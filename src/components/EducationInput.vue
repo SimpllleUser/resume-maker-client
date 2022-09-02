@@ -13,18 +13,32 @@
     >
       <div>
         <div class="education-name">
-          <b-form-input v-model="educations[key].educationName" />
+          <b-form-input v-model="educations[key].educationName" @change="onUpdateInput" />
         </div>
         <div class="education-date-work d-flex align-items-center">
-          <b-form-datepicker v-model="educations[key].date.from" placeholder="from" size="sm" />
-          <b-form-datepicker v-model="educations[key].date.to" placeholder="to" size="sm" />
+          <b-form-datepicker
+            v-model="educations[key].date.from"
+            @change="onUpdateInput"
+            placeholder="from"
+            size="sm"
+          />
+          <b-form-datepicker
+            v-model="educations[key].date.to"
+            @change="onUpdateInput"
+            placeholder="to"
+            size="sm"
+          />
         </div>
       </div>
       <div>
-        <b-textarea v-model="educations[key].description" rows="4"></b-textarea>
-        <b-button  @click="deleteExpirience(key)"
-        variant="outline-danger" size="sm" class="btn-delete">
-          <b-icon icon="trash" variant="danger"/>
+        <b-textarea v-model="educations[key].description" @change="onUpdateInput" rows="4" />
+        <b-button
+          @click="deleteExpirience(key)"
+          variant="outline-danger"
+          size="sm"
+          class="btn-delete"
+        >
+          <b-icon icon="trash" variant="danger" />
         </b-button>
       </div>
     </div>
@@ -32,6 +46,8 @@
 </template>
 
 <script>
+import props from '@/props';
+
 const defaultEducation = {
   educationName: 'Education place',
   date: { from: 'from', to: 'to' },
@@ -40,6 +56,9 @@ const defaultEducation = {
 
 export default {
   name: 'EducationInput',
+  props: {
+    setFormValue: props.setFormValue,
+  },
   data() {
     return {
       educations: [JSON.parse(JSON.stringify(defaultEducation))],
@@ -51,6 +70,14 @@ export default {
     },
     deleteExpirience(key) {
       this.educations = this.educations.filter((_, index) => index !== key);
+    },
+    onUpdateInput() {
+      this.setFormValue({ educations: this.educations });
+    },
+  },
+  watch: {
+    educations() {
+      this.setFormValue({ educations: this.educations });
     },
   },
 };
@@ -64,7 +91,7 @@ export default {
   .btn-delete {
     position: absolute;
     right: -40px;
-    top: 0px
+    top: 0px;
   }
 }
 </style>

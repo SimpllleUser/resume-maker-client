@@ -18,16 +18,17 @@
                   @click="
                     () => {
                       contacts[index].icon = icon;
+                      onUpdateInput();
                     }
                   "
                 />
               </b-tooltip>
             </div>
             <div class="contatc-input">
-              <b-form-input v-model="contacts[index].value" />
+              <b-form-input v-model="contacts[index].value" @change="onUpdateInput" />
             </div>
             <div>
-              <b-icon icon="trash-fill" @click="deleteConatct(index)" />
+              <b-icon icon="trash-fill"  @click="deleteConatct(index)" />
             </div>
           </div>
         </b-col>
@@ -43,10 +44,15 @@
 </template>
 
 <script>
+import props from '@/props';
+
 const defaultConatctItem = { icon: 'phone', value: 'value conatct' };
 
 export default {
   name: 'ConatactInput',
+  props: {
+    setFormValue: props.setFormValue,
+  },
   data() {
     return {
       icons: ['phone', 'mailbox', 'geo-alt-fill', 'github'],
@@ -54,11 +60,19 @@ export default {
     };
   },
   methods: {
+    onUpdateInput() {
+      this.setFormValue({ conatct: this.contacts });
+    },
     addConatct() {
       this.contacts = [...this.contacts, JSON.parse(JSON.stringify(defaultConatctItem))];
     },
     deleteConatct(key) {
       this.contacts = this.contacts.filter((_, index) => index !== key);
+    },
+  },
+  watch: {
+    contacts() {
+      this.setFormValue({ conatct: this.contacts });
     },
   },
 };

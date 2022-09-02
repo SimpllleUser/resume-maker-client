@@ -4,7 +4,7 @@
       <div v-for="(skill, index) in skills" :key="index" class="mx-2 mb-2">
         <div class="d-flex align-items-center">
           <div class="contatc-input">
-            <b-form-input v-model="skills[index]" />
+            <b-form-input v-model="skills[index]" @change="onUpdateInput" />
           </div>
           <div class="pl-2">
             <b-icon icon="trash-fill" @click="deleteSkill(index)" />
@@ -23,8 +23,13 @@
 </template>
 
 <script>
+import props from '@/props';
+
 export default {
   name: 'SkillInput',
+  props: {
+    setFormValue: props.setFormValue,
+  },
   data() {
     return {
       skills: ['some skill'],
@@ -36,6 +41,14 @@ export default {
     },
     deleteSkill(key) {
       this.skills = this.skills.filter((_, index) => index !== key);
+    },
+    onUpdateInput() {
+      this.setFormValue({ skills: this.skills });
+    },
+  },
+  watch: {
+    educations() {
+      this.onUpdateInput();
     },
   },
 };

@@ -1,1 +1,3 @@
-export default {};
+export default {
+  SET_FORM_PROPERTY: 'TASK/SET_FORM_PROPERTY',
+};
