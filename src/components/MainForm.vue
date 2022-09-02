@@ -6,22 +6,35 @@
     <b-form-group label="Enter position">
       <b-form-input v-model="position" />
     </b-form-group>
-    <div class="p-3">
-      <InputContact />
+    <div class="p-2">
+      <ContactInput />
     </div>
-    <div class="p-3">
+    <div class="p-2">
+      <SkillInput />
+    </div>
+    <div class="p-2">
       <ExpreienceInput />
     </div>
+      <div class="p-2">
+      <EducationInput />
+    </div>
+    <b-form-group label="Enter about you">
+      <b-form-textarea v-model="about"  rows="4"/>
+    </b-form-group>
   </div>
 </template>
 
 <script>
-import InputContact from './InputContact.vue';
+import ContactInput from './ContactInput.vue';
+import SkillInput from './SkillInput.vue';
 import ExpreienceInput from './ExpreienceInput.vue';
+import EducationInput from './EducationInput.vue';
 
 export default {
   name: 'MainForm',
-  components: { InputContact, ExpreienceInput },
+  components: {
+    ContactInput, SkillInput, ExpreienceInput, EducationInput,
+  },
   data() {
     return {
       fullName: '',

@@ -46,7 +46,7 @@
 const defaultConatctItem = { icon: 'phone', value: 'value conatct' };
 
 export default {
-  name: 'InputConatact',
+  name: 'ConatactInput',
   data() {
     return {
       icons: ['phone', 'mailbox', 'geo-alt-fill', 'github'],
