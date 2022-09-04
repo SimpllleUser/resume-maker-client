@@ -9,4 +9,7 @@ export default {
       this[namePropetyValue] = this.formData[namePropetyValue];
     },
   },
+  mounted() {
+    this.properties.map((propertyName) => this.initDataForm(propertyName));
+  },
 };

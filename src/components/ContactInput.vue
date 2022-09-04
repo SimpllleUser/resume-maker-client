@@ -59,6 +59,7 @@ export default {
     return {
       icons: ['phone', 'mailbox', 'geo-alt-fill', 'github'],
       contacts: [JSON.parse(JSON.stringify(defaultConatctItem))],
+      properties: ['contacts'],
     };
   },
   methods: {
@@ -76,9 +77,6 @@ export default {
     contacts() {
       this.setFormValue({ contacts: this.contacts });
     },
-  },
-  mounted() {
-    this.initDataForm('contacts');
   },
 };
 </script>

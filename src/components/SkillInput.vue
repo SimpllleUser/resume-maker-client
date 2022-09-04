@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       skills: ['some skill'],
+      properties: ['skills'],
     };
   },
   methods: {
@@ -52,9 +53,6 @@ export default {
     educations() {
       this.onUpdateInput();
     },
-  },
-  mounted() {
-    this.initDataForm('skills');
   },
 };
 </script>

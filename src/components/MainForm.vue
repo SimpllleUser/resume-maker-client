@@ -50,6 +50,7 @@ export default {
       expirience: [{ companyName: '', date: 'YYYY-MM', description: '' }],
       education: [{ placeName: '', date: 'YYYY', description: '' }],
       about: '',
+      properties: ['fullName', 'position', 'about'],
     };
   },
   methods: {
@@ -65,9 +66,6 @@ export default {
     about(value) {
       this.setProperty({ about: value });
     },
-  },
-  mounted() {
-    ['fullName', 'position', 'about'].map((namePropety) => this.initDataForm(namePropety));
   },
 };
 </script>

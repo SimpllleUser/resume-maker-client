@@ -72,6 +72,7 @@ export default {
   data() {
     return {
       expiriences: [JSON.parse(JSON.stringify(defaultExpereence))],
+      properties: ['expiriences'],
     };
   },
   methods: {
@@ -89,9 +90,6 @@ export default {
     educations() {
       this.onUpdateInput();
     },
-  },
-  mounted() {
-    this.initDataForm('expiriences');
   },
 };
 </script>

@@ -64,6 +64,7 @@ export default {
   data() {
     return {
       educations: [JSON.parse(JSON.stringify(defaultEducation))],
+      properties: ['educations'],
     };
   },
   methods: {
@@ -81,9 +82,6 @@ export default {
     educations() {
       this.setFormValue({ educations: this.educations });
     },
-  },
-  mounted() {
-    this.initDataForm('educations');
   },
 };
 </script>
