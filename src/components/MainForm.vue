@@ -7,16 +7,16 @@
       <b-form-input v-model="position" @change="updateInputValue" />
     </b-form-group>
     <div class="p-2">
-      <ContactInput :set-form-value="setProperty" />
+      <ContactInput/>
     </div>
     <div class="p-2">
-      <SkillInput :set-form-value="setProperty" />
+      <SkillInput/>
     </div>
     <div class="p-2">
-      <ExpreienceInput :set-form-value="setProperty" />
+      <ExpreienceInput/>
     </div>
     <div class="p-2">
-      <EducationInput :set-form-value="setProperty" />
+      <EducationInput/>
     </div>
     <b-form-group label="Enter about you">
       <b-form-textarea v-model="about" rows="4" @change="updateInputValue" />
