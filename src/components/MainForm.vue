@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import types from '@/store/modules/form/types';
-import { mapMutations } from 'vuex';
 import formMixin from '@/mixins/form';
 import ContactInput from './ContactInput.vue';
 import SkillInput from './SkillInput.vue';
@@ -52,9 +50,6 @@ export default {
       about: '',
       properties: ['fullName', 'position', 'about'],
     };
-  },
-  methods: {
-    ...mapMutations('form', { setProperty: types.SET_FORM_PROPERTY }),
   },
 };
 </script>
