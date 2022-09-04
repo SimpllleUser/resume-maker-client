@@ -24,12 +24,14 @@
 
 <script>
 import props from '@/props';
+import formMixin from '@/mixins/form';
 
 export default {
   name: 'SkillInput',
   props: {
     setFormValue: props.setFormValue,
   },
+  mixins: [formMixin],
   data() {
     return {
       skills: ['some skill'],
@@ -50,6 +52,9 @@ export default {
     educations() {
       this.onUpdateInput();
     },
+  },
+  mounted() {
+    this.initDataForm('skills');
   },
 };
 </script>

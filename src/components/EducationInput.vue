@@ -47,6 +47,7 @@
 
 <script>
 import props from '@/props';
+import formMixin from '@/mixins/form';
 
 const defaultEducation = {
   educationName: 'Education place',
@@ -59,6 +60,7 @@ export default {
   props: {
     setFormValue: props.setFormValue,
   },
+  mixins: [formMixin],
   data() {
     return {
       educations: [JSON.parse(JSON.stringify(defaultEducation))],
@@ -79,6 +81,9 @@ export default {
     educations() {
       this.setFormValue({ educations: this.educations });
     },
+  },
+  mounted() {
+    this.initDataForm('educations');
   },
 };
 </script>

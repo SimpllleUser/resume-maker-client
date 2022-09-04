@@ -27,6 +27,7 @@
 <script>
 import types from '@/store/modules/form/types';
 import { mapMutations } from 'vuex';
+import formMixin from '@/mixins/form';
 import ContactInput from './ContactInput.vue';
 import SkillInput from './SkillInput.vue';
 import ExpreienceInput from './ExpreienceInput.vue';
@@ -40,6 +41,7 @@ export default {
     ExpreienceInput,
     EducationInput,
   },
+  mixins: [formMixin],
   data() {
     return {
       fullName: '',
@@ -63,6 +65,9 @@ export default {
     about(value) {
       this.setProperty({ about: value });
     },
+  },
+  mounted() {
+    ['fullName', 'position', 'about'].map((namePropety) => this.initDataForm(namePropety));
   },
 };
 </script>

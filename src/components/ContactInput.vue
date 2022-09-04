@@ -45,6 +45,7 @@
 
 <script>
 import props from '@/props';
+import formMixin from '@/mixins/form';
 
 const defaultConatctItem = { icon: 'phone', value: 'value conatct' };
 
@@ -53,6 +54,7 @@ export default {
   props: {
     setFormValue: props.setFormValue,
   },
+  mixins: [formMixin],
   data() {
     return {
       icons: ['phone', 'mailbox', 'geo-alt-fill', 'github'],
@@ -74,6 +76,9 @@ export default {
     contacts() {
       this.setFormValue({ contacts: this.contacts });
     },
+  },
+  mounted() {
+    this.initDataForm('contacts');
   },
 };
 </script>

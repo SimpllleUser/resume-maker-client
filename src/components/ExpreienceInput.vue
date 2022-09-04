@@ -54,6 +54,7 @@
 
 <script>
 import props from '@/props';
+import formMixin from '@/mixins/form';
 
 const defaultExpereence = {
   companyName: 'companyName',
@@ -67,6 +68,7 @@ export default {
   props: {
     setFormValue: props.setFormValue,
   },
+  mixins: [formMixin],
   data() {
     return {
       expiriences: [JSON.parse(JSON.stringify(defaultExpereence))],
@@ -87,6 +89,9 @@ export default {
     educations() {
       this.onUpdateInput();
     },
+  },
+  mounted() {
+    this.initDataForm('expiriences');
   },
 };
 </script>
