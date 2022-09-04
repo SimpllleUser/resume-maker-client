@@ -13,18 +13,18 @@
     >
       <div>
         <div class="education-name">
-          <b-form-input v-model="educations[key].educationName" @change="onUpdateInput" />
+          <b-form-input v-model="educations[key].educationName" @change="updateInputValue" />
         </div>
         <div class="education-date-work d-flex align-items-center">
           <b-form-datepicker
             v-model="educations[key].date.from"
-            @change="onUpdateInput"
+            @change="updateInputValue"
             placeholder="from"
             size="sm"
           />
           <b-form-datepicker
             v-model="educations[key].date.to"
-            @change="onUpdateInput"
+            @change="updateInputValue"
             placeholder="to"
             size="sm"
           />
@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import props from '@/props';
 import formMixin from '@/mixins/form';
 
 const defaultEducation = {
@@ -57,9 +56,6 @@ const defaultEducation = {
 
 export default {
   name: 'EducationInput',
-  props: {
-    setFormValue: props.setFormValue,
-  },
   mixins: [formMixin],
   data() {
     return {
@@ -74,13 +70,10 @@ export default {
     deleteExpirience(key) {
       this.educations = this.educations.filter((_, index) => index !== key);
     },
-    onUpdateInput() {
-      this.setFormValue({ educations: this.educations });
-    },
   },
   watch: {
     educations() {
-      this.setFormValue({ educations: this.educations });
+      this.updateInputValue();
     },
   },
 };

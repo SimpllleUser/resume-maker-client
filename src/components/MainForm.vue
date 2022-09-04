@@ -1,10 +1,10 @@
 <template>
   <div class="main-form">
     <b-form-group label="Enter full name">
-      <b-form-input v-model="fullName" />
+      <b-form-input v-model="fullName" @change="updateInputValue" />
     </b-form-group>
     <b-form-group label="Enter position">
-      <b-form-input v-model="position" />
+      <b-form-input v-model="position" @change="updateInputValue" />
     </b-form-group>
     <div class="p-2">
       <ContactInput :set-form-value="setProperty" />
@@ -19,7 +19,7 @@
       <EducationInput :set-form-value="setProperty" />
     </div>
     <b-form-group label="Enter about you">
-      <b-form-textarea v-model="about" rows="4" />
+      <b-form-textarea v-model="about" rows="4" @change="updateInputValue" />
     </b-form-group>
   </div>
 </template>
@@ -55,17 +55,6 @@ export default {
   },
   methods: {
     ...mapMutations('form', { setProperty: types.SET_FORM_PROPERTY }),
-  },
-  watch: {
-    fullName(value) {
-      this.setProperty({ fullName: value });
-    },
-    position(value) {
-      this.setProperty({ position: value });
-    },
-    about(value) {
-      this.setProperty({ about: value });
-    },
   },
 };
 </script>

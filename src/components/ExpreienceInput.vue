@@ -13,21 +13,21 @@
     >
       <div>
         <div class="company-name">
-          <b-form-input v-model="expiriences[key].companyName" @change="onUpdateInput" />
+          <b-form-input v-model="expiriences[key].companyName" @change="updateInputValue" />
         </div>
         <div class="company-position">
-          <b-form-input v-model="expiriences[key].position" @change="onUpdateInput" />
+          <b-form-input v-model="expiriences[key].position" @change="updateInputValue" />
         </div>
         <div class="company-date-work d-flex align-items-center">
           <b-form-datepicker
             v-model="expiriences[key].date.from"
-            @context="onUpdateInput"
+            @context="updateInputValue"
             placeholder="from"
             size="sm"
           />
           <b-form-datepicker
             v-model="expiriences[key].date.to"
-            @context="onUpdateInput"
+            @context="updateInputValue"
             placeholder="to"
             size="sm"
           />
@@ -36,7 +36,7 @@
       <div>
         <b-textarea
           v-model="expiriences[key].description"
-          @change="onUpdateInput"
+          @change="updateInputValue"
           rows="4"
         ></b-textarea>
         <b-button
@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import props from '@/props';
 import formMixin from '@/mixins/form';
 
 const defaultExpereence = {
@@ -65,9 +64,6 @@ const defaultExpereence = {
 
 export default {
   name: 'ExpreienceInput',
-  props: {
-    setFormValue: props.setFormValue,
-  },
   mixins: [formMixin],
   data() {
     return {
@@ -82,13 +78,10 @@ export default {
     deleteExpirience(key) {
       this.expiriences = this.expiriences.filter((_, index) => index !== key);
     },
-    onUpdateInput() {
-      this.setFormValue({ expiriences: this.expiriences });
-    },
   },
   watch: {
     educations() {
-      this.onUpdateInput();
+      this.updateInputValue();
     },
   },
 };

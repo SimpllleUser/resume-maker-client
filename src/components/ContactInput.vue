@@ -18,14 +18,14 @@
                   @click="
                     () => {
                       contacts[index].icon = icon;
-                      onUpdateInput();
+                      updateInputValue();
                     }
                   "
                 />
               </b-tooltip>
             </div>
             <div class="contatc-input">
-              <b-form-input v-model="contacts[index].value" @change="onUpdateInput" />
+              <b-form-input v-model="contacts[index].value" @change="updateInputValue" />
             </div>
             <div>
               <b-icon icon="trash-fill"  @click="deleteConatct(index)" />
@@ -44,16 +44,12 @@
 </template>
 
 <script>
-import props from '@/props';
 import formMixin from '@/mixins/form';
 
 const defaultConatctItem = { icon: 'phone', value: 'value conatct' };
 
 export default {
   name: 'ConatactInput',
-  props: {
-    setFormValue: props.setFormValue,
-  },
   mixins: [formMixin],
   data() {
     return {
@@ -63,9 +59,6 @@ export default {
     };
   },
   methods: {
-    onUpdateInput() {
-      this.setFormValue({ contacts: this.contacts });
-    },
     addConatct() {
       this.contacts = [...this.contacts, JSON.parse(JSON.stringify(defaultConatctItem))];
     },
@@ -75,7 +68,7 @@ export default {
   },
   watch: {
     contacts() {
-      this.setFormValue({ contacts: this.contacts });
+      this.updateInputValue();
     },
   },
 };

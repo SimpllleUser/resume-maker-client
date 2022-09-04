@@ -4,7 +4,7 @@
       <div v-for="(skill, index) in skills" :key="index" class="mx-2 mb-2">
         <div class="d-flex align-items-center">
           <div class="contatc-input">
-            <b-form-input v-model="skills[index]" @change="onUpdateInput" />
+            <b-form-input v-model="skills[index]" @change="updateInputValue" />
           </div>
           <div class="pl-2">
             <b-icon icon="trash-fill" @click="deleteSkill(index)" />
@@ -23,14 +23,10 @@
 </template>
 
 <script>
-import props from '@/props';
 import formMixin from '@/mixins/form';
 
 export default {
   name: 'SkillInput',
-  props: {
-    setFormValue: props.setFormValue,
-  },
   mixins: [formMixin],
   data() {
     return {
@@ -45,13 +41,10 @@ export default {
     deleteSkill(key) {
       this.skills = this.skills.filter((_, index) => index !== key);
     },
-    onUpdateInput() {
-      this.setFormValue({ skills: this.skills });
-    },
   },
   watch: {
-    educations() {
-      this.onUpdateInput();
+    skills() {
+      this.updateInputValue();
     },
   },
 };
