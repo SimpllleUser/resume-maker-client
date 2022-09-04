@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     onUpdateInput() {
-      this.setFormValue({ conatct: this.contacts });
+      this.setFormValue({ contacts: this.contacts });
     },
     addConatct() {
       this.contacts = [...this.contacts, JSON.parse(JSON.stringify(defaultConatctItem))];
@@ -72,7 +72,7 @@ export default {
   },
   watch: {
     contacts() {
-      this.setFormValue({ conatct: this.contacts });
+      this.setFormValue({ contacts: this.contacts });
     },
   },
 };
