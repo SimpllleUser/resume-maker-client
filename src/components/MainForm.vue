@@ -1,5 +1,8 @@
 <template>
   <div class="main-form">
+    <b-form-group class="mb-4">
+      <PhotoInput />
+    </b-form-group>
     <b-form-group label="Enter full name">
       <b-form-input v-model="fullName" @change="updateInputValue" />
     </b-form-group>
@@ -7,16 +10,16 @@
       <b-form-input v-model="position" @change="updateInputValue" />
     </b-form-group>
     <div class="p-2">
-      <ContactInput/>
+      <ContactInput />
     </div>
     <div class="p-2">
-      <SkillInput/>
+      <SkillInput />
     </div>
     <div class="p-2">
-      <ExpreienceInput/>
+      <ExpreienceInput />
     </div>
     <div class="p-2">
-      <EducationInput/>
+      <EducationInput />
     </div>
     <b-form-group label="Enter about you">
       <b-form-textarea v-model="about" rows="4" @change="updateInputValue" />
@@ -30,6 +33,7 @@ import ContactInput from './ContactInput.vue';
 import SkillInput from './SkillInput.vue';
 import ExpreienceInput from './ExpreienceInput.vue';
 import EducationInput from './EducationInput.vue';
+import PhotoInput from './PhotoInput.vue';
 
 export default {
   name: 'MainForm',
@@ -38,6 +42,7 @@ export default {
     SkillInput,
     ExpreienceInput,
     EducationInput,
+    PhotoInput,
   },
   mixins: [formMixin],
   data() {

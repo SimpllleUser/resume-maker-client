@@ -4,24 +4,31 @@
       <b-button @click="print"> Print </b-button>
     </div>
     <div class="container" id="resume">
-      <div class="row">
-        <div class="col">
-          <h1 class="text-center">{{ formData.fullName }}</h1>
-          <h4 class="text-center">{{ formData.position }}</h4>
-        </div>
-      </div>
-      <div class="row" v-if="formData.contacts">
-        <div
-          v-for="(contact, index) in formData.contacts"
-          :key="`conatct-key-${index}`"
-          class="col-4"
-        >
-          <div class="d-flex align-items-center justify-content-center">
-            <div class="pr-2">
-              <b-icon :icon="contact.icon" />
-            </div>
-            <div class="pl-2">{{ contact.value }}</div>
+      <div class="row row-cols-2">
+        <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
+          <div class="col">
+            <h1 class="text-center">{{ formData.fullName }}</h1>
+            <h4 class="text-center">{{ formData.position }}</h4>
           </div>
+          <div class="row">
+            <div
+            class="col"
+            v-for="(contact, index) in formData.contacts"
+            :key="`conatct-key-${index}`"
+          >
+            <div class="d-flex align-items-center justify-content-center">
+              <div class="pr-2">
+                <b-icon :icon="contact.icon" />
+              </div>
+              <div class="pl-2">{{ contact.value }}</div>
+            </div>
+          </div>
+          </div>
+        </div>
+        <div v-if="formData.imgDataUrl" class="col-2">
+          <div class="d-flex justify-content-center align-items-center">
+          <img :src="formData.imgDataUrl" alt="photo" width="190px" height="190px">
+        </div>
         </div>
       </div>
       <title-container text="Skills" />
