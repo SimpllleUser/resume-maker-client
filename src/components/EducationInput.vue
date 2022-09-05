@@ -31,7 +31,7 @@
         </div>
       </div>
       <div>
-        <b-textarea v-model="educations[key].description" @change="onUpdateInput" rows="4" />
+        <b-textarea v-model="educations[key].description" @change="updateInputValue" rows="4" />
         <b-button
           @click="deleteExpirience(key)"
           variant="outline-danger"

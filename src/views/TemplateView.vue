@@ -24,27 +24,25 @@
           </div>
         </div>
       </div>
-      <hr />
+      <title-container text="Skills" />
       <div>
-        <h4 class="text-center">Skills</h4>
         <div class="row py-4">
           <div v-for="(skill, index) in formData.skills" :key="index" class="col-4 text-center">
             <div class="d-flex align-items-center justify-content-center">
               <div><b-icon icon="dot" scale="2rem" /></div>
-              <div>{{ skill }}</div>
+              <div class="pl-2">{{ skill }}</div>
             </div>
           </div>
         </div>
       </div>
-      <hr />
       <div>
-        <h4 class="text-center">Experience</h4>
+        <title-container text="Experience" />
         <div class="py-4">
           <div v-for="(experience, index) in formData.expiriences" :key="`conatct-key-${index}`">
             <div class="container">
               <div class="row row-cols-2">
                 <div class="text-center">
-                  <div class="col">{{ experience.companyName }}</div>
+                  <div class="col"><b>{{ experience.companyName }}</b></div>
                   <div class="col">{{ experience.position }}</div>
                   <div class="col">{{ experience.date.from }} - {{ experience.date.to }}</div>
                 </div>
@@ -54,15 +52,14 @@
           </div>
         </div>
       </div>
-      <hr />
       <div>
-        <h4 class="text-center">Education</h4>
+        <title-container text="Education" />
         <div class="py-4">
           <div v-for="(education, index) in formData.educations" :key="`conatct-key-${index}`">
             <div class="container">
               <div class="row row-cols-2">
                 <div class="text-center">
-                  <div class="col">{{ education.educationName }}</div>
+                  <div class="col"><b>{{ education.educationName }}</b></div>
                   <div class="col">{{ education.date.from }} - {{ education.date.to }}</div>
                 </div>
                 <div class="col">{{ education.description }}</div>
@@ -71,9 +68,8 @@
           </div>
         </div>
       </div>
-      <hr />
       <div>
-        <h4 class="text-center">About</h4>
+        <title-container text="About" />
         <div class="py-4">
           <div class="row">
             <div class="col-8 ml-auto mr-auto">{{ formData.about }}</div>
@@ -86,9 +82,14 @@
 
 <script>
 import { mapState } from 'vuex';
+import TitleContainer from '@/components/TitleContainer.vue';
 
 export default {
+  components: { TitleContainer },
   name: 'TemplateView',
+  comments: {
+    TitleContainer,
+  },
   computed: {
     ...mapState('form', ['formData']),
   },
