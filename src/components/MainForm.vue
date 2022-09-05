@@ -10,7 +10,14 @@
       <b-form-input v-model="position" @change="updateInputValue" />
     </b-form-group>
     <div class="p-2">
-      <ContactInput />
+      <ContainerFocusItem>
+        <template>
+        <h1>Contact text</h1>
+      </template>
+        <template  #input="{onFocus, onBlur}" >
+        <ContactInput @on-focus="onFocus" @on-blur="onBlur" />
+      </template>
+      </ContainerFocusItem>
     </div>
     <div class="p-2">
       <SkillInput />
@@ -34,6 +41,7 @@ import SkillInput from './SkillInput.vue';
 import ExpreienceInput from './ExpreienceInput.vue';
 import EducationInput from './EducationInput.vue';
 import PhotoInput from './PhotoInput.vue';
+import ContainerFocusItem from './ContainerFocusItem.vue';
 
 export default {
   name: 'MainForm',
@@ -43,6 +51,7 @@ export default {
     ExpreienceInput,
     EducationInput,
     PhotoInput,
+    ContainerFocusItem,
   },
   mixins: [formMixin],
   data() {
