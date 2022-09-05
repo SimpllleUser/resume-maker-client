@@ -26,18 +26,17 @@
       </div>
       <title-container text="Skills" />
       <div>
-        <div class="row py-4">
+        <div class="row">
           <div v-for="(skill, index) in formData.skills" :key="index" class="col-4 text-center">
-            <div class="d-flex align-items-center justify-content-center">
-              <div><b-icon icon="dot" scale="2rem" /></div>
-              <div class="pl-2">{{ skill }}</div>
+            <div class="d-flex align-items-center justify-content-center py-1">
+                <div class="text-center">{{ skill }}</div>
             </div>
           </div>
         </div>
       </div>
       <div>
         <title-container text="Experience" />
-        <div class="py-4">
+        <div>
           <div v-for="(experience, index) in formData.expiriences" :key="`conatct-key-${index}`">
             <div class="container">
               <div class="row row-cols-2">
@@ -54,7 +53,7 @@
       </div>
       <div>
         <title-container text="Education" />
-        <div class="py-4">
+        <div>
           <div v-for="(education, index) in formData.educations" :key="`conatct-key-${index}`">
             <div class="container">
               <div class="row row-cols-2">
@@ -70,7 +69,7 @@
       </div>
       <div>
         <title-container text="About" />
-        <div class="py-4">
+        <div>
           <div class="row">
             <div class="col-8 ml-auto mr-auto">{{ formData.about }}</div>
           </div>
