@@ -1,5 +1,6 @@
 import { mapState, mapMutations } from 'vuex';
 import types from '@/store/modules/form/types';
+import ClickOutside from 'vue-click-outside';
 
 export default {
   computed: {
@@ -15,8 +16,17 @@ export default {
         [propertyName]: this[`${propertyName}`],
       }));
     },
+    onFocus() {
+      this.$emit('on-focus');
+    },
+    onBlur() {
+      this.$emit('on-blur');
+    },
   },
   mounted() {
     this.properties.map((propertyName) => this.initDataForm(propertyName));
+  },
+  directives: {
+    ClickOutside,
   },
 };

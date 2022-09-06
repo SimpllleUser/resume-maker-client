@@ -4,26 +4,22 @@
    :class="`${focus && classOnFocus}`"
     @focus="setFocus"
     tabindex="-1"
-    v-click-outside="setUnfocus"
     >
     <template>
       <div v-show="focus">
         <slot
-          :actions="getAction()"
+          :actions="actions"
           name="input"
         ></slot>
       </div>
       <div v-show="!focus">
-        <slot
-          :actions="getAction()"
-        />
+        <slot/>
       </div>
     </template>
   </div>
 </template>
 
 <script>
-import ClickOutside from 'vue-click-outside';
 
 export default {
   name: 'ContainerFocusItem',
@@ -63,11 +59,8 @@ export default {
       this.setFocusState(false);
     },
     setFocus() {
-      setTimeout(() => { this.setFocusState(true); });
+      setTimeout(() => { this.setFocusState(true); }, 100);
     },
-  },
-  directives: {
-    ClickOutside,
   },
 };
 </script>

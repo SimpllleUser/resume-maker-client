@@ -1,5 +1,5 @@
 <template>
-  <div class="conatct-input" @focus="onFocus">
+  <div class="conatct-input" v-click-outside="onBlur">
     <div class="d-flex align-items-center flex-wrap">
       <div v-for="(skill, index) in skills" :key="index" class="mx-2 mb-2">
         <div class="d-flex align-items-center">

@@ -1,5 +1,5 @@
 <template>
-  <div class="conatct-input bg-primary" tabindex="-1">
+  <div class="conatct-input bg-primary" v-click-outside="onBlur">
     <b-row class="d-flex align-items-center flex-wrap">
       <b-col v-for="(contact, index) in contacts" :key="index">
         <div class="d-flex align-items-center">
@@ -25,10 +25,7 @@
             </b-tooltip>
           </div>
           <div class="contatc-input bg-white">
-            <b-form-input
-              v-model="contacts[index].value"
-              @change="updateInputValue"
-            />
+            <b-form-input v-model="contacts[index].value" @change="updateInputValue" />
           </div>
           <div>
             <b-icon icon="trash-fill" @click="deleteConatct(index)" />
@@ -37,8 +34,7 @@
       </b-col>
       <b-col>
         <div class="d-flex align-item-center">
-          <b-button size="sm" variant="dark-outline"
-           @click="addConatct">
+          <b-button size="sm" variant="dark-outline" @click="addConatct">
             add <b-icon icon="plus-lg" />
           </b-button>
         </div>
@@ -70,12 +66,6 @@ export default {
     deleteConatct(key) {
       this.contacts = this.contacts.filter((_, index) => index !== key);
       this.onFocus();
-    },
-    onFocus() {
-      this.$emit('on-focus');
-    },
-    onBlur() {
-      this.$emit('on-blur');
     },
   },
   watch: {

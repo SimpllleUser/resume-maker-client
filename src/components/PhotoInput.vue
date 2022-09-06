@@ -60,6 +60,9 @@ export default {
     },
   },
   methods: {
+    activateFocus() {
+      this.$emit('on-focus');
+    },
     toggleShow() {
       this.show = true;
     },
@@ -70,15 +73,18 @@ export default {
     cropSuccess(imgDataUrl) {
       console.log('-------- crop success --------');
       this.imgDataUrl = imgDataUrl;
-
+      this.activateFocus();
       this.show = false;
+      this.activateFocus();
     },
 
     cropUploadSuccess(jsonData, field) {
       console.log('-------- upload success --------');
       console.log(jsonData);
       console.log(`field: ${field}`);
+      this.activateFocus();
       this.show = false;
+      this.activateFocus();
     },
 
     cropUploadFail(status, field) {
