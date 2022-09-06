@@ -6,14 +6,17 @@
     tabindex="-1"
     >
     <template>
+      <div>
+        <slot/>
+      </div>
+      <div v-show="!focus">
+        <slot name="text" />
+      </div>
       <div v-show="focus">
         <slot
           :actions="actions"
           name="input"
         ></slot>
-      </div>
-      <div v-show="!focus">
-        <slot/>
       </div>
     </template>
   </div>
