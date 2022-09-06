@@ -1,16 +1,22 @@
 <template>
   <div
   class="focus-container"
-  :class="`${focus && classOnFocus}`"
-   @focus="setFocus"
+   :class="`${focus && classOnFocus}`"
+    @focus="setFocus"
     tabindex="-1"
+    v-click-outside="setUnfocus"
     >
     <template>
       <div v-show="focus">
-        <slot :onFocus="setFocus" :onBlur="setUnfocus" name="input"></slot>
+        <slot
+          :actions="getAction()"
+          name="input"
+        ></slot>
       </div>
       <div v-show="!focus">
-        <slot :onFocus="setFocus" :onBlur="setUnfocus" />
+        <slot
+          :actions="getAction()"
+        />
       </div>
     </template>
   </div>
@@ -22,10 +28,11 @@ import ClickOutside from 'vue-click-outside';
 export default {
   name: 'ContainerFocusItem',
   props: {
-    focusChildren: {
-      type: Boolean,
+
+    name: {
+      type: String,
       require: true,
-      default: false,
+      default: '',
     },
   },
   data() {
@@ -34,12 +41,21 @@ export default {
       classOnFocus: 'border border-primary shadow py-4 my-4 mb-2 bg-white rounded',
     };
   },
-  watch: {
-    focusChildren(state) {
-      this.setFocusState(state);
+  computed: {
+    actions() {
+      return {
+        [`${this.name}-on-focus`]: this.setFocus,
+        [`${this.name}-on-blur`]: this.setUnfocus,
+      };
     },
   },
   methods: {
+    getAction() {
+      return {
+        [`${this.name}-on-focus`]: this.setFocus,
+        [`${this.name}-on-blur`]: this.setUnfocus,
+      };
+    },
     setFocusState(state) {
       this.focus = state;
     },
@@ -47,7 +63,7 @@ export default {
       this.setFocusState(false);
     },
     setFocus() {
-      this.setFocusState(true);
+      setTimeout(() => { this.setFocusState(true); });
     },
   },
   directives: {

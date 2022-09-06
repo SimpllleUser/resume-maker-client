@@ -10,17 +10,34 @@
       <b-form-input v-model="position" @change="updateInputValue" />
     </b-form-group>
     <div class="p-2">
-      <ContainerFocusItem>
+      <ContainerFocusItem name="contact">
         <template>
-        <h1>Contact text</h1>
-      </template>
-        <template  #input="{onFocus, onBlur}" >
-        <ContactInput @on-focus="onFocus" @on-blur="onBlur" />
-      </template>
+          <h1>
+            Contact text
+          </h1>
+        </template>
+        <template #input="{actions}">
+          <ContactInput
+            @on-focus="actions['contact-on-focus']"
+            @on-blur="actions['contact-on-blur']"
+          />
+        </template>
       </ContainerFocusItem>
     </div>
     <div class="p-2">
-      <SkillInput />
+      <ContainerFocusItem name="skill">
+        <template>
+          <h1>
+            Skill text
+          </h1>
+        </template>
+        <template #input="{actions}">
+          <SkillInput
+            @on-focus="actions['skill-on-focus']"
+            @on-blur="actions['skill-on-blur']"
+          />
+        </template>
+      </ContainerFocusItem>
     </div>
     <div class="p-2">
       <ExpreienceInput />
@@ -64,6 +81,11 @@ export default {
       about: '',
       properties: ['fullName', 'position', 'about'],
     };
+  },
+  methods: {
+    testFocus(actions) {
+      actions['contact-on-blur']();
+    },
   },
 };
 </script>
