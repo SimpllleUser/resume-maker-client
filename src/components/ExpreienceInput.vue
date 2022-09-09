@@ -1,5 +1,5 @@
 <template>
-  <div class="expereiance-row">
+  <div class="expereiance-row" v-click-outside="onBlur">
     <div class="pb-2">
       <b-button size="sm" variant="primary" @click="addExperience"
         >add

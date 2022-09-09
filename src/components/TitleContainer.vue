@@ -1,5 +1,5 @@
 <template>
-  <div class="title position-relative my-4 py-2" style="width: 90%; margin-left: auto;
+  <div class="title position-relative my-4 py-2" style="width: 90%;margin-left: auto;
   margin-right: auto;">
     <div class="position-absolute bg-white"
     style="margin-left: auto;
