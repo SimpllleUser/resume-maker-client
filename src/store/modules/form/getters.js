@@ -1,5 +1,5 @@
 import SkillInput from '@/components/SkillInput.vue';
-import ExpreienceInput from '@/components/ExpreienceInput.vue';
+import ExpreienceInputForm from '@/components/InputForm/ExpreienceInputForm.vue';
 import EducationInputForm from '@/components/InputForm/EducationInputForm.vue';
 
 export default {
@@ -13,7 +13,7 @@ export default {
       {
         name: 'Experience',
         type: 'experience',
-        component: ExpreienceInput,
+        component: ExpreienceInputForm,
       },
       {
         name: 'Education',

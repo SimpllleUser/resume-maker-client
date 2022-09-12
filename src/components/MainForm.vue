@@ -173,10 +173,9 @@
           </template>
         </ContainerFocusItem>
       </div>
-      <div v-if="inputs.length">
+      {{ inputs.length }}
       <div v-for="(input, inputKey) in inputs" :key="`input-${inputKey}`">
         <component v-bind:is="input.component"></component>
-      </div>
     </div>
     </div>
   </div>
