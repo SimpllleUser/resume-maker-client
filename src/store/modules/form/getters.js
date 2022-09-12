@@ -1,4 +1,4 @@
-import SkillInput from '@/components/SkillInput.vue';
+import SkillInputForm from '@/components/InputForm/SkillInputForm.vue';
 import ExpreienceInputForm from '@/components/InputForm/ExpreienceInputForm.vue';
 import EducationInputForm from '@/components/InputForm/EducationInputForm.vue';
 
@@ -8,7 +8,7 @@ export default {
       {
         name: 'Skill',
         type: 'skill',
-        component: SkillInput,
+        component: SkillInputForm,
       },
       {
         name: 'Experience',
