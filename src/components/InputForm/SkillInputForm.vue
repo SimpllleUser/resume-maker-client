@@ -60,6 +60,9 @@ export default {
       this.updateInputValue();
     },
   },
+  mounted() {
+    this.updateInputValue();
+  },
 };
 </script>
 

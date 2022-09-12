@@ -53,6 +53,9 @@ export default {
     skills() {
       this.updateInputValue();
     },
+    mounted() {
+      this.updateInputValue();
+    },
   },
 };
 </script>
