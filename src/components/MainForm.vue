@@ -148,6 +148,7 @@
           </template>
         </ContainerFocusItem>
       </div>
+
       <div class="my-2">
         <ContainerFocusItem name="about">
           <template>
@@ -172,11 +173,17 @@
           </template>
         </ContainerFocusItem>
       </div>
+      <div v-if="inputs.length">
+      <div v-for="(input, inputKey) in inputs" :key="`input-${inputKey}`">
+        <component v-bind:is="input.component"></component>
+      </div>
+    </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import formMixin from '@/mixins/form';
 import TitleContainer from '@/components/TitleContainer.vue';
 import ContactInput from './ContactInput.vue';
@@ -208,6 +215,9 @@ export default {
       about: '',
       properties: ['fullName', 'position', 'about'],
     };
+  },
+  computed: {
+    ...mapState('form', ['inputs']),
   },
   methods: {
     async print() {

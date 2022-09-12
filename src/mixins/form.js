@@ -1,6 +1,7 @@
 import { mapState, mapMutations } from 'vuex';
 import types from '@/store/modules/form/types';
 import ClickOutside from 'vue-click-outside';
+import _ from 'lodash';
 
 export default {
   computed: {
@@ -13,7 +14,8 @@ export default {
     },
     updateInputValue() {
       this.properties.map((propertyName) => this.setFormValue({
-        [propertyName]: this[`${propertyName}`],
+        // eslint-disable-next-line no-underscore-dangle
+        [propertyName]: _.get(this?._data, propertyName),
       }));
     },
     onFocus() {

@@ -6,4 +6,7 @@ export default {
     const [value] = Object.values(propery);
     state.formData = { ...state.formData, [key]: value };
   },
+  [types.ADD_INPUT](state, input) {
+    state.inputs = [...state.inputs, input];
+  },
 };

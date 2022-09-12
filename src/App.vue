@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <side-bar/>
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/template">Template</router-link>
@@ -7,6 +8,17 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+import SideBar from './components/SideBar.vue';
+
+export default {
+  name: 'App',
+  components: {
+    SideBar,
+  },
+};
+</script>
 
 <style lang="scss">
 #app {

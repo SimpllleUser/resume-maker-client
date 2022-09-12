@@ -23,4 +23,5 @@ export default {
       }],
     about: 'Some information about me',
   },
+  inputs: [],
 };

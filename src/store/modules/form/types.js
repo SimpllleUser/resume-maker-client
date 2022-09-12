@@ -1,3 +1,4 @@
 export default {
   SET_FORM_PROPERTY: 'TASK/SET_FORM_PROPERTY',
+  ADD_INPUT: 'FORM/ADD_INPUT',
 };
