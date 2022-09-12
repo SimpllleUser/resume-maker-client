@@ -7,7 +7,7 @@
     >
     <template>
       <div>
-        <slot/>
+        <slot :focus="focus" />
       </div>
       <div v-show="!focus">
         <slot name="text" />
