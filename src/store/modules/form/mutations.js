@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import removeKeyFromObject from 'lodash/omit';
 import types from './types';
 
 export default {
@@ -9,5 +10,12 @@ export default {
   },
   [types.ADD_INPUT](state, input) {
     state.inputs = [...state.inputs, { ...input, id: uuidv4() }];
+  },
+  [types.DELETE_INPUT_FROM_AND_DATA](state, input) {
+    state.inputs = state.inputs.filter(({ id }) => id !== input.id);
+    const currenDoemDataKey = Object
+      ?.keys(state.formData)
+      ?.find((key) => key.indexOf(input.id) !== -1);
+    state.formData = removeKeyFromObject(state.formData, currenDoemDataKey);
   },
 };

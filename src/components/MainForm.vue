@@ -72,7 +72,11 @@
           </template>
         </ContainerFocusItem>
       </div>
-      <div v-for="(input, inputKey) in inputs" :key="`input-${inputKey}`">
+      <div
+      v-for="(input, inputKey) in inputs"
+       :key="`input-${inputKey}`"
+       style='position: relative'
+       >
         <ContainerFocusItem name="about">
           <template>
             <title-container :text="input.name" />
@@ -89,6 +93,13 @@
           <template #input="{ actions }">
             <div v-click-outside="actions['about-on-blur']">
               <component :id="input.id" v-bind:is="input.component" />
+              <b-button
+              @click="deleteInputForm(input)"
+               variant="danger"
+               style='position: absolute; top:0px; right: 0px'
+               >
+                <b-icon icon="trash"/>
+              </b-button>
             </div>
           </template>
         </ContainerFocusItem>
@@ -98,9 +109,10 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapGetters, mapState, mapMutations } from 'vuex';
 import formMixin from '@/mixins/form';
 import TitleContainer from '@/components/TitleContainer.vue';
+import types from '@/store/modules/form/types';
 import ContactInput from './ContactInput.vue';
 import SkillInput from './SkillInput.vue';
 import ExpreienceInput from './ExpreienceInput.vue';
@@ -136,6 +148,7 @@ export default {
     ...mapGetters('form', ['getValue']),
   },
   methods: {
+    ...mapMutations('form', { deleteInputForm: types.DELETE_INPUT_FROM_AND_DATA }),
     async print() {
       await this.$htmlToPaper('resume-form');
     },
