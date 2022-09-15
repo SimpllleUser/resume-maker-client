@@ -22,12 +22,13 @@
         :ref="refName"
         v-model="value"
         :placeholder="text"
+        v-autowidth="{maxWidth: '960px', minWidth: '20px', comfortZone: 0}"
         style="
           font-size: 24px;
           font-weight: bold;
           border: none;
           text-align: center;
-          padding: 0px;
+          padding: 0px 20px;
           margin: 0 auto;
         "
       />

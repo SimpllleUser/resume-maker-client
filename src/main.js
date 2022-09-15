@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueHtmlToPaper from 'vue-html-to-paper';
+import VueInputAutowidth from 'vue-input-autowidth';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import App from './App.vue';
 import './registerServiceWorker';
@@ -28,6 +29,7 @@ const options = {
 };
 
 Vue.use(VueHtmlToPaper, options);
+Vue.use(VueInputAutowidth);
 
 new Vue({
   router,

@@ -72,107 +72,6 @@
           </template>
         </ContainerFocusItem>
       </div>
-      <!-- <div class="my-2">
-        <ContainerFocusItem name="skill">
-          <template>
-            <title-container text="Skills" />
-          </template>
-          <template #text>
-            <div class="row">
-              <div v-for="(skill, index) in formData.skills" :key="index" class="col-4 text-center">
-                <div class="d-flex align-items-center justify-content-center py-1">
-                  <div class="text-center">{{ skill }}</div>
-                </div>
-              </div>
-            </div>
-          </template>
-          <template #input="{ actions }">
-            <SkillInput @on-focus="actions['skill-on-focus']" @on-blur="actions['skill-on-blur']" />
-          </template>
-        </ContainerFocusItem>
-      </div> -->
-      <!-- <div class="my-2">
-        <ContainerFocusItem name="expreience">
-          <template>
-            <title-container text="Experience" />
-          </template>
-          <template #text>
-            <div v-for="(experience, index) in formData.expiriences" :key="`conatct-key-${index}`">
-              <div class="container">
-                <div class="row row-cols-2">
-                  <div class="text-center">
-                    <div class="col">
-                      <b>{{ experience.companyName }}</b>
-                    </div>
-                    <div class="col">{{ experience.position }}</div>
-                    <div class="col">{{ experience.date.from }} - {{ experience.date.to }}</div>
-                  </div>
-                  <div class="col">{{ experience.description }}</div>
-                </div>
-              </div>
-            </div>
-          </template>
-          <template #input="{ actions }">
-            <ExpreienceInput
-              @on-focus="actions['expreience-on-focus']"
-              @on-blur="actions['expreience-on-blur']"
-            />
-          </template>
-        </ContainerFocusItem>
-      </div> -->
-      <!-- <div class="my-2">
-        <ContainerFocusItem name="education">
-          <template>
-            <title-container text="Education" />
-          </template>
-          <template #text>
-            <div v-for="(education, index) in formData.educations" :key="`conatct-key-${index}`">
-              <div class="container">
-                <div class="row row-cols-2">
-                  <div class="text-center">
-                    <div class="col">
-                      <b>{{ education.educationName }}</b>
-                    </div>
-                    <div class="col">{{ education.date.from }} - {{ education.date.to }}</div>
-                  </div>
-                  <div class="col">{{ education.description }}</div>
-                </div>
-              </div>
-            </div>
-          </template>
-          <template #input="{ actions }">
-            <EducationInput
-              @on-focus="actions['education-on-focus']"
-              @on-blur="actions['education-on-blur']"
-            />
-          </template>
-        </ContainerFocusItem>
-      </div> -->
-
-      <!-- <div class="my-2">
-        <ContainerFocusItem name="about">
-          <template>
-            <title-container text="About" />
-          </template>
-          <template #text>
-            <div class="row">
-              <div class="col-8 ml-auto mr-auto">{{ formData.about }}</div>
-            </div>
-          </template>
-          <template #input="{ actions }">
-            <div v-click-outside="actions['about-on-blur']">
-              <b-form-group label="Enter about you">
-                <b-form-textarea
-                  v-model="about"
-                  @focus="actions['about-on-focus']"
-                  rows="4"
-                  @change="updateInputValue"
-                />
-              </b-form-group>
-            </div>
-          </template>
-        </ContainerFocusItem>
-      </div> -->
       <div v-for="(input, inputKey) in inputs" :key="`input-${inputKey}`">
         <ContainerFocusItem name="about">
           <template>
@@ -181,14 +80,15 @@
           <template #text>
             <div class="row">
               <component
-              :id="input.id"
-               :value="getValue(inputKey)"
-                 v-bind:is="input.componentStatic" />
+                :id="input.id"
+                :value="getValue(inputKey)"
+                v-bind:is="input.componentStatic"
+              />
             </div>
           </template>
           <template #input="{ actions }">
             <div v-click-outside="actions['about-on-blur']">
-              <component :id="input.id"  v-bind:is="input.component" />
+              <component :id="input.id" v-bind:is="input.component" />
             </div>
           </template>
         </ContainerFocusItem>
