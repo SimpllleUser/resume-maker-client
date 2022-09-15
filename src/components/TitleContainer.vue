@@ -6,7 +6,6 @@
     @blur="focus = false"
     @focus="onFocus()"
   >
-  /// ADD auto resize input text
     <div
       class="position-absolute"
       style="

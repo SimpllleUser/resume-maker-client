@@ -72,7 +72,7 @@
           </template>
         </ContainerFocusItem>
       </div>
-      <div class="my-2">
+      <!-- <div class="my-2">
         <ContainerFocusItem name="skill">
           <template>
             <title-container text="Skills" />
@@ -90,8 +90,8 @@
             <SkillInput @on-focus="actions['skill-on-focus']" @on-blur="actions['skill-on-blur']" />
           </template>
         </ContainerFocusItem>
-      </div>
-      <div class="my-2">
+      </div> -->
+      <!-- <div class="my-2">
         <ContainerFocusItem name="expreience">
           <template>
             <title-container text="Experience" />
@@ -119,8 +119,8 @@
             />
           </template>
         </ContainerFocusItem>
-      </div>
-      <div class="my-2">
+      </div> -->
+      <!-- <div class="my-2">
         <ContainerFocusItem name="education">
           <template>
             <title-container text="Education" />
@@ -147,9 +147,9 @@
             />
           </template>
         </ContainerFocusItem>
-      </div>
+      </div> -->
 
-      <div class="my-2">
+      <!-- <div class="my-2">
         <ContainerFocusItem name="about">
           <template>
             <title-container text="About" />
@@ -172,17 +172,33 @@
             </div>
           </template>
         </ContainerFocusItem>
-      </div>
+      </div> -->
       <div v-for="(input, inputKey) in inputs" :key="`input-${inputKey}`">
-        {{ input }}
-        <component v-bind:is="input.component" />
+        <ContainerFocusItem name="about">
+          <template>
+            <title-container :text="input.name" />
+          </template>
+          <template #text>
+            <div class="row">
+              <component
+              :id="input.id"
+               :value="getValue(inputKey)"
+                 v-bind:is="input.componentStatic" />
+            </div>
+          </template>
+          <template #input="{ actions }">
+            <div v-click-outside="actions['about-on-blur']">
+              <component :id="input.id"  v-bind:is="input.component" />
+            </div>
+          </template>
+        </ContainerFocusItem>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import formMixin from '@/mixins/form';
 import TitleContainer from '@/components/TitleContainer.vue';
 import ContactInput from './ContactInput.vue';
@@ -217,6 +233,7 @@ export default {
   },
   computed: {
     ...mapState('form', ['inputs']),
+    ...mapGetters('form', ['getValue']),
   },
   methods: {
     async print() {

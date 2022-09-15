@@ -50,10 +50,8 @@
 </template>
 
 <script>
-import { v4 as uuidv4 } from 'uuid';
 import formMixin from '@/mixins/form';
 
-const propertyName = `education-${uuidv4()}`;
 const defaultEducation = {
   educationName: 'Education place',
   date: { from: 'from', to: 'to' },
@@ -63,11 +61,23 @@ const defaultEducation = {
 export default {
   name: 'EducationInputForm',
   mixins: [formMixin],
+  props: {
+    id: {
+      type: String,
+      require: true,
+      default: '',
+    },
+    value: {
+      type: Array,
+      require: true,
+      default: () => [],
+    },
+  },
   data() {
     return {
-      educations: { [propertyName]: [JSON.parse(JSON.stringify(defaultEducation))] },
-      properties: [`educations.${propertyName}`],
-      propertyName,
+      educations: null,
+      properties: null,
+      propertyName: '',
     };
   },
   methods: {
@@ -77,16 +87,27 @@ export default {
         JSON.parse(JSON.stringify(defaultEducation))];
     },
     deleteExpirience(key) {
-      this.educations[propertyName] = this.educations[this.propertyName]
+      this.educations[this.propertyName] = this.educations[this.propertyName]
         ?.filter((_, index) => index !== key);
     },
   },
   watch: {
+    id: {
+      immediate: true,
+      handler() {
+        this.propertyName = this.id;
+        this.educations = { [this.propertyName]: [JSON.parse(JSON.stringify(defaultEducation))] };
+        this.properties = [`educations.${this.propertyName}`];
+        this.updateInputValue();
+      },
+    },
     educations() {
+      if (!this.propertyName) return;
       this.updateInputValue();
     },
   },
   mounted() {
+    if (!this.propertyName) return;
     this.updateInputValue();
   },
 };
