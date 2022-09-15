@@ -9,7 +9,7 @@
     <div
       class="experience-item company-template pb-2"
       v-for="(expirience, key) in expiriences[propertyName]"
-      :key="key"
+      :key="`experience-key-${id}-${key}`"
     >
       <div>
         <div class="company-name">
@@ -57,10 +57,8 @@
 </template>
 
 <script>
-import { v4 as uuidv4 } from 'uuid';
 import formMixin from '@/mixins/form';
 
-const propertyName = `experience-${uuidv4()}`;
 const defaultExpereence = {
   companyName: 'companyName',
   position: 'position',
@@ -71,31 +69,49 @@ const defaultExpereence = {
 export default {
   name: 'ExpreienceInputForm',
   mixins: [formMixin],
+  props: {
+    id: {
+      type: String,
+      require: true,
+      default: '',
+    },
+  },
   data() {
     return {
-      expiriences: { [propertyName]: [JSON.parse(JSON.stringify(defaultExpereence))] },
-      properties: [`expiriences.${propertyName}`],
-      propertyName,
+      expiriences: null,
+      properties: null,
+      propertyName: '',
     };
   },
   methods: {
     addExperience() {
-      this.expiriences[propertyName] = [
-        ...this.expiriences[propertyName],
+      this.expiriences[this.propertyName] = [
+        ...this.expiriences[this.propertyName],
         JSON.parse(JSON.stringify(defaultExpereence)),
       ];
     },
     deleteExpirience(key) {
-      this.expiriences[propertyName] = this.expiriences[propertyName]
+      this.expiriences[this.propertyName] = this.expiriences[this.propertyName]
         .filter((_, index) => index !== key);
     },
   },
   watch: {
+    id: {
+      immediate: true,
+      handler() {
+        this.propertyName = this.id;
+        this.expiriences = { [this.propertyName]: [JSON.parse(JSON.stringify(defaultExpereence))] };
+        this.properties = [`expiriences.${this.propertyName}`];
+        this.updateInputValue();
+      },
+    },
     educations() {
+      if (!this.propertyName) return;
       this.updateInputValue();
     },
   },
   mounted() {
+    if (!this.propertyName) return;
     this.updateInputValue();
   },
 };
