@@ -1,13 +1,23 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-8 ml-auto mr-auto">{{ value || 'Enter some text about you' }}</div>
+    <div>
+      <div
+        style="
+          max-width: 70%;
+          width: 100%;
+          display: block;
+          margin: 0 auto;
+          white-space: pre;
+          text-align: justify;
+        "
+      >
+        {{ value || 'Enter some text about you' }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'AboutStaticItem',
   props: {
@@ -22,7 +32,6 @@ export default {
       default: '',
     },
   },
-
 };
 </script>
 
