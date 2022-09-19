@@ -10,8 +10,16 @@
             <div class="row row-cols-2">
               <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
                 <div class="col">
-                  <h1 class="text-center">{{ formData.fullName }}</h1>
-                  <h4 class="text-center">{{ formData.position }}</h4>
+                  <div class="h1 text-center">
+                    <text-placeholder
+                    :value="formData.fullName"
+                     label="Your full name" />
+                  </div>
+                  <div class="h4 text-center">
+                    <text-placeholder
+                    :value="formData.position"
+                     label="Your position" />
+                  </div>
                 </div>
               </div>
               <div v-if="formData.imgDataUrl" class="col-2">
@@ -34,12 +42,14 @@
                 class="text-center"
                 style="font-size: calc(1.375rem + 1.5vw); border-style: none"
                 v-model="fullName"
+                placeholder="Your full name"
                 @change="updateInputValue"
               />
               <b-form-input
                 v-model="position"
                 class="text-center"
                 style="font-size: calc(1.275rem + 0.3vw); border-style: none"
+                placeholder="Your position"
                 @change="updateInputValue"
               />
             </div>
@@ -60,6 +70,9 @@
                     <b-icon :icon="contact.icon" />
                   </div>
                   <div class="pl-2">{{ contact.value }}</div>
+                  <text-placeholder
+                    :value="contact.value"
+                     label="your contact" />
                 </div>
               </div>
             </div>
@@ -73,10 +86,10 @@
         </ContainerFocusItem>
       </div>
       <div
-      v-for="(input, inputKey) in inputs"
-       :key="`input-${inputKey}`"
-       style='position: relative'
-       >
+        v-for="(input, inputKey) in inputs"
+        :key="`input-${inputKey}`"
+        style="position: relative"
+      >
         <ContainerFocusItem name="about">
           <template>
             <title-container :text="input.name" />
@@ -94,11 +107,11 @@
             <div v-click-outside="actions['about-on-blur']">
               <component :id="input.id" v-bind:is="input.component" />
               <b-button
-              @click="deleteInputForm(input)"
-               variant="danger"
-               style='position: absolute; top:0px; right: 0px'
-               >
-                <b-icon icon="trash"/>
+                @click="deleteInputForm(input)"
+                variant="danger"
+                style="position: absolute; top: 0px; right: 0px"
+              >
+                <b-icon icon="trash" />
               </b-button>
             </div>
           </template>
@@ -113,6 +126,7 @@ import { mapGetters, mapState, mapMutations } from 'vuex';
 import formMixin from '@/mixins/form';
 import TitleContainer from '@/components/TitleContainer.vue';
 import types from '@/store/modules/form/types';
+import TextPlaceholder from '@/components/TextPlaceholder.vue';
 import ContactInput from './ContactInput.vue';
 import SkillInput from './SkillInput.vue';
 import ExpreienceInput from './ExpreienceInput.vue';
@@ -130,6 +144,7 @@ export default {
     PhotoInput,
     ContainerFocusItem,
     TitleContainer,
+    TextPlaceholder,
   },
   mixins: [formMixin],
   data() {

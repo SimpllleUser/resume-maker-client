@@ -10,16 +10,22 @@
           white-space: pre;
           text-align: justify;
         "
+        :class="{ 'text-center': !value }"
       >
-        {{ value || 'Enter some text about you' }}
+        <text-placeholder :value="value" label="Enter some text about you" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import TextPlaceholder from '@/components/TextPlaceholder.vue';
+
 export default {
   name: 'AboutStaticItem',
+  components: {
+    TextPlaceholder,
+  },
   props: {
     id: {
       type: String,

@@ -1,11 +1,18 @@
 <template>
   <div class="conatct-input" v-click-outside="onBlur">
     <div class="d-flex align-items-center flex-wrap">
-      <div v-for="(skill, index) in skills[propertyName]"
-      :key="`skill-key-${id}-${index}`" class="mx-2 mb-2">
+      <div
+        v-for="(skill, index) in skills[propertyName]"
+        :key="`skill-key-${id}-${index}`"
+        class="mx-2 mb-2"
+      >
         <div class="d-flex align-items-center">
           <div class="contatc-input">
-            <b-form-input v-model="skills[propertyName][index]" @change="updateInputValue" />
+            <b-form-input
+              v-model="skills[propertyName][index]"
+              @change="updateInputValue"
+              placeholde="some skill"
+            />
           </div>
           <div class="pl-2">
             <b-icon icon="trash-fill" @click="deleteSkill(index)" />
@@ -50,9 +57,7 @@ export default {
   },
   methods: {
     addSkill() {
-      console.log(this.skills);
-      this.skills[this.propertyName] = [...this.skills[this.propertyName], 'some skill'];
-      console.log(this.skills);
+      this.skills[this.propertyName] = [...this.skills[this.propertyName], ' '];
     },
     deleteSkill(key) {
       this.skills[this.propertyName] = this.skills[this.propertyName].filter(
@@ -72,7 +77,7 @@ export default {
       immediate: true,
       handler() {
         this.propertyName = this.id;
-        this.skills = { [this.propertyName]: ['some skill'] };
+        this.skills = { [this.propertyName]: [''] };
         this.properties = [`skills.${this.propertyName}`];
         this.updateInputValue();
       },

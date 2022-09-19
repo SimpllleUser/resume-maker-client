@@ -41,6 +41,7 @@
               variant="outline-danger"
               size="sm"
               class="btn-delete"
+              placeholder="Description about your education"
             >
               <b-icon icon="trash" variant="danger" />
             </b-button>
@@ -53,9 +54,9 @@
 import formMixin from '@/mixins/form';
 
 const defaultEducation = {
-  educationName: 'Education place',
-  date: { from: 'from', to: 'to' },
-  description: 'description',
+  educationName: '',
+  date: { from: '', to: '' },
+  description: '',
 };
 
 export default {

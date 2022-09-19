@@ -25,7 +25,11 @@
             </b-tooltip>
           </div>
           <div class="contatc-input">
-            <b-form-input v-model="contacts[index].value" @change="updateInputValue" />
+            <b-form-input
+            v-model="contacts[index].value"
+             @change="updateInputValue"
+             placeholder="Your contact"
+             />
           </div>
           <div>
             <b-icon icon="trash-fill" @click="deleteConatct(index)" />
@@ -46,7 +50,7 @@
 <script>
 import formMixin from '@/mixins/form';
 
-const defaultConatctItem = { icon: 'phone', value: 'value conatct' };
+const defaultConatctItem = { icon: 'phone', value: '' };
 
 export default {
   name: 'ConatactInput',

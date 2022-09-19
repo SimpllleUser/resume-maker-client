@@ -5,7 +5,7 @@
         class="d-block ml-auto mr-auto"
         v-model="about[propertyName]"
         @change="updateInputValue"
-        placeholder="Some about text"
+        placeholder="Some text about"
         rows="4"
       />
     </b-form-group>

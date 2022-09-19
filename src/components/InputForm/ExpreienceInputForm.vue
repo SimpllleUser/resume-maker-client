@@ -41,6 +41,7 @@
         <b-textarea
           v-model="expiriences[propertyName][key].description"
           @change="updateInputValue"
+          placeholder="Description about your expereince"
           rows="4"
         ></b-textarea>
         <b-button
@@ -60,10 +61,10 @@
 import formMixin from '@/mixins/form';
 
 const defaultExpereence = {
-  companyName: 'companyName',
-  position: 'position',
-  date: { from: 'from', to: 'to' },
-  description: 'description',
+  companyName: '',
+  position: '',
+  date: { from: '', to: '' },
+  description: '',
 };
 
 export default {
