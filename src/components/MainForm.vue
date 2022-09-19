@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div>
-      <b-button @click="print"> Print </b-button>
+    <div class="d-flex justify-content-center py-2">
+      <div class="px-4"><side-bar/></div>
+      <div>
+        <b-button @click="print"> Print </b-button>
+
+      </div>
     </div>
     <div class="main-form" id="resume-form">
       <div>
@@ -127,6 +131,7 @@ import formMixin from '@/mixins/form';
 import TitleContainer from '@/components/TitleContainer.vue';
 import types from '@/store/modules/form/types';
 import TextPlaceholder from '@/components/TextPlaceholder.vue';
+import SideBar from '@/components/SideBar.vue';
 import ContactInput from './ContactInput.vue';
 import SkillInput from './SkillInput.vue';
 import ExpreienceInput from './ExpreienceInput.vue';
@@ -145,6 +150,7 @@ export default {
     ContainerFocusItem,
     TitleContainer,
     TextPlaceholder,
+    SideBar,
   },
   mixins: [formMixin],
   data() {
