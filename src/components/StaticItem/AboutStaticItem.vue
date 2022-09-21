@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div>
+  <div class="about-static" style="margin: 0 auto; width: 80px; display: contents;">
+    <div style="width: 100%;">
       <div
         style="
-          max-width: 70%;
-          width: 100%;
-          display: block;
-          margin: 0 auto;
+        margin: 0 auto;
+        width: 80%;
           white-space: pre;
           text-align: justify;
         "

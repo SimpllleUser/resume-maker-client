@@ -1,6 +1,6 @@
 <template>
   <div v-click-outside="onBlur" class="ml-auto mr-auto">
-    <b-form-group style="max-width: 70%; width: 100%; display: block; margin: 0 auto">
+    <b-form-group style="width: 100%; display: block; margin: 0 auto">
       <b-form-textarea
         class="d-block ml-auto mr-auto"
         v-model="about[propertyName]"
