@@ -11,6 +11,9 @@ export default {
   [types.ADD_INPUT](state, input) {
     state.inputs = [...state.inputs, { ...input, id: uuidv4() }];
   },
+  [types.SET_INPUT](state, inputList) {
+    state.inputs = inputList;
+  },
   [types.DELETE_INPUT_FROM_AND_DATA](state, input) {
     state.inputs = state.inputs.filter(({ id }) => id !== input.id);
     const currenDoemDataKey = Object

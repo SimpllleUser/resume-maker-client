@@ -7,7 +7,10 @@
 
       </div>
     </div>
-    <div class="main-form" id="resume-form">
+    <div
+    class="main-form"
+     id="resume-form"
+      style="max-width: 80%;margin: 0 auto;" >
       <div>
         <ContainerFocusItem name="main-info">
           <template #text>
@@ -25,12 +28,14 @@
                      label="Your position" />
                   </div>
                 </div>
+                <contact-static-item :value="formData.contacts"/>
               </div>
               <div v-if="formData.imgDataUrl" class="col-2">
                 <div class="d-flex justify-content-center align-items-center">
                   <img :src="formData.imgDataUrl" alt="photo" width="190px" height="190px" />
                 </div>
               </div>
+
             </div>
           </template>
           <template #input="{ actions }">
@@ -56,13 +61,23 @@
                 placeholder="Your position"
                 @change="updateInputValue"
               />
+              <div>
+                <ContactInput
+                @on-focus="actions['main-info-on-focus']"
+                @on-blur="actions['main-info-on-blur']"
+              />
+            </div>
             </div>
           </template>
         </ContainerFocusItem>
       </div>
       <div class="my-2">
-        <ContainerFocusItem name="contact">
+        {{ mainFormInputs.contacts }}
+        <!-- <ContainerFocusItem name="contact">
           <template #text>
+            <div>
+              <contact-static-item :value="mainFormInputs.contacts"/>
+            </div>
             <div class="row">
               <div
                 class="col"
@@ -87,12 +102,14 @@
               @on-blur="actions['contact-on-blur']"
             />
           </template>
-        </ContainerFocusItem>
+        </ContainerFocusItem> -->
       </div>
+      <draggable v-model="mainFormInputs">
+        <transition-group>
       <div
-        v-for="(input, inputKey) in inputs"
+        v-for="(input, inputKey) in mainFormInputs"
         :key="`input-${inputKey}`"
-        style="position: relative"
+        style="position: relative; margin: 32px 0px"
       >
         <ContainerFocusItem name="about">
           <template>
@@ -102,14 +119,14 @@
             <div class="row">
               <component
                 :id="input.id"
-                :value="getValue(inputKey)"
+                :value="getValue(input.id)"
                 v-bind:is="input.componentStatic"
               />
             </div>
           </template>
           <template #input="{ actions }">
             <div v-click-outside="actions['about-on-blur']">
-              <component :id="input.id" v-bind:is="input.component" />
+              <component :id="input.id" :value="getValue(input.id)" v-bind:is="input.component" />
               <b-button
                 @click="deleteInputForm(input)"
                 variant="danger"
@@ -121,6 +138,8 @@
           </template>
         </ContainerFocusItem>
       </div>
+    </transition-group>
+    </draggable>
     </div>
   </div>
 </template>
@@ -128,10 +147,12 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex';
 import formMixin from '@/mixins/form';
+import ContactStaticItem from '@/components/StaticItem/ContactStaticItem.vue';
 import TitleContainer from '@/components/TitleContainer.vue';
 import types from '@/store/modules/form/types';
 import TextPlaceholder from '@/components/TextPlaceholder.vue';
 import SideBar from '@/components/SideBar.vue';
+import draggable from 'vuedraggable';
 import ContactInput from './ContactInput.vue';
 import SkillInput from './SkillInput.vue';
 import ExpreienceInput from './ExpreienceInput.vue';
@@ -150,7 +171,9 @@ export default {
     ContainerFocusItem,
     TitleContainer,
     TextPlaceholder,
+    ContactStaticItem,
     SideBar,
+    draggable,
   },
   mixins: [formMixin],
   data() {
@@ -162,14 +185,29 @@ export default {
       education: [{ placeName: '', date: 'YYYY', description: '' }],
       about: '',
       properties: ['fullName', 'position', 'about'],
+      mainFormInputs: null,
     };
   },
   computed: {
-    ...mapState('form', ['inputs']),
+    ...mapState('form', ['inputs', 'formData']),
     ...mapGetters('form', ['getValue']),
   },
+  watch: {
+    inputs: {
+      immediate: true,
+      handler() {
+        this.mainFormInputs = this.inputs;
+      },
+    },
+    mainFormInputs() {
+      this.updateInputs(this.mainFormInputs);
+    },
+  },
   methods: {
-    ...mapMutations('form', { deleteInputForm: types.DELETE_INPUT_FROM_AND_DATA }),
+    ...mapMutations('form', {
+      updateInputs: types.SET_INPUT,
+      deleteInputForm: types.DELETE_INPUT_FROM_AND_DATA,
+    }),
     async print() {
       await this.$htmlToPaper('resume-form');
     },
@@ -177,4 +215,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

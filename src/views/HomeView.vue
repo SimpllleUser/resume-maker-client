@@ -1,9 +1,7 @@
 <template>
-  <div class="home">
+  <div class="home" style="height: 80vh;">
     <b-container class="bv-example-row">
-      <b-row>
-      <main-form/>
-      </b-row>
+        <main-form/>
     </b-container>
   </div>
 </template>

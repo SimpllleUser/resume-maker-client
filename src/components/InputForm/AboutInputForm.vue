@@ -45,6 +45,11 @@ export default {
       this.$emit('on-blur');
     },
   },
+  computed: {
+    canUpdate() {
+      return Boolean(this.about[`${this.propertyName}`]?.length);
+    },
+  },
   watch: {
     id: {
       immediate: true,
@@ -55,13 +60,17 @@ export default {
         this.updateInputValue();
       },
     },
+    value: {
+      immediate: true,
+      handler() {
+        this.about[`${this.propertyName}`] = this.value;
+      },
+    },
     about() {
-      if (!this.propertyName) return;
       this.updateInputValue();
     },
   },
   mounted() {
-    if (!this.propertyName) return;
     this.updateInputValue();
   },
 };

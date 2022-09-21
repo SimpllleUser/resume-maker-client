@@ -1,7 +1,7 @@
 <template>
   <div
-    class="title position-relative my-4 py-2"
-    style="width: 90%; margin-left: auto; margin-right: auto"
+    class="title position-relative py-2"
+    style="width: 90%; margin-left: auto; margin-right: auto; margin-bottom: 50px"
     tabindex="-1"
     @blur="focus = false"
     @focus="onFocus()"
@@ -15,7 +15,7 @@
         right: 0;
         font-size: 32px;
         width: fit-content;
-        top: -15px;
+        top: -7px;
       "
     >
       <b-input

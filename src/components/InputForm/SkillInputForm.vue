@@ -45,7 +45,7 @@ export default {
     value: {
       type: Array,
       require: true,
-      default: () => [],
+      default: () => [''],
     },
   },
   data() {
@@ -72,6 +72,11 @@ export default {
       this.$emit('on-blur');
     },
   },
+  computed: {
+    canUpdate() {
+      return Boolean(this.skills[`${this.propertyName}`]?.length);
+    },
+  },
   watch: {
     id: {
       immediate: true,
@@ -82,13 +87,17 @@ export default {
         this.updateInputValue();
       },
     },
+    value: {
+      immediate: true,
+      handler() {
+        this.skills[`${this.propertyName}`] = this.value;
+      },
+    },
     skills() {
-      if (!this.propertyName) return;
       this.updateInputValue();
     },
   },
   mounted() {
-    if (!this.propertyName) return;
     this.updateInputValue();
   },
 };

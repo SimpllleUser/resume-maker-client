@@ -36,12 +36,14 @@ export default {
       },
     ];
   },
-  getValue: ({ formData }) => (index) => {
+  getValue: ({ formData }) => (keyInput) => {
     const createdInputKeys = Object
       ?.keys(formData)
       ?.filter((key) => key.split('.').length > 1);
-    return createdInputKeys
-      ?.map((key) => formData[key])
-      ?.at(index);
+    const formInputKey = createdInputKeys.find((key) => {
+      const id = key.split('.').at(1);
+      return keyInput === id;
+    });
+    return formData[formInputKey];
   },
 };

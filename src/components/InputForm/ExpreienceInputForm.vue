@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import cloneDepp from 'lodash/cloneDeep';
 import formMixin from '@/mixins/form';
 
 const defaultExpereence = {
@@ -75,6 +76,10 @@ export default {
       type: String,
       require: true,
       default: '',
+    },
+    value: {
+      type: Array,
+      default: () => [cloneDepp(defaultExpereence)],
     },
   },
   data() {
@@ -106,13 +111,17 @@ export default {
         this.updateInputValue();
       },
     },
+    value: {
+      immediate: true,
+      handler() {
+        this.expiriences[`${this.propertyName}`] = this.value;
+      },
+    },
     educations() {
-      if (!this.propertyName) return;
       this.updateInputValue();
     },
   },
   mounted() {
-    if (!this.propertyName) return;
     this.updateInputValue();
   },
 };

@@ -1,17 +1,23 @@
 <template>
   <div
   class="focus-container"
-   :class="`${focus && classOnFocus}`"
+   :class="containerClass"
     @focus="setFocus"
+    style="margin: 16px 0px;"
     tabindex="-1"
     >
     <template>
-      <div>
-        <slot :focus="focus" />
+      <div v-b-hover="hoverHandler">
+        <div>
+          <slot :focus="focus" />
+        </div>
+        <div v-show="!focus">
+          <div>
+            <slot name="text" />
+          </div>
+        </div>
       </div>
-      <div v-show="!focus">
-        <slot name="text" />
-      </div>
+
       <div v-show="focus">
         <slot
           :actions="actions"
@@ -27,7 +33,6 @@
 export default {
   name: 'ContainerFocusItem',
   props: {
-
     name: {
       type: String,
       require: true,
@@ -36,8 +41,10 @@ export default {
   },
   data() {
     return {
+      hover: false,
       focus: false,
       classOnFocus: 'border border-primary shadow py-4 my-4 mb-2 bg-white rounded',
+      classOnHover: 'border border-secondary bg-white rounded',
     };
   },
   computed: {
@@ -46,6 +53,9 @@ export default {
         [`${this.name}-on-focus`]: this.setFocus,
         [`${this.name}-on-blur`]: this.setUnfocus,
       };
+    },
+    containerClass() {
+      return `border-style ${this.focus && this.classOnFocus} ${this.hover && this.classOnHover}`;
     },
   },
   methods: {
@@ -64,8 +74,24 @@ export default {
     setFocus() {
       setTimeout(() => { this.setFocusState(true); }, 100);
     },
+    hoverHandler(value) {
+      this.hover = value;
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .border {
+    transition: border-color .3s ease;
+  }
+  .border-style {
+    border: 1px solid white
+  }
+  .border-primary {
+    border-color: var(--bs-primary)
+  }
+  .border-secondary {
+    border-color: var(--bs-secondary)
+  }
+</style>

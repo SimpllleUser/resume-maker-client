@@ -1,5 +1,5 @@
 <template>
-  <div class="conatct-input" v-click-outside="onBlur">
+  <div class="conatct-input">
     <b-row class="d-flex align-items-center flex-wrap">
       <b-col v-for="(contact, index) in contacts" :key="index">
         <div class="d-flex align-items-center">
