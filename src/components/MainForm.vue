@@ -71,39 +71,6 @@
           </template>
         </ContainerFocusItem>
       </div>
-      <div class="my-2">
-        {{ mainFormInputs.contacts }}
-        <!-- <ContainerFocusItem name="contact">
-          <template #text>
-            <div>
-              <contact-static-item :value="mainFormInputs.contacts"/>
-            </div>
-            <div class="row">
-              <div
-                class="col"
-                v-for="(contact, index) in formData.contacts"
-                :key="`conatct-key-${index}`"
-              >
-                <div class="d-flex align-items-center justify-content-center">
-                  <div class="pr-2">
-                    <b-icon :icon="contact.icon" />
-                  </div>
-                  <div class="pl-2">{{ contact.value }}</div>
-                  <text-placeholder
-                    :value="contact.value"
-                     label="your contact" />
-                </div>
-              </div>
-            </div>
-          </template>
-          <template #input="{ actions }">
-            <ContactInput
-              @on-focus="actions['contact-on-focus']"
-              @on-blur="actions['contact-on-blur']"
-            />
-          </template>
-        </ContainerFocusItem> -->
-      </div>
       <draggable v-model="mainFormInputs">
         <transition-group>
       <div
@@ -113,7 +80,11 @@
       >
         <ContainerFocusItem name="about">
           <template>
-            <title-container :text="input.name" />
+            <title-container
+            :id="input.id"
+             :text="getContainerTitleValue(input.id)"
+             :placeholder="input.name"
+             />
           </template>
           <template #text>
             <div class="row">
@@ -190,7 +161,7 @@ export default {
   },
   computed: {
     ...mapState('form', ['inputs', 'formData']),
-    ...mapGetters('form', ['getValue']),
+    ...mapGetters('form', ['getValue', 'getContainerTitleValue']),
   },
   watch: {
     inputs: {

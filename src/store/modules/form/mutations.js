@@ -14,6 +14,9 @@ export default {
   [types.SET_INPUT](state, inputList) {
     state.inputs = inputList;
   },
+  [types.UPDATE_TITLE_CONTAINER](state, { id, value }) {
+    state.formTitles = { ...state.formTitles, [id]: value };
+  },
   [types.DELETE_INPUT_FROM_AND_DATA](state, input) {
     state.inputs = state.inputs.filter(({ id }) => id !== input.id);
     const currenDoemDataKey = Object

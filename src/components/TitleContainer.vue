@@ -21,8 +21,9 @@
       <b-input
         :ref="refName"
         v-model="value"
-        :placeholder="text"
-        v-autowidth="{maxWidth: '960px', minWidth: '20px', comfortZone: 0}"
+        :placeholder="placeholder"
+        @change="onChange"
+        v-autowidth="{maxWidth: '960px', minWidth, comfortZone: 0}"
         style="
           font-size: 24px;
           font-weight: bold;
@@ -39,15 +40,24 @@
 
 <script>
 import { v4 as uuidv4 } from 'uuid';
+import { mapMutations } from 'vuex';
+import types from '@/store/modules/form/types';
 
 const refName = `title-container-ref-${uuidv4()}`;
 export default {
   name: 'TitleContainer',
   props: {
+    id: {
+      type: String,
+      require: true,
+    },
     text: {
       type: String,
       require: true,
-      default: '',
+    },
+    placeholder: {
+      type: String,
+      require: true,
     },
   },
   data() {
@@ -58,9 +68,18 @@ export default {
     };
   },
   methods: {
+    ...mapMutations('form', { updateTitleContainer: types.UPDATE_TITLE_CONTAINER }),
     onFocus() {
       this.focus = true;
       this.$refs[this.refName]?.focus();
+    },
+    onChange(value) {
+      this.updateTitleContainer({ id: this.id, value });
+    },
+  },
+  computed: {
+    minWidth() {
+      return `${this.value ? this.value.length * 15 : 40}px`;
     },
   },
   watch: {

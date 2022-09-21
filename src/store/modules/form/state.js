@@ -1,4 +1,5 @@
 export default {
+  formTitles: {},
   formData: {
     fullName: '',
     position: '',

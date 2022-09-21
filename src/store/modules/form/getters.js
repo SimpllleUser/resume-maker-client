@@ -46,4 +46,5 @@ export default {
     });
     return formData[formInputKey];
   },
+  getContainerTitleValue: ({ formTitles }) => (key) => formTitles[key],
 };
