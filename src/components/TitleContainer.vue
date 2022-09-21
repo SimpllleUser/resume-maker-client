@@ -79,7 +79,8 @@ export default {
   },
   computed: {
     minWidth() {
-      return `${this.value ? this.value.length * 15 : 40}px`;
+      const text = this.value || this.placeholder;
+      return `${text.length * 15}px`;
     },
   },
   watch: {
