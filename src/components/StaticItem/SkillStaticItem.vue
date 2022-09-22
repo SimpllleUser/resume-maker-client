@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="row">
       <div v-for="(skill, index) in value" :key="`skill-${id}-${index}`" class="col-4 text-center">
         <div class="d-flex align-items-center justify-content-center py-1">
