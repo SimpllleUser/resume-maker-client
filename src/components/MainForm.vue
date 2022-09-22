@@ -1,16 +1,12 @@
 <template>
   <div>
     <div class="d-flex justify-content-center py-2">
-      <div class="px-4"><side-bar/></div>
+      <div class="px-4"><side-bar /></div>
       <div>
         <b-button @click="print"> Print </b-button>
-
       </div>
     </div>
-    <div
-    class="main-form"
-     id="resume-form"
-      style="max-width: 80%;margin: 0 auto;" >
+    <div class="main-form" id="resume-form" style="max-width: 80%; margin: 0 auto">
       <div>
         <ContainerFocusItem name="main-info">
           <template #text>
@@ -18,24 +14,19 @@
               <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
                 <div class="col">
                   <div class="h1 text-center">
-                    <text-placeholder
-                    :value="formData.fullName"
-                     label="Your full name" />
+                    <text-placeholder :value="formData.fullName" label="Your full name" />
                   </div>
                   <div class="h4 text-center">
-                    <text-placeholder
-                    :value="formData.position"
-                     label="Your position" />
+                    <text-placeholder :value="formData.position" label="Your position" />
                   </div>
                 </div>
-                <contact-static-item :value="formData.contacts"/>
+                <contact-static-item :value="formData.contacts" />
               </div>
               <div v-if="formData.imgDataUrl" class="col-2">
                 <div class="d-flex justify-content-center align-items-center">
                   <img :src="formData.imgDataUrl" alt="photo" width="190px" height="190px" />
                 </div>
               </div>
-
             </div>
           </template>
           <template #input="{ actions }">
@@ -63,54 +54,58 @@
               />
               <div>
                 <ContactInput
-                @on-focus="actions['main-info-on-focus']"
-                @on-blur="actions['main-info-on-blur']"
-              />
-            </div>
+                  @on-focus="actions['main-info-on-focus']"
+                  @on-blur="actions['main-info-on-blur']"
+                />
+              </div>
             </div>
           </template>
         </ContainerFocusItem>
       </div>
       <draggable v-model="mainFormInputs">
         <transition-group>
-      <div
-        v-for="(input, inputKey) in mainFormInputs"
-        :key="`input-${inputKey}`"
-        style="position: relative; margin: 32px 0px"
-      >
-        <ContainerFocusItem name="about">
-          <template>
-            <title-container
-            :id="input.id"
-             :text="getContainerTitleValue(input.id)"
-             :placeholder="input.name"
-             />
-          </template>
-          <template #text>
-            <div class="row">
-              <component
-                :id="input.id"
-                :value="getValue(input.id)"
-                v-bind:is="input.componentStatic"
-              />
-            </div>
-          </template>
-          <template #input="{ actions }">
-            <div v-click-outside="actions['about-on-blur']">
-              <component :id="input.id" :value="getValue(input.id)" v-bind:is="input.component" />
-              <b-button
-                @click="deleteInputForm(input)"
-                variant="danger"
-                style="position: absolute; top: 0px; right: 0px"
-              >
-                <b-icon icon="trash" />
-              </b-button>
-            </div>
-          </template>
-        </ContainerFocusItem>
-      </div>
-    </transition-group>
-    </draggable>
+          <div
+            v-for="(input, inputKey) in mainFormInputs"
+            :key="`input-${inputKey}`"
+            style="position: relative; margin: 32px 0px"
+          >
+            <ContainerFocusItem name="about">
+              <template>
+                <title-container
+                  :id="input.id"
+                  :text="getContainerTitleValue(input.id)"
+                  :placeholder="input.name"
+                />
+              </template>
+              <template #text>
+                <div class="row">
+                  <component
+                    :id="input.id"
+                    :value="getValue(input.id)"
+                    v-bind:is="input.componentStatic"
+                  />
+                </div>
+              </template>
+              <template #input="{ actions }">
+                <div v-click-outside="actions['about-on-blur']">
+                  <component
+                    :id="input.id"
+                    :value="getValue(input.id)"
+                    v-bind:is="input.component"
+                  />
+                  <b-button
+                    @click="deleteInputForm(input)"
+                    variant="danger"
+                    style="position: absolute; top: 0px; right: 0px"
+                  >
+                    <b-icon icon="trash" />
+                  </b-button>
+                </div>
+              </template>
+            </ContainerFocusItem>
+          </div>
+        </transition-group>
+      </draggable>
     </div>
   </div>
 </template>
@@ -186,5 +181,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
