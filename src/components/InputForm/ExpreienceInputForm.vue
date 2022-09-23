@@ -1,5 +1,6 @@
 <template>
-  <div class="expereiance-row" v-click-outside="onBlur">
+  <div class="expereiance-row">
+    {{ allow }}
     <div class="pb-2">
       <b-button size="sm" variant="primary" @click="addExperience"
         >add
@@ -32,6 +33,9 @@
           <b-form-datepicker
             v-model="expiriences[propertyName][key].date.to"
             @context="updateInputValue"
+            @input="() => allow = false"
+            @hidden="() => allow = false"
+            @shown="() => allow = false"
             placeholder="to"
             size="sm"
           />
@@ -87,6 +91,7 @@ export default {
       expiriences: null,
       properties: null,
       propertyName: '',
+      allow: false,
     };
   },
   methods: {

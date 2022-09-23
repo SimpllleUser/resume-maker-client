@@ -30,4 +30,24 @@ export default {
     state.formData = removeKeyFromObject(state.formData, currenDoemDataKey);
     utils.statuePropertyToLocalStorage('formData', state.formData);
   },
+  [types.INIT_STATE](state) {
+    const {
+      formTitles,
+      formData,
+      inputs,
+    } = utils.getInitState();
+    state.formData = formData;
+    state.inputs = inputs;
+    state.formTitles = formTitles;
+  },
+  [types.RESET_STATE](state) {
+    const {
+      formTitles,
+      formData,
+      inputs,
+    } = utils.getInitState(true);
+    state.formData = formData;
+    state.inputs = inputs;
+    state.formTitles = formTitles;
+  },
 };

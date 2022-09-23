@@ -9,6 +9,14 @@
               font-scale="1.5rem"
               :id="`icon-selector-${index}`"
             />
+            <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
+              <b-dropdown-item>First Action</b-dropdown-item>
+              <b-dropdown-item>Second Action</b-dropdown-item>
+              <b-dropdown-item>Third Action</b-dropdown-item>
+              <b-dropdown-divider></b-dropdown-divider>
+              <b-dropdown-item >Active action</b-dropdown-item>
+              <b-dropdown-item >Disabled action</b-dropdown-item>
+            </b-dropdown>
             <b-tooltip :target="`icon-selector-${index}`" triggers="hover" variant="primary">
               <b-icon
                 v-for="icon in icons"

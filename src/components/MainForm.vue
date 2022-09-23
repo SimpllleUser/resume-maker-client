@@ -1,11 +1,16 @@
 <template>
   <div>
-    1. Поправить работу с фокусом на елементах
-    2. Добавить кнопку rest resume
-    3. Добавить выбор шрифтов и цвета => [Шрифта, полосок оглавоений, фона]
-    4. Добавить возможность множественных созданий резюме
+    <ul>
+      <li>1. Поправить работу с фокусом на елементах</li>
+      <li> <s>2. Добавить кнопку rest resume</s></li>
+      <li>3. Добавить выбор шрифтов и цвета => [Шрифта, полосок оглавоений, фона]</li>
+      <li>4. Добавить возможность множественных созданий резюме</li>
+    </ul>
     <div class="d-flex justify-content-center py-2">
       <div class="px-4"><side-bar /></div>
+      <div>
+        <b-button @click="resetState()">Reset</b-button>
+      </div>
       <div>
         <b-button @click="print"> Print </b-button>
       </div>
@@ -177,12 +182,15 @@ export default {
     ...mapMutations('form', {
       updateInputs: types.SET_INPUT,
       deleteInputForm: types.DELETE_INPUT_FROM_AND_DATA,
+      initState: types.INIT_STATE,
+      resetState: types.RESET_STATE,
     }),
     async print() {
       await this.$htmlToPaper('resume-form');
     },
   },
+  mounted() {
+    this.initState();
+  },
 };
 </script>
-
-<style></style>

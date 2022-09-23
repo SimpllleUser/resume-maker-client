@@ -22,6 +22,7 @@ export default {
       this.$emit('on-focus');
     },
     onBlur() {
+      if (this.allow) return;
       this.$emit('on-blur');
     },
   },
