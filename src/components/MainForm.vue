@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li>1. Поправить работу с фокусом на елементах</li>
-      <li> <s>2. Добавить кнопку rest resume</s></li>
+      <li><s>2. Добавить кнопку rest resume</s></li>
       <li>3. Добавить выбор шрифтов и цвета => [Шрифта, полосок оглавоений, фона]</li>
       <li>4. Добавить возможность множественных созданий резюме</li>
     </ul>
@@ -44,23 +44,27 @@
               v-click-outside="actions['main-info-on-blur']"
               @focus="actions['main-info-on-focus']"
             >
-              <b-form-group class="mb-4">
-                <PhotoInput @on-focus="actions['main-info-on-focus']" />
-              </b-form-group>
-              <b-form-input
-                class="text-center"
-                style="font-size: calc(1.375rem + 1.5vw); border-style: none"
-                v-model="fullName"
-                placeholder="Your full name"
-                @change="updateInputValue"
-              />
-              <b-form-input
-                v-model="position"
-                class="text-center"
-                style="font-size: calc(1.275rem + 0.3vw); border-style: none"
-                placeholder="Your position"
-                @change="updateInputValue"
-              />
+              <div class="d-flex">
+                <div :class="{ 'w-100': !formData.imgDataUrl }">
+                  <b-form-input
+                    class="text-center"
+                    style="font-size: calc(1.375rem + 1.5vw); border-style: none"
+                    v-model="fullName"
+                    placeholder="Your full name"
+                    @change="updateInputValue"
+                  />
+                  <b-form-input
+                    v-model="position"
+                    class="text-center"
+                    style="font-size: calc(1.275rem + 0.3vw); border-style: none"
+                    placeholder="Your position"
+                    @change="updateInputValue"
+                  />
+                </div>
+                <div>
+                  <PhotoInput @on-focus="actions['main-info-on-focus']" />
+                </div>
+              </div>
               <div>
                 <ContactInput
                   @on-focus="actions['main-info-on-focus']"
@@ -103,9 +107,11 @@
                     v-bind:is="input.component"
                   />
                   <b-button
+                    size="sm"
+                    pill
                     @click="deleteInputForm(input)"
                     variant="danger"
-                    style="position: absolute; top: 0px; right: 0px"
+                    style="position: absolute; top: -15px; right: -15px"
                   >
                     <b-icon icon="trash" />
                   </b-button>

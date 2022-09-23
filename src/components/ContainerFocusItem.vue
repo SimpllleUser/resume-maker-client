@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div v-show="focus">
+      <div v-show="focus" class="p-2">
         <slot
           :actions="actions"
           name="input"
@@ -43,7 +43,7 @@ export default {
     return {
       hover: false,
       focus: false,
-      classOnFocus: 'border border-primary shadow py-4 my-4 mb-2 bg-white rounded',
+      classOnFocus: 'border shadow py-4 my-4 mb-2 bg-white rounded',
       classOnHover: 'border border-secondary bg-white rounded',
     };
   },

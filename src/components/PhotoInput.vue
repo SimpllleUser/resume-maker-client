@@ -1,5 +1,5 @@
 <template>
-  <div class="photo-input">
+  <div class="photo-input position-relative">
     <div class="mb-2">
       <my-upload
         v-if="show"
@@ -7,26 +7,32 @@
         @crop-success="cropSuccess"
         @crop-upload-success="cropUploadSuccess"
         v-model="show"
-        :width="250"
-        :height="250"
+        :width="190"
+        :height="190"
         :params="params"
         :headers="headers"
         img-format="png"
         langType="ru"
-      ></my-upload>
-      <img v-show="imgDataUrl" :src="imgDataUrl" alt="photo" />
+      />
+      <div v-if="imgDataUrl" class="position-relative">
+        <img :src="imgDataUrl" alt="photo" :width="190" :height="190" />
+        <b-button
+          size="sm"
+          @click="resetPhoto"
+          variant="outline-danger"
+          class="btn-delete position-absolute"
+          style="top: -15px;
+          right: -15px;"
+        >
+          <b-icon icon="trash" variant="danger" />
+        </b-button>
+      </div>
     </div>
-    <div>
-      <b-button variant="primary" @click="toggleShow">Select photo</b-button>
-      <b-button
-      v-show="imgDataUrl"
-      @click="resetPhoto"
-      variant="outline-danger"
-      class="btn-delete"
-    >
-      <b-icon icon="trash" variant="danger" />
-    </b-button>
-    </div>
+      <div v-if="!imgDataUrl" class="position-absolute" style="right: 0px;">
+        <b-button variant="primary" size="sm" @click="toggleShow">
+           <b-icon icon="camera-fill" aria-hidden="true"  ></b-icon>
+        </b-button>
+      </div>
   </div>
 </template>
 

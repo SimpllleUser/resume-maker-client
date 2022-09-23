@@ -5,13 +5,15 @@
       v-for="(contact, index) in value"
       :key="`conatct-key-${index}`"
     >
-      <div class="d-flex align-items-center justify-content-center">
-        <div class="pr-2">
-          <b-icon :icon="contact.icon" />
+      <div class="d-flex justify-content-center">
+        <div style="padding-right: 8px;">
+          <b-icon :icon="contact.icon" scale="1.2rem" />
         </div>
-        <text-placeholder
+        <div class="pl-5">
+          <text-placeholder
           :value="contact.value"
            label="your contact" />
+        </div>
       </div>
     </div>
   </div>
