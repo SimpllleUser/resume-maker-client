@@ -1,23 +1,38 @@
 <template>
   <div class="conatct-input">
-    <b-row class="d-flex align-items-center flex-wrap">
-      <b-col v-for="(contact, index) in contacts" :key="index">
+    <b-row>
+      <b-col cols="4" v-for="(contact, index) in contacts" :key="index">
         <div class="d-flex align-items-center">
           <div class="contatc-icon">
-            <b-icon
-              :icon="contacts[index].icon"
-              font-scale="1.5rem"
-              :id="`icon-selector-${index}`"
-            />
-            <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
-              <b-dropdown-item>First Action</b-dropdown-item>
-              <b-dropdown-item>Second Action</b-dropdown-item>
-              <b-dropdown-item>Third Action</b-dropdown-item>
-              <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item >Active action</b-dropdown-item>
-              <b-dropdown-item >Disabled action</b-dropdown-item>
+            <b-dropdown id="dropdown-1" no-caret size="sm" :ref="getDropDownRefName(index)">
+              <template #button-content>
+                <b-icon
+                  :icon="contacts[index].icon"
+                  font-scale="1.5rem"
+                  :id="`icon-selector-${index}`"
+                />
+              </template>
+              <b-dropdown-form>
+                <b-button
+                v-for="icon in icons"
+                 :key="icon"
+                  variant="outline-dark"
+                  @click="
+                  () => {
+                    contacts[index].icon = icon;
+                    hideDropDowm(`icon-selector-${index}`);
+                    updateInputValue();
+                  }
+                "
+                  >
+                  <b-icon
+                    :icon="icon"
+                    font-scale="1.5rem"
+                  />
+                </b-button>
+              </b-dropdown-form>
             </b-dropdown>
-            <b-tooltip :target="`icon-selector-${index}`" triggers="hover" variant="primary">
+            <!-- <b-tooltip :target="`icon-selector-${index}`" triggers="hover" variant="primary">
               <b-icon
                 v-for="icon in icons"
                 :key="icon"
@@ -30,14 +45,14 @@
                   }
                 "
               />
-            </b-tooltip>
+            </b-tooltip> -->
           </div>
           <div class="contatc-input">
             <b-form-input
-            v-model="contacts[index].value"
-             @change="updateInputValue"
-             placeholder="Your contact"
-             />
+              v-model="contacts[index].value"
+              @change="updateInputValue"
+              placeholder="Your contact"
+            />
           </div>
           <div>
             <b-icon icon="trash-fill" @click="deleteConatct(index)" />
@@ -73,11 +88,17 @@ export default {
   },
   methods: {
     addConatct() {
-      this.contacts = [...this.contacts, JSON.parse(JSON.stringify(defaultConatctItem))];
+      this.contacts = [...(this.contacts || []), JSON.parse(JSON.stringify(defaultConatctItem))];
     },
     deleteConatct(key) {
-      this.contacts = this.contacts.filter((_, index) => index !== key);
+      this.contacts = this.contacts?.filter((_, index) => index !== key) || [];
       this.onFocus();
+    },
+    getDropDownRefName(index) {
+      return `icon-selector-${index}`;
+    },
+    hideDropDowm(refName) {
+      this.$refs[`${refName}`].at(0).hide();
     },
   },
   watch: {
