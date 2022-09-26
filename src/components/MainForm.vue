@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="main-form" id="resume-form" style="max-width: 80%; margin: 0 auto">
-      <div>
+      <div class="test">
         <ContainerFocusItem name="main-info">
           <template #text>
             <div class="row row-cols-2">
