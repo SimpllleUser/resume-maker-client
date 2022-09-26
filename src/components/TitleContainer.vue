@@ -1,6 +1,6 @@
 <template>
   <div
-    class="title position-relative py-2"
+    class="title title-container position-relative py-2"
     style="width: 90%; margin-left: auto; margin-right: auto; margin-bottom: 50px"
     tabindex="-1"
     @blur="focus = false"
@@ -23,24 +23,27 @@
         v-model="value"
         :placeholder="placeholder"
         @change="onChange"
-        v-autowidth="{maxWidth: '960px', minWidth, comfortZone: 0}"
-        style="
-          font-size: 24px;
+        v-autowidth="{ maxWidth: '960px', minWidth, comfortZone: 0 }"
+        :style="`font-size: 24px;
           font-weight: bold;
           border: none;
           text-align: center;
           padding: 0px 20px;
           margin: 0 auto;
-        "
+          color: ${currentColor} !importnat;`"
+        :class="`color-${currentColor.class}`"
       />
     </div>
-    <div class="w-100" style="border: 2px solid grey; height: 2px"></div>
+    <div
+      :class="`border-style-color-${currentColor.class} w-100`"
+      :style="`border: 2px solid; height: 2px`"
+    ></div>
   </div>
 </template>
 
 <script>
 import { v4 as uuidv4 } from 'uuid';
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 import types from '@/store/modules/form/types';
 
 const refName = `title-container-ref-${uuidv4()}`;
@@ -82,6 +85,7 @@ export default {
       const text = this.value || this.placeholder;
       return `${text.length * 15}px`;
     },
+    ...mapState('form', ['currentColor']),
   },
   watch: {
     text: {
@@ -93,3 +97,8 @@ export default {
   },
 };
 </script>
+<!-- <style>
+  .form-control.test {
+    color: red !important;
+  }
+</style> -->

@@ -1,0 +1,24 @@
+$theme-colors: (
+    navy: #63677c,
+    navy2: #031635,
+    blue: #1f497d,
+    blue2: #339fc3,
+    violet: #8eb9eb,
+    green: #6967ba,
+    ochre: #4cab96,
+);
+
+@each $theme-color, $color in $theme-colors {
+    .color-#{$theme-color} {
+        color: $color !important;
+    }
+    .form-control.color-#{$theme-color} {
+        color: $color !important;
+    } 
+    .border-style-color-#{$theme-color} {
+        border-color: $color !important;
+    }
+      .full-name-color-#{$theme-color} {
+        color: $color !important;
+    }
+}

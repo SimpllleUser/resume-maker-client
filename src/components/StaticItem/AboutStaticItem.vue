@@ -10,7 +10,8 @@
         "
         :class="{ 'text-center': !value }"
       >
-        <text-placeholder :value="value" label="Enter some text about you" />
+        <text-placeholder class="text-color-blue"
+         :value="value" label="Enter some text about you" />
       </div>
     </div>
   </div>

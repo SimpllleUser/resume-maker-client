@@ -50,4 +50,10 @@ export default {
     state.inputs = inputs;
     state.formTitles = formTitles;
   },
+  [types.SET_COLOR](state, color) {
+    state.currentColor = color;
+  },
+  [types.SET_FONT](state, font) {
+    state.currentFont = font;
+  },
 };

@@ -1,9 +1,12 @@
 <template>
   <div>
     <ul>
-      <li>1. Поправить работу с фокусом на елементах</li>
+      <li><s>1. Поправить работу с фокусом на елементах</s></li>
       <li><s>2. Добавить кнопку rest resume</s></li>
-      <li>3. Добавить выбор шрифтов и цвета => [Шрифта, полосок оглавоений, фона]</li>
+      <li>
+        3. Добавить выбор шрифтов и цвета => [Шрифта, полосок оглавоений, фона] example
+        https://codepen.io/stacy/pen/myxJWO
+      </li>
       <li>4. Добавить возможность множественных созданий резюме</li>
     </ul>
     <div class="d-flex justify-content-center py-2">
@@ -22,7 +25,10 @@
             <div class="row row-cols-2">
               <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
                 <div class="col">
-                  <div class="h1 text-center">
+                  <div
+                    class="h1 text-center text-color-blue"
+                    :class="`full-name-color-${currentColor.class}`"
+                  >
                     <text-placeholder :value="formData.fullName" label="Your full name" />
                   </div>
                   <div class="h4 text-center">
@@ -170,7 +176,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('form', ['inputs', 'formData']),
+    ...mapState('form', ['inputs', 'formData', 'currentColor']),
     ...mapGetters('form', ['getValue', 'getContainerTitleValue']),
   },
   watch: {
@@ -200,3 +206,6 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+@import '../assets/app.scss';
+</style>

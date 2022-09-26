@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row row-cols-2">
           <div class="text-center">
-            <div class="col">
+            <div class="col text-color-blue">
               <b>
                 <text-placeholder :value="education.educationName" label="Education name" />
               </b>

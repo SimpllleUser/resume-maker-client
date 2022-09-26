@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Roboto&display=swap');
+// font-family: 'Roboto', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+// font-family: 'Playfair Display', serif;
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap');
+// font-family: 'EB Garamond', serif;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+// font-family: 'Noto Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight&display=swap');
+// font-family: 'Inter Tight', sans-serif;
+
+$theme-fonts: (
+    roboto: 'Roboto',
+    playfair_display: 'Playfair Display',
+    eb_garamond: 'EB Garamond',
+    noto_sans: 'Noto Sans',
+    inter_tight: 'Inter Tight',
+);
+
+@each $theme-font, $font in $theme-fonts {
+    .font-#{$theme-font} {
+        font-family: $font, sans-serif !important;
+    }
+}

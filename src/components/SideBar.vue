@@ -11,6 +11,9 @@
               {{ input.name }}
             </b-button>
           </div>
+          <div class="py-2">
+            <color-picker/>
+          </div>
         </div>
       </b-sidebar>
     </div>
@@ -20,9 +23,13 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 import types from '@/store/modules/form/types';
+import ColorPicker from '@/components/ColorPicker.vue';
 
 export default {
   name: 'SideBar',
+  components: {
+    ColorPicker,
+  },
   computed: {
     ...mapGetters('form', ['inputsList']),
   },
