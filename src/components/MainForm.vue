@@ -18,7 +18,12 @@
         <b-button @click="print"> Print </b-button>
       </div>
     </div>
-    <div class="main-form" id="resume-form" style="max-width: 80%; margin: 0 auto">
+    <div
+      class="main-form"
+      id="resume-form"
+      :class="`font-${currentFont.value}`"
+      style="max-width: 80%; margin: 0 auto"
+    >
       <div>
         <ContainerFocusItem name="main-info">
           <template #text>
@@ -27,7 +32,7 @@
                 <div class="col">
                   <div
                     class="h1 text-center text-color-blue"
-                    :class="`full-name-color-${currentColor.class}`"
+                    :class="`full-name-color-${currentColor.class} font-${currentFont.value}`"
                   >
                     <text-placeholder :value="formData.fullName" label="Your full name" />
                   </div>
@@ -176,7 +181,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('form', ['inputs', 'formData', 'currentColor']),
+    ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont']),
     ...mapGetters('form', ['getValue', 'getContainerTitleValue']),
   },
   watch: {

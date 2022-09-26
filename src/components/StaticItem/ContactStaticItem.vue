@@ -6,7 +6,8 @@
           <b-icon :icon="contact.icon" scale="1.2rem" :style="`color: ${currentColor.value}`" />
         </div>
         <div class="pl-5">
-          <text-placeholder :value="contact.value" label="your contact" />
+          <text-placeholder :class="`contact-text font-${currentFont.value}`"
+           :value="contact.value" label="your contact" />
         </div>
       </div>
     </div>
@@ -35,7 +36,7 @@ export default {
     },
   },
   computed: {
-    ...mapState('form', ['currentColor']),
+    ...mapState('form', ['currentColor', 'currentFont']),
   },
 };
 </script>

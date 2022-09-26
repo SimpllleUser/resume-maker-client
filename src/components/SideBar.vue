@@ -14,6 +14,9 @@
           <div class="py-2">
             <color-picker/>
           </div>
+          <div class="py-2">
+            <font-picker/>
+          </div>
         </div>
       </b-sidebar>
     </div>
@@ -24,11 +27,13 @@
 import { mapGetters, mapMutations } from 'vuex';
 import types from '@/store/modules/form/types';
 import ColorPicker from '@/components/ColorPicker.vue';
+import FontPicker from '@/components/FontPicker.vue';
 
 export default {
   name: 'SideBar',
   components: {
     ColorPicker,
+    FontPicker,
   },
   computed: {
     ...mapGetters('form', ['inputsList']),

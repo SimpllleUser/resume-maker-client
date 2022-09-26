@@ -1,11 +1,13 @@
 <template>
-    <div>
+    <div :class="`font-${currentFont.value}`">
         <div v-show="value.length">{{ value }}</div>
         <div v-show="!value.length" class="text-secondary opacity-4">{{ label }}</div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'TextPlaceholder',
   props: {
@@ -19,6 +21,10 @@ export default {
       require: true,
       default: '',
     },
+  },
+  computed: {
+    ...mapState('form', ['currentFont']),
+
   },
 };
 </script>

@@ -30,7 +30,9 @@
           text-align: center;
           padding: 0px 20px;
           margin: 0 auto;
-          color: ${currentColor} !importnat;`"
+          color: ${currentColor} !importnat;
+          font-family: ${currentFont.name}, sans-serif !important;
+          `"
         :class="`color-${currentColor.class}`"
       />
     </div>
@@ -85,7 +87,7 @@ export default {
       const text = this.value || this.placeholder;
       return `${text.length * 15}px`;
     },
-    ...mapState('form', ['currentColor']),
+    ...mapState('form', ['currentColor', 'currentFont']),
   },
   watch: {
     text: {

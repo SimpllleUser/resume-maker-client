@@ -21,4 +21,10 @@ $theme-fonts: (
     .font-#{$theme-font} {
         font-family: $font, sans-serif !important;
     }
+    .contact-text.font-#{$theme-font} {
+        font-family: $font, sans-serif !important;
+    }
+    .form-control.font-#{$theme-font} {
+        font-family: $font, sans-serif !important;
+    }
 }
