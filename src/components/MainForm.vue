@@ -25,7 +25,7 @@
               <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
                 <div class="col">
                   <div
-                    class="h1 text-center text-color-blue"
+                    class="h1 text-center test"
                     :class="`full-name-color-${currentColor.class} font-${currentFont.value}`"
                   >
                     <text-placeholder :value="formData.fullName" label="Your full name" />

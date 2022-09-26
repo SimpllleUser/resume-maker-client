@@ -38,7 +38,7 @@
     </div>
     <div
       :class="`border-style-color-${currentColor.class} w-100`"
-      :style="`border: 2px solid; height: 2px`"
+      :style="`border: 2px solid ${currentColor.value}; height: 2px`"
     ></div>
   </div>
 </template>

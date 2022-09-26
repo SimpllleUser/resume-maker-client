@@ -1,9 +1,11 @@
 <template>
   <div class="row">
     <div class="col" v-for="(contact, index) in value" :key="`conatct-key-${index}`">
-      <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center test">
         <div style="padding-right: 8px">
-          <b-icon :icon="contact.icon" scale="1.2rem" :style="`color: ${currentColor.value}`" />
+          <b-icon :icon="contact.icon"
+          scale="1.2rem"
+          :style="`min-height: 1.2rem; color: ${currentColor.value}`" />
         </div>
         <div class="pl-5">
           <text-placeholder :class="`contact-text font-${currentFont.value}`"
@@ -24,11 +26,6 @@ export default {
     TextPlaceholder,
   },
   props: {
-    // id: {
-    //   type: String,
-    //   require: true,
-    //   default: '',
-    // },
     value: {
       type: [],
       require: true,
@@ -40,5 +37,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>

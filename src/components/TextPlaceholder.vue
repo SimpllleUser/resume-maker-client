@@ -1,7 +1,10 @@
 <template>
-    <div :class="`font-${currentFont.value}`">
+    <div :class="`font-${currentFont.value}`"
+      :style="`font-family: ${currentFont.name}`"
+    >
         <div v-show="value.length">{{ value }}</div>
-        <div v-show="!value.length" class="text-secondary opacity-4">{{ label }}</div>
+        <div v-show="!value.length"
+        class="text-secondary opacity-4">{{ label }}</div>
     </div>
 </template>
 
@@ -23,7 +26,7 @@ export default {
     },
   },
   computed: {
-    ...mapState('form', ['currentFont']),
+    ...mapState('form', ['currentFont', 'currentColor']),
 
   },
 };
