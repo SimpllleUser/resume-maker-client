@@ -1,13 +1,7 @@
 <template>
   <div>
     <ul>
-      <li><s>1. Поправить работу с фокусом на елементах</s></li>
-      <li><s>2. Добавить кнопку rest resume</s></li>
-      <li>
-        3. Добавить выбор шрифтов и цвета => [Шрифта, полосок оглавоений, фона] example
-        https://codepen.io/stacy/pen/myxJWO
-      </li>
-      <li>4. Добавить возможность множественных созданий резюме</li>
+      <li> Добавить возможность множественных созданий резюме</li>
     </ul>
     <div class="d-flex justify-content-center py-2">
       <div class="px-4"><side-bar /></div>
