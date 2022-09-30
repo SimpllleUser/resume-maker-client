@@ -47,4 +47,87 @@ export default {
     return formData[formInputKey];
   },
   getContainerTitleValue: ({ formTitles }) => (key) => formTitles[key],
+  styleFormPrint: () => {
+    const colors = [
+      {
+        class: 'navy',
+        style: '#63677c',
+      },
+      {
+        class: 'navy2',
+        style: '#031635',
+      },
+      {
+        class: 'blue',
+        style: '#1f497d',
+      },
+      {
+        class: 'blue2',
+        style: '#339fc3',
+      },
+      {
+        class: 'violet',
+        style: '#8eb9eb',
+      },
+      {
+        class: 'green',
+        style: '#6967ba',
+      },
+      {
+        class: 'ochre',
+        style: '#4cab96',
+      },
+    ];
+    const getCssStylesByColor = (color) => `
+      .color-${color.class} {
+          color: ${color.style} !important;
+      }
+      .form-control.color-${color.class} {
+          color: ${color.style} !important;
+      }
+      .border-style-color-${color.class} {
+          border-color: ${color.style} !important;
+      }
+        .full-name-color-${color.class} {
+          color: ${color.style} !important;
+      }`;
+    const styleColorsString = colors.reduce((otherStyles, color) => `${otherStyles} ${getCssStylesByColor(color)}`, '');
+    const fonts = [
+      {
+        class: 'roboto',
+        style: `${'Roboto'}`,
+      },
+      {
+        class: 'playfair_display',
+        style: `${'Playfair Display'}`,
+      },
+      {
+        class: 'eb_garamond',
+        style: `${'EB Garamond'}`,
+      },
+      {
+        class: 'noto_sans',
+        style: `${'Noto Sans'}`,
+      },
+      {
+        class: 'inter_tight',
+        style: `${'Noto Serif Display'}`,
+      },
+    ];
+    const getFontStyle = (font) => `
+    .font-${font.class} {
+      font-family: ${font.style} !important;
+    }
+    .contact-text.font-${font.class} {
+        font-family: ${font.style} !important;
+    }
+    .form-control.font-${font.class} {
+        font-family: ${font.style} !important;
+    }
+    `;
+    const fontStyles = fonts.reduce((allFonts, font) => `${allFonts} ${getFontStyle(font)}`, '');
+    return `${styleColorsString}
+      ${fontStyles}
+    `;
+  },
 };

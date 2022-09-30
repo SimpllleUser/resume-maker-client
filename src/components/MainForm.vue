@@ -18,6 +18,14 @@
       :class="`font-${currentFont.value}`"
       style="max-width: 80%; margin: 0 auto"
     >
+    <span v-html="`<style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+      ${styleFormPrint}
+      body {
+        font-family: Playfair Display, sans-serif !important;
+      }
+    </style>`" />
+    <span v-html="includesFont"></span>
       <div>
         <ContainerFocusItem name="main-info">
           <template #text>
@@ -172,11 +180,20 @@ export default {
       about: '',
       properties: ['fullName', 'position', 'about'],
       mainFormInputs: null,
+      includesFont: `
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wght@500&display=swap" rel="stylesheet">
+    `,
     };
   },
   computed: {
     ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont']),
-    ...mapGetters('form', ['getValue', 'getContainerTitleValue']),
+    ...mapGetters('form', ['getValue', 'getContainerTitleValue', 'styleFormPrint']),
   },
   watch: {
     inputs: {

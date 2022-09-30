@@ -14,7 +14,7 @@ $theme-fonts: (
     playfair_display: 'Playfair Display',
     eb_garamond: 'EB Garamond',
     noto_sans: 'Noto Sans',
-    inter_tight: 'Inter Tight',
+    inter_tight: 'Noto Serif Display',
 );
 
 @each $theme-font, $font in $theme-fonts {

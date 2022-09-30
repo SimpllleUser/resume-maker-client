@@ -1,19 +1,2 @@
 @import './fonts.scss';
 @import './colors.scss';
-
-@media print {
-    @page {
-      size: landscape
-    }
-    .test {
-        border: 1px solid red;
-        color: red !important;
-        background-color: red !important;
-    }
-  }
-
-  .test {
-    border: 1px solid red;
-    color: red !important;
-    background-color: red !important;
-}
