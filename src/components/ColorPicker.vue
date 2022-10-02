@@ -2,16 +2,16 @@
   <div class="color-list d-flex flex-wrap">
     <div
       v-for="color in colors"
-      :key="color.value"
+      :key="color.style"
       class="my-2"
-      :class="{ 'rounded-circle shadow-lg': currentColor.value === color.value }"
+      :class="{ 'rounded-circle shadow-lg': currentColor.style === color.style }"
       style="width: 55px"
     >
       <div>
         <b-button
           class="p-4"
-          :class="{ [`${activeClass}`]: currentColor.value === color.value }"
-          :style="`background-color: ${color.value}`"
+          :class="{ [`${activeClass}`]: currentColor.style === color.style }"
+          :style="`background-color: ${color.style}`"
           @click="setColor(color)"
         >
         </b-button>
