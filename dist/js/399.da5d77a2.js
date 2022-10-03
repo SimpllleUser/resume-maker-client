@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkresume_maker_vue2"]=self["webpackChunkresume_maker_vue2"]||[]).push([[399],{5399:function(e,u,n){n.r(u),n.d(u,{default:function(){return i}});var s=function(){var e=this;e._self._c;return e._m(0)},t=[function(){var e=this,u=e._self._c;return u("div",{staticClass:"about"},[u("h1",[e._v("This is an about page")])])}],r=n(1001),a={},l=(0,r.Z)(a,s,t,!1,null,null,null),i=l.exports}}]);
-//# sourceMappingURL=399.da5d77a2.js.map

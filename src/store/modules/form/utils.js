@@ -35,12 +35,20 @@ const inputsList = [
     componentStatic: AboutStaticItem,
   },
 ];
+const statuePropertyToLocalStorage = (key, value) => { localStorage[key] = JSON.stringify(value); };
+const initStateProperty = (stateKey, defaultValue) => {
+  if (!localStorage[stateKey]) {
+    statuePropertyToLocalStorage(stateKey, defaultValue);
+    return defaultValue;
+  }
+  return JSON.parse(localStorage[stateKey]);
+};
 
 export default {
-  statuePropertyToLocalStorage: (key, value) => { localStorage[key] = JSON.stringify(value); },
+  statuePropertyToLocalStorage,
   initStateProperty: (stateKey, defaultValue) => {
     if (!localStorage[stateKey]) {
-      this.statuePropertyToLocalStorage(stateKey, defaultValue);
+      statuePropertyToLocalStorage(stateKey, defaultValue);
       return defaultValue;
     }
     return JSON.parse(localStorage[stateKey]);
@@ -56,8 +64,8 @@ export default {
     };
     const defaultInputs = [];
 
-    const formTitles = this.initStateProperty('formTitles', {});
-    const formData = this.initStateProperty('formData', defaultFormData);
+    const formTitles = initStateProperty('formTitles', {});
+    const formData = initStateProperty('formData', defaultFormData);
     if (isDefault) {
       return {
         formTitles: defaultTitles,
@@ -65,7 +73,7 @@ export default {
         inputs: defaultInputs,
       };
     }
-    const inputs = this.initStateProperty('inputs', defaultInputs).map((currentInput) => ({
+    const inputs = initStateProperty('inputs', defaultInputs).map((currentInput) => ({
       ...currentInput,
       ..._.find(inputsList, { name: currentInput.name }),
     }));
