@@ -1,3 +1,5 @@
+import utils from '@/store/modules/form/utils';
+
 const getFontFullLink = (linkParam) => `https://fonts.googleapis.com/css2?family=${linkParam}&display=swap`;
 const colors = [
   { style: '#63677c', class: 'navy' },
@@ -41,6 +43,9 @@ const fonts = [
   },
 ];
 
+const currentColor = utils.initStateProperty('currentColor', colors[0]);
+const currentFont = utils.initStateProperty('currentFont', fonts[0]);
+
 export default {
   formTitles: {},
   formData: {},
@@ -51,6 +56,6 @@ export default {
   },
   colors,
   fonts,
-  currentColor: colors[0],
-  currentFont: fonts[0],
+  currentColor,
+  currentFont,
 };

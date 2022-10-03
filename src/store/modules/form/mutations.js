@@ -52,8 +52,10 @@ export default {
   },
   [types.SET_COLOR](state, color) {
     state.currentColor = color;
+    utils.statuePropertyToLocalStorage('currentColor', state.currentColor);
   },
   [types.SET_FONT](state, font) {
     state.currentFont = font;
+    utils.statuePropertyToLocalStorage('currentFont', state.currentFont);
   },
 };
