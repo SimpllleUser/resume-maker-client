@@ -1,10 +1,13 @@
 <template>
-  <div
-    :class="`font-${currentFont.class} color-${currentColor.class}`"
-    :style="`color: ${currentColor.style}`"
-  >
-    <div v-show="value.length">{{ value }}</div>
-    <div v-show="!value.length" class="text-secondary opacity-4">{{ label }}</div>
+  <div>
+    <div v-show="value.length" :class="`font-${currentFont.class}`">{{ value }}</div>
+    <div
+      v-show="!value.length"
+      :class="`font-${currentFont.class}`"
+      class="text-secondary opacity-4"
+    >
+      {{ label }}
+    </div>
   </div>
 </template>
 
@@ -24,6 +27,11 @@ export default {
       require: true,
       default: '',
     },
+    customClass: {
+      type: String,
+      require: true,
+      default: '',
+    },
   },
   computed: {
     ...mapState('form', ['currentFont', 'currentColor']),
@@ -31,7 +39,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .opacity-0 {
   opacity: 0 !important;
 }

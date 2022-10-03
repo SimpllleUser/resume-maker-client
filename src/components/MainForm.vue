@@ -1,10 +1,10 @@
 <template>
   <div>
     <ul>
-      <li> Добавить возможность множественных созданий резюме</li>
+      <li>Добавить возможность множественных созданий резюме</li>
     </ul>
-    <div class="d-flex justify-content-center py-2">
-      <div class="px-4"><side-bar /></div>
+    <div class="d-flex justify-content-center">
+      <!-- <div class="px-4"><side-bar /></div> -->
       <div>
         <b-button @click="resetState()">Reset</b-button>
       </div>
@@ -12,14 +12,10 @@
         <b-button @click="print"> Print </b-button>
       </div>
     </div>
-    <div
-      class="main-form"
-      id="resume-form"
-      :class="`font-${currentFont.value}`"
-      style="max-width: 80%; margin: 0 auto"
-    >
-    <span v-html="`<style>${styleFormPrint}</style>`" />
-    <span v-html="includeFotns"></span><div>
+    <div class="main-form" id="resume-form" :class="`font-${currentFont.value}`">
+      <span v-html="`<style>${styleFormPrint}</style>`" />
+      <span v-html="includeFotns"></span>
+      <div>
         <ContainerFocusItem name="main-info">
           <template #text>
             <div class="row row-cols-2">
@@ -29,10 +25,18 @@
                     class="h1 text-center test"
                     :class="`full-name-color-${currentColor.class} font-${currentFont.value}`"
                   >
-                    <text-placeholder :value="formData.fullName" label="Your full name" />
+                    <text-placeholder
+                      :class="`font-${currentFont.class}`"
+                      :value="formData.fullName"
+                      label="Your full name"
+                    />
                   </div>
                   <div class="h4 text-center">
-                    <text-placeholder :value="formData.position" label="Your position" />
+                    <text-placeholder
+                      :class="`font-${currentFont.class}`"
+                      :value="formData.position"
+                      label="Your position"
+                    />
                   </div>
                 </div>
                 <contact-static-item :value="formData.contacts" />
@@ -138,7 +142,6 @@ import ContactStaticItem from '@/components/StaticItem/ContactStaticItem.vue';
 import TitleContainer from '@/components/TitleContainer.vue';
 import types from '@/store/modules/form/types';
 import TextPlaceholder from '@/components/TextPlaceholder.vue';
-import SideBar from '@/components/SideBar.vue';
 import draggable from 'vuedraggable';
 import ContactInput from './ContactInput.vue';
 import SkillInput from './SkillInput.vue';
@@ -159,7 +162,6 @@ export default {
     TitleContainer,
     TextPlaceholder,
     ContactStaticItem,
-    SideBar,
     draggable,
   },
   mixins: [formMixin],
@@ -173,15 +175,15 @@ export default {
       about: '',
       properties: ['fullName', 'position', 'about'],
       mainFormInputs: null,
-    //   includeFotns: `
-    //   <link rel="preconnect" href="https://fonts.googleapis.com">
-    //   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    //   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    //   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    //   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap" rel="stylesheet">
-    //   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
-    //   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap" rel="stylesheet">
-    // `,
+      //   includeFotns: `
+      //   <link rel="preconnect" href="https://fonts.googleapis.com">
+      //   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      //   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+      //   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+      //   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap" rel="stylesheet">
+      //   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&display=swap" rel="stylesheet">
+      //   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap" rel="stylesheet">
+      // `,
     };
   },
   computed: {

@@ -1,10 +1,15 @@
 <template>
-  <div>
-    <div v-for="font in fonts" :key="font.value"
-    class="my-2"
+  <div class="w-100">
+    <div v-for="font in fonts"
+    :key="font.value"
+    class="my-2 w-100"
     :class="{'sahdow-xl': currentFont.value === font.value}"
     >
-      <b-button @click="setFont(font)" :class="`font-${font.value}`">
+      <b-button @click="setFont(font)"
+      class="w-100"
+      :variant="`${isActive(font) ? 'primary' : 'outline-dark'}`"
+      :style="`font-family: ${font.style}`"
+      :class="`font-${font.value}`">
         {{ font.name }}
     </b-button>
     </div>
@@ -31,6 +36,9 @@ export default {
     ...mapMutations('form', {
       setFont: types.SET_FONT,
     }),
+    isActive({ style }) {
+      return this.currentFont.style === style;
+    },
   },
 };
 </script>

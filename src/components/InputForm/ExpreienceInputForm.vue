@@ -1,6 +1,5 @@
 <template>
   <div class="expereiance-row">
-    {{ allow }}
     <div class="pb-2">
       <b-button size="sm" variant="primary" @click="addExperience"
         >add
