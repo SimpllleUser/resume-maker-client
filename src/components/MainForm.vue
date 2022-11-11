@@ -1,6 +1,7 @@
 <template>
   <div>
     <ul>
+      <li><h1>Переделать все инпуты в editable content</h1></li>
       <li>Добавить возможность множественных созданий резюме</li>
     </ul>
     <div class="d-flex justify-content-center">
@@ -41,7 +42,7 @@
                 </div>
                 <contact-static-item :value="formData.contacts" />
               </div>
-              <div v-if="formData.imgDataUrl" class="col-2">
+              <div v-if="formData.imgDataUrl" class="col-3">
                 <div class="d-flex justify-content-center align-items-center">
                   <img :src="formData.imgDataUrl" alt="photo" width="190px" height="190px" />
                 </div>
