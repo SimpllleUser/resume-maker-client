@@ -1,6 +1,7 @@
 <template>
   <div>
     <ul>
+      <tag-editable tag-type="h1" v-model="txt" ></tag-editable>
       <li><h1>Переделать все инпуты в editable content</h1></li>
       <li>Добавить возможность множественных созданий резюме</li>
     </ul>
@@ -150,6 +151,7 @@ import ExpreienceInput from './ExpreienceInput.vue';
 import EducationInput from './EducationInput.vue';
 import PhotoInput from './PhotoInput.vue';
 import ContainerFocusItem from './ContainerFocusItem.vue';
+import TagEditable from './TagEditable.vue';
 
 export default {
   name: 'MainForm',
@@ -163,11 +165,13 @@ export default {
     TitleContainer,
     TextPlaceholder,
     ContactStaticItem,
+    TagEditable,
     draggable,
   },
   mixins: [formMixin],
   data() {
     return {
+      txt: 'Text editablecontent',
       fullName: '',
       position: '',
       skills: ['name - skill'],
@@ -209,6 +213,10 @@ export default {
       initState: types.INIT_STATE,
       resetState: types.RESET_STATE,
     }),
+    setValue(e) {
+      const value = e.target.innerText;
+      this.txt = value;
+    },
     async print() {
       await this.$htmlToPaper('resume-form');
     },
