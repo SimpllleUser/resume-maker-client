@@ -1,10 +1,11 @@
 <template>
   <div>
     <ul>
+      <tag-editable tag-type="h1" v-model="txt" placeholderValue="Empty content" ></tag-editable>
+      <li><h1>Переделать все инпуты в editable content</h1></li>
       <li>Добавить возможность множественных созданий резюме</li>
     </ul>
     <div class="d-flex justify-content-center">
-      <!-- <div class="px-4"><side-bar /></div> -->
       <div>
         <b-button @click="resetState()">Reset</b-button>
       </div>
@@ -41,7 +42,7 @@
                 </div>
                 <contact-static-item :value="formData.contacts" />
               </div>
-              <div v-if="formData.imgDataUrl" class="col-2">
+              <div v-if="formData.imgDataUrl" class="col-3">
                 <div class="d-flex justify-content-center align-items-center">
                   <img :src="formData.imgDataUrl" alt="photo" width="190px" height="190px" />
                 </div>
@@ -149,6 +150,7 @@ import ExpreienceInput from './ExpreienceInput.vue';
 import EducationInput from './EducationInput.vue';
 import PhotoInput from './PhotoInput.vue';
 import ContainerFocusItem from './ContainerFocusItem.vue';
+import TagEditable from './TagEditable.vue';
 
 export default {
   name: 'MainForm',
@@ -162,11 +164,13 @@ export default {
     TitleContainer,
     TextPlaceholder,
     ContactStaticItem,
+    TagEditable,
     draggable,
   },
   mixins: [formMixin],
   data() {
     return {
+      txt: '',
       fullName: '',
       position: '',
       skills: ['name - skill'],
@@ -208,6 +212,10 @@ export default {
       initState: types.INIT_STATE,
       resetState: types.RESET_STATE,
     }),
+    setValue(e) {
+      const value = e.target.innerText;
+      this.txt = value;
+    },
     async print() {
       await this.$htmlToPaper('resume-form');
     },
