@@ -1,13 +1,26 @@
 <template>
-<component :is="tagType" contenteditable v-text="content" @blur="setContent">
-  {{ content }}
-</component>
+  <div>
+    <component
+      :is="tagType"
+      contenteditable
+      v-text="content"
+      @blur="setContentHandler"
+      @focus="resetPlaceHolder"
+      :style="contentStyle"
+    >
+      {{ content }}
+    </component>
+  </div>
 </template>
 <script>
 export default {
   name: 'TagEditable',
   props: {
     value: {
+      type: String,
+      default: '',
+    },
+    placeholderValue: {
       type: String,
       default: '',
     },
@@ -19,22 +32,47 @@ export default {
   data() {
     return {
       content: '',
+      isUpdatedContent: false,
     };
+  },
+  computed: {
+    placeholderIsactive() {
+      return !this.isUpdatedContent || !this.content.length;
+    },
+    contentStyle() {
+      return this.placeholderIsactive ? 'color: gray;' : '';
+    },
   },
   watch: {
     value: {
       immediate: true,
       handler: 'initValue',
     },
+    placeholderValue: {
+      immediate: true,
+      handler: 'initPlaceholder',
+    },
   },
   methods: {
     emitContent() {
       this.$emit('input', this.content);
     },
-    setContent(e) {
-      const value = e.target.innerText;
+    resetPlaceHolder() {
+      if (this.isUpdatedContent) return;
+      this.content = '';
+    },
+    setContent(value) {
       this.content = value;
+    },
+    setContentHandler(e) {
+      const value = e.target.innerText;
+      this.setContent(value);
+      this.isUpdatedContent = value.length;
+      if (!this.isUpdatedContent) this.initPlaceholder();
       this.emitContent();
+    },
+    initPlaceholder() {
+      this.content = this.placeholderValue;
     },
     initValue(value) {
       this.content = value;

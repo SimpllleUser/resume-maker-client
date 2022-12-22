@@ -1,12 +1,11 @@
 <template>
   <div>
     <ul>
-      <tag-editable tag-type="h1" v-model="txt" ></tag-editable>
+      <tag-editable tag-type="h1" v-model="txt" placeholderValue="Empty content" ></tag-editable>
       <li><h1>Переделать все инпуты в editable content</h1></li>
       <li>Добавить возможность множественных созданий резюме</li>
     </ul>
     <div class="d-flex justify-content-center">
-      <!-- <div class="px-4"><side-bar /></div> -->
       <div>
         <b-button @click="resetState()">Reset</b-button>
       </div>
@@ -171,7 +170,7 @@ export default {
   mixins: [formMixin],
   data() {
     return {
-      txt: 'Text editablecontent',
+      txt: '',
       fullName: '',
       position: '',
       skills: ['name - skill'],
