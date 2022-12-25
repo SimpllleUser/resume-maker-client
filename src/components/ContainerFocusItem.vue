@@ -6,12 +6,12 @@
     style="margin: 16px 0px;"
     tabindex="-1"
     >
-    <template>
-      <div v-b-hover="hoverHandler">
+    <template name="main">
+      <div v-b-hover="hoverHandler" >
         <div>
           <slot :focus="focus" />
         </div>
-        <div v-show="!focus">
+        <!-- <div v-show="!focus">
           <div>
             <slot name="text" />
           </div>
@@ -23,6 +23,7 @@
           :actions="actions"
           name="input"
         ></slot>
+      </div> -->
       </div>
     </template>
   </div>

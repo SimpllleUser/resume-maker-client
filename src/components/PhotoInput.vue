@@ -1,38 +1,35 @@
 <template>
-  <div class="photo-input position-relative">
+  <div
+  class="photo-input position-relative">
     <div class="mb-2">
       <my-upload
-        v-if="show"
-        field="img"
+        v-if="show" field="img"
         @crop-success="cropSuccess"
         @crop-upload-success="cropUploadSuccess"
+        @crop-upload-fail="cropUploadFail"
         v-model="show"
-        :width="190"
-        :height="190"
-        :params="params"
-        :headers="headers"
-        img-format="png"
-        langType="ru"
-      />
+         :width="190"
+          :height="190" :params="params" :headers="headers" img-format="png" langType="ru" />
       <div v-if="imgDataUrl" class="position-relative">
         <img :src="imgDataUrl" alt="photo" :width="190" :height="190" />
         <b-button
-          size="sm"
+         size="sm"
           @click="resetPhoto"
-          variant="outline-danger"
-          class="btn-delete position-absolute"
-          style="top: -15px;
-          right: -15px;"
-        >
-          <b-icon icon="trash" variant="danger" />
+            variant="outline-danger"
+            class="delete-photo-btn position-absolute"
+            style="top: -15px;
+           right: -15px;">
+          <b-icon icon="trash" />
         </b-button>
       </div>
     </div>
-      <div v-if="!imgDataUrl" class="position-absolute" style="right: 0px;">
-        <b-button variant="primary" size="sm" @click="toggleShow">
-           <b-icon icon="camera-fill" aria-hidden="true"  ></b-icon>
-        </b-button>
-      </div>
+    <div
+    v-if="!imgDataUrl"
+    class="position-absolute border border-danger">
+      <b-button variant="primary" size="sm" @click="toggleShow">
+        <b-icon icon="camera-fill" aria-hidden="true"></b-icon>
+      </b-button>
+    </div>
   </div>
 </template>
 
@@ -102,4 +99,15 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.photo-input:hover {
+    .delete-photo-btn {
+      opacity: 1;
+  }
+}
+
+.delete-photo-btn {
+  opacity: 0;
+  transition: opacity .3s;
+}
+</style>

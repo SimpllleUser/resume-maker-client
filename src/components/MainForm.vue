@@ -18,38 +18,41 @@
       <span v-html="includeFotns"></span>
       <div>
         <ContainerFocusItem name="main-info">
-          <template #text>
-            <div class="row row-cols-2">
+          <template>
+            <div class="row justify-content-center row-cols-2 position-relative">
               <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
                 <div class="col">
                   <div
                     class="h1 text-center test"
                     :class="`full-name-color-${currentColor.class} font-${currentFont.value}`"
                   >
-                    <text-placeholder
-                      :class="`font-${currentFont.class}`"
-                      :value="formData.fullName"
-                      label="Your full name"
-                    />
-                  </div>
-                  <div class="h4 text-center">
-                    <text-placeholder
-                      :class="`font-${currentFont.class}`"
-                      :value="formData.position"
-                      label="Your position"
-                    />
-                  </div>
+                  <tag-editable
+                  v-model="fullName"
+                  @change="updateInputValue"
+                   tagType="h1"
+                   placeholderValue="Your full name" />
+                  <tag-editable
+                  v-model="position"
+                  @change="updateInputValue"
+                   tagType="h4"
+                   placeholderValue="Your position" />
                 </div>
-                <contact-static-item :value="formData.contacts" />
+                </div>
+                <div>
+                  <ContactInput/>
+                </div>
               </div>
-              <div v-if="formData.imgDataUrl" class="col-3">
-                <div class="d-flex justify-content-center align-items-center">
-                  <img :src="formData.imgDataUrl" alt="photo" width="190px" height="190px" />
+              <div
+              :class="{'col-3': formData.imgDataUrl}">
+                <div
+                :class="{ 'empty-photo position-absolute': !formData.imgDataUrl }"
+                class="d-flex justify-content-center align-items-center">
+                  <PhotoInput/>
                 </div>
               </div>
             </div>
           </template>
-          <template #input="{ actions }">
+          <!-- <template #input="{ actions }">
             <div
               tabindex="-1"
               v-click-outside="actions['main-info-on-blur']"
@@ -83,7 +86,7 @@
                 />
               </div>
             </div>
-          </template>
+          </template> -->
         </ContainerFocusItem>
       </div>
       <draggable v-model="mainFormInputs">
@@ -227,4 +230,8 @@ export default {
 </script>
 <style lang="scss">
 @import '../assets/app.scss';
+.empty-photo {
+  top: 0px;
+  right: 100px;
+}
 </style>

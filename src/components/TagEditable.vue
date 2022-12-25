@@ -56,6 +56,7 @@ export default {
   methods: {
     emitContent() {
       this.$emit('input', this.content);
+      this.$emit('change', this.content);
     },
     resetPlaceHolder() {
       if (this.isUpdatedContent) return;

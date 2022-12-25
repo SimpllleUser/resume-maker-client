@@ -2,57 +2,20 @@
   <div class="conatct-input">
     <b-row>
       <b-col cols="4" v-for="(contact, index) in contacts" :key="index">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center justify-content-center">
           <div class="contatc-icon">
-            <b-dropdown id="dropdown-1" no-caret size="sm" :ref="getDropDownRefName(index)">
-              <template #button-content>
-                <b-icon
-                  :icon="contacts[index].icon"
-                  font-scale="1.5rem"
-                  :id="`icon-selector-${index}`"
-                />
-              </template>
-              <b-dropdown-form>
-                <b-button
-                v-for="icon in icons"
-                 :key="icon"
-                  variant="outline-dark"
-                  @click="
-                  () => {
-                    contacts[index].icon = icon;
-                    hideDropDowm(`icon-selector-${index}`);
-                    updateInputValue();
-                  }
-                "
-                  >
-                  <b-icon
-                    :icon="icon"
-                    font-scale="1.5rem"
-                  />
-                </b-button>
-              </b-dropdown-form>
-            </b-dropdown>
-            <!-- <b-tooltip :target="`icon-selector-${index}`" triggers="hover" variant="primary">
-              <b-icon
-                v-for="icon in icons"
-                :key="icon"
-                :icon="icon"
-                font-scale="2rem"
-                @click="
-                  () => {
-                    contacts[index].icon = icon;
-                    updateInputValue();
-                  }
-                "
-              />
-            </b-tooltip> -->
+            <b-icon
+            :icon="contacts[index].icon"
+             font-scale="1.5rem"
+            :id="`icon-selector-${index}`" />
+            <b-tooltip :target="`icon-selector-${index}`" triggers="hover" variant="dark">
+              <b-icon v-for="icon in icons" :key="icon" :icon="icon" font-scale="2rem"
+              @click="selectHandleIcon(icon, index)" />
+            </b-tooltip>
           </div>
           <div class="contatc-input">
-            <b-form-input
-              v-model="contacts[index].value"
-              @change="updateInputValue"
-              placeholder="Your contact"
-            />
+            <tag-editable tagType="div" v-model="contacts[index].value" @change="updateInputValue"
+              placeholder="Your contact" style="min-width: 150px;" />
           </div>
           <div>
             <b-icon icon="trash-fill" @click="deleteConatct(index)" />
@@ -71,12 +34,14 @@
 </template>
 
 <script>
+import TagEditable from '@/components/TagEditable.vue';
 import formMixin from '@/mixins/form';
 
 const defaultConatctItem = { icon: 'phone', value: '' };
 
 export default {
   name: 'ConatactInput',
+  components: { TagEditable },
   mixins: [formMixin],
   data() {
     return {
@@ -100,6 +65,10 @@ export default {
     hideDropDowm(refName) {
       this.$refs[`${refName}`].at(0).hide();
     },
+    selectHandleIcon(icon, index) {
+      this.contacts[index].icon = icon;
+      this.updateInputValue();
+    },
   },
   watch: {
     contacts() {
@@ -109,4 +78,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>
