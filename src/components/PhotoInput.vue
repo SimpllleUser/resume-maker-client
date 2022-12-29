@@ -1,32 +1,26 @@
 <template>
-  <div
-  class="photo-input position-relative">
+  <div class="photo-input position-relative">
     <div class="mb-2">
-      <my-upload
-        v-if="show" field="img"
-        @crop-success="cropSuccess"
-        @crop-upload-success="cropUploadSuccess"
-        @crop-upload-fail="cropUploadFail"
-        v-model="show"
-         :width="190"
-          :height="190" :params="params" :headers="headers" img-format="png" langType="ru" />
-      <div v-if="imgDataUrl" class="position-relative">
-        <img :src="imgDataUrl" alt="photo" :width="190" :height="190" />
+      <label for="image-upload" v-show="false">
+        <input ref="FileInput" type="file" id="image-upload" @change="onFileSelect"/>
+      </label>
+      <div style="height: 200px; width: 200px;" >
+        <VueCropper
+        v-show="!updateCropImg"
+        ref="cropper"
+        :src="imgDataUrl"
+        alt="Source Image" />
+        <img v-show="updateCropImg" :src="cropedImage" alt="photo" :height="190" />
+
         <b-button
-         size="sm"
-          @click="resetPhoto"
-            variant="outline-danger"
-            class="delete-photo-btn position-absolute"
-            style="top: -15px;
-           right: -15px;">
-          <b-icon icon="trash" />
+        v-show="!updateCropImg && updateImg"
+        variant="primary" size="sm" @click="saveImage">
+          set
         </b-button>
       </div>
     </div>
-    <div
-    v-if="!imgDataUrl"
-    class="position-absolute border border-danger">
-      <b-button variant="primary" size="sm" @click="toggleShow">
+    <div  class="position-absolute border border-danger">
+      <b-button variant="primary" size="sm" @click="updatePhoto">
         <b-icon icon="camera-fill" aria-hidden="true"></b-icon>
       </b-button>
     </div>
@@ -34,17 +28,21 @@
 </template>
 
 <script>
-import myUpload from 'vue-image-crop-upload';
+// import myUpload from 'vue-image-crop-upload';
 import formMixin from '@/mixins/form';
+import VueCropper from 'vue-cropperjs';
+import 'cropperjs/dist/cropper.css';
 
 export default {
   name: 'PhotoInput',
   components: {
-    'my-upload': myUpload,
+    VueCropper,
   },
   mixins: [formMixin],
   data() {
     return {
+      updateImg: false,
+      updateCropImg: false,
       show: false,
       params: {
         token: '123456798',
@@ -55,14 +53,28 @@ export default {
       },
       imgDataUrl: '',
       properties: ['imgDataUrl'],
+      /// /
+      mime_type: '',
+      cropedImage: '',
+      autoCrop: false,
+      selectedFile: '',
+      image: '',
+      dialog: false,
+      files: '',
     };
   },
   watch: {
     imgDataUrl() {
       this.updateInputValue();
     },
+    // cropedImage() {
+    //   this.updateCropImg = true;
+    // },
   },
   methods: {
+    updatePhoto() {
+      this.$refs.FileInput.click();
+    },
     activateFocus() {
       this.$emit('on-focus');
     },
@@ -73,27 +85,26 @@ export default {
       this.show = false;
       this.imgDataUrl = null;
     },
-    cropSuccess(imgDataUrl) {
-      console.log('-------- crop success --------');
-      this.imgDataUrl = imgDataUrl;
-      this.activateFocus();
-      this.show = false;
-      this.activateFocus();
+    saveImage() {
+      this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
+      this.updateCropImg = true;
     },
-
-    cropUploadSuccess(jsonData, field) {
-      console.log('-------- upload success --------');
-      console.log(jsonData);
-      console.log(`field: ${field}`);
-      this.activateFocus();
-      this.show = false;
-      this.activateFocus();
-    },
-
-    cropUploadFail(status, field) {
-      console.log('-------- upload fail --------');
-      console.log(status);
-      console.log(`field: ${field}`);
+    onFileSelect(e) {
+      const file = e.target.files[0];
+      this.mime_type = file.type;
+      if (typeof FileReader === 'function') {
+        this.dialog = true;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.imgDataUrl = event.target.result;
+          this.$refs.cropper.replace(this.imgDataUrl);
+          this.updateImg = true;
+          this.updateCropImg = false;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert('Sorry, FileReader API not supported');
+      }
     },
   },
 };
@@ -101,13 +112,13 @@ export default {
 
 <style lang="scss" scoped>
 .photo-input:hover {
-    .delete-photo-btn {
-      opacity: 1;
+  .delete-photo-btn {
+    opacity: 1;
   }
 }
 
 .delete-photo-btn {
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 </style>

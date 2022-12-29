@@ -5,17 +5,28 @@
         <div class="d-flex align-items-center justify-content-center">
           <div class="contatc-icon">
             <b-icon
-            :icon="contacts[index].icon"
-             font-scale="1.5rem"
-            :id="`icon-selector-${index}`" />
+              :icon="contacts[index].icon"
+              font-scale="1.5rem"
+              :id="`icon-selector-${index}`"
+            />
             <b-tooltip :target="`icon-selector-${index}`" triggers="hover" variant="dark">
-              <b-icon v-for="icon in icons" :key="icon" :icon="icon" font-scale="2rem"
-              @click="selectHandleIcon(icon, index)" />
+              <b-icon
+                v-for="icon in icons"
+                :key="icon"
+                :icon="icon"
+                font-scale="2rem"
+                @click="selectHandleIcon(icon, index)"
+              />
             </b-tooltip>
           </div>
           <div class="contatc-input">
-            <tag-editable tagType="div" v-model="contacts[index].value" @change="updateInputValue"
-              placeholder="Your contact" style="min-width: 150px;" />
+            <tag-editable
+              tagType="div"
+              v-model="contacts[index].value"
+              @change="updateInputValue"
+              placeholderValue="Your contact"
+              style="min-width: 150px"
+            />
           </div>
           <div>
             <b-icon icon="trash-fill" @click="deleteConatct(index)" />
@@ -78,6 +89,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

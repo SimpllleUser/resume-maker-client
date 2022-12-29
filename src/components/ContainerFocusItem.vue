@@ -6,26 +6,11 @@
     style="margin: 16px 0px;"
     tabindex="-1"
     >
-    <template name="main">
       <div v-b-hover="hoverHandler" >
         <div>
-          <slot :focus="focus" />
-        </div>
-        <!-- <div v-show="!focus">
-          <div>
-            <slot name="text" />
-          </div>
+          <slot name="main" :actions="{actions}" :focus="focus" />
         </div>
       </div>
-
-      <div v-show="focus" class="p-2">
-        <slot
-          :actions="actions"
-          name="input"
-        ></slot>
-      </div> -->
-      </div>
-    </template>
   </div>
 </template>
 

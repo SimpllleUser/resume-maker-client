@@ -2,7 +2,7 @@
   <div>
     <ul>
       <tag-editable tag-type="h1" v-model="txt" placeholderValue="Empty content" ></tag-editable>
-      <li><h1>Переделать все инпуты в editable content</h1></li>
+      <li><h1>Переделать выдиление  контента</h1></li>
       <li>Добавить возможность множественных созданий резюме</li>
     </ul>
     <div class="d-flex justify-content-center">
@@ -18,8 +18,11 @@
       <span v-html="includeFotns"></span>
       <div>
         <ContainerFocusItem name="main-info">
-          <template>
-            <div class="row justify-content-center row-cols-2 position-relative">
+          <template #main="{ actions }">
+            <div
+            class="row justify-content-center row-cols-2 position-relative"
+            v-click-outside="actions['main-info']"
+            >
               <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
                 <div class="col">
                   <div
@@ -52,41 +55,6 @@
               </div>
             </div>
           </template>
-          <!-- <template #input="{ actions }">
-            <div
-              tabindex="-1"
-              v-click-outside="actions['main-info-on-blur']"
-              @focus="actions['main-info-on-focus']"
-            >
-              <div class="d-flex">
-                <div :class="{ 'w-100': !formData.imgDataUrl }">
-                  <b-form-input
-                    class="text-center"
-                    style="font-size: calc(1.375rem + 1.5vw); border-style: none"
-                    v-model="fullName"
-                    placeholder="Your full name"
-                    @change="updateInputValue"
-                  />
-                  <b-form-input
-                    v-model="position"
-                    class="text-center"
-                    style="font-size: calc(1.275rem + 0.3vw); border-style: none"
-                    placeholder="Your position"
-                    @change="updateInputValue"
-                  />
-                </div>
-                <div>
-                  <PhotoInput @on-focus="actions['main-info-on-focus']" />
-                </div>
-              </div>
-              <div>
-                <ContactInput
-                  @on-focus="actions['main-info-on-focus']"
-                  @on-blur="actions['main-info-on-blur']"
-                />
-              </div>
-            </div>
-          </template> -->
         </ContainerFocusItem>
       </div>
       <draggable v-model="mainFormInputs">
