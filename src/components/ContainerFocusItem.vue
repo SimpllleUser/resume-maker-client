@@ -9,6 +9,7 @@
     >
       <div v-b-hover="hoverHandler" >
         <div>
+          {{ focus }}
           <slot name="main" :actions="actions" :focus="focus" />
         </div>
       </div>

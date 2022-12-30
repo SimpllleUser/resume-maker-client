@@ -25,7 +25,7 @@
               <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
                 <div class="col">
                   <div
-                    class="h1 text-center test"
+                    class="h1 text-center"
                     :class="`full-name-color-${currentColor.class} font-${currentFont.value}`"
                   >
                   <tag-editable
@@ -65,29 +65,14 @@
             :key="`input-${inputKey}`"
             style="position: relative; margin: 32px 0px"
           >
-            <ContainerFocusItem name="about">
-              <template>
-                <title-container
-                  :id="input.id"
-                  :text="getContainerTitleValue(input.id)"
-                  :placeholder="input.name"
-                />
-              </template>
-              <template #text>
-                <div class="row">
-                  <component
-                    :id="input.id"
-                    :value="getValue(input.id)"
-                    v-bind:is="input.componentStatic"
-                  />
-                </div>
-              </template>
+            <ContainerFocusItem :name="input.id">
               <template #main="{ actions }">
-                <div v-click-outside="actions['about'].unFoucs">
+                <div>
                   <component
                     :id="input.id"
                     :value="getValue(input.id)"
                     v-bind:is="input.component"
+                    @focus-input="actions[`${input.id}`].focus()"
                   />
                   <b-button
                     size="sm"
@@ -185,7 +170,7 @@ export default {
       resetState: types.RESET_STATE,
     }),
     test() {
-      console.log('!');
+      console.log('-----------------');
     },
     setValue(e) {
       const value = e.target.innerText;

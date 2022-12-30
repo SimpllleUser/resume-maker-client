@@ -7,11 +7,12 @@
         class="mx-2 mb-2"
       >
         <div class="d-flex align-items-center">
-          <div class="contatc-input">
-            <b-form-input
-              v-model="skills[propertyName][index]"
-              @change="updateInputValue"
-              placeholde="some skill"
+          <div class="contatc-input" style="min-width: 100px">
+            <tag-editable
+                   tagType="div"
+                   placeholderValue="Example skill"
+                   @change="updateInputValue"
+                   @focus-input="focusHandler"
             />
           </div>
           <div class="pl-2">
@@ -32,9 +33,11 @@
 
 <script>
 import formMixin from '@/mixins/form';
+import TagEditable from '@/components/TagEditable.vue';
 
 export default {
   name: 'SkillInputForm',
+  components: { TagEditable },
   mixins: [formMixin],
   props: {
     id: {
@@ -56,6 +59,9 @@ export default {
     };
   },
   methods: {
+    focusHandler() {
+      this.$emit('focus-input');
+    },
     addSkill() {
       this.skills[this.propertyName] = [...this.skills[this.propertyName], ' '];
     },
