@@ -18,10 +18,9 @@
       <span v-html="includeFotns"></span>
       <div>
         <ContainerFocusItem name="main-info">
-          <template #main="{ actions }">
+          <template #main={actions}>
             <div
             class="row justify-content-center row-cols-2 position-relative"
-            v-click-outside="actions['main-info']"
             >
               <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
                 <div class="col">
@@ -32,17 +31,19 @@
                   <tag-editable
                   v-model="fullName"
                   @change="updateInputValue"
+                  @focus-input="actions['main-info'].focus"
                    tagType="h1"
                    placeholderValue="Your full name" />
                   <tag-editable
                   v-model="position"
                   @change="updateInputValue"
+                  @focus-input="actions['main-info'].focus"
                    tagType="h4"
                    placeholderValue="Your position" />
                 </div>
                 </div>
                 <div>
-                  <ContactInput/>
+                  <ContactInput @focus-input="actions['main-info'].focus"/>
                 </div>
               </div>
               <div
@@ -57,7 +58,7 @@
           </template>
         </ContainerFocusItem>
       </div>
-      <draggable v-model="mainFormInputs">
+      <draggable v-model="mainFormInputs" >
         <transition-group>
           <div
             v-for="(input, inputKey) in mainFormInputs"
@@ -81,8 +82,8 @@
                   />
                 </div>
               </template>
-              <template #input="{ actions }">
-                <div v-click-outside="actions['about-on-blur']">
+              <template #main="{ actions }">
+                <div v-click-outside="actions['about'].unFoucs">
                   <component
                     :id="input.id"
                     :value="getValue(input.id)"
@@ -183,6 +184,9 @@ export default {
       initState: types.INIT_STATE,
       resetState: types.RESET_STATE,
     }),
+    test() {
+      console.log('!');
+    },
     setValue(e) {
       const value = e.target.innerText;
       this.txt = value;

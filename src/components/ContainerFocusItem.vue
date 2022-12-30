@@ -3,21 +3,24 @@
   class="focus-container"
    :class="containerClass"
     @focus="setFocus"
+    v-click-outside="setUnfocus"
     style="margin: 16px 0px;"
     tabindex="-1"
     >
       <div v-b-hover="hoverHandler" >
         <div>
-          <slot name="main" :actions="{actions}" :focus="focus" />
+          <slot name="main" :actions="actions" :focus="focus" />
         </div>
       </div>
   </div>
 </template>
 
 <script>
+import form from '@/mixins/form';
 
 export default {
   name: 'ContainerFocusItem',
+  mixins: [form],
   props: {
     name: {
       type: String,
@@ -36,8 +39,10 @@ export default {
   computed: {
     actions() {
       return {
-        [`${this.name}-on-focus`]: this.setFocus,
-        [`${this.name}-on-blur`]: this.setUnfocus,
+        [`${this.name}`]: {
+          focus: this.setFocus,
+          unFocus: this.setUnfocus,
+        },
       };
     },
     containerClass() {

@@ -24,6 +24,7 @@
               tagType="div"
               v-model="contacts[index].value"
               @change="updateInputValue"
+              @focus-input="focusHandler"
               placeholderValue="Your contact"
               style="min-width: 150px"
             />
@@ -63,6 +64,9 @@ export default {
     };
   },
   methods: {
+    focusHandler() {
+      this.$emit('focus-input');
+    },
     addConatct() {
       this.contacts = [...(this.contacts || []), JSON.parse(JSON.stringify(defaultConatctItem))];
     },

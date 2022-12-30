@@ -5,7 +5,7 @@
       contenteditable
       v-text="content"
       @blur="setContentHandler"
-      @focus="resetPlaceHolder"
+      @focus="focusHandler"
       :style="contentStyle"
     >
       {{ content }}
@@ -57,6 +57,10 @@ export default {
     emitContent() {
       this.$emit('input', this.content);
       this.$emit('change', this.content);
+    },
+    focusHandler() {
+      this.resetPlaceHolder();
+      this.$emit('focus-input');
     },
     resetPlaceHolder() {
       if (this.isUpdatedContent) return;
