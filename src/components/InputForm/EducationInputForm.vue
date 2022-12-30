@@ -13,29 +13,35 @@
         >
           <div>
             <div class="education-name">
-              <b-form-input
+              <tag-editable
               v-model="educations[propertyName][key].educationName"
-               @change="updateInputValue" />
+              placeholder-value="Name"
+              @focus-input="focusHandler"
+              @change="updateInputValue" />
             </div>
             <div class="education-date-work d-flex align-items-center">
               <b-form-datepicker
-                v-model="educations[propertyName][key].date.from"
-                @change="updateInputValue"
-                placeholder="from"
+              v-model="educations[propertyName][key].date.from"
+              @change="updateInputValue"
+              placeholder="from"
                 size="sm"
-              />
-              <b-form-datepicker
+                style="border: none !important;"
+                />
+                <b-form-datepicker
                 v-model="educations[propertyName][key].date.to"
                 @change="updateInputValue"
                 placeholder="to"
                 size="sm"
+                style="border: none !important;"
               />
             </div>
           </div>
           <div>
-            <b-textarea
+            <tag-editable
             v-model="educations[propertyName][key].description"
-             @change="updateInputValue" rows="4" />
+            @focus-input="focusHandler"
+            placeholder-value="Description"
+            @change="updateInputValue" rows="4" />
             <b-button
               @click="deleteExpirience(key)"
               variant="outline-danger"
@@ -53,6 +59,7 @@
 <script>
 import cloneDepp from 'lodash/cloneDeep';
 import formMixin from '@/mixins/form';
+import TagEditable from '../TagEditable.vue';
 
 const defaultEducation = {
   educationName: '',
@@ -62,6 +69,7 @@ const defaultEducation = {
 
 export default {
   name: 'EducationInputForm',
+  components: { TagEditable },
   mixins: [formMixin],
   props: {
     id: {
@@ -82,6 +90,9 @@ export default {
     };
   },
   methods: {
+    focusHandler() {
+      this.$emit('focus-input');
+    },
     addExperience() {
       this.educations[this.propertyName] = [
         ...this.educations[this.propertyName],

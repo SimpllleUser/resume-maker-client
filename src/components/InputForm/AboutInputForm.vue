@@ -1,12 +1,12 @@
 <template>
   <div v-click-outside="onBlur" class="ml-auto mr-auto">
     <b-form-group style="width: 100%; display: block; margin: 0 auto">
-      <b-form-textarea
-        class="d-block ml-auto mr-auto"
+      <tag-editable
+      style="text-align: left; padding: 20px;white-space: pre;"
         v-model="about[propertyName]"
         @change="updateInputValue"
-        placeholder="Some text about"
-        rows="4"
+        @focus-input="focusHandler"
+        placeholderValue="Some text about"
       />
     </b-form-group>
   </div>
@@ -14,9 +14,11 @@
 
 <script>
 import formMixin from '@/mixins/form';
+import TagEditable from '../TagEditable.vue';
 
 export default {
   name: 'AboutInputForm',
+  components: { TagEditable },
   mixins: [formMixin],
   props: {
     id: {
@@ -38,6 +40,9 @@ export default {
     };
   },
   methods: {
+    focusHandler() {
+      this.$emit('focus-input');
+    },
     onFocus() {
       this.$emit('on-focus');
     },
