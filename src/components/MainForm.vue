@@ -2,7 +2,9 @@
   <div>
     <ul>
       <tag-editable tag-type="h1" v-model="txt" placeholderValue="Empty content" ></tag-editable>
-      <li><h1>Переделать выдиление  контента</h1></li>
+      <li>Реализовать сохранение данных в Local Storage</li>
+      <li>Сделать единый стиль для редактирования и отображения данных</li>
+      <li>Вернуть отображение оглавлений</li>
       <li>Добавить возможность множественных созданий резюме</li>
     </ul>
     <div class="d-flex justify-content-center">
