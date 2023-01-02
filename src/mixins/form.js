@@ -4,6 +4,12 @@ import ClickOutside from 'vue-click-outside';
 import _ from 'lodash';
 
 export default {
+  props: {
+    showNavigation: {
+      type: Boolean,
+      default: false,
+    },
+  },
   computed: {
     ...mapState('form', ['formData']),
   },

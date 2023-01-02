@@ -16,12 +16,12 @@
               @focus-input="focusHandler"
             />
           </div>
-          <div class="pl-2">
+          <div class="pl-2" v-show="showNavigation">
             <b-icon icon="trash-fill" @click="deleteSkill(index)" />
           </div>
         </div>
       </div>
-      <div>
+      <div v-show="showNavigation">
         <div class="d-flex align-item-center">
           <b-button size="sm" variant="dark-outline" @click="addSkill">
             add <b-icon icon="plus-lg" />

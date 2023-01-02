@@ -1,6 +1,6 @@
 <template>
   <div class="expereiance-row">
-    <div class="pb-2">
+    <div class="pb-2" v-show="showNavigation">
       <b-button size="sm" variant="primary" @click="addExperience"
         >add
         <b-icon icon="plus-lg" />
@@ -55,6 +55,7 @@
           placeholder-value="Description about your expereince"
         ></tag-editable>
         <b-button
+        v-show="showNavigation"
           @click="deleteExpirience(key)"
           variant="outline-danger"
           size="sm"

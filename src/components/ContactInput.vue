@@ -29,12 +29,12 @@
               style="min-width: 150px"
             />
           </div>
-          <div>
+          <div v-show="showNavigation">
             <b-icon icon="trash-fill" @click="deleteConatct(index)" />
           </div>
         </div>
       </b-col>
-      <b-col>
+      <b-col v-show="showNavigation">
         <div class="d-flex align-item-center">
           <b-button size="sm" variant="dark-outline" @click="addConatct">
             add <b-icon icon="plus-lg" />

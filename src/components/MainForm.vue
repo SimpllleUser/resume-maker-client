@@ -20,7 +20,7 @@
       <span v-html="includeFotns"></span>
       <div>
         <ContainerFocusItem name="main-info">
-          <template #main={actions}>
+          <template #main="{ actions, focus }">
             <div
             class="row justify-content-center row-cols-2 position-relative"
             >
@@ -45,7 +45,10 @@
                 </div>
                 </div>
                 <div>
-                  <ContactInput @focus-input="actions['main-info'].focus"/>
+                  <ContactInput
+                  :show-navigation="focus"
+                  @focus-input="actions['main-info'].focus"
+                  />
                 </div>
               </div>
               <div
@@ -68,15 +71,17 @@
             style="position: relative; margin: 32px 0px"
           >
             <ContainerFocusItem :name="input.id">
-              <template #main="{ actions }">
+              <template #main="{ actions, focus }">
                 <div>
                   <component
                     :id="input.id"
                     :value="getValue(input.id)"
                     v-bind:is="input.component"
+                    :show-navigation="focus"
                     @focus-input="actions[`${input.id}`].focus()"
                   />
                   <b-button
+                    v-show="focus"
                     size="sm"
                     pill
                     @click="deleteInputForm(input)"

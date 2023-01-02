@@ -1,6 +1,6 @@
 <template>
     <div class="expereiance-row" v-click-outside="onBlur">
-        <div class="pb-2">
+        <div class="pb-2" v-show="showNavigation">
           <b-button size="sm" variant="primary" @click="addExperience"
             >add
             <b-icon icon="plus-lg" />
@@ -38,11 +38,13 @@
           </div>
           <div>
             <tag-editable
+            allow-white-space
             v-model="educations[propertyName][key].description"
             @focus-input="focusHandler"
             placeholder-value="Description"
             @change="updateInputValue" rows="4" />
             <b-button
+            v-show="showNavigation"
               @click="deleteExpirience(key)"
               variant="outline-danger"
               size="sm"
