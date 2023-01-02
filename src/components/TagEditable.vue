@@ -6,7 +6,7 @@
       v-text="content"
       @blur="setContentHandler"
       @focus="focusHandler"
-      :style="contentStyle"
+      :style="style"
     >
       {{ content }}
     </component>
@@ -28,6 +28,10 @@ export default {
       type: String,
       default: 'div',
     },
+    allowWhiteSpace: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -41,6 +45,12 @@ export default {
     },
     contentStyle() {
       return this.placeholderIsactive ? 'color: gray;' : '';
+    },
+    whiteSpaceStyle() {
+      return this.allowWhiteSpace ? 'white-space: pre' : '';
+    },
+    style() {
+      return `${this.contentStyle} ${this.whiteSpaceStyle}`;
     },
   },
   watch: {

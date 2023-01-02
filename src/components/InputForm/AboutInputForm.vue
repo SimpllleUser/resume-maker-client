@@ -2,7 +2,8 @@
   <div v-click-outside="onBlur" class="ml-auto mr-auto">
     <b-form-group style="width: 100%; display: block; margin: 0 auto">
       <tag-editable
-      style="text-align: left; padding: 20px;white-space: pre;"
+      style="text-align: left; padding: 20px;"
+        allow-white-space
         v-model="about[propertyName]"
         @change="updateInputValue"
         @focus-input="focusHandler"

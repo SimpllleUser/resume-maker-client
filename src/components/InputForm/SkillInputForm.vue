@@ -1,6 +1,6 @@
 <template>
   <div class="conatct-input" v-click-outside="onBlur">
-    <div class="d-flex align-items-center flex-wrap">
+    <div class="d-flex justify-content-center align-items-center flex-wrap">
       <div
         v-for="(skill, index) in skills[propertyName]"
         :key="`skill-key-${id}-${index}`"
@@ -9,10 +9,11 @@
         <div class="d-flex align-items-center">
           <div class="contatc-input" style="min-width: 100px">
             <tag-editable
-                   tagType="div"
-                   placeholderValue="Example skill"
-                   @change="updateInputValue"
-                   @focus-input="focusHandler"
+              allow-white-space
+              tagType="div"
+              placeholderValue="Example skill"
+              @change="updateInputValue"
+              @focus-input="focusHandler"
             />
           </div>
           <div class="pl-2">
