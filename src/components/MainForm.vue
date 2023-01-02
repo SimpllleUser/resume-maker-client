@@ -56,7 +56,7 @@
                 <div
                 :class="{ 'empty-photo position-absolute': !formData.imgDataUrl }"
                 class="d-flex justify-content-center align-items-center">
-                  <PhotoInput/>
+                  <PhotoInput :show-navigation="focus" />
                 </div>
               </div>
             </div>

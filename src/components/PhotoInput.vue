@@ -4,24 +4,28 @@
       <label for="image-upload" v-show="false">
         <input ref="FileInput" type="file" id="image-upload" @change="onFileSelect"/>
       </label>
-      <div style="height: 200px; width: 200px;" >
+      <div :style="style">
         <VueCropper
-        v-show="!updateCropImg"
+        :style="style"
+        v-show="!updatedCropImg"
         ref="cropper"
         :src="imgDataUrl"
         alt="Source Image" />
-        <img v-show="updateCropImg" :src="cropedImage" alt="photo" :height="190" />
+        <img v-show="updatedCropImg" :src="cropedImage" alt="photo" :height="190" />
 
         <b-button
-        v-show="!updateCropImg && updateImg"
+        v-show="!updatedCropImg && updateImg"
         variant="primary" size="sm" @click="saveImage">
           set
         </b-button>
       </div>
     </div>
-    <div  class="position-absolute border border-danger">
-      <b-button variant="primary" size="sm" @click="updatePhoto">
+    <div  class="add-photo position-absolute" v-show="showNavigation">
+      <b-button v-show="!updatedCropImg" variant="primary" size="sm" @click="updatePhoto">
         <b-icon icon="camera-fill" aria-hidden="true"></b-icon>
+      </b-button>
+      <b-button v-show="updatedCropImg" @click="resetPhoto" variant="primary" size="sm">
+        <b-icon icon="trash" aria-hidden="true"></b-icon>
       </b-button>
     </div>
   </div>
@@ -42,7 +46,7 @@ export default {
   data() {
     return {
       updateImg: false,
-      updateCropImg: false,
+      updatedCropImg: false,
       show: false,
       params: {
         token: '123456798',
@@ -63,15 +67,29 @@ export default {
       files: '',
     };
   },
+  computed: {
+    boxStyle() {
+      return this.showNavigation ? 'height: 200px; width: 200px;' : '';
+    },
+    style() {
+      return `${this.boxStyle}`;
+    },
+  },
   watch: {
     imgDataUrl() {
       this.updateInputValue();
     },
     // cropedImage() {
-    //   this.updateCropImg = true;
+    //   this.updatedCropImg = true;
     // },
   },
   methods: {
+    resetPhoto() {
+      this.imgDataUrl = '';
+      this.cropedImage = '';
+      this.updateImg = false;
+      this.updatedCropImg = true;
+    },
     updatePhoto() {
       this.$refs.FileInput.click();
     },
@@ -81,13 +99,13 @@ export default {
     toggleShow() {
       this.show = true;
     },
-    resetPhoto() {
-      this.show = false;
-      this.imgDataUrl = null;
-    },
+    // resetPhoto() {
+    //   this.show = false;
+    //   this.imgDataUrl = null;
+    // },
     saveImage() {
       this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
-      this.updateCropImg = true;
+      this.updatedCropImg = true;
     },
     onFileSelect(e) {
       const file = e.target.files[0];
@@ -99,7 +117,7 @@ export default {
           this.imgDataUrl = event.target.result;
           this.$refs.cropper.replace(this.imgDataUrl);
           this.updateImg = true;
-          this.updateCropImg = false;
+          this.updatedCropImg = false;
         };
         reader.readAsDataURL(file);
       } else {
@@ -111,14 +129,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.photo-input:hover {
+.photo-input{
+  &:hover {
   .delete-photo-btn {
     opacity: 1;
   }
+}
 }
 
 .delete-photo-btn {
   opacity: 0;
   transition: opacity 0.3s;
+}
+
+.add-photo {
+  top: 0px;
+  right: 0px;
 }
 </style>
