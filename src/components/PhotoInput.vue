@@ -2,29 +2,32 @@
   <div class="photo-input position-relative">
     <div class="mb-2">
       <label for="image-upload" v-show="false">
-        <input ref="FileInput" type="file" id="image-upload" @change="onFileSelect"/>
+        <input ref="FileInput" type="file" id="image-upload" @change="onFileSelect" />
       </label>
       <div :style="style">
         <VueCropper
-        :style="style"
-        v-show="!updatedCropImg"
-        ref="cropper"
-        :src="imgDataUrl"
-        alt="Source Image" />
-        <img v-show="updatedCropImg" :src="cropedImage" alt="photo" :height="190" />
-
+          v-show="!updatedCropImg"
+          :style="style"
+          ref="cropper"
+          :src="imgDataUrl"
+          alt="Source Image"
+        />
+        <img
+        v-show="updatedCropImg"
+         :src="cropedImage"
+          alt="photo" :height="190" style="max-width: 200px;" />
         <b-button
-        v-show="!updatedCropImg && updateImg"
-        variant="primary" size="sm" @click="saveImage">
-          set
-        </b-button>
+        v-show="!updatedCropImg"
+         variant="primary"
+          size="sm"
+           @click="setImage"> <b-icon icon="check-lg"></b-icon> </b-button>
       </div>
     </div>
-    <div  class="add-photo position-absolute" v-show="showNavigation">
-      <b-button v-show="!updatedCropImg" variant="primary" size="sm" @click="updatePhoto">
-        <b-icon icon="camera-fill" aria-hidden="true"></b-icon>
+    <div class="add-photo position-absolute" v-show="showNavigation">
+      <b-button variant="primary" size="sm" @click="updatePhoto">
+        <b-icon icon="arrow-clockwise" aria-hidden="true"></b-icon>
       </b-button>
-      <b-button v-show="updatedCropImg" @click="resetPhoto" variant="primary" size="sm">
+      <b-button @click="resetPhoto" variant="primary" size="sm">
         <b-icon icon="trash" aria-hidden="true"></b-icon>
       </b-button>
     </div>
@@ -37,6 +40,8 @@ import formMixin from '@/mixins/form';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 
+import defaultImg from '@/assets/img/default.png';
+
 export default {
   name: 'PhotoInput',
   components: {
@@ -45,8 +50,9 @@ export default {
   mixins: [formMixin],
   data() {
     return {
+      defaultImg,
       updateImg: false,
-      updatedCropImg: false,
+      updatedCropImg: true,
       show: false,
       params: {
         token: '123456798',
@@ -60,11 +66,6 @@ export default {
       /// /
       mime_type: '',
       cropedImage: '',
-      autoCrop: false,
-      selectedFile: '',
-      image: '',
-      dialog: false,
-      files: '',
     };
   },
   computed: {
@@ -75,19 +76,11 @@ export default {
       return `${this.boxStyle}`;
     },
   },
-  watch: {
-    imgDataUrl() {
-      this.updateInputValue();
-    },
-    // cropedImage() {
-    //   this.updatedCropImg = true;
-    // },
-  },
   methods: {
     resetPhoto() {
-      this.imgDataUrl = '';
-      this.cropedImage = '';
-      this.updateImg = false;
+      this.imgDataUrl = this.defaultImg;
+      this.$refs.cropper.replace(this.imgDataUrl);
+      setTimeout(() => this.setImage(), 100);
       this.updatedCropImg = true;
     },
     updatePhoto() {
@@ -96,27 +89,18 @@ export default {
     activateFocus() {
       this.$emit('on-focus');
     },
-    toggleShow() {
-      this.show = true;
-    },
-    // resetPhoto() {
-    //   this.show = false;
-    //   this.imgDataUrl = null;
-    // },
-    saveImage() {
-      this.cropedImage = this.$refs.cropper.getCroppedCanvas().toDataURL();
+    setImage() {
+      this.cropedImage = this.$refs.cropper.getCroppedCanvas()?.toDataURL();
       this.updatedCropImg = true;
     },
     onFileSelect(e) {
       const file = e.target.files[0];
       this.mime_type = file.type;
       if (typeof FileReader === 'function') {
-        this.dialog = true;
         const reader = new FileReader();
         reader.onload = (event) => {
           this.imgDataUrl = event.target.result;
           this.$refs.cropper.replace(this.imgDataUrl);
-          this.updateImg = true;
           this.updatedCropImg = false;
         };
         reader.readAsDataURL(file);
@@ -125,16 +109,21 @@ export default {
       }
     },
   },
+  mounted() {
+    this.imgDataUrl = this.defaultImg;
+    this.$refs.cropper.replace(this.imgDataUrl);
+    setTimeout(() => this.setImage(), 100);
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.photo-input{
+.photo-input {
   &:hover {
-  .delete-photo-btn {
-    opacity: 1;
+    .delete-photo-btn {
+      opacity: 1;
+    }
   }
-}
 }
 
 .delete-photo-btn {
