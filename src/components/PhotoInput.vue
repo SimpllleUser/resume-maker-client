@@ -1,5 +1,11 @@
 <template>
   <div class="photo-input position-relative">
+    <b-button size="sm" @click="togglePhoto" v-show="showNavigation">
+    <div class="d-flex">
+        <b-icon :icon="`${  showPhotoInput ? 'x-circle' : 'plus-circle'}`"></b-icon>
+    </div>
+    </b-button>
+    <div v-show="showPhotoInput">
     <div class="mb-2">
       <label for="image-upload" v-show="false">
         <input ref="FileInput" type="file" id="image-upload" @change="onFileSelect" />
@@ -13,14 +19,15 @@
           alt="Source Image"
         />
         <img
-        v-show="updatedCropImg"
-         :src="cropedImage"
-          alt="photo" :height="190" style="max-width: 200px;" />
-        <b-button
-        v-show="!updatedCropImg"
-         variant="primary"
-          size="sm"
-           @click="setImage"> <b-icon icon="check-lg"></b-icon> </b-button>
+          v-show="updatedCropImg"
+          :src="cropedImage"
+          alt="photo"
+          :height="190"
+          style="max-width: 200px"
+        />
+        <b-button v-show="!updatedCropImg" variant="primary" size="sm" @click="setImage">
+          <b-icon icon="check-lg"></b-icon>
+        </b-button>
       </div>
     </div>
     <div class="add-photo position-absolute" v-show="showNavigation">
@@ -32,10 +39,10 @@
       </b-button>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
-// import myUpload from 'vue-image-crop-upload';
 import formMixin from '@/mixins/form';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
@@ -50,6 +57,7 @@ export default {
   mixins: [formMixin],
   data() {
     return {
+      showPhotoInput: false,
       defaultImg,
       updateImg: false,
       updatedCropImg: true,
@@ -63,7 +71,6 @@ export default {
       },
       imgDataUrl: '',
       properties: ['imgDataUrl'],
-      /// /
       mime_type: '',
       cropedImage: '',
     };
@@ -76,7 +83,22 @@ export default {
       return `${this.boxStyle}`;
     },
   },
+  watch: {
+    showNavigation() {
+      this.setImage();
+    },
+    showPhotoInput: {
+      immediate: true,
+      handler: 'showPhotoInputHandler',
+    },
+  },
   methods: {
+    showPhotoInputHandler(state) {
+      this.$emit('can-show', state);
+    },
+    togglePhoto() {
+      this.showPhotoInput = !this.showPhotoInput;
+    },
     resetPhoto() {
       this.imgDataUrl = this.defaultImg;
       this.$refs.cropper.replace(this.imgDataUrl);

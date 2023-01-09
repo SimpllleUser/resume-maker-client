@@ -52,11 +52,11 @@
                 </div>
               </div>
               <div
-              :class="{'col-3': formData.imgDataUrl}">
+              :class="{'col-3': showPhotoInput}">
                 <div
-                :class="{ 'empty-photo position-absolute': !formData.imgDataUrl }"
+                :class="{ 'empty-photo position-absolute': !showPhotoInput }"
                 class="d-flex justify-content-center align-items-center">
-                  <PhotoInput :show-navigation="focus" />
+                  <PhotoInput :show-navigation="focus" @can-show="showPhotoInputHandle" />
                 </div>
               </div>
             </div>
@@ -143,6 +143,7 @@ export default {
       about: '',
       properties: ['fullName', 'position', 'about'],
       mainFormInputs: null,
+      showPhotoInput: false,
       //   includeFotns: `
       //   <link rel="preconnect" href="https://fonts.googleapis.com">
       //   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -176,8 +177,8 @@ export default {
       initState: types.INIT_STATE,
       resetState: types.RESET_STATE,
     }),
-    test() {
-      console.log('-----------------');
+    showPhotoInputHandle(canShow) {
+      this.showPhotoInput = canShow;
     },
     setValue(e) {
       const value = e.target.innerText;
