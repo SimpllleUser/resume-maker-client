@@ -20,11 +20,18 @@
         />
         <img
           v-show="updatedCropImg"
-          :src="cropedImage"
+          :src="valueTest"
           alt="photo"
           :height="190"
           style="max-width: 200px"
         />
+        <!-- <img
+          v-show="valueTest"
+          :src="valueTest"
+          alt="photo"
+          :height="190"
+          style="max-width: 200px"
+        /> -->
         <b-button v-show="!updatedCropImg" variant="primary" size="sm" @click="setImage">
           <b-icon icon="check-lg"></b-icon>
         </b-button>
@@ -43,22 +50,21 @@
 </template>
 
 <script>
-import formMixin from '@/mixins/form';
+import inputMixin from '@/mixins/input';
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 
-import defaultImg from '@/assets/img/default.png';
+import defaultInputValueInForm from '@/assets/img/default.png';
 
 export default {
   name: 'PhotoInput',
   components: {
     VueCropper,
   },
-  mixins: [formMixin],
+  mixins: [inputMixin],
   data() {
     return {
       showPhotoInput: false,
-      defaultImg,
       updateImg: false,
       updatedCropImg: true,
       show: false,
@@ -72,7 +78,9 @@ export default {
       imgDataUrl: '',
       properties: ['imgDataUrl'],
       mime_type: '',
-      cropedImage: '',
+      valueTest: null,
+      inputType: 'photo',
+      defaultInputValueInForm,
     };
   },
   computed: {
@@ -84,9 +92,10 @@ export default {
     },
   },
   watch: {
-    showNavigation() {
-      this.setImage();
-    },
+    // showNavigation(show) {
+    //   if (show && this.valueTest?.length) return;
+    //   this.setImage(this.defaultInputValueInForm);
+    // },
     showPhotoInput: {
       immediate: true,
       handler: 'showPhotoInputHandler',
@@ -100,9 +109,10 @@ export default {
       this.showPhotoInput = !this.showPhotoInput;
     },
     resetPhoto() {
-      this.imgDataUrl = this.defaultImg;
-      this.$refs.cropper.replace(this.imgDataUrl);
-      setTimeout(() => this.setImage(), 100);
+      this.imgDataUrl = this.defaultInputValueInForm;
+      this.$refs.cropper.replace(this.defaultInputValueInForm);
+      this.setImage();
+      this.valueTest = this.defaultInputValueInForm;
       this.updatedCropImg = true;
     },
     updatePhoto() {
@@ -112,7 +122,7 @@ export default {
       this.$emit('on-focus');
     },
     setImage() {
-      this.cropedImage = this.$refs.cropper.getCroppedCanvas()?.toDataURL();
+      this.valueTest = this.$refs.cropper.getCroppedCanvas()?.toDataURL();
       this.updatedCropImg = true;
     },
     onFileSelect(e) {
@@ -130,11 +140,6 @@ export default {
         alert('Sorry, FileReader API not supported');
       }
     },
-  },
-  mounted() {
-    this.imgDataUrl = this.defaultImg;
-    this.$refs.cropper.replace(this.imgDataUrl);
-    setTimeout(() => this.setImage(), 100);
   },
 };
 </script>

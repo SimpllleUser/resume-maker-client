@@ -60,7 +60,9 @@
                 <div
                 :class="{ 'empty-photo position-absolute': !showPhotoInput }"
                 class="d-flex justify-content-center align-items-center">
-                  <PhotoInput :show-navigation="focus" @can-show="showPhotoInputHandle" />
+                  <PhotoInput
+                  id="photo-input-is-uniq"
+                  :show-navigation="focus" @can-show="showPhotoInputHandle" />
                 </div>
               </div>
             </div>
