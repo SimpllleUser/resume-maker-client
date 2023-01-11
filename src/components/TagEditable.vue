@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     placeholderIsactive() {
-      return !this.isUpdatedContent || !this.content.length;
+      return !this.value?.length;
     },
     contentStyle() {
       return this.placeholderIsactive ? 'color: gray;' : '';
@@ -64,10 +64,10 @@ export default {
     },
   },
   methods: {
-    emitContent() {
-      this.$emit('input', this.content);
-      this.$emit('change', this.content);
-    },
+    // emitContent() {
+    //   this.$emit('input', this.content);
+    //   this.$emit('change', this.content);
+    // },
     focusHandler() {
       this.resetPlaceHolder();
       this.$emit('focus-input');
@@ -83,14 +83,18 @@ export default {
       const value = e.target.innerText;
       this.setContent(value);
       this.isUpdatedContent = value.length;
-      if (!this.isUpdatedContent) this.initPlaceholder();
-      this.emitContent();
+      // if (!this.isUpdatedContent) this.initPlaceholder();
+      // this.emitContent();
+      this.$emit('input', value);
     },
     initPlaceholder() {
-      this.content = this.placeholderValue;
+      if (this.value?.length) return;
+      this.setContent(this.placeholderValue);
     },
     initValue(value) {
-      this.content = value;
+      // this.placeholderIsactive = !this.value?.length;
+      console.log(value);
+      this.setContent(value);
     },
   },
 };

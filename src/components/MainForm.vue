@@ -7,6 +7,9 @@
       <li>Вернуть отображение оглавлений</li>
       <li>Добавить возможность множественных созданий резюме</li>
     </ul>
+    <!-- <div>
+      {{ formData }}
+    </div> -->
     <div class="d-flex justify-content-center">
       <div>
         <b-button @click="resetState()">Reset</b-button>

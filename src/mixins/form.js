@@ -19,7 +19,7 @@ export default {
       this[namePropetyValue] = this.formData[namePropetyValue];
     },
     updateInputValue() {
-      this.properties.map((propertyName) => this.setFormValue({
+      this.properties?.map((propertyName) => this.setFormValue({
         // eslint-disable-next-line no-underscore-dangle
         [propertyName]: _.get(this?._data, propertyName),
       }));
@@ -33,7 +33,7 @@ export default {
     },
   },
   mounted() {
-    this.properties.map((propertyName) => this.initDataForm(propertyName));
+    this.properties?.map((propertyName) => this.initDataForm(propertyName));
   },
   directives: {
     ClickOutside,

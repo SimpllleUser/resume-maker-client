@@ -5,14 +5,13 @@
         v-for="(skill, index) in skills[propertyName]"
         :key="`skill-key-${id}-${index}`"
         class="mx-2 mb-2"
-      >
-        <div class="d-flex align-items-center">
+      >        <div class="d-flex align-items-center">
           <div class="contatc-input" style="min-width: 100px">
             <tag-editable
+              v-model="skills[propertyName][index]"
               allow-white-space
               tagType="div"
               placeholderValue="Example skill"
-              @change="updateInputValue"
               @focus-input="focusHandler"
             />
           </div>
@@ -54,6 +53,7 @@ export default {
   },
   data() {
     return {
+      test: '',
       skills: null,
       properties: null,
       propertyName: '',
