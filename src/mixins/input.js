@@ -19,6 +19,30 @@ export default {
       // defaultValue: 'value',
     };
   },
+  watch: {
+    id: {
+      immediate: true,
+      handler() {
+        // this.propertyName = this.id;
+        // this.skills = { [this.propertyName]: [''] };
+        // this.properties = [`skills.${this.propertyName}`];
+        this.initValueTest();
+        // const key = `test.${this.type}.${this.id}`;
+        // const storageValue = JSON.parse(localStorage.getItem(key));
+        // this.valueTestInit(storageValue);
+        // this.updateInputValue();
+      },
+    },
+    inputProperty: {
+      immediate: true,
+      deep: true,
+      handler: 'updateStateInput',
+    },
+    // valueTest(value) {
+    //   console.log(value);
+    //   this.updateStateInput();
+    // },
+  },
   computed: {
     ...mapGetters('form', ['inputValueByKey']),
     inputKey() {

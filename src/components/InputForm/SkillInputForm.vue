@@ -1,5 +1,6 @@
 <template>
   <div class="conatct-input" v-click-outside="onBlur">
+    {{ id }}
     <div class="d-flex justify-content-center align-items-center flex-wrap">
       <div
         v-for="(skill, index) in valueTest"
@@ -68,11 +69,11 @@ export default {
       this.$emit('focus-input');
     },
     addSkill() {
-      this.skills[this.propertyName] = [...this.skills[this.propertyName], ' '];
+    // this.skills[this.propertyName] = [...this.skills[this.propertyName], ' '];
       this.valueTest = [...this.valueTest || [''], ''] || [''];
     },
     deleteSkill(key) {
-      this.skills[this.propertyName] = this.skills[this.propertyName].filter(
+      this.valueTest = this.valueTest.filter(
         (_, index) => index !== key,
       );
       this.onFocus();
@@ -83,44 +84,25 @@ export default {
     onBlur() {
       this.$emit('on-blur');
     },
-    valueTestInit(value) {
-      this.valueTest = value;
-    },
-    valueTestHandle() {
-      const key = `test.${this.type}.${this.id}`;
-      // console.log(key, JSON.stringify(this.valueTest));
-      localStorage.setItem(key, JSON.stringify(this.valueTest || []));
-    },
+    // valueTestHandle() {
+    //   const key = `test.${this.type}.${this.id}`;
+    //   // console.log(key, JSON.stringify(this.valueTest));
+    //   localStorage.setItem(key, JSON.stringify(this.valueTest || []));
+    // },
   },
   computed: {
     canUpdate() {
-      return Boolean(this.skills[`${this.propertyName}`]?.length);
+      return Boolean(this.valueTest?.length);
     },
   },
   watch: {
-    id: {
-      immediate: true,
-      handler() {
-        this.propertyName = this.id;
-        this.skills = { [this.propertyName]: [''] };
-        this.properties = [`skills.${this.propertyName}`];
-        this.initValueTest();
-        // const key = `test.${this.type}.${this.id}`;
-        // const storageValue = JSON.parse(localStorage.getItem(key));
-        // this.valueTestInit(storageValue);
-        // this.updateInputValue();
-      },
-    },
-    value: {
-      immediate: true,
-      handler() {
-        this.skills[`${this.propertyName}`] = this.value;
-        // this.valueTestInit(this.value);
-      },
-    },
-    valueTest() {
-      this.updateStateInput();
-    },
+    // value: {
+    //   immediate: true,
+    //   handler() {
+    //     this.skills[`${this.propertyName}`] = this.value;
+    //     // this.valueTestInit(this.value);
+    //   },
+    // },
     skills() {
       // this.updateInputValue();
     },

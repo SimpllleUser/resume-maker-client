@@ -49,6 +49,7 @@
                 </div>
                 <div>
                   <ContactInput
+                  id="contact-item-is-uniq"
                   :show-navigation="focus"
                   @focus-input="actions['main-info'].focus"
                   />

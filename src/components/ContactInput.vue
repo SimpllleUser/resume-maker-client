@@ -1,11 +1,11 @@
 <template>
   <div class="conatct-input">
     <b-row>
-      <b-col cols="4" v-for="(contact, index) in contacts" :key="index">
+      <b-col cols="4" v-for="(contact, index) in valueTest" :key="index">
         <div class="d-flex align-items-center justify-content-center">
           <div class="contatc-icon">
             <b-icon
-              :icon="contacts[index].icon"
+              :icon="valueTest[index].icon"
               font-scale="1.5rem"
               :id="`icon-selector-${index}`"
             />
@@ -22,8 +22,7 @@
           <div class="contatc-input">
             <tag-editable
               tagType="div"
-              v-model="contacts[index].value"
-              @change="updateInputValue"
+              v-model="valueTest[index].value"
               @focus-input="focusHandler"
               placeholderValue="Your contact"
               style="min-width: 150px"
@@ -47,20 +46,23 @@
 
 <script>
 import TagEditable from '@/components/TagEditable.vue';
-import formMixin from '@/mixins/form';
-
-const defaultConatctItem = { icon: 'phone', value: '' };
+// import formMixin from '@/mixins/form';
+import inputMixin from '@/mixins/input';
 
 export default {
   name: 'ConatactInput',
   components: { TagEditable },
-  mixins: [formMixin],
+  mixins: [inputMixin],
   data() {
     return {
       icons: ['phone', 'mailbox', 'geo-alt-fill', 'github'],
-      contacts: [JSON.parse(JSON.stringify(defaultConatctItem))],
+      defaultInputItemValue: { icon: 'phone', value: '' },
+      contacts: [this.defaultInputItemValue],
       properties: ['contacts'],
       focus: false,
+      inputType: 'contacts',
+      defaultInputValueInForm: [],
+      valueTest: null,
     };
   },
   methods: {
@@ -68,10 +70,13 @@ export default {
       this.$emit('focus-input');
     },
     addConatct() {
-      this.contacts = [...(this.contacts || []), JSON.parse(JSON.stringify(defaultConatctItem))];
+      this.valueTest = [
+        ...(this.valueTest || this.defaultInputValueInForm),
+        this.defaultInputItemValue,
+      ];
     },
     deleteConatct(key) {
-      this.contacts = this.contacts?.filter((_, index) => index !== key) || [];
+      this.valueTest = this.valueTest?.filter((_, index) => index !== key) || [];
       this.onFocus();
     },
     getDropDownRefName(index) {
@@ -81,13 +86,7 @@ export default {
       this.$refs[`${refName}`].at(0).hide();
     },
     selectHandleIcon(icon, index) {
-      this.contacts[index].icon = icon;
-      this.updateInputValue();
-    },
-  },
-  watch: {
-    contacts() {
-      this.updateInputValue();
+      this.valueTest[index].icon = icon;
     },
   },
 };
