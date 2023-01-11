@@ -8,6 +8,7 @@ import SkillStaticItem from '@/components/StaticItem/SkillStaticItem.vue';
 import AboutStaticItem from '@/components/StaticItem/AboutStaticItem.vue';
 
 export default {
+  inputValueByKey: ({ formDataTest }) => (key) => formDataTest[key] || null,
   inputsList() {
     return [
       {

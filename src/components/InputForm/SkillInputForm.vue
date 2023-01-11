@@ -2,13 +2,13 @@
   <div class="conatct-input" v-click-outside="onBlur">
     <div class="d-flex justify-content-center align-items-center flex-wrap">
       <div
-        v-for="(skill, index) in skills[propertyName]"
+        v-for="(skill, index) in valueTest"
         :key="`skill-key-${id}-${index}`"
         class="mx-2 mb-2"
       >        <div class="d-flex align-items-center">
           <div class="contatc-input" style="min-width: 100px">
             <tag-editable
-              v-model="skills[propertyName][index]"
+              v-model="valueTest[index]"
               allow-white-space
               tagType="div"
               placeholderValue="Example skill"
@@ -32,13 +32,14 @@
 </template>
 
 <script>
-import formMixin from '@/mixins/form';
+// import formMixin from '@/mixins/form';
+import inputMixin from '@/mixins/input';
 import TagEditable from '@/components/TagEditable.vue';
 
 export default {
   name: 'SkillInputForm',
   components: { TagEditable },
-  mixins: [formMixin],
+  mixins: [inputMixin],
   props: {
     id: {
       type: String,
@@ -57,6 +58,9 @@ export default {
       skills: null,
       properties: null,
       propertyName: '',
+      valueTest: null,
+      inputType: 'skills',
+      defaultInputValueInForm: [],
     };
   },
   methods: {
@@ -65,6 +69,7 @@ export default {
     },
     addSkill() {
       this.skills[this.propertyName] = [...this.skills[this.propertyName], ' '];
+      this.valueTest = [...this.valueTest || [''], ''] || [''];
     },
     deleteSkill(key) {
       this.skills[this.propertyName] = this.skills[this.propertyName].filter(
@@ -77,6 +82,14 @@ export default {
     },
     onBlur() {
       this.$emit('on-blur');
+    },
+    valueTestInit(value) {
+      this.valueTest = value;
+    },
+    valueTestHandle() {
+      const key = `test.${this.type}.${this.id}`;
+      // console.log(key, JSON.stringify(this.valueTest));
+      localStorage.setItem(key, JSON.stringify(this.valueTest || []));
     },
   },
   computed: {
@@ -91,21 +104,31 @@ export default {
         this.propertyName = this.id;
         this.skills = { [this.propertyName]: [''] };
         this.properties = [`skills.${this.propertyName}`];
-        this.updateInputValue();
+        this.initValueTest();
+        // const key = `test.${this.type}.${this.id}`;
+        // const storageValue = JSON.parse(localStorage.getItem(key));
+        // this.valueTestInit(storageValue);
+        // this.updateInputValue();
       },
     },
     value: {
       immediate: true,
       handler() {
         this.skills[`${this.propertyName}`] = this.value;
+        // this.valueTestInit(this.value);
       },
     },
+    valueTest() {
+      this.updateStateInput();
+    },
     skills() {
-      this.updateInputValue();
+      // this.updateInputValue();
     },
   },
   mounted() {
-    this.updateInputValue();
+    // eslint-disable-next-line no-underscore-dangle
+    // console.log(this._data);
+    // this.updateInputValue();
   },
 };
 </script>

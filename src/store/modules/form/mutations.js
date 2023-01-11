@@ -58,4 +58,8 @@ export default {
     state.currentFont = font;
     utils.statuePropertyToLocalStorage('currentFont', state.currentFont);
   },
+  [types.SET_INPUT_VALUE](state, { key, value }) {
+    state.formDataTest = { ...this.formDataTest, [key]: value };
+    localStorage.setItem('formDataTest', JSON.stringify(state.formDataTest));
+  },
 };

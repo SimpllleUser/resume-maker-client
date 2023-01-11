@@ -19,6 +19,7 @@ export default {
       this[namePropetyValue] = this.formData[namePropetyValue];
     },
     updateInputValue() {
+      // eslint-disable-next-line no-underscore-dangle
       this.properties?.map((propertyName) => this.setFormValue({
         // eslint-disable-next-line no-underscore-dangle
         [propertyName]: _.get(this?._data, propertyName),

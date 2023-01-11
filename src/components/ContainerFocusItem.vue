@@ -8,6 +8,7 @@
     tabindex="-1"
     >
       <div v-b-hover="hoverHandler" >
+        <h1>{{ name }}</h1>
         <div>
           <slot name="main" :actions="actions" :focus="focus" />
         </div>

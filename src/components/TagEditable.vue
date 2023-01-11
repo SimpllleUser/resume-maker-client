@@ -92,8 +92,6 @@ export default {
       this.setContent(this.placeholderValue);
     },
     initValue(value) {
-      // this.placeholderIsactive = !this.value?.length;
-      console.log(value);
       this.setContent(value);
     },
   },
