@@ -8,34 +8,34 @@
     </div>
     <div
       class="experience-item company-template pb-2"
-      v-for="(expirience, key) in expiriences[propertyName]"
+      v-for="(expirience, key) in valueTest"
       :key="`experience-key-${id}-${key}`"
     >
       <div>
         <div class="company-name">
           <tag-editable
-          v-model="expiriences[propertyName][key].companyName"
+          v-model="valueTest[key].companyName"
           placeholder-value="Complany name"
           @focus-input="focusHandler"
            @change="updateInputValue" />
         </div>
         <div class="company-position">
           <tag-editable
-          v-model="expiriences[propertyName][key].position"
+          v-model="valueTest[key].position"
           placeholder-value="Position name"
           @focus-input="focusHandler"
            @change="updateInputValue" />
         </div>
         <div class="company-date-work d-flex align-items-center">
           <b-form-datepicker
-            v-model="expiriences[propertyName][key].date.from"
+            v-model="valueTest[key].date.from"
             @context="updateInputValue"
             placeholder="from"
             style="border: none !important;"
             size="sm"
           />
           <b-form-datepicker
-            v-model="expiriences[propertyName][key].date.to"
+            v-model="valueTest[key].date.to"
             @context="updateInputValue"
             @input="() => allow = false"
             @hidden="() => allow = false"
@@ -49,7 +49,7 @@
       <div>
         <tag-editable
         style="text-align: left; padding: 20px;white-space: pre;"
-          v-model="expiriences[propertyName][key].description"
+          v-model="valueTest[key].description"
           @change="updateInputValue"
           @focus-input="focusHandler"
           placeholder-value="Description about your expereince"
@@ -69,38 +69,36 @@
 </template>
 
 <script>
-import cloneDepp from 'lodash/cloneDeep';
-import formMixin from '@/mixins/form';
+// import cloneDepp from 'lodash/cloneDeep';
+import inputMixin from '@/mixins/input';
 import TagEditable from '../TagEditable.vue';
 
-const defaultExpereence = {
-  companyName: '',
-  position: '',
-  date: { from: '', to: '' },
-  description: '',
-};
+// const defaultExpereence = {
+//   companyName: '',
+//   position: '',
+//   date: { from: '', to: '' },
+//   description: '',
+// };
 
 export default {
   name: 'ExpreienceInputForm',
   components: { TagEditable },
-  mixins: [formMixin],
-  props: {
-    id: {
-      type: String,
-      require: true,
-      default: '',
-    },
-    value: {
-      type: Array,
-      default: () => [cloneDepp(defaultExpereence)],
-    },
-  },
+  mixins: [inputMixin],
   data() {
     return {
       expiriences: null,
       properties: null,
       propertyName: '',
       allow: false,
+      defaultInputItemValue: {
+        companyName: '',
+        position: '',
+        date: { from: '', to: '' },
+        description: '',
+      },
+      valueTest: null,
+      inputType: 'expreriance',
+      defaultInputValueInForm: [],
     };
   },
   methods: {
@@ -108,39 +106,41 @@ export default {
       this.$emit('focus-input');
     },
     addExperience() {
-      this.expiriences[this.propertyName] = [
-        ...this.expiriences[this.propertyName],
-        JSON.parse(JSON.stringify(defaultExpereence)),
+      this.valueTest = [
+        ...this.valueTest, this.defaultInputItemValue,
       ];
     },
     deleteExpirience(key) {
-      this.expiriences[this.propertyName] = this.expiriences[this.propertyName]
+      this.valueTest = this.valueTest
         .filter((_, index) => index !== key);
     },
   },
   watch: {
-    id: {
-      immediate: true,
-      handler() {
-        this.propertyName = this.id;
-        this.expiriences = { [this.propertyName]: [JSON.parse(JSON.stringify(defaultExpereence))] };
-        this.properties = [`expiriences.${this.propertyName}`];
-        this.updateInputValue();
-      },
-    },
-    value: {
-      immediate: true,
-      handler() {
-        this.expiriences[`${this.propertyName}`] = this.value;
-      },
-    },
-    educations() {
-      this.updateInputValue();
-    },
+    // id: {
+    //   immediate: true,
+    //   handler() {
+    //     this.propertyName = this.id;
+    //     this.valueTest = {
+    //       [this.propertyName]: [
+    //         JSON.parse(JSON.stringify(this.defaultInputItemValue))],
+    //     };
+    //     this.properties = [`expiriences.${this.propertyName}`];
+    //     this.updateInputValue();
+    //   },
+    // },
+    // value: {
+    //   immediate: true,
+    //   handler() {
+    //     this.expiriences[`${this.propertyName}`] = this.value;
+    //   },
+    // },
+    // educations() {
+    //   this.updateInputValue();
+    // },
   },
-  mounted() {
-    this.updateInputValue();
-  },
+  // mounted() {
+  //   this.updateInputValue();
+  // },
 };
 </script>
 

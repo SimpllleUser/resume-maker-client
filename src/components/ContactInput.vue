@@ -46,7 +46,6 @@
 
 <script>
 import TagEditable from '@/components/TagEditable.vue';
-// import formMixin from '@/mixins/form';
 import inputMixin from '@/mixins/input';
 
 export default {

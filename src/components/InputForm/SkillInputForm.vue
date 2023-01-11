@@ -41,18 +41,6 @@ export default {
   name: 'SkillInputForm',
   components: { TagEditable },
   mixins: [inputMixin],
-  props: {
-    id: {
-      type: String,
-      require: true,
-      default: '',
-    },
-    value: {
-      type: Array,
-      require: true,
-      default: () => [''],
-    },
-  },
   data() {
     return {
       test: '',
