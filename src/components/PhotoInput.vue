@@ -2,10 +2,10 @@
   <div class="photo-input position-relative">
     <b-button size="sm" @click="togglePhoto" v-show="showNavigation">
     <div class="d-flex">
-        <b-icon :icon="`${  showPhotoInput ? 'x-circle' : 'plus-circle'}`"></b-icon>
+        <b-icon :icon="`${  valueTest.show ? 'x-circle' : 'plus-circle'}`"></b-icon>
     </div>
     </b-button>
-    <div v-show="showPhotoInput">
+    <div v-show="valueTest.show">
     <div class="mb-2">
       <label for="image-upload" v-show="false">
         <input ref="FileInput" type="file" id="image-upload" @change="onFileSelect" />
@@ -20,7 +20,7 @@
         />
         <img
           v-show="updatedCropImg"
-          :src="valueTest"
+          :src="valueTest.img"
           alt="photo"
           :height="190"
           style="max-width: 200px"
@@ -78,7 +78,7 @@ export default {
       imgDataUrl: '',
       properties: ['imgDataUrl'],
       mime_type: '',
-      valueTest: null,
+      valueTest: { img: '', show: true },
       inputType: 'photo',
       defaultInputValueInForm,
     };
@@ -90,29 +90,35 @@ export default {
     style() {
       return `${this.boxStyle}`;
     },
+    showPhoto() {
+      return this.valueTest.show;
+    },
   },
   watch: {
     // showNavigation(show) {
     //   if (show && this.valueTest?.length) return;
     //   this.setImage(this.defaultInputValueInForm);
     // },
-    showPhotoInput: {
+    showPhoto: {
       immediate: true,
       handler: 'showPhotoInputHandler',
     },
   },
   methods: {
+    setvalueTestImg(img) {
+      this.valueTest = { ...this.valueTest, img };
+    },
     showPhotoInputHandler(state) {
       this.$emit('can-show', state);
     },
     togglePhoto() {
-      this.showPhotoInput = !this.showPhotoInput;
+      this.valueTest = { ...this.valueTest, show: !this.valueTest?.show };
     },
     resetPhoto() {
       this.imgDataUrl = this.defaultInputValueInForm;
       this.$refs.cropper.replace(this.defaultInputValueInForm);
       this.setImage();
-      this.valueTest = this.defaultInputValueInForm;
+      this.setvalueTestImg(this.defaultInputValueInForm);
       this.updatedCropImg = true;
     },
     updatePhoto() {
@@ -122,7 +128,7 @@ export default {
       this.$emit('on-focus');
     },
     setImage() {
-      this.valueTest = this.$refs.cropper.getCroppedCanvas()?.toDataURL();
+      this.setvalueTestImg(this.$refs.cropper.getCroppedCanvas()?.toDataURL());
       this.updatedCropImg = true;
     },
     onFileSelect(e) {
