@@ -1,6 +1,10 @@
 <template>
   <div class="photo-input position-relative">
-    <b-button size="sm" @click="togglePhoto" v-show="showNavigation">
+    <b-button
+    variant="outline-dark"
+    size="sm"
+     @click="togglePhoto"
+      v-show="showNavigation">
     <div class="d-flex">
         <b-icon :icon="`${  inputValue.show ? 'x-circle' : 'plus-circle'}`"></b-icon>
     </div>
@@ -25,9 +29,10 @@
           :height="190"
           style="max-width: 200px"
         />
-        <b-button v-show="!updatedCropImg" variant="primary" size="sm" @click="setImage">
+        <!-- <b-button
+          v-show="!updatedCropImg" variant="outline-primary" size="sm" @click="setImage">
           <b-icon icon="check-lg"></b-icon>
-        </b-button>
+        </b-button> -->
       </div>
     </div>
     <div class="add-photo position-absolute" v-show="showNavigation">

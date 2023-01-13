@@ -1,9 +1,9 @@
 <template>
     <div class="expereiance-row">
         <div class="pb-2" v-show="showNavigation">
-          <b-button size="sm" variant="primary" @click="addExperience"
-            >add
-            <b-icon icon="plus-lg" />
+          <b-button size="sm" variant="dark" @click="addExperience"
+            >
+            <b-icon icon="plus" />
           </b-button>
         </div>
         <div
@@ -35,6 +35,7 @@
           </div>
           <div>
             <tag-editable
+            style="text-align: left; padding: 20px; white-space: pre"
             allow-white-space
             v-model="inputValue[key].description"
             @focus-input="focusHandler"
@@ -43,12 +44,12 @@
             <b-button
             v-show="showNavigation"
               @click="deleteExpirience(key)"
-              variant="outline-danger"
+              variant="outline-dark"
               size="sm"
               class="btn-delete"
               placeholder="Description about your education"
             >
-              <b-icon icon="trash" variant="danger" />
+              <b-icon icon="trash" />
             </b-button>
           </div>
         </div>
@@ -102,7 +103,7 @@ export default {
       position: relative;
       .btn-delete {
         position: absolute;
-        right: -40px;
+        right: 0px;
         top: 0px;
       }
     }

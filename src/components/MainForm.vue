@@ -74,12 +74,11 @@
                   <b-button
                     v-show="focus"
                     size="sm"
-                    pill
                     @click="deleteInputForm(input)"
-                    variant="danger"
+                    variant="dark"
                     style="position: absolute; top: -15px; right: -15px"
                   >
-                    <b-icon icon="trash" />
+                    <b-icon icon="x" />
                   </b-button>
                 </div>
               </template>

@@ -29,14 +29,16 @@
             />
           </div>
           <div v-show="showNavigation">
-            <b-icon icon="trash-fill" @click="deleteConatct(index)" />
+            <b-button size="sm" variant="outline-dark" @click="deleteConatct(index)">
+              <b-icon icon="trash-fill" />
+            </b-button>
           </div>
         </div>
       </b-col>
       <b-col v-show="showNavigation">
         <div class="d-flex align-item-center">
-          <b-button size="sm" variant="dark-outline" @click="addConatct">
-            add <b-icon icon="plus-lg" />
+          <b-button size="sm" variant="outline-dark" @click="addConatct">
+            <b-icon icon="plus" />
           </b-button>
         </div>
       </b-col>
