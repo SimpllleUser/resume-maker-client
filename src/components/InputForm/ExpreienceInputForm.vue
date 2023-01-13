@@ -14,33 +14,31 @@
       <div>
         <div class="company-name">
           <tag-editable
-          v-model="inputValue[key].companyName"
-          placeholder-value="Complany name"
-          @focus-input="focusHandler"
-           @change="updateInputValue" />
+            v-model="inputValue[key].companyName"
+            placeholder-value="Complany name"
+            @focus-input="focusHandler"
+          />
         </div>
         <div class="company-position">
           <tag-editable
-          v-model="inputValue[key].position"
-          placeholder-value="Position name"
-          @focus-input="focusHandler"
-           @change="updateInputValue" />
+            v-model="inputValue[key].position"
+            placeholder-value="Position name"
+            @focus-input="focusHandler"
+          />
         </div>
         <div class="company-date-work d-flex align-items-center">
           <b-form-datepicker
             v-model="inputValue[key].date.from"
-            @context="updateInputValue"
             placeholder="from"
-            style="border: none !important;"
+            style="border: none !important"
             size="sm"
           />
           <b-form-datepicker
             v-model="inputValue[key].date.to"
-            @context="updateInputValue"
-            @input="() => allow = false"
-            @hidden="() => allow = false"
-            @shown="() => allow = false"
-            style="border: none !important;"
+            @input="() => (allow = false)"
+            @hidden="() => (allow = false)"
+            @shown="() => (allow = false)"
+            style="border: none !important"
             placeholder="to"
             size="sm"
           />
@@ -48,14 +46,13 @@
       </div>
       <div>
         <tag-editable
-        style="text-align: left; padding: 20px;white-space: pre;"
+          style="text-align: left; padding: 20px; white-space: pre"
           v-model="inputValue[key].description"
-          @change="updateInputValue"
           @focus-input="focusHandler"
           placeholder-value="Description about your expereince"
         ></tag-editable>
         <b-button
-        v-show="showNavigation"
+          v-show="showNavigation"
           @click="deleteExpirience(key)"
           variant="outline-danger"
           size="sm"
@@ -98,13 +95,10 @@ export default {
       this.$emit('focus-input');
     },
     addExperience() {
-      this.inputValue = [
-        ...this.inputValue, this.defaultInputItemValue,
-      ];
+      this.inputValue = [...this.inputValue, this.defaultInputItemValue];
     },
     deleteExpirience(key) {
-      this.inputValue = this.inputValue
-        .filter((_, index) => index !== key);
+      this.inputValue = this.inputValue.filter((_, index) => index !== key);
     },
   },
 };
