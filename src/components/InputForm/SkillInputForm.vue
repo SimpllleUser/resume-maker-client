@@ -1,6 +1,5 @@
 <template>
   <div class="conatct-input" v-click-outside="onBlur">
-    {{ id }}
     <div class="d-flex justify-content-center align-items-center flex-wrap">
       <div
         v-for="(skill, index) in valueTest"
