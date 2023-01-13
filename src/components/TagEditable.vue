@@ -1,6 +1,6 @@
 <template>
   <div>
-    <component
+      <component
       :is="tagType"
       contenteditable
       v-text="content"
@@ -35,14 +35,15 @@ export default {
   },
   data() {
     return {
+      isInit: false,
       content: '',
       isUpdatedContent: false,
-      placeholderIsactive: true,
+      placeholderIsActive: true,
     };
   },
   computed: {
     contentStyle() {
-      return this.placeholderIsactive ? 'color: gray;' : '';
+      return this.placeholderIsActive ? 'color: gray;' : '';
     },
     whiteSpaceStyle() {
       return this.allowWhiteSpace ? 'white-space: pre' : '';
@@ -60,6 +61,10 @@ export default {
       immediate: true,
       handler: 'initPlaceholder',
     },
+    isUpdatedContent: {
+      immediate: true,
+      handler: 'initPlaceholder',
+    },
   },
   methods: {
     focusHandler() {
@@ -74,19 +79,24 @@ export default {
       this.content = value;
     },
     setContentHandler(e) {
+      if (!this.isInit) return;
       const value = e.target.innerText;
       this.setContent(value);
       this.isUpdatedContent = Boolean(value?.length);
       // eslint-disable-next-line no-unused-expressions
       this.isUpdatedContent ? this.$emit('input', value) : this.initPlaceholder();
-      this.placeholderIsactive = !this.isUpdatedContent;
     },
     initPlaceholder() {
+      if (this.content.length) return;
+      this.placeholderIsActive = true;
       this.setContent(this.placeholderValue);
     },
     initValue(value) {
-      if (!this.value && this.content) return;
+      this.placeholderIsActive = !value?.length;
+      if (this.isInit) return;
       this.setContent(value);
+      this.isUpdatedContent = true;
+      this.isInit = true;
     },
   },
 };
