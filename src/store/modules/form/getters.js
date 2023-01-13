@@ -45,6 +45,9 @@ export default {
       .color-${color.class} {
           color: ${color.style} !important;
       }
+      .bg_color-${color.class}:after {
+          background-color: ${color.style} !important;
+      }
       .form-control.color-${color.class} {
           color: ${color.style} !important;
       }

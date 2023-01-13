@@ -1,26 +1,38 @@
 <template>
   <div
-  class="focus-container"
-   :class="containerClass"
+    class="focus-container"
+    :class="containerClass"
     @focus="setFocus"
     v-click-outside="setUnfocus"
-    style="margin: 16px 0px;"
+    style="margin: 16px 0px"
     tabindex="-1"
-    >
-      <div v-b-hover="hoverHandler" >
-   <div :class="`full-name-color-${currentColor.class} font-${currentFont.value}`">
-    <tag-editable v-if="showTitle"
-      v-model="inputValue"
-      @focus-input="setFocus"
-      tagType="h2"
-      :placeholderValue="title"
-      :disable-placeholder-style="true"
-    />
-   </div>
-        <div>
-          <slot name="main" :actions="actions" :focus="focus" />
+  >
+    <div v-b-hover="hoverHandler">
+      <div
+        v-if="showTitle"
+        style="position: relative"
+        :class="`
+        full-name-color-${currentColor.class}
+        font-${currentFont.value}`"
+      >
+        <div class="middle-line" :class="`bg_color-${currentColor.class}`"></div>
+        <div class="title-wrapper-container">
+          <div class="title-wrapper">
+            <tag-editable
+              v-model="inputValue"
+              @focus-input="setFocus"
+              tagType="h2"
+              :placeholderValue="title"
+              :disable-placeholder-style="true"
+              style="min-width: 100px;"
+            />
+          </div>
         </div>
       </div>
+      <div>
+        <slot name="main" :actions="actions" :focus="focus" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -43,7 +55,7 @@ export default {
       default: '',
     },
     showTitle: {
-      type: String,
+      type: Boolean,
       defaut: false,
     },
     title: {
@@ -90,7 +102,9 @@ export default {
       this.setFocusState(false);
     },
     setFocus() {
-      setTimeout(() => { this.setFocusState(true); }, 100);
+      setTimeout(() => {
+        this.setFocusState(true);
+      }, 100);
     },
     hoverHandler(value) {
       this.hover = value;
@@ -100,16 +114,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .border {
-    transition: border-color .3s ease;
+.border {
+  transition: border-color 0.3s ease;
+}
+.border-style {
+  border: 1px solid white;
+}
+.border-primary {
+  border-color: var(--bs-primary);
+}
+.border-secondary {
+  border-color: var(--bs-secondary);
+}
+
+.middle-line {
+  z-index: 1;
+    position: relative;
+    // background-color: red;
+  &:after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: red;
+    top: 17px;
+    z-index: -1;
+    left: 0px;
   }
-  .border-style {
-    border: 1px solid white
-  }
-  .border-primary {
-    border-color: var(--bs-primary)
-  }
-  .border-secondary {
-    border-color: var(--bs-secondary)
-  }
+}
+.title-wrapper {
+  z-index: 999;
+  background-color: white !important;
+  width: fit-content !important;
+  padding: 0px 25px !important;
+}
+.title-wrapper-container {
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
 </style>

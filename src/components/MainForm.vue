@@ -19,7 +19,7 @@
       <span v-html="`<style>${styleFormPrint}</style>`" />
       <span v-html="includeFotns"></span>
       <div>
-        <ContainerFocusItem name="main-info">
+        <ContainerFocusItem name="main-info" :show-title="false">
           <template #main="{ actions, focus }">
             <div
             class="row justify-content-center row-cols-2 position-relative"
