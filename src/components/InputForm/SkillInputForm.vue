@@ -2,13 +2,13 @@
   <div class="conatct-input" v-click-outside="onBlur">
     <div class="d-flex justify-content-center align-items-center flex-wrap">
       <div
-        v-for="(skill, index) in valueTest"
+        v-for="(skill, index) in inputValue"
         :key="`skill-key-${id}-${index}`"
         class="mx-2 mb-2"
       >        <div class="d-flex align-items-center">
           <div class="contatc-input" style="min-width: 100px">
             <tag-editable
-              v-model="valueTest[index]"
+              v-model="inputValue[index]"
               allow-white-space
               tagType="div"
               placeholderValue="Example skill"
@@ -32,7 +32,6 @@
 </template>
 
 <script>
-// import formMixin from '@/mixins/form';
 import inputMixin from '@/mixins/input';
 import TagEditable from '@/components/TagEditable.vue';
 
@@ -46,7 +45,7 @@ export default {
       skills: null,
       properties: null,
       propertyName: '',
-      valueTest: null,
+      inputValue: null,
       inputType: 'skills',
       defaultInputValueInForm: [],
     };
@@ -56,11 +55,10 @@ export default {
       this.$emit('focus-input');
     },
     addSkill() {
-    // this.skills[this.propertyName] = [...this.skills[this.propertyName], ' '];
-      this.valueTest = [...this.valueTest || [''], ''] || [''];
+      this.inputValue = [...this.inputValue || [''], ''] || [''];
     },
     deleteSkill(key) {
-      this.valueTest = this.valueTest.filter(
+      this.inputValue = this.inputValue.filter(
         (_, index) => index !== key,
       );
       this.onFocus();
@@ -71,33 +69,11 @@ export default {
     onBlur() {
       this.$emit('on-blur');
     },
-    // valueTestHandle() {
-    //   const key = `test.${this.type}.${this.id}`;
-    //   // console.log(key, JSON.stringify(this.valueTest));
-    //   localStorage.setItem(key, JSON.stringify(this.valueTest || []));
-    // },
   },
   computed: {
     canUpdate() {
-      return Boolean(this.valueTest?.length);
+      return Boolean(this.inputValue?.length);
     },
-  },
-  watch: {
-    // value: {
-    //   immediate: true,
-    //   handler() {
-    //     this.skills[`${this.propertyName}`] = this.value;
-    //     // this.valueTestInit(this.value);
-    //   },
-    // },
-    skills() {
-      // this.updateInputValue();
-    },
-  },
-  mounted() {
-    // eslint-disable-next-line no-underscore-dangle
-    // console.log(this._data);
-    // this.updateInputValue();
   },
 };
 </script>

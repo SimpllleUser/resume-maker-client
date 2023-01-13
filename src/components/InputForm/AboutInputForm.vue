@@ -4,7 +4,7 @@
       <tag-editable
       style="text-align: left; padding: 20px;"
         allow-white-space
-        v-model="valueTest"
+        v-model="inputValue"
         @focus-input="focusHandler"
         placeholderValue="Some text about"
       />
@@ -27,7 +27,7 @@ export default {
       propertyName: '',
       inputType: 'about',
       defaultInputValueInForm: '',
-      valueTest: null,
+      inputValue: null,
     };
   },
   methods: {

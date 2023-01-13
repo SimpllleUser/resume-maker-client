@@ -2,10 +2,10 @@
   <div class="photo-input position-relative">
     <b-button size="sm" @click="togglePhoto" v-show="showNavigation">
     <div class="d-flex">
-        <b-icon :icon="`${  valueTest.show ? 'x-circle' : 'plus-circle'}`"></b-icon>
+        <b-icon :icon="`${  inputValue.show ? 'x-circle' : 'plus-circle'}`"></b-icon>
     </div>
     </b-button>
-    <div v-show="valueTest.show">
+    <div v-show="inputValue.show">
     <div class="mb-2">
       <label for="image-upload" v-show="false">
         <input ref="FileInput" type="file" id="image-upload" @change="onFileSelect" />
@@ -20,18 +20,11 @@
         />
         <img
           v-show="updatedCropImg"
-          :src="valueTest.img"
+          :src="inputValue.img"
           alt="photo"
           :height="190"
           style="max-width: 200px"
         />
-        <!-- <img
-          v-show="valueTest"
-          :src="valueTest"
-          alt="photo"
-          :height="190"
-          style="max-width: 200px"
-        /> -->
         <b-button v-show="!updatedCropImg" variant="primary" size="sm" @click="setImage">
           <b-icon icon="check-lg"></b-icon>
         </b-button>
@@ -78,7 +71,7 @@ export default {
       imgDataUrl: '',
       properties: ['imgDataUrl'],
       mime_type: '',
-      valueTest: { img: '', show: true },
+      inputValue: { img: '', show: true },
       inputType: 'photo',
       defaultInputValueInForm,
     };
@@ -91,14 +84,10 @@ export default {
       return `${this.boxStyle}`;
     },
     showPhoto() {
-      return this.valueTest.show;
+      return this.inputValue.show;
     },
   },
   watch: {
-    // showNavigation(show) {
-    //   if (show && this.valueTest?.length) return;
-    //   this.setImage(this.defaultInputValueInForm);
-    // },
     showPhoto: {
       immediate: true,
       handler: 'showPhotoInputHandler',
@@ -106,13 +95,13 @@ export default {
   },
   methods: {
     setvalueTestImg(img) {
-      this.valueTest = { ...this.valueTest, img };
+      this.inputValue = { ...this.inputValue, img };
     },
     showPhotoInputHandler(state) {
       this.$emit('can-show', state);
     },
     togglePhoto() {
-      this.valueTest = { ...this.valueTest, show: !this.valueTest?.show };
+      this.inputValue = { ...this.inputValue, show: !this.inputValue?.show };
     },
     resetPhoto() {
       this.imgDataUrl = this.defaultInputValueInForm;

@@ -8,25 +8,25 @@
         </div>
         <div
           class="experience-item education-template pb-2"
-          v-for="(education, key) in valueTest"
+          v-for="(education, key) in inputValue"
           :key="key"
         >
           <div>
             <div class="education-name">
               <tag-editable
-              v-model="valueTest[key].educationName"
+              v-model="inputValue[key].educationName"
               placeholder-value="Name"
               @focus-input="focusHandler"/>
             </div>
             <div class="education-date-work d-flex align-items-center">
               <b-form-datepicker
-              v-model="valueTest[key].date.from"
+              v-model="inputValue[key].date.from"
               placeholder="from"
                 size="sm"
                 style="border: none !important;"
                 />
                 <b-form-datepicker
-                v-model="valueTest[key].date.to"
+                v-model="inputValue[key].date.to"
                 placeholder="to"
                 size="sm"
                 style="border: none !important;"
@@ -36,7 +36,7 @@
           <div>
             <tag-editable
             allow-white-space
-            v-model="valueTest[key].description"
+            v-model="inputValue[key].description"
             @focus-input="focusHandler"
             placeholder-value="Description"
              rows="4" />
@@ -56,7 +56,6 @@
 </template>
 
 <script>
-// import cloneDepp from 'lodash/cloneDeep';
 import input from '@/mixins/input';
 import TagEditable from '../TagEditable.vue';
 
@@ -64,17 +63,6 @@ export default {
   name: 'EducationInputForm',
   components: { TagEditable },
   mixins: [input],
-  // props: {
-  //   id: {
-  //     type: String,
-  //     require: true,
-  //     default: '',
-  //   },
-  //   value: {
-  //     type: Array,
-  //     default: () => [cloneDepp(defaultEducation)],
-  //   },
-  // },
   data() {
     return {
       educations: null,
@@ -85,7 +73,7 @@ export default {
         date: { from: '', to: '' },
         description: '',
       },
-      valueTest: null,
+      inputValue: null,
       inputType: 'educations',
       defaultInputValueInForm: [],
     };
@@ -95,12 +83,12 @@ export default {
       this.$emit('focus-input');
     },
     addExperience() {
-      this.valueTest = [
-        ...this.valueTest,
+      this.inputValue = [
+        ...this.inputValue,
         JSON.parse(JSON.stringify(this.defaultInputItemValue))];
     },
     deleteExpirience(key) {
-      this.valueTest = this.valueTest
+      this.inputValue = this.inputValue
         ?.filter((_, index) => index !== key);
     },
   },

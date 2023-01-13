@@ -4,13 +4,13 @@
     :class="`full-name-color-${currentColor.class} font-${currentFont.value}`"
   >
     <tag-editable
-      v-model="valueTest.fullName"
+      v-model="inputValue.fullName"
       @focus-input="focusHandler"
       tagType="h1"
       placeholderValue="Your full name"
     />
     <tag-editable
-      v-model="valueTest.position"
+      v-model="inputValue.position"
       @focus-input="focusHandler"
       tagType="h4"
       placeholderValue="Your position"
@@ -31,7 +31,7 @@ export default {
     return {
       inputType: 'mainInfo',
       defaultInputValueInForm: { fullName: '', position: '' },
-      valueTest: null,
+      inputValue: null,
     };
   },
   computed: {

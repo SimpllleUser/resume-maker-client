@@ -1,11 +1,11 @@
 <template>
   <div class="conatct-input">
     <b-row>
-      <b-col cols="4" v-for="(contact, index) in valueTest" :key="index">
+      <b-col cols="4" v-for="(contact, index) in inputValue" :key="index">
         <div class="d-flex align-items-center justify-content-center">
           <div class="contatc-icon">
             <b-icon
-              :icon="valueTest[index].icon"
+              :icon="inputValue[index].icon"
               font-scale="1.5rem"
               :id="`icon-selector-${index}`"
             />
@@ -22,7 +22,7 @@
           <div class="contatc-input">
             <tag-editable
               tagType="div"
-              v-model="valueTest[index].value"
+              v-model="inputValue[index].value"
               @focus-input="focusHandler"
               placeholderValue="Your contact"
               style="min-width: 150px"
@@ -61,7 +61,7 @@ export default {
       focus: false,
       inputType: 'contacts',
       defaultInputValueInForm: [],
-      valueTest: null,
+      inputValue: null,
     };
   },
   methods: {
@@ -69,13 +69,13 @@ export default {
       this.$emit('focus-input');
     },
     addConatct() {
-      this.valueTest = [
-        ...(this.valueTest || this.defaultInputValueInForm),
+      this.inputValue = [
+        ...(this.inputValue || this.defaultInputValueInForm),
         this.defaultInputItemValue,
       ];
     },
     deleteConatct(key) {
-      this.valueTest = this.valueTest?.filter((_, index) => index !== key) || [];
+      this.inputValue = this.inputValue?.filter((_, index) => index !== key) || [];
       this.onFocus();
     },
     getDropDownRefName(index) {
@@ -85,7 +85,7 @@ export default {
       this.$refs[`${refName}`].at(0).hide();
     },
     selectHandleIcon(icon, index) {
-      this.valueTest[index].icon = icon;
+      this.inputValue[index].icon = icon;
     },
   },
 };

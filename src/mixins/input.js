@@ -14,23 +14,11 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      // defaultValue: 'value',
-    };
-  },
   watch: {
     id: {
       immediate: true,
       handler() {
-        // this.propertyName = this.id;
-        // this.skills = { [this.propertyName]: [''] };
-        // this.properties = [`skills.${this.propertyName}`];
-        this.initValueTest();
-        // const key = `test.${this.type}.${this.id}`;
-        // const storageValue = JSON.parse(localStorage.getItem(key));
-        // this.valueTestInit(storageValue);
-        // this.updateInputValue();
+        this.initInputValue();
       },
     },
     inputProperty: {
@@ -38,10 +26,11 @@ export default {
       deep: true,
       handler: 'updateStateInput',
     },
-    // valueTest(value) {
-    //   console.log(value);
-    //   this.updateStateInput();
-    // },
+    inputValue: {
+      immediate: true,
+      deep: true,
+      handler: 'updateStateInput',
+    },
   },
   computed: {
     ...mapGetters('form', ['inputValueByKey']),
@@ -49,7 +38,7 @@ export default {
       return `${this.inputType}.${this.id}`;
     },
     inputProperty() {
-      return { key: this.inputKey, value: this.valueTest };
+      return { key: this.inputKey, value: this.inputValue };
     },
     inputValueFromStore() {
       return this.inputValueByKey(this.inputKey);
@@ -60,8 +49,8 @@ export default {
     updateStateInput() {
       this.setFormValue(this.inputProperty);
     },
-    initValueTest() {
-      this.valueTest = this.inputValueFromStore || this.defaultInputValueInForm;
+    initInputValue() {
+      this.inputValue = this.inputValueFromStore || this.defaultInputValueInForm;
     },
   },
   directives: {
