@@ -59,4 +59,5 @@ export default {
   fonts,
   currentColor,
   currentFont,
+  requireFocus: false,
 };

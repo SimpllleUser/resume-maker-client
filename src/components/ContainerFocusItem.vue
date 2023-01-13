@@ -75,7 +75,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont']),
+    ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont', 'requireFocus']),
     actions() {
       return {
         [`${this.name}`]: {
@@ -86,6 +86,11 @@ export default {
     },
     containerClass() {
       return `border-style ${this.focus && this.classOnFocus} ${this.hover && this.classOnHover}`;
+    },
+  },
+  watch: {
+    requireFocus() {
+      this.setUnfocus();
     },
   },
   methods: {

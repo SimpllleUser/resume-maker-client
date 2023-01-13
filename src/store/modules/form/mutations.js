@@ -62,4 +62,7 @@ export default {
     state.formDataTest = { ...state.formDataTest, [key]: value };
     localStorage.setItem('formDataTest', JSON.stringify(state.formDataTest));
   },
+  [types.TOGGLE_REQUIRE_FOCUS](state) {
+    state.requireFocus = !state.requireFocus;
+  },
 };

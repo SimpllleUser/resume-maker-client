@@ -1,10 +1,8 @@
 <template>
   <div>
     <ul>
-      <tag-editable tag-type="h1" v-model="txt" placeholderValue="Empty content" ></tag-editable>
-      <li>Реализовать сохранение данных в Local Storage</li>
+      {{ requireFocus }}
       <li>Сделать единый стиль для редактирования и отображения данных</li>
-      <li>Вернуть отображение оглавлений</li>
       <li>Добавить возможность множественных созданий резюме</li>
     </ul>
     <div class="d-flex justify-content-center">
@@ -140,7 +138,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont']),
+    ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont', 'requireFocus']),
     ...mapGetters('form', ['getValue', 'getContainerTitleValue', 'styleFormPrint', 'includeFotns']),
   },
   watch: {
@@ -160,15 +158,13 @@ export default {
       deleteInputForm: types.DELETE_INPUT_FROM_AND_DATA,
       initState: types.INIT_STATE,
       resetState: types.RESET_STATE,
+      toggleRequireFocus: types.TOGGLE_REQUIRE_FOCUS,
     }),
     showPhotoInputHandle(canShow) {
       this.showPhotoInput = canShow;
     },
-    setValue(e) {
-      const value = e.target.innerText;
-      this.txt = value;
-    },
     async print() {
+      await this.toggleRequireFocus();
       await this.$htmlToPaper('resume-form');
     },
   },
