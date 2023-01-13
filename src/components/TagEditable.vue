@@ -98,8 +98,7 @@ export default {
       this.initPlaceholder();
       if (this.isInit) return;
       this.setContent(value);
-      console.log(value);
-      // this.isUpdatedContent = true;
+      this.isUpdatedContent = value.length;
       this.isInit = true;
     },
   },
