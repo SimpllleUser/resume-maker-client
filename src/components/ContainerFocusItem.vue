@@ -8,7 +8,12 @@
     tabindex="-1"
     >
       <div v-b-hover="hoverHandler" >
-        <h1>{{ name }}</h1>
+        <tag-editable v-if="showTitle"
+      v-model="inputValue"
+      @focus-input="setFocus"
+      tagType="h2"
+      placeholderValue="Some title"
+    />
         <div>
           <slot name="main" :actions="actions" :focus="focus" />
         </div>
@@ -17,16 +22,24 @@
 </template>
 
 <script>
-import form from '@/mixins/form';
+import input from '@/mixins/input';
+import TagEditable from './TagEditable.vue';
 
 export default {
   name: 'ContainerFocusItem',
-  mixins: [form],
+  mixins: [input],
+  components: {
+    TagEditable,
+  },
   props: {
     name: {
       type: String,
       require: true,
       default: '',
+    },
+    showTitle: {
+      type: String,
+      defaut: false,
     },
   },
   data() {
@@ -35,6 +48,9 @@ export default {
       focus: false,
       classOnFocus: 'border shadow py-4 my-4 mb-2 bg-white rounded',
       classOnHover: 'border border-secondary bg-white rounded',
+      inputType: 'title',
+      defaultInputValueInForm: '',
+      inputValue: null,
     };
   },
   computed: {
