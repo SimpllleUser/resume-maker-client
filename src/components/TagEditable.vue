@@ -61,10 +61,6 @@ export default {
       immediate: true,
       handler: 'initPlaceholder',
     },
-    // isUpdatedContent: {
-    //   immediate: true,
-    //   handler: 'initPlaceholder',
-    // },
   },
   methods: {
     focusHandler() {
@@ -83,9 +79,7 @@ export default {
       const value = e.target.innerText;
       this.setContent(value);
       this.isUpdatedContent = Boolean(value?.length);
-      console.log(!this.isUpdatedContent && this.placeholderIsActive);
       if (!this.isUpdatedContent && this.placeholderIsActive) this.initPlaceholder();
-      // console.log(value, this.placeholderIsActive);
       this.$emit('input', value);
     },
     initPlaceholder() {
@@ -94,7 +88,6 @@ export default {
       this.setContent(this.placeholderValue);
     },
     initValue(value) {
-      // this.placeholderIsActive = !value?.length;
       this.initPlaceholder();
       if (this.isInit) return;
       this.setContent(value);
