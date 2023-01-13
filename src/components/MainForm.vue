@@ -94,19 +94,15 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex';
 import formMixin from '@/mixins/form';
-import ContactStaticItem from '@/components/StaticItem/ContactStaticItem.vue';
 import TitleContainer from '@/components/TitleContainer.vue';
 import types from '@/store/modules/form/types';
 import TextPlaceholder from '@/components/TextPlaceholder.vue';
 import draggable from 'vuedraggable';
+import MainInfoInputForm from './InputForm/MainInfoInputForm.vue';
 import ContactInput from './ContactInput.vue';
-import SkillInput from './SkillInput.vue';
-import ExpreienceInput from './ExpreienceInput.vue';
-import EducationInput from './EducationInput.vue';
 import PhotoInput from './PhotoInput.vue';
 import ContainerFocusItem from './ContainerFocusItem.vue';
 import TagEditable from './TagEditable.vue';
-import MainInfoInputForm from './InputForm/MainInfoInputForm.vue';
 
 export default {
   name: 'MainForm',
@@ -115,14 +111,10 @@ export default {
     draggable,
     MainInfoInputForm,
     ContactInput,
-    SkillInput,
-    ExpreienceInput,
-    EducationInput,
     PhotoInput,
     ContainerFocusItem,
     TitleContainer,
     TextPlaceholder,
-    ContactStaticItem,
   },
   mixins: [formMixin],
   data() {
