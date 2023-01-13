@@ -61,10 +61,10 @@ export default {
       immediate: true,
       handler: 'initPlaceholder',
     },
-    isUpdatedContent: {
-      immediate: true,
-      handler: 'initPlaceholder',
-    },
+    // isUpdatedContent: {
+    //   immediate: true,
+    //   handler: 'initPlaceholder',
+    // },
   },
   methods: {
     focusHandler() {
@@ -83,19 +83,23 @@ export default {
       const value = e.target.innerText;
       this.setContent(value);
       this.isUpdatedContent = Boolean(value?.length);
-      // eslint-disable-next-line no-unused-expressions
-      this.isUpdatedContent ? this.$emit('input', value) : this.initPlaceholder();
+      console.log(!this.isUpdatedContent && this.placeholderIsActive);
+      if (!this.isUpdatedContent && this.placeholderIsActive) this.initPlaceholder();
+      // console.log(value, this.placeholderIsActive);
+      this.$emit('input', value);
     },
     initPlaceholder() {
-      if (this.content.length) return;
-      this.placeholderIsActive = true;
+      this.placeholderIsActive = !this.value?.length;
+      if (!this.placeholderIsActive) return;
       this.setContent(this.placeholderValue);
     },
     initValue(value) {
-      this.placeholderIsActive = !value?.length;
+      // this.placeholderIsActive = !value?.length;
+      this.initPlaceholder();
       if (this.isInit) return;
       this.setContent(value);
-      this.isUpdatedContent = true;
+      console.log(value);
+      // this.isUpdatedContent = true;
       this.isInit = true;
     },
   },
