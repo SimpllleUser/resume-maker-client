@@ -7,9 +7,6 @@
       <li>Вернуть отображение оглавлений</li>
       <li>Добавить возможность множественных созданий резюме</li>
     </ul>
-    <!-- <div>
-      {{ formData }}
-    </div> -->
     <div class="d-flex justify-content-center">
       <div>
         <b-button @click="resetState()">Reset</b-button>
@@ -29,23 +26,11 @@
             >
               <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
                 <div class="col">
-                  <div
-                    class="h1 text-center"
-                    :class="`full-name-color-${currentColor.class} font-${currentFont.value}`"
-                  >
-                  <tag-editable
-                  v-model="fullName"
-                  @change="updateInputValue"
+                  <main-info-input-form
+                  id="main-info"
+                  :show-navigation="focus"
                   @focus-input="actions['main-info'].focus"
-                   tagType="h1"
-                   placeholderValue="Your full name" />
-                  <tag-editable
-                  v-model="position"
-                  @change="updateInputValue"
-                  @focus-input="actions['main-info'].focus"
-                   tagType="h4"
-                   placeholderValue="Your position" />
-                </div>
+                  />
                 </div>
                 <div>
                   <ContactInput
@@ -121,10 +106,14 @@ import EducationInput from './EducationInput.vue';
 import PhotoInput from './PhotoInput.vue';
 import ContainerFocusItem from './ContainerFocusItem.vue';
 import TagEditable from './TagEditable.vue';
+import MainInfoInputForm from './InputForm/MainInfoInputForm.vue';
 
 export default {
   name: 'MainForm',
   components: {
+    TagEditable,
+    draggable,
+    MainInfoInputForm,
     ContactInput,
     SkillInput,
     ExpreienceInput,
@@ -134,8 +123,6 @@ export default {
     TitleContainer,
     TextPlaceholder,
     ContactStaticItem,
-    TagEditable,
-    draggable,
   },
   mixins: [formMixin],
   data() {
