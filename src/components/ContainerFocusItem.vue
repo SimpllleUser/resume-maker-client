@@ -8,12 +8,15 @@
     tabindex="-1"
     >
       <div v-b-hover="hoverHandler" >
-        <tag-editable v-if="showTitle"
+   <div :class="`full-name-color-${currentColor.class} font-${currentFont.value}`">
+    <tag-editable v-if="showTitle"
       v-model="inputValue"
       @focus-input="setFocus"
       tagType="h2"
-      placeholderValue="Some title"
+      :placeholderValue="title"
+      :disable-placeholder-style="true"
     />
+   </div>
         <div>
           <slot name="main" :actions="actions" :focus="focus" />
         </div>
@@ -22,6 +25,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import input from '@/mixins/input';
 import TagEditable from './TagEditable.vue';
 
@@ -41,6 +46,10 @@ export default {
       type: String,
       defaut: false,
     },
+    title: {
+      type: String,
+      defaut: '',
+    },
   },
   data() {
     return {
@@ -54,6 +63,7 @@ export default {
     };
   },
   computed: {
+    ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont']),
     actions() {
       return {
         [`${this.name}`]: {

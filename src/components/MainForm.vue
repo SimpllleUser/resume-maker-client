@@ -61,7 +61,7 @@
             :key="`input-${inputKey}`"
             style="position: relative; margin: 32px 0px"
           >
-            <ContainerFocusItem :name="input.id">
+            <ContainerFocusItem :name="input.id" :title="input.name" :show-title="true" >
               <template #main="{ actions, focus }">
                 <div>
                   <component

@@ -32,6 +32,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    disablePlaceholderStyle: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -43,7 +47,7 @@ export default {
   },
   computed: {
     contentStyle() {
-      return this.placeholderIsActive ? 'color: gray;' : '';
+      return this.placeholderIsActive && !this.disablePlaceholderStyle ? 'color: gray;' : '';
     },
     whiteSpaceStyle() {
       return this.allowWhiteSpace ? 'white-space: pre' : '';
