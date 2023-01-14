@@ -1,14 +1,6 @@
 <template>
   <div>
     <ul>
-      <li><div>
-        <h3>Добавить вызов focus по индексу елемента которій перетащили</h3>
-        <p>
-          В комопнент передавать index или другие данные. <br>
-          Тригерить на изминение положения, и после  изминения положения вызывыать фокус <br>
-          (Избежать конфликта из сбрасіванием фокуса)
-        </p>
-      </div></li>
       <li>Добавить небольшой OVERLAY на невіделенные обьекты</li>
       <li>Поправить фокус после D&D</li>
       <li>Подключение стилей без инета</li>
@@ -62,7 +54,7 @@
           </template>
         </ContainerFocusItem>
       </div>
-      <draggable v-model="mainFormInputs" @end="log">
+      <draggable v-model="mainFormInputs" @end="setActiveContainer">
         <transition-group>
           <div
             v-for="(input, inputKey) in mainFormInputs"
@@ -70,14 +62,20 @@
             style="position: relative; margin: 32px 0px"
           >
           {{ input.id }}
-            <ContainerFocusItem :name="input.id" :title="input.name" :show-title="true" >
+            <ContainerFocusItem
+            :name="input.id"
+            :title="input.name"
+            :show-title="true"
+            :activeIndex="activeIndex"
+            :index="inputKey"
+            >
               <template #main="{ actions, focus }">
                 <div>
                   <component
                     :id="input.id"
                     :value="getValue(input.id)"
-                    v-bind:is="input.component"
                     :show-navigation="focus"
+                    v-bind:is="input.component"
                     @focus-input="actions[`${input.id}`].focus()"
                   />
                   <b-button
@@ -137,6 +135,7 @@ export default {
       properties: ['fullName', 'position', 'about'],
       mainFormInputs: null,
       showPhotoInput: false,
+      activeIndex: NaN,
       //   includeFotns: `
       //   <link rel="preconnect" href="https://fonts.googleapis.com">
       //   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -178,9 +177,9 @@ export default {
       await this.toggleRequireFocus();
       await this.$htmlToPaper('resume-form');
     },
-    log(data) {
-      console.log(data);
+    setActiveContainer({ newIndex }) {
       this.toggleRequireFocus();
+      this.activeIndex = newIndex;
     },
   },
   mounted() {

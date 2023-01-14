@@ -62,6 +62,14 @@ export default {
       type: String,
       defaut: '',
     },
+    activeIndex: {
+      type: Number,
+      defaut: NaN,
+    },
+    index: {
+      type: Number,
+      defaut: NaN,
+    },
   },
   data() {
     return {
@@ -87,10 +95,18 @@ export default {
     containerClass() {
       return `border-style ${this.focus && this.classOnFocus} ${this.hover && this.classOnHover}`;
     },
+    isDraggable() {
+      return this.index === this.activeIndex;
+    },
   },
   watch: {
     requireFocus() {
       this.setUnfocus();
+    },
+    isDraggable(isDraggable) {
+      console.log(isDraggable);
+      if (!isDraggable) return;
+      this.setFocus();
     },
   },
   methods: {
