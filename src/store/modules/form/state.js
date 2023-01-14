@@ -60,4 +60,5 @@ export default {
   currentColor,
   currentFont,
   requireFocus: false,
+  inputFocusExist: false,
 };

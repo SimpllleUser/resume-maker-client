@@ -65,4 +65,7 @@ export default {
   [types.TOGGLE_REQUIRE_FOCUS](state) {
     state.requireFocus = !state.requireFocus;
   },
+  [types.SET_EXIST_FOCUS](state, inputFocusExist) {
+    state.inputFocusExist = inputFocusExist;
+  },
 };

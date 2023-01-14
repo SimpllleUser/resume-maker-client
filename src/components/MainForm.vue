@@ -2,7 +2,6 @@
   <div>
     <ul>
       <li>Добавить небольшой OVERLAY на невіделенные обьекты</li>
-      <li>Поправить фокус после D&D</li>
       <li>Подключение стилей без инета</li>
       <li>Сделать единый стиль для редактирования и отображения данных</li>
       <li>Добавить возможность множественных созданий резюме</li>
@@ -15,7 +14,10 @@
         <b-button @click="print"> Print </b-button>
       </div>
     </div>
-    <div class="main-form" id="resume-form" :class="`font-${currentFont.value}`">
+    <div
+    class="main-form"
+     id="resume-form"
+      :class="` ${inputFocusExist && 'exist-focus'} font-${currentFont.value}`">
       <span v-html="`<style>${styleFormPrint}</style>`" />
       <span v-html="includeFotns"></span>
       <div>
@@ -61,7 +63,6 @@
             :key="`input-${inputKey}`"
             style="position: relative; margin: 32px 0px"
           >
-          {{ input.id }}
             <ContainerFocusItem
             :name="input.id"
             :title="input.name"
@@ -148,7 +149,9 @@ export default {
     };
   },
   computed: {
-    ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont', 'requireFocus']),
+    ...mapState('form', [
+      'inputs',
+      'formData', 'currentColor', 'currentFont', 'requireFocus', 'inputFocusExist']),
     ...mapGetters('form', ['getValue', 'getContainerTitleValue', 'styleFormPrint', 'includeFotns']),
   },
   watch: {
@@ -192,5 +195,13 @@ export default {
 .empty-photo {
   top: 0px;
   right: 100px;
+}
+.main-form {
+  padding: 10px;
+  background-color: white;
+}
+.main-form.exist-focus {
+  background-color: rgba(128, 128, 128, 0.332);
+  box-shadow: 0 0 3px rgb(0 0 0 / 10%);
 }
 </style>

@@ -37,9 +37,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapMutations, mapState } from 'vuex';
 
 import input from '@/mixins/input';
+import types from '@/store/modules/form/types';
 import TagEditable from './TagEditable.vue';
 
 export default {
@@ -75,7 +76,7 @@ export default {
     return {
       hover: false,
       focus: false,
-      classOnFocus: 'border shadow py-4 my-4 mb-2 bg-white rounded',
+      classOnFocus: 'border py-4 my-4 mb-2 bg-white rounded is-focus',
       classOnHover: 'border border-secondary bg-white rounded',
       inputType: 'title',
       defaultInputValueInForm: '',
@@ -104,19 +105,24 @@ export default {
       this.setUnfocus();
     },
     isDraggable(isDraggable) {
-      console.log(isDraggable);
       if (!isDraggable) return;
-      this.setFocus();
+      setTimeout(() => this.setFocus(), 100);
     },
   },
   methods: {
+    ...mapMutations('form', { setExistFocus: types.SET_EXIST_FOCUS }),
     getAction() {
       return {
         [`${this.name}-on-focus`]: this.setFocus,
         [`${this.name}-on-blur`]: this.setUnfocus,
       };
     },
+    existFocusHandler(state) {
+      if (!this.focus && state) this.setExistFocus(state);
+      if (this.focus !== state) this.setExistFocus(state);
+    },
     setFocusState(state) {
+      this.existFocusHandler(state);
       this.focus = state;
     },
     setUnfocus() {
@@ -135,6 +141,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// .focus-container {
+//   background-color: red;
+// }
 .border {
   transition: border-color 0.3s ease;
 }
@@ -157,14 +166,13 @@ export default {
     position: absolute;
     width: 100%;
     height: 4px;
-    background-color: red;
     top: 17px;
     z-index: -1;
     left: 0px;
   }
 }
 .title-wrapper {
-  z-index: 999;
+  z-index: 3;
   background-color: white !important;
   width: fit-content !important;
   padding: 0px 25px !important;
@@ -173,5 +181,11 @@ export default {
   width: auto;
   display: flex;
   justify-content: center;
+}
+
+.is-focus {
+  -webkit-box-shadow: 0px 0px 23px 32px rgba(0,0,0,0.19);
+-moz-box-shadow: 0px 0px 23px 32px rgba(0,0,0,0.19);
+box-shadow: 0px 0px 23px 32px rgba(0,0,0,0.19);
 }
 </style>
