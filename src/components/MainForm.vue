@@ -1,7 +1,14 @@
 <template>
   <div>
     <ul>
-      <li>Добавить вызов focus по индексу елемента которій перетащили</li>
+      <li><div>
+        <h3>Добавить вызов focus по индексу елемента которій перетащили</h3>
+        <p>
+          В комопнент передавать index или другие данные. <br>
+          Тригерить на изминение положения, и после  изминения положения вызывыать фокус <br>
+          (Избежать конфликта из сбрасіванием фокуса)
+        </p>
+      </div></li>
       <li>Добавить небольшой OVERLAY на невіделенные обьекты</li>
       <li>Поправить фокус после D&D</li>
       <li>Подключение стилей без инета</li>
@@ -55,7 +62,7 @@
           </template>
         </ContainerFocusItem>
       </div>
-      <draggable v-model="mainFormInputs" @change="log">
+      <draggable v-model="mainFormInputs" @end="log">
         <transition-group>
           <div
             v-for="(input, inputKey) in mainFormInputs"
@@ -171,8 +178,8 @@ export default {
       await this.toggleRequireFocus();
       await this.$htmlToPaper('resume-form');
     },
-    log({ moved }) {
-      console.log(moved);
+    log(data) {
+      console.log(data);
       this.toggleRequireFocus();
     },
   },
