@@ -1,5 +1,6 @@
 <template>
   <div class="expereiance-row">
+    <span v-html="`<style>${styleFormPrint}</style>`" />
     <div class="pb-2" v-show="showNavigation">
       <b-button size="sm" variant="dark" @click="addExperience"
         >
@@ -17,6 +18,7 @@
             v-model="inputValue[key].companyName"
             placeholder-value="Complany name"
             @focus-input="focusHandler"
+            style="text-align: center;"
           />
         </div>
         <div class="company-position">
@@ -24,6 +26,7 @@
             v-model="inputValue[key].position"
             placeholder-value="Position name"
             @focus-input="focusHandler"
+            style="text-align: center;"
           />
         </div>
         <div class="company-date-work d-flex align-items-center">
@@ -88,6 +91,12 @@ export default {
       inputValue: null,
       inputType: 'expreriance',
       defaultInputValueInForm: [],
+      styleFormPrint: `
+      .company-template {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        position: relative;
+      }`,
     };
   },
   methods: {
@@ -109,10 +118,10 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   position: relative;
-  .btn-delete {
+}
+.btn-delete {
     position: absolute;
     right: 0px;
     top: 0px;
   }
-}
 </style>

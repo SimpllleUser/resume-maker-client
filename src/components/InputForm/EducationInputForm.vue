@@ -1,5 +1,6 @@
 <template>
     <div class="expereiance-row">
+      <span v-html="`<style>${styleFormPrint}</style>`" />
         <div class="pb-2" v-show="showNavigation">
           <b-button size="sm" variant="dark" @click="addExperience"
             >
@@ -16,7 +17,9 @@
               <tag-editable
               v-model="inputValue[key].educationName"
               placeholder-value="Name"
-              @focus-input="focusHandler"/>
+              @focus-input="focusHandler"
+              style="text-align: center;"
+              />
             </div>
             <div class="education-date-work d-flex align-items-center">
               <b-form-datepicker
@@ -77,6 +80,12 @@ export default {
       inputValue: null,
       inputType: 'educations',
       defaultInputValueInForm: [],
+      styleFormPrint: `
+      .education-template {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        position: relative;
+      }`,
     };
   },
   methods: {

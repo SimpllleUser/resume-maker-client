@@ -1,42 +1,42 @@
 <template>
-<div :class="{'focus-style': focus}">
-  <div
-  class="focus-container"
-  :class="containerClass"
-  @focus="setFocus"
-  v-click-outside="setUnfocus"
-  style="margin: 16px 0px"
-  tabindex="-1"
->
-  <div v-b-hover="hoverHandler">
+  <div :class="{ 'focus-style': focus }">
+    <span v-html="`<style>${styleFormPrint}</style>`" />
     <div
-      v-if="showTitle"
-      style="position: relative;"
-      :class="`
+      class="focus-container"
+      :class="containerClass"
+      @focus="setFocus"
+      v-click-outside="setUnfocus"
+      style="margin: 16px 0px"
+      tabindex="-1"
+    >
+      <div v-b-hover="hoverHandler">
+        <div
+          v-if="showTitle"
+          style="position: relative"
+          :class="`
       full-name-color-${currentColor.class}
       font-${currentFont.value}`"
-    >
-      <div class="middle-line" :class="`bg_color-${currentColor.class}`"></div>
-      <div class="title-wrapper-container">
-        <div class="title-wrapper"
-        :style="dynamicTitleStyle">
-          <tag-editable
-            v-model="inputValue"
-            @focus-input="setFocus"
-            tagType="h2"
-            :placeholderValue="title"
-            :disable-placeholder-style="true"
-            style="min-width: 100px;font-weight: 700;text-align: center;"
-          />
+        >
+          <div class="middle-line" :class="`bg_color-${currentColor.class}`"></div>
+          <div class="title-wrapper-container">
+            <div class="title-wrapper" :style="dynamicTitleStyle">
+              <tag-editable
+                v-model="inputValue"
+                @focus-input="setFocus"
+                tagType="h2"
+                :placeholderValue="title"
+                :disable-placeholder-style="true"
+                style="min-width: 100px; font-weight: 700; text-align: center"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <slot name="main" :actions="actions" :focus="focus" />
         </div>
       </div>
     </div>
-    <div>
-      <slot name="main" :actions="actions" :focus="focus" />
-    </div>
   </div>
-</div>
-</div>
 </template>
 
 <script>
@@ -84,13 +84,41 @@ export default {
       inputType: 'title',
       defaultInputValueInForm: '',
       inputValue: null,
+      styleFormPrint: `
+      .middle-line {
+        z-index: 3;
+        position: relative;
+      }
+      .middle-line:after {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    top: 17px;
+    z-index: -1;
+    left: 0px;
+  }
+  .title-wrapper {
+  z-index: 3;
+  background-color: white;
+  width: fit-content !important;
+  padding: 0px 25px !important;
+}
+.title-wrapper-container {
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+.focus-style {
+  position: relative;
+  z-index: 9;
+}
+}`,
     };
   },
   computed: {
     ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont', 'requireFocus']),
-    ...mapGetters('form', [
-      'existFocusOnInput',
-    ]),
+    ...mapGetters('form', ['existFocusOnInput']),
     actions() {
       return {
         [`${this.name}`]: {
@@ -153,7 +181,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- .focus-container {
+.focus-container {
   border: 1px solid rgba(255, 0, 0, 0);
 }
 .border {
@@ -166,33 +194,33 @@ export default {
   border-color: var(--bs-secondary);
 }
 
-.middle-line {
-  z-index: 3;
-    position: relative;
-    // background-color: red;
-  &:after {
-    content: " ";
-    position: absolute;
-    width: 100%;
-    height: 4px;
-    top: 17px;
-    z-index: -1;
-    left: 0px;
-  }
-}
-.title-wrapper {
-  z-index: 3;
-  background-color: white;
-  width: fit-content !important;
-  padding: 0px 25px !important;
-}
-.title-wrapper-container {
-  width: auto;
-  display: flex;
-  justify-content: center;
-}
-.focus-style {
-  position: relative;
-  z-index: 9;
-}
+// .middle-line {
+//   z-index: 3;
+//   position: relative;
+//   // background-color: red;
+//   &:after {
+//     content: " ";
+//     position: absolute;
+//     width: 100%;
+//     height: 4px;
+//     top: 17px;
+//     z-index: -1;
+//     left: 0px;
+//   }
+// }
+// .title-wrapper {
+//   z-index: 3;
+//   background-color: white;
+//   width: fit-content !important;
+//   padding: 0px 25px !important;
+// }
+// .title-wrapper-container {
+//   width: auto;
+//   display: flex;
+//   justify-content: center;
+// }
+// .focus-style {
+//   position: relative;
+//   z-index: 9;
+// }
 </style>

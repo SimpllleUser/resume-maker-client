@@ -2,7 +2,7 @@
   <div class="conatct-input">
     <b-row>
       <b-col cols="4" v-for="(contact, index) in inputValue" :key="index">
-        <div class="d-flex align-items-center justify-content-center">
+        <div class="d-flex align-items-center">
           <div class="contatc-icon">
             <b-icon
               :icon="inputValue[index].icon"
@@ -19,7 +19,7 @@
               />
             </b-tooltip>
           </div>
-          <div class="contatc-input">
+          <div class="contatc-input" style="margin-left: 10px;">
             <tag-editable
               tagType="div"
               v-model="inputValue[index].value"

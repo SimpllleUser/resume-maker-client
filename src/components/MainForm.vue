@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-form-page p-2 border shadow">
     <ul>
       <li>Сделать единый стиль для редактирования и отображения данных</li>
       <li>Добавить данные по умолчанию как value и placeholder</li>
@@ -161,6 +161,11 @@ export default {
       'includeFotns',
       'existFocusOnInput',
     ]),
+    bodyStyle() {
+      return !this.existFocusOnInput && ` body{
+      background-color: white;
+    }`;
+    },
   },
   watch: {
     inputs: {
@@ -211,5 +216,8 @@ export default {
 .main-form.exist-focus {
   background-color: rgba(128, 128, 128, 0.332);
   box-shadow: 0 0 3px rgb(0 0 0 / 10%);
+}
+.main-form-page {
+  background-color: rgba(128, 128, 128, 0.192);
 }
 </style>
