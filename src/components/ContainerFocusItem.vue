@@ -1,43 +1,46 @@
 <template>
+<div :class="{'focus-style': focus}">
   <div
-    class="focus-container"
-    :class="containerClass"
-    @focus="setFocus"
-    v-click-outside="setUnfocus"
-    style="margin: 16px 0px"
-    tabindex="-1"
-  >
-    <div v-b-hover="hoverHandler">
-      <div
-        v-if="showTitle"
-        style="position: relative"
-        :class="`
-        full-name-color-${currentColor.class}
-        font-${currentFont.value}`"
-      >
-        <div class="middle-line" :class="`bg_color-${currentColor.class}`"></div>
-        <div class="title-wrapper-container">
-          <div class="title-wrapper">
-            <tag-editable
-              v-model="inputValue"
-              @focus-input="setFocus"
-              tagType="h2"
-              :placeholderValue="title"
-              :disable-placeholder-style="true"
-              style="min-width: 100px;"
-            />
-          </div>
+  class="focus-container"
+  :class="containerClass"
+  @focus="setFocus"
+  v-click-outside="setUnfocus"
+  style="margin: 16px 0px"
+  tabindex="-1"
+>
+  <div v-b-hover="hoverHandler">
+    <div
+      v-if="showTitle"
+      style="position: relative;"
+      :class="`
+      full-name-color-${currentColor.class}
+      font-${currentFont.value}`"
+    >
+      <div class="middle-line" :class="`bg_color-${currentColor.class}`"></div>
+      <div class="title-wrapper-container">
+        <div class="title-wrapper"
+        :style="dynamicTitleStyle">
+          <tag-editable
+            v-model="inputValue"
+            @focus-input="setFocus"
+            tagType="h2"
+            :placeholderValue="title"
+            :disable-placeholder-style="true"
+            style="min-width: 100px;"
+          />
         </div>
       </div>
-      <div>
-        <slot name="main" :actions="actions" :focus="focus" />
-      </div>
+    </div>
+    <div>
+      <slot name="main" :actions="actions" :focus="focus" />
     </div>
   </div>
+</div>
+</div>
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapMutations, mapState, mapGetters } from 'vuex';
 
 import input from '@/mixins/input';
 import types from '@/store/modules/form/types';
@@ -76,8 +79,8 @@ export default {
     return {
       hover: false,
       focus: false,
-      classOnFocus: 'border py-4 my-4 mb-2 bg-white rounded is-focus',
-      classOnHover: 'border border-secondary bg-white rounded',
+      classOnFocus: 'py-4 my-4 mb-2 bg-white rounded shadow-lg',
+      classOnHover: 'border border-primary rounded',
       inputType: 'title',
       defaultInputValueInForm: '',
       inputValue: null,
@@ -85,6 +88,9 @@ export default {
   },
   computed: {
     ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont', 'requireFocus']),
+    ...mapGetters('form', [
+      'existFocusOnInput',
+    ]),
     actions() {
       return {
         [`${this.name}`]: {
@@ -99,6 +105,10 @@ export default {
     isDraggable() {
       return this.index === this.activeIndex;
     },
+    dynamicTitleStyle() {
+      const canAddStyle = this.existFocusOnInput && !this.focus;
+      return canAddStyle && 'background-color: rgb(213 213 213)';
+    },
   },
   watch: {
     requireFocus() {
@@ -110,7 +120,10 @@ export default {
     },
   },
   methods: {
-    ...mapMutations('form', { setExistFocus: types.SET_EXIST_FOCUS }),
+    ...mapMutations('form', {
+      setExistFocus: types.SET_EXIST_FOCUS,
+      setContainerInputState: types.SET_CONTAINER_INPUT_BY_KEY,
+    }),
     getAction() {
       return {
         [`${this.name}-on-focus`]: this.setFocus,
@@ -118,8 +131,7 @@ export default {
       };
     },
     existFocusHandler(state) {
-      if (!this.focus && state) this.setExistFocus(state);
-      if (this.focus !== state) this.setExistFocus(state);
+      this.setContainerInputState({ key: this.name, value: state });
     },
     setFocusState(state) {
       this.existFocusHandler(state);
@@ -141,14 +153,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .focus-container {
-//   background-color: red;
-// }
+ .focus-container {
+  border: 1px solid rgba(255, 0, 0, 0);
+}
 .border {
   transition: border-color 0.3s ease;
-}
-.border-style {
-  border: 1px solid white;
 }
 .border-primary {
   border-color: var(--bs-primary);
@@ -158,7 +167,7 @@ export default {
 }
 
 .middle-line {
-  z-index: 1;
+  z-index: 3;
     position: relative;
     // background-color: red;
   &:after {
@@ -173,7 +182,7 @@ export default {
 }
 .title-wrapper {
   z-index: 3;
-  background-color: white !important;
+  background-color: white;
   width: fit-content !important;
   padding: 0px 25px !important;
 }
@@ -182,10 +191,8 @@ export default {
   display: flex;
   justify-content: center;
 }
-
-.is-focus {
-  -webkit-box-shadow: 0px 0px 23px 32px rgba(0,0,0,0.19);
--moz-box-shadow: 0px 0px 23px 32px rgba(0,0,0,0.19);
-box-shadow: 0px 0px 23px 32px rgba(0,0,0,0.19);
+.focus-style {
+  position: relative;
+  z-index: 9;
 }
 </style>

@@ -61,4 +61,5 @@ export default {
   currentFont,
   requireFocus: false,
   inputFocusExist: false,
+  focusContainer: {},
 };

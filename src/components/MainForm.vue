@@ -1,7 +1,6 @@
 <template>
   <div>
     <ul>
-      <li>Добавить небольшой OVERLAY на невіделенные обьекты</li>
       <li>Подключение стилей без инета</li>
       <li>Сделать единый стиль для редактирования и отображения данных</li>
       <li>Добавить возможность множественных созданий резюме</li>
@@ -17,7 +16,7 @@
     <div
     class="main-form"
      id="resume-form"
-      :class="` ${inputFocusExist && 'exist-focus'} font-${currentFont.value}`">
+      :class="` ${existFocusOnInput && 'exist-focus'} font-${currentFont.value}`">
       <span v-html="`<style>${styleFormPrint}</style>`" />
       <span v-html="includeFotns"></span>
       <div>
@@ -151,8 +150,16 @@ export default {
   computed: {
     ...mapState('form', [
       'inputs',
-      'formData', 'currentColor', 'currentFont', 'requireFocus', 'inputFocusExist']),
-    ...mapGetters('form', ['getValue', 'getContainerTitleValue', 'styleFormPrint', 'includeFotns']),
+      'formData',
+      'currentFont',
+    ]),
+    ...mapGetters('form', [
+      'getValue',
+      'getContainerTitleValue',
+      'styleFormPrint',
+      'includeFotns',
+      'existFocusOnInput',
+    ]),
   },
   watch: {
     inputs: {

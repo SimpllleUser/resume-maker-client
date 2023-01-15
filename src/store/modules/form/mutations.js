@@ -65,7 +65,7 @@ export default {
   [types.TOGGLE_REQUIRE_FOCUS](state) {
     state.requireFocus = !state.requireFocus;
   },
-  [types.SET_EXIST_FOCUS](state, inputFocusExist) {
-    state.inputFocusExist = inputFocusExist;
+  [types.SET_CONTAINER_INPUT_BY_KEY](state, { key, value }) {
+    state.focusContainer = { ...state.focusContainer, [key]: value };
   },
 };
