@@ -6,7 +6,7 @@
         allow-white-space
         v-model="inputValue"
         @focus-input="focusHandler"
-        placeholderValue="Some text about"
+        :placeholderValue="RESUME_PLACEHOLDER_TEXT.ABOUT"
       />
     </b-form-group>
   </div>

@@ -16,7 +16,7 @@
         <div class="company-name">
           <tag-editable
             v-model="inputValue[key].companyName"
-            placeholder-value="Complany name"
+            :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.NAME"
             @focus-input="focusHandler"
             style="text-align: center;"
           />
@@ -24,7 +24,7 @@
         <div class="company-position">
           <tag-editable
             v-model="inputValue[key].position"
-            placeholder-value="Position name"
+            :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.POSITION"
             @focus-input="focusHandler"
             style="text-align: center;"
           />
@@ -32,7 +32,7 @@
         <div class="company-date-work d-flex align-items-center">
           <b-form-datepicker
             v-model="inputValue[key].date.from"
-            placeholder="from"
+            :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.FROM"
             style="border: none !important"
             size="sm"
           />
@@ -42,7 +42,7 @@
             @hidden="() => (allow = false)"
             @shown="() => (allow = false)"
             style="border: none !important"
-            placeholder="to"
+            :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.TO"
             size="sm"
           />
         </div>
@@ -52,7 +52,7 @@
           style="text-align: left; padding: 20px; white-space: pre"
           v-model="inputValue[key].description"
           @focus-input="focusHandler"
-          placeholder-value="Description about your expereince"
+          :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DESCRIPTION"
         ></tag-editable>
         <b-button
           v-show="showNavigation"

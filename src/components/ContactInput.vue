@@ -24,7 +24,7 @@
               tagType="div"
               v-model="inputValue[index].value"
               @focus-input="focusHandler"
-              placeholderValue="Your contact"
+              :placeholderValue="RESUME_PLACEHOLDER_TEXT.CONTACT"
               style="min-width: 150px"
             />
           </div>

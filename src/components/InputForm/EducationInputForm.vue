@@ -16,7 +16,7 @@
             <div class="education-name">
               <tag-editable
               v-model="inputValue[key].educationName"
-              placeholder-value="Name"
+              :placeholder-value="RESUME_PLACEHOLDER_TEXT.EDUCATION.NAME"
               @focus-input="focusHandler"
               style="text-align: center;"
               />
@@ -24,13 +24,13 @@
             <div class="education-date-work d-flex align-items-center">
               <b-form-datepicker
               v-model="inputValue[key].date.from"
-              placeholder="from"
-                size="sm"
-                style="border: none !important;"
-                />
-                <b-form-datepicker
-                v-model="inputValue[key].date.to"
-                placeholder="to"
+              :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.FROM"
+              size="sm"
+              style="border: none !important;"
+              />
+              <b-form-datepicker
+              v-model="inputValue[key].date.to"
+              :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.TO"
                 size="sm"
                 style="border: none !important;"
               />
@@ -42,7 +42,7 @@
             allow-white-space
             v-model="inputValue[key].description"
             @focus-input="focusHandler"
-            placeholder-value="Description"
+            :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.DESCRIPTION"
              rows="4" />
             <b-button
             v-show="showNavigation"

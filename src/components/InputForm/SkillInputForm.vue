@@ -11,7 +11,7 @@
               v-model="inputValue[index]"
               allow-white-space
               tagType="div"
-              placeholderValue="Example skill"
+              :placeholderValue="RESUME_PLACEHOLDER_TEXT.SKILL"
               @focus-input="focusHandler"
             />
           </div>

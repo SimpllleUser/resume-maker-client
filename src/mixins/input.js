@@ -3,6 +3,8 @@ import ClickOutside from 'vue-click-outside';
 
 import types from '@/store/modules/form/types';
 
+import RESUME_PLACEHOLDER_TEXT from '@/constants';
+
 export default {
   props: {
     id: {
@@ -13,6 +15,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      RESUME_PLACEHOLDER_TEXT,
+    };
   },
   watch: {
     id: {

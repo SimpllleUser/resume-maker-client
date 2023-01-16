@@ -7,13 +7,13 @@
       v-model="inputValue.fullName"
       @focus-input="focusHandler"
       tagType="h1"
-      placeholderValue="Your full name"
+      :placeholderValue="RESUME_PLACEHOLDER_TEXT.MAIN_INPUT.FULL_NAME"
     />
     <tag-editable
       v-model="inputValue.position"
       @focus-input="focusHandler"
       tagType="h4"
-      placeholderValue="Your position"
+      :placeholderValue="RESUME_PLACEHOLDER_TEXT.MAIN_INPUT.POSITION"
     />
   </div>
 </template>
