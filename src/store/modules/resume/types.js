@@ -1,0 +1,4 @@
+export default {
+  ADD_RESUME: 'RESUME/ADD',
+  DELETE_RESUME: 'RESUME/DELETE',
+};
