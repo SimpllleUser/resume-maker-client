@@ -20,7 +20,12 @@
               class="list--item
               border border-dark d-flex align-items-center justify-content-center m-3"
             >
-              <b-button @click="addResume" size="lg" variant="outline-dark" style="border: none">
+              <b-button
+                @click="addResumeHandle"
+                size="lg"
+                variant="outline-dark"
+                style="border: none"
+              >
                 <b-icon icon="plus-lg"></b-icon>
               </b-button>
             </div>
@@ -57,6 +62,10 @@ export default {
       addResume: types.ADD_RESUME,
       deleteResume: types.DELETE_RESUME,
     }),
+    addResumeHandle() {
+      this.addResume();
+      this.$router.push('resume');
+    },
   },
 };
 </script>

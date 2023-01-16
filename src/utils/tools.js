@@ -43,7 +43,17 @@ const getDefaultResume = () => ({
 });
 
 const setLocalStorageObject = (key, value) => localStorage.setItem(key, JSON.stringify(value));
-const getLocalStorageObject = (key) => JSON.parse(localStorage.getItem(key) || '{}');
+const getLocalStorageObject = (
+  key,
+  defaultValue,
+) => {
+  try {
+    return JSON?.parse(localStorage.getItem(key));
+  } catch (error) {
+    console.error(JSON.stringify(error, null, 4));
+    return defaultValue || {};
+  }
+};
 const initLocalStorageItem = (key, defaultValue) => localStorage[key]?.lenght || localStorage.setItem(key, defaultValue || '');
 
 export default {
