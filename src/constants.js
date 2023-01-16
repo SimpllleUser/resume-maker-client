@@ -1,6 +1,6 @@
 const date = new Date().getFullYear();
 
-const RESUME_PLACEHOLDER_TEXT = {
+export const RESUME_PLACEHOLDER_TEXT = {
   ABOUT: `A few words about tasks
    you enjoy doing the most and people you would love to work with.`,
   EDUCATION: {
@@ -24,5 +24,4 @@ const RESUME_PLACEHOLDER_TEXT = {
   },
   CONTACT: 'Your contact',
 };
-
-export default RESUME_PLACEHOLDER_TEXT;
+export const LOCAL_STORAGE_KEYS_RESUMES = 'ALL/RESUMES';
