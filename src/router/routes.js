@@ -4,7 +4,8 @@ const routes = [
     name: 'resumes',
     component: () => import('../views/ResumesView.vue'),
   }, {
-    path: '/resume',
+    path: '/resume/:id',
+    props: true,
     name: 'home',
     component: () => import('../views/HomeView.vue'),
   },

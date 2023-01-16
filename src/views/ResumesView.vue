@@ -21,7 +21,7 @@
               border border-dark d-flex align-items-center justify-content-center m-3"
             >
               <b-button
-                @click="addResumeHandle"
+                @click="addResume"
                 size="lg"
                 variant="outline-dark"
                 style="border: none"
@@ -37,7 +37,7 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapState } from 'vuex';
+import { mapGetters, mapMutations, mapState } from 'vuex';
 
 import types from '@/store/modules/resume/types';
 
@@ -50,12 +50,17 @@ export default {
     return {};
   },
   computed: {
-    ...mapState('resume', ['resumeList']),
-    // resumeListWrapper() {
-    //   return `padding-left: ${5 * 10}px;`;
-    // },
+    ...mapState('resume', ['resumeList', 'createdResumeId']),
+    ...mapGetters('resume', ['createdResumeId']),
   },
-  watch: {},
+  watch: {
+    createdResumeId: {
+      deep: true,
+      handler() {
+        this.$router.push(`resume/${this.createdResumeId}`);
+      },
+    },
+  },
   mounted() {},
   methods: {
     ...mapMutations('resume', {
@@ -64,7 +69,6 @@ export default {
     }),
     addResumeHandle() {
       this.addResume();
-      this.$router.push('resume');
     },
   },
 };

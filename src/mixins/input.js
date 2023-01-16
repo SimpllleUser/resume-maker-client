@@ -3,7 +3,7 @@ import ClickOutside from 'vue-click-outside';
 
 import types from '@/store/modules/form/types';
 
-import RESUME_PLACEHOLDER_TEXT from '@/constants';
+import constnts from '@/constants';
 
 export default {
   props: {
@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      RESUME_PLACEHOLDER_TEXT,
+      RESUME_PLACEHOLDER_TEXT: constnts.RESUME_PLACEHOLDER_TEXT,
     };
   },
   watch: {
@@ -60,6 +60,9 @@ export default {
       this.inputValue = this.inputValueFromStore || this.defaultInputValueInForm;
     },
   },
+  // mounted() {
+  //   console.log(this.RESUME_PLACEHOLDER_TEXT);
+  // },
   directives: {
     ClickOutside,
   },

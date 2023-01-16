@@ -26,7 +26,7 @@
             <div
             class="row justify-content-center row-cols-2 position-relative"
             >
-              <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
+              <div class="col-12">
                 <div class="col">
                   <main-info-input-form
                   id="main-info"
@@ -124,6 +124,12 @@ export default {
     TextPlaceholder,
   },
   mixins: [formMixin],
+  props: {
+    id: {
+      type: String,
+      require: true,
+    },
+  },
   data() {
     return {
       txt: '',
@@ -151,7 +157,7 @@ export default {
   computed: {
     ...mapState('form', [
       'inputs',
-      'formData',
+      // 'formData',
       'currentFont',
     ]),
     ...mapGetters('form', [
@@ -161,17 +167,25 @@ export default {
       'includeFotns',
       'existFocusOnInput',
     ]),
+    ...mapGetters('resume', [
+      'currentResume',
+      'currentResumeInputs',
+    ]),
     bodyStyle() {
       return !this.existFocusOnInput && ` body{
       background-color: white;
     }`;
     },
+    formData() {
+      return this.currentResume(this.id);
+    },
   },
   watch: {
-    inputs: {
+    id: {
       immediate: true,
-      handler() {
-        this.mainFormInputs = this.inputs;
+      handler(id) {
+        this.mainFormInputs = this.currentResumeInputs(id);
+        // this.setFormData(this.currentResume(id));
       },
     },
     mainFormInputs() {
