@@ -18,7 +18,8 @@
     class="main-form"
      id="resume-form"
       :class="` ${existFocusOnInput && 'exist-focus'} font-${currentFont.value}`">
-      <span v-html="`<style>${styleFormPrint}</style>`" />
+      <div style="margin: 0 auto; max-width: 990px;">
+      <span v-html="`<style>${styleFormPrint}margin: 0 auto; max-width: 990px;</style>`" />
       <span v-html="includeFotns"></span>
       <div>
         <ContainerFocusItem name="main-info" :show-title="false">
@@ -65,6 +66,7 @@
           >
             <ContainerFocusItem
             :name="input.id"
+            :id="input.id"
             :title="input.name"
             :show-title="true"
             :activeIndex="activeIndex"
@@ -96,6 +98,7 @@
       </draggable>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -103,6 +106,7 @@ import { mapGetters, mapState, mapMutations } from 'vuex';
 import formMixin from '@/mixins/form';
 import TitleContainer from '@/components/TitleContainer.vue';
 import types from '@/store/modules/form/types';
+import resumeTypes from '@/store/modules/resume/types';
 import TextPlaceholder from '@/components/TextPlaceholder.vue';
 import draggable from 'vuedraggable';
 import MainInfoInputForm from './InputForm/MainInfoInputForm.vue';
@@ -157,7 +161,8 @@ export default {
   computed: {
     ...mapState('form', [
       'inputs',
-      // 'formData',
+      'formData',
+      'formDataTest',
       'currentFont',
     ]),
     ...mapGetters('form', [
@@ -185,20 +190,26 @@ export default {
       immediate: true,
       handler(id) {
         this.mainFormInputs = this.currentResumeInputs(id);
-        // this.setFormData(this.currentResume(id));
+        this.initState(this.currentResume(this.id));
       },
     },
     mainFormInputs() {
       this.updateInputs(this.mainFormInputs);
     },
+    formDataTest() {
+      this.updateResume(this.formDataTest);
+    },
   },
   methods: {
     ...mapMutations('form', {
+      initState: types.INIT_STATE,
       updateInputs: types.SET_INPUT,
       deleteInputForm: types.DELETE_INPUT_FROM_AND_DATA,
-      initState: types.INIT_STATE,
       resetState: types.RESET_STATE,
       toggleRequireFocus: types.TOGGLE_REQUIRE_FOCUS,
+    }),
+    ...mapMutations('resume', {
+      updateResume: resumeTypes.UPDATE_RESUME,
     }),
     showPhotoInputHandle(canShow) {
       this.showPhotoInput = canShow;
@@ -211,9 +222,6 @@ export default {
       this.toggleRequireFocus();
       this.activeIndex = newIndex;
     },
-  },
-  mounted() {
-    this.initState();
   },
 };
 </script>

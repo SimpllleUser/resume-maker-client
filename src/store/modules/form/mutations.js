@@ -30,25 +30,26 @@ export default {
     state.formData = removeKeyFromObject(state.formData, currenDoemDataKey);
     utils.statuePropertyToLocalStorage('formData', state.formData);
   },
-  [types.INIT_STATE](state) {
-    const {
-      formTitles,
-      formData,
-      inputs,
-    } = utils.getInitState();
-    state.formData = formData;
-    state.inputs = inputs;
-    state.formTitles = formTitles;
+  [types.INIT_STATE](state, formData) {
+    // const {
+    //   formTitles,
+    //   formData,
+    //   inputs,
+    // } = utils.getInitState();
+    state.formDataTest = formData;
+    // state.inputs = inputs;
+    // state.formTitles = formTitles;
   },
-  [types.RESET_STATE](state) {
-    const {
-      formTitles,
-      formData,
-      inputs,
-    } = utils.getInitState(true);
-    state.formData = formData;
-    state.inputs = inputs;
-    state.formTitles = formTitles;
+  [types.RESET_STATE]() {
+    console.log(types.RESET_STATE);
+    // const {
+    //   formTitles,
+    //   formData,
+    //   inputs,
+    // } = utils.getInitState(true);
+    // state.formData = formData;
+    // state.inputs = inputs;
+    // state.formTitles = formTitles;
   },
   [types.SET_COLOR](state, color) {
     state.currentColor = color;

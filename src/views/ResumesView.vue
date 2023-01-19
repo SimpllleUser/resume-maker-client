@@ -12,7 +12,12 @@
                   <b-icon icon="x"></b-icon>
                 </b-button>
               </div>
-              <h3>{{ resumeItem.id }}</h3>
+              <b-button variant="danger">
+                <router-link
+                :to="`resume/${resumeItem.id}`"
+                class="text-dark"
+                >{{ resumeItem.id }}</router-link>
+              </b-button>
             </div>
           </div>
           <div>
