@@ -1,8 +1,3 @@
-import SkillInputForm from '@/components/InputForm/SkillInputForm.vue';
-import ExpreienceInputForm from '@/components/InputForm/ExpreienceInputForm.vue';
-import EducationInputForm from '@/components/InputForm/EducationInputForm.vue';
-import AboutInputForm from '@/components/InputForm/AboutInputForm.vue';
-
 const date = new Date().getFullYear();
 
 const RESUME_PLACEHOLDER_TEXT = {
@@ -30,31 +25,8 @@ const RESUME_PLACEHOLDER_TEXT = {
   CONTACT: 'Your contact',
 };
 const LOCAL_STORAGE_KEYS_RESUMES = 'ALL/RESUMES';
-const INPUTS = {
-  skills: {
-    name: 'Skill',
-    type: 'skill',
-    component: SkillInputForm,
-  },
-  expreriance: {
-    name: 'Experience',
-    type: 'experience',
-    component: ExpreienceInputForm,
-  },
-  educations: {
-    name: 'Education',
-    type: 'education',
-    component: EducationInputForm,
-  },
-  ebout: {
-    name: 'About',
-    type: 'about',
-    component: AboutInputForm,
-  },
-};
 
 export default {
   RESUME_PLACEHOLDER_TEXT,
   LOCAL_STORAGE_KEYS_RESUMES,
-  INPUTS,
 };

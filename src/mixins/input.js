@@ -3,7 +3,7 @@ import ClickOutside from 'vue-click-outside';
 
 import types from '@/store/modules/form/types';
 
-import constnts from '@/constants';
+import constants from '@/constants';
 
 export default {
   props: {
@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      RESUME_PLACEHOLDER_TEXT: constnts.RESUME_PLACEHOLDER_TEXT,
+      RESUME_PLACEHOLDER_TEXT: constants.RESUME_PLACEHOLDER_TEXT,
     };
   },
   watch: {
