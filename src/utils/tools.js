@@ -38,7 +38,16 @@ const getDefaultResume = () => ({
       description: '',
     },
   ],
-  [`educations.${uuidv4()}`]: [],
+  [`educations.${uuidv4()}`]: [
+    {
+      educationName: '',
+      date: {
+        from: '',
+        to: '',
+      },
+      description: '',
+    },
+  ],
   [`ebout.${uuidv4()}`]: '',
 });
 

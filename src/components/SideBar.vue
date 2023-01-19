@@ -3,8 +3,14 @@
     <div>
       <div>
         <div class="px-3 py-2">
-          <div v-for="input in inputsList" :key="input.name" class="w-100 py-1">
-            <b-button variant="outline-dark" @click="addInput(input)" class="d-block w-100">
+          <div
+            v-for="input in inputsList"
+           :key="input.name"
+            class="w-100 py-1">
+            <b-button
+            variant="outline-dark"
+             @click="addInput(input)"
+              class="d-block w-100">
               {{ input.name }}
             </b-button>
           </div>

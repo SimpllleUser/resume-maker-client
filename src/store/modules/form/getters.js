@@ -1,33 +1,9 @@
-import SkillInputForm from '@/components/InputForm/SkillInputForm.vue';
-import ExpreienceInputForm from '@/components/InputForm/ExpreienceInputForm.vue';
-import EducationInputForm from '@/components/InputForm/EducationInputForm.vue';
-import AboutInputForm from '@/components/InputForm/AboutInputForm.vue';
+import inputList from '@/inputs-list';
 
 export default {
   inputValueByKey: ({ formDataTest }) => (key) => formDataTest[key] || null,
   inputsList() {
-    return [
-      {
-        name: 'Skill',
-        type: 'skill',
-        component: SkillInputForm,
-      },
-      {
-        name: 'Experience',
-        type: 'experience',
-        component: ExpreienceInputForm,
-      },
-      {
-        name: 'Education',
-        type: 'education',
-        component: EducationInputForm,
-      },
-      {
-        name: 'About',
-        type: 'about',
-        component: AboutInputForm,
-      },
-    ];
+    return inputList;
   },
   getValue: ({ formData }) => (keyInput) => {
     const createdInputKeys = Object

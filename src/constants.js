@@ -26,7 +26,34 @@ const RESUME_PLACEHOLDER_TEXT = {
 };
 const LOCAL_STORAGE_KEYS_RESUMES = 'ALL/RESUMES';
 
+const DEFAULT_INPUT_VALUE = {
+  CONTACT: {
+    icon: 'phone',
+    value: '',
+  },
+  SKILL: '',
+  EXPRERIANCE: {
+    companyName: '',
+    position: '',
+    date: {
+      from: '',
+      to: '',
+    },
+    description: '',
+  },
+  EDUCATION: {
+    educationName: '',
+    date: {
+      from: '',
+      to: '',
+    },
+    description: '',
+  },
+  ABOUT: '',
+};
+
 export default {
   RESUME_PLACEHOLDER_TEXT,
   LOCAL_STORAGE_KEYS_RESUMES,
+  DEFAULT_INPUT_VALUE,
 };
