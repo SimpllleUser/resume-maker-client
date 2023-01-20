@@ -26,7 +26,7 @@
               border border-dark d-flex align-items-center justify-content-center m-3"
             >
               <b-button
-                @click="addResume"
+                @click="addResumeHandle"
                 size="lg"
                 variant="outline-dark"
                 style="border: none"
@@ -58,14 +58,6 @@ export default {
     ...mapState('resume', ['resumeList', 'createdResumeId']),
     ...mapGetters('resume', ['createdResumeId']),
   },
-  watch: {
-    createdResumeId: {
-      deep: true,
-      handler() {
-        this.$router.push(`resume/${this.createdResumeId}`);
-      },
-    },
-  },
   mounted() {},
   methods: {
     ...mapMutations('resume', {
@@ -74,6 +66,7 @@ export default {
     }),
     addResumeHandle() {
       this.addResume();
+      this.$router.push(`resume/${this.createdResumeId}`);
     },
   },
 };

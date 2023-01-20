@@ -1,6 +1,18 @@
 import inputList from '@/inputs-list';
 
+const getInputKeyFromData = (keyData) => keyData.split('.')[0];
+const getInputIdFromData = (keyData) => keyData.split('.')[1];
+
 export default {
+  currentResumeInputs: ({ formDataTest }) => {
+    const componentKeys = Object.keys(inputList);
+    return Object.keys(formDataTest)
+      .filter((key) => componentKeys.includes(key.split('.')[0]))
+      .map((formKey) => ({
+        id: getInputIdFromData(formKey),
+        ...inputList[getInputKeyFromData(formKey)],
+      }));
+  },
   inputValueByKey: ({ formDataTest }) => (key) => formDataTest[key] || null,
   inputsList() {
     return inputList;

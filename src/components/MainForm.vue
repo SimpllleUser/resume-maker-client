@@ -1,7 +1,7 @@
 <template>
   <div class="main-form-page p-2 border shadow">
     <ul>
-      <li>Изменить формат рендера списка динамически подключенных комопнентов</li>
+      <li>Не правильная инициализация списка комопнентов</li>
       <li>Сделать единый стиль для редактирования и отображения данных</li>
       <li>Подключение стилей без инета</li>
     </ul>
@@ -80,7 +80,6 @@
                     v-bind:is="input.component"
                     @focus-input="actions[`${input.id}`].focus()"
                     />
-                    {{ input.component }}
                   <b-button
                     v-show="focus"
                     size="sm"
@@ -171,10 +170,10 @@ export default {
       'styleFormPrint',
       'includeFotns',
       'existFocusOnInput',
+      'currentResumeInputs',
     ]),
     ...mapGetters('resume', [
       'currentResume',
-      'currentResumeInputs',
     ]),
     bodyStyle() {
       return !this.existFocusOnInput && ` body{
@@ -188,16 +187,19 @@ export default {
   watch: {
     id: {
       immediate: true,
-      handler(id) {
-        this.mainFormInputs = this.currentResumeInputs(id);
+      handler() {
+        this.mainFormInputs = this.currentResumeInputs;
         this.initState(this.currentResume(this.id));
       },
     },
-    mainFormInputs() {
-      this.updateInputs(this.mainFormInputs);
-    },
+    // mainFormInputs() {
+    //   this.updateInputs(this.mainFormInputs);
+    // },
     formDataTest() {
       this.updateResume(this.formDataTest);
+    },
+    currentResumeInputs() {
+      this.mainFormInputs = this.currentResumeInputs;
     },
   },
   methods: {
