@@ -1,7 +1,7 @@
 <template>
     <div class="template">
       <div class="sidebar shadow">
-        <side-bar />
+        <side-bar :id="id" />
       </div>
       <div class="main-contant px-3 mx-3">
         <main-form :id="id" />

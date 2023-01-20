@@ -6,7 +6,8 @@ import AboutInputForm from '@/components/InputForm/AboutInputForm.vue';
 import constants from '@/constants';
 
 const getValue = ({ type, quantity = 0, value }) => ({
-  [`${type}.${uuidv4()}`]: quantity
+  key: `${type}.${uuidv4()}`,
+  value: quantity
     ? new Array(quantity).fill(value)
     : value,
 });
@@ -17,7 +18,7 @@ const inputList = {
     type: 'skill',
     component: SkillInputForm,
     defaultValue: getValue({
-      type: 'skills',
+      type: 'skill',
       quantity: 3,
       value: constants.DEFAULT_INPUT_VALUE.SKILL,
     }),
@@ -27,7 +28,7 @@ const inputList = {
     type: 'experience',
     component: ExpreienceInputForm,
     defaultValue: getValue({
-      type: 'expreriance',
+      type: 'experience',
       quantity: 3,
       value: constants.DEFAULT_INPUT_VALUE.EXPRERIANCE,
     }),
@@ -37,7 +38,7 @@ const inputList = {
     type: 'education',
     component: EducationInputForm,
     defaultValue: getValue({
-      type: 'educations',
+      type: 'education',
       quantity: 3,
       value: constants.DEFAULT_INPUT_VALUE.EDUCATION,
     }),
@@ -47,7 +48,7 @@ const inputList = {
     type: 'about',
     component: AboutInputForm,
     defaultValue: getValue({
-      type: 'ebout',
+      type: 'about',
       value: constants.DEFAULT_INPUT_VALUE.ABOUT,
     }),
   },

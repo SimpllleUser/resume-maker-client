@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import removeKeyFromObject from 'lodash/omit';
 import types from './types';
 import utils from './utils';
@@ -11,8 +11,10 @@ export default {
     utils.statuePropertyToLocalStorage('formData', state.formData);
   },
   [types.ADD_INPUT](state, input) {
-    state.inputs = [...state.inputs, { ...input, id: uuidv4() }];
-    utils.statuePropertyToLocalStorage('inputs', state.inputs);
+    console.log(state);
+    console.log({ input });
+    // state.inputs = [...state.inputs, { ...input, id: uuidv4() }];
+    // utils.statuePropertyToLocalStorage('inputs', state.inputs);
   },
   [types.SET_INPUT](state, inputList) {
     state.inputs = inputList;

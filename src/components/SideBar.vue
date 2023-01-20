@@ -9,9 +9,10 @@
             class="w-100 py-1">
             <b-button
             variant="outline-dark"
-             @click="addInput(input)"
+             @click="addInputHandle(input)"
               class="d-block w-100">
               {{ input.name }}
+              {{ formDataTest }}
             </b-button>
           </div>
           <div class="py-2">
@@ -38,11 +39,20 @@ export default {
     ColorPicker,
     FontPicker,
   },
+  props: {
+    id: {
+      type: String,
+      require: true,
+    },
+  },
   computed: {
-    ...mapGetters('form', ['inputsList']),
+    ...mapGetters('form', ['inputsList', 'formDataTest']),
   },
   methods: {
-    ...mapMutations('form', { addInput: types.ADD_INPUT }),
+    ...mapMutations('form', { setFormValue: types.SET_INPUT_VALUE }),
+    addInputHandle({ defaultValue }) {
+      this.setFormValue(defaultValue);
+    },
   },
 };
 </script>
