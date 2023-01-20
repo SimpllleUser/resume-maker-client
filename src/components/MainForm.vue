@@ -1,9 +1,8 @@
 <template>
   <div class="main-form-page p-2 border shadow">
     <ul>
+      <li>Изменить формат рендера списка динамически подключенных комопнентов</li>
       <li>Сделать единый стиль для редактирования и отображения данных</li>
-      <li>Добавить данные по умолчанию как value и placeholder</li>
-      <li>Добавить возможность множественных созданий резюме</li>
       <li>Подключение стилей без инета</li>
     </ul>
     <div class="d-flex justify-content-center">
@@ -80,7 +79,8 @@
                     :show-navigation="focus"
                     v-bind:is="input.component"
                     @focus-input="actions[`${input.id}`].focus()"
-                  />
+                    />
+                    {{ input.component }}
                   <b-button
                     v-show="focus"
                     size="sm"

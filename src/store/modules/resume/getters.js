@@ -4,7 +4,7 @@ const getInputKeyFromData = (keyData) => keyData.split('.')[0];
 const getInputIdFromData = (keyData) => keyData.split('.')[1];
 
 export default {
-  createdResumeId: ({ resumeList }) => resumeList[0].id,
+  createdResumeId: ({ resumeList }) => resumeList[0]?.id,
   currentResume: ({ resumeList }) => (id) => resumeList.find((resumeItem) => resumeItem.id === id),
   currentResumeInputs: ({ resumeList }) => (id) => {
     const componentKeys = Object.keys(inputs);

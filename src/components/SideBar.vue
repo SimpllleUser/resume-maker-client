@@ -3,6 +3,7 @@
     <div>
       <div>
         <div class="px-3 py-2">
+          {{ Object.keys(formDataTest).length }}
           <div
             v-for="input in inputsList"
            :key="input.name"
@@ -29,6 +30,7 @@
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex';
 import types from '@/store/modules/form/types';
+import resumeTypes from '@/store/modules/resume/types';
 import ColorPicker from '@/components/ColorPicker.vue';
 import FontPicker from '@/components/FontPicker.vue';
 
@@ -47,11 +49,23 @@ export default {
   computed: {
     ...mapGetters('form', ['inputsList']),
     ...mapState('form', ['formDataTest']),
+    ...mapGetters('resume', [
+      'currentResume',
+      'currentResumeInputs',
+    ]),
   },
   methods: {
-    ...mapMutations('form', { setFormValue: types.SET_INPUT_VALUE }),
+    ...mapMutations('form', {
+      setFormValue: types.SET_INPUT_VALUE,
+      updateInputs: types.SET_INPUT,
+    }),
+    ...mapMutations('resume', {
+      updateResume: resumeTypes.UPDATE_RESUME,
+    }),
     addInputHandle({ defaultValue }) {
       this.setFormValue(defaultValue);
+      this.updateResume(this.formDataTest);
+      this.updateInputs(this.currentResumeInputs(this.id));
     },
   },
 };
