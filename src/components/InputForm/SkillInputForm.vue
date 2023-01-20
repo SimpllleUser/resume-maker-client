@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import constants from '@/constants';
 import inputMixin from '@/mixins/input';
 import TagEditable from '@/components/TagEditable.vue';
 
@@ -46,7 +47,7 @@ export default {
       properties: null,
       propertyName: '',
       inputValue: null,
-      inputType: 'skills',
+      inputType: constants.INPUT_KEYS.SKILL,
       defaultInputValueInForm: [],
     };
   },

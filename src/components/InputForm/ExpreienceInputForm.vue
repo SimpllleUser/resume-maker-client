@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import constants from '@/constants';
 import inputMixin from '@/mixins/input';
 import TagEditable from '../TagEditable.vue';
 
@@ -89,7 +90,7 @@ export default {
         description: '',
       },
       inputValue: null,
-      inputType: 'expreriance',
+      inputType: constants.INPUT_KEYS.EXPERIENCE,
       defaultInputValueInForm: [],
       styleFormPrint: `
       .company-template {

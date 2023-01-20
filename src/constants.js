@@ -52,8 +52,16 @@ const DEFAULT_INPUT_VALUE = {
   ABOUT: '',
 };
 
+const INPUT_KEYS = {
+  ABOUT: 'about',
+  SKILL: 'skill',
+  EXPERIENCE: 'experience',
+  EDUCATION: 'education',
+};
+
 export default {
   RESUME_PLACEHOLDER_TEXT,
   LOCAL_STORAGE_KEYS_RESUMES,
   DEFAULT_INPUT_VALUE,
+  INPUT_KEYS,
 };

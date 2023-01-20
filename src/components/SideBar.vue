@@ -12,7 +12,6 @@
              @click="addInputHandle(input)"
               class="d-block w-100">
               {{ input.name }}
-              {{ formDataTest }}
             </b-button>
           </div>
           <div class="py-2">
@@ -28,7 +27,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapState } from 'vuex';
 import types from '@/store/modules/form/types';
 import ColorPicker from '@/components/ColorPicker.vue';
 import FontPicker from '@/components/FontPicker.vue';
@@ -46,7 +45,8 @@ export default {
     },
   },
   computed: {
-    ...mapGetters('form', ['inputsList', 'formDataTest']),
+    ...mapGetters('form', ['inputsList']),
+    ...mapState('form', ['formDataTest']),
   },
   methods: {
     ...mapMutations('form', { setFormValue: types.SET_INPUT_VALUE }),

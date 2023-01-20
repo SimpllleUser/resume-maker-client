@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import constants from '@/constants';
 
 const getDefaultResume = () => ({
   id: uuidv4(),
@@ -22,12 +23,12 @@ const getDefaultResume = () => ({
     },
   ],
   'photo.photo-input-is-uniq': '',
-  [`skills.${uuidv4()}`]: [
+  [`${constants.INPUT_KEYS.SKILL}.${uuidv4()}`]: [
     '',
     '',
     '',
   ],
-  [`expreriance.${uuidv4()}`]: [
+  [`${constants.INPUT_KEYS.EXPERIENCE}.${uuidv4()}`]: [
     {
       companyName: '',
       position: '',
@@ -38,7 +39,7 @@ const getDefaultResume = () => ({
       description: '',
     },
   ],
-  [`educations.${uuidv4()}`]: [
+  [`${constants.INPUT_KEYS.EDUCATION}.${uuidv4()}`]: [
     {
       educationName: '',
       date: {
@@ -48,7 +49,7 @@ const getDefaultResume = () => ({
       description: '',
     },
   ],
-  [`ebout.${uuidv4()}`]: '',
+  [`${constants.INPUT_KEYS.ABOUT}.${uuidv4()}`]: '',
 });
 
 const setLocalStorageObject = (key, value) => localStorage.setItem(key, JSON.stringify(value));

@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import constants from '@/constants';
 import inputMixin from '@/mixins/input';
 import TagEditable from '../TagEditable.vue';
 
@@ -25,7 +26,7 @@ export default {
       about: null,
       properties: null,
       propertyName: '',
-      inputType: 'about',
+      inputType: constants.INPUT_KEYS.ABOUT,
       defaultInputValueInForm: '',
       inputValue: null,
     };

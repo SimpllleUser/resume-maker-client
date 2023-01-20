@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import constants from '@/constants';
 import input from '@/mixins/input';
 import TagEditable from '../TagEditable.vue';
 
@@ -78,7 +79,7 @@ export default {
         description: '',
       },
       inputValue: null,
-      inputType: 'educations',
+      inputType: constants.INPUT_KEYS.EDUCATION,
       defaultInputValueInForm: [],
       styleFormPrint: `
       .education-template {

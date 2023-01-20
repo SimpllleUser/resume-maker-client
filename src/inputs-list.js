@@ -13,42 +13,42 @@ const getValue = ({ type, quantity = 0, value }) => ({
 });
 
 const inputList = {
-  skills: {
+  [constants.INPUT_KEYS.SKILL]: {
     name: 'Skill',
-    type: 'skill',
+    type: constants.INPUT_KEYS.SKILL,
     component: SkillInputForm,
     defaultValue: getValue({
-      type: 'skill',
+      type: constants.INPUT_KEYS.SKILL,
       quantity: 3,
       value: constants.DEFAULT_INPUT_VALUE.SKILL,
     }),
   },
-  expreriance: {
+  [constants.INPUT_KEYS.EXPERIENCE]: {
     name: 'Experience',
-    type: 'experience',
+    type: constants.INPUT_KEYS.EXPERIENCE,
     component: ExpreienceInputForm,
     defaultValue: getValue({
-      type: 'experience',
+      type: constants.INPUT_KEYS.EXPERIENCE,
       quantity: 3,
       value: constants.DEFAULT_INPUT_VALUE.EXPRERIANCE,
     }),
   },
-  educations: {
+  [constants.INPUT_KEYS.EDUCATION]: {
     name: 'Education',
-    type: 'education',
+    type: constants.INPUT_KEYS.EDUCATION,
     component: EducationInputForm,
     defaultValue: getValue({
-      type: 'education',
+      type: constants.INPUT_KEYS.EDUCATION,
       quantity: 3,
       value: constants.DEFAULT_INPUT_VALUE.EDUCATION,
     }),
   },
-  ebout: {
+  [constants.INPUT_KEYS.ABOUT]: {
     name: 'About',
-    type: 'about',
+    type: constants.INPUT_KEYS.ABOUT,
     component: AboutInputForm,
     defaultValue: getValue({
-      type: 'about',
+      type: constants.INPUT_KEYS.ABOUT,
       value: constants.DEFAULT_INPUT_VALUE.ABOUT,
     }),
   },
