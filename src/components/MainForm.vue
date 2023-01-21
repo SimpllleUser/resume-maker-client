@@ -1,7 +1,6 @@
 <template>
   <div class="main-form-page p-2 border shadow">
     <ul>
-      <li>Не правильная инициализация списка комопнентов</li>
       <li>Сделать единый стиль для редактирования и отображения данных</li>
       <li>Подключение стилей без инета</li>
     </ul>
@@ -170,10 +169,11 @@ export default {
       'styleFormPrint',
       'includeFotns',
       'existFocusOnInput',
-      'currentResumeInputs',
+      // 'currentResumeInputs',
     ]),
     ...mapGetters('resume', [
       'currentResume',
+      'currentResumeInputs',
     ]),
     bodyStyle() {
       return !this.existFocusOnInput && ` body{
@@ -183,12 +183,15 @@ export default {
     formData() {
       return this.currentResume(this.id);
     },
+    resumeInputs() {
+      return this.currentResumeInputs(this.id);
+    },
   },
   watch: {
     id: {
       immediate: true,
       handler() {
-        this.mainFormInputs = this.currentResumeInputs;
+        this.mainFormInputs = this.resumeInputs;
         this.initState(this.currentResume(this.id));
       },
     },
@@ -198,8 +201,8 @@ export default {
     formDataTest() {
       this.updateResume(this.formDataTest);
     },
-    currentResumeInputs() {
-      this.mainFormInputs = this.currentResumeInputs;
+    resumeInputs() {
+      this.mainFormInputs = this.resumeInputs;
     },
   },
   methods: {
