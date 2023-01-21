@@ -195,9 +195,6 @@ export default {
         this.initState(this.currentResume(this.id));
       },
     },
-    // mainFormInputs() {
-    //   this.updateInputs(this.mainFormInputs);
-    // },
     formDataTest() {
       this.updateResume(this.formDataTest);
     },

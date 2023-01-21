@@ -4,17 +4,14 @@ import types from './types';
 import utils from './utils';
 
 export default {
+  [types.INIT_STATE](state, formData) {
+    state.formDataTest = formData;
+  },
   [types.SET_FORM_PROPERTY](state, propery) {
     const [key] = Object.keys(propery);
     const [value] = Object.values(propery);
     state.formData = { ...state.formData, [key]: value };
     utils.statuePropertyToLocalStorage('formData', state.formData);
-  },
-  [types.ADD_INPUT](state, input) {
-    console.log(state);
-    console.log({ input });
-    // state.inputs = [...state.inputs, { ...input, id: uuidv4() }];
-    // utils.statuePropertyToLocalStorage('inputs', state.inputs);
   },
   [types.SET_INPUT](state, inputList) {
     state.inputs = inputList;
@@ -25,33 +22,12 @@ export default {
     utils.statuePropertyToLocalStorage('formTitles', state.formTitles);
   },
   [types.DELETE_INPUT_FROM_AND_DATA](state, input) {
-    state.inputs = state.inputs.filter(({ id }) => id !== input.id);
-    const currenDoemDataKey = Object
-      ?.keys(state.formData)
+    const resume = state.formDataTest;
+    const currenDataKey = Object
+      ?.keys(state.formDataTest)
       ?.find((key) => key.indexOf(input.id) !== -1);
-    state.formData = removeKeyFromObject(state.formData, currenDoemDataKey);
-    utils.statuePropertyToLocalStorage('formData', state.formData);
-  },
-  [types.INIT_STATE](state, formData) {
-    // const {
-    //   formTitles,
-    //   formData,
-    //   inputs,
-    // } = utils.getInitState();
-    state.formDataTest = formData;
-    // state.inputs = inputs;
-    // state.formTitles = formTitles;
-  },
-  [types.RESET_STATE]() {
-    console.log(types.RESET_STATE);
-    // const {
-    //   formTitles,
-    //   formData,
-    //   inputs,
-    // } = utils.getInitState(true);
-    // state.formData = formData;
-    // state.inputs = inputs;
-    // state.formTitles = formTitles;
+    state.formDataTest = removeKeyFromObject(resume, currenDataKey);
+    utils.statuePropertyToLocalStorage('formData', resume);
   },
   [types.SET_COLOR](state, color) {
     state.currentColor = color;
