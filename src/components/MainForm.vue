@@ -1,7 +1,7 @@
 <template>
   <div class="main-form-page p-2 border shadow">
     <ul>
-      <li>Исправить работу с фото</li>
+      <li>Изменить календарь</li>
       <li>Сделать единый стиль для редактирования и отображения данных</li>
       <li>Подключение стилей без инета</li>
     </ul>
@@ -26,7 +26,7 @@
             <div
             class="row justify-content-center row-cols-2 position-relative"
             >
-              <div class="col-12">
+              <div :class="`col-${ showPhotoInput ? '8' : 12}`">
                 <div class="col">
                   <main-info-input-form
                   id="main-info"
@@ -43,7 +43,8 @@
                 </div>
               </div>
               <div
-              :class="{'col-3': showPhotoInput}">
+              :class="{ 'col-3': showPhotoInput }"
+              >
                 <div
                 :class="{ 'empty-photo position-absolute': !showPhotoInput }"
                 class="d-flex justify-content-center align-items-center">
