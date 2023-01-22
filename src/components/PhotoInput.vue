@@ -103,6 +103,7 @@ export default {
       this.inputValue = { ...this.inputValue, img };
     },
     showPhotoInputHandler(state) {
+      if (state && !this.inputValue.img) this.resetPhoto();
       this.$emit('can-show', state);
     },
     togglePhoto() {
