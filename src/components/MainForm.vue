@@ -1,7 +1,7 @@
 <template>
   <div class="main-form-page p-2 border shadow">
     <ul>
-      <li>Изменить календарь</li>
+      <li>Изменить календарь on vue2-datepicker</li>
       <li>Сделать единый стиль для редактирования и отображения данных</li>
       <li>Подключение стилей без инета</li>
     </ul>
