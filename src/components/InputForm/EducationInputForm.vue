@@ -17,7 +17,7 @@
               <tag-editable
               v-model="inputValue[key].educationName"
               :placeholder-value="RESUME_PLACEHOLDER_TEXT.EDUCATION.NAME"
-              @focus-input="focusHandler"
+              @focus="focusHandler"
               style="text-align: center;"
               />
             </div>
@@ -25,7 +25,11 @@
               <date-picker
               v-model="dates[key]"
               type="month"
-              :range="true" />
+              :range="true"
+              @focus="focusHandler"
+              :prefix-class="prefixClass"
+              :placeholder="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DATE"
+              />
               <!-- <b-form-datepicker
               v-model="inputValue[key].date.from"
               :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.FROM"

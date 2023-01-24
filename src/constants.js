@@ -16,6 +16,7 @@ const RESUME_PLACEHOLDER_TEXT = {
       just job responsibilities)`,
     FORM: date,
     TO: date + 1,
+    DATE: 'from - to',
   },
   SKILL: 'Skill',
   MAIN_INPUT: {

@@ -5,6 +5,11 @@ export default {
       handler: 'dateHandle',
     },
   },
+  computed: {
+    prefixClass() {
+      return `${!this.showNavigation && 'hide'} mx`;
+    },
+  },
   methods: {
     dateHandle(dates) {
       this.inputValue = this.inputValue

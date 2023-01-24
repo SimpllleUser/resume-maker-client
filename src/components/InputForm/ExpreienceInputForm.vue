@@ -1,5 +1,6 @@
 <template>
-  <div class="expereiance-row">
+  <d
+  iv class="expereiance-row">
     <span v-html="`<style>${styleFormPrint}</style>`" />
     <div class="pb-2" v-show="showNavigation">
       <b-button size="sm" variant="dark" @click="addExperience"
@@ -33,7 +34,11 @@
           <date-picker
           v-model="dates[key]"
           type="month"
-          :range="true" />
+          :range="true"
+          @focus="focusHandler"
+          :prefix-class="prefixClass"
+          :placeholder="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DATE"
+          />
         </div>
       </div>
       <div>
@@ -54,7 +59,7 @@
         </b-button>
       </div>
     </div>
-  </div>
+  </d>
 </template>
 
 <script>
@@ -122,4 +127,5 @@ export default {
     right: 0px;
     top: 0px;
   }
+
 </style>
