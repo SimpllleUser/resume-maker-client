@@ -105,7 +105,7 @@ export default {
       this.inputValue = this.inputValue.filter((_, index) => index !== key);
     },
     customInit(inputsValue) {
-      this.dates = this.getValidDateForInput(inputsValue);
+      this.dates = this.getValidDateForInput(inputsValue) || [];
     },
   },
 };

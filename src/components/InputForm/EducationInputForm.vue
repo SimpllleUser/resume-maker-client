@@ -22,7 +22,11 @@
               />
             </div>
             <div class="education-date-work d-flex align-items-center">
-              <b-form-datepicker
+              <date-picker
+              v-model="dates[key]"
+              type="month"
+              :range="true" />
+              <!-- <b-form-datepicker
               v-model="inputValue[key].date.from"
               :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.FROM"
               size="sm"
@@ -33,7 +37,7 @@
               :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.TO"
                 size="sm"
                 style="border: none !important;"
-              />
+              /> -->
             </div>
           </div>
           <div>
@@ -62,20 +66,24 @@
 <script>
 import constants from '@/constants';
 import input from '@/mixins/input';
+import datePicker from '@/mixins/date-picker';
+import DatePicker from 'vue2-datepicker';
 import TagEditable from '../TagEditable.vue';
+import 'vue2-datepicker/index.css';
 
 export default {
   name: 'EducationInputForm',
-  components: { TagEditable },
-  mixins: [input],
+  components: { TagEditable, DatePicker },
+  mixins: [input, datePicker],
   data() {
     return {
+      dates: [],
       educations: null,
       properties: null,
       propertyName: '',
       defaultInputItemValue: {
         educationName: '',
-        date: { from: '', to: '' },
+        date: [],
         description: '',
       },
       inputValue: null,
@@ -87,6 +95,7 @@ export default {
         grid-template-columns: repeat(2, 1fr);
         position: relative;
       }`,
+      isCustomInit: true,
     };
   },
   methods: {
@@ -101,6 +110,9 @@ export default {
     deleteExpirience(key) {
       this.inputValue = this.inputValue
         ?.filter((_, index) => index !== key);
+    },
+    customInit(inputsValue) {
+      this.dates = this.getValidDateForInput(inputsValue);
     },
   },
 };
