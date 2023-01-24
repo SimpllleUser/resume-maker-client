@@ -30,7 +30,12 @@
           />
         </div>
         <div class="company-date-work d-flex align-items-center">
-          <b-form-datepicker
+          {{ dates[key] }}
+          <date-picker
+          v-model="dates[key]"
+          type="month"
+          :range="true" />
+          <!-- <b-form-datepicker
             v-model="inputValue[key].date.from"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.FROM"
             style="border: none !important"
@@ -44,7 +49,7 @@
             style="border: none !important"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.TO"
             size="sm"
-          />
+          /> -->
         </div>
       </div>
       <div>
@@ -71,14 +76,17 @@
 <script>
 import constants from '@/constants';
 import inputMixin from '@/mixins/input';
+import DatePicker from 'vue2-datepicker';
 import TagEditable from '../TagEditable.vue';
+import 'vue2-datepicker/index.css';
 
 export default {
   name: 'ExpreienceInputForm',
-  components: { TagEditable },
+  components: { TagEditable, DatePicker },
   mixins: [inputMixin],
   data() {
     return {
+      dates: [[new Date(), new Date()]],
       expiriences: null,
       properties: null,
       propertyName: '',
@@ -86,7 +94,7 @@ export default {
       defaultInputItemValue: {
         companyName: '',
         position: '',
-        date: { from: '', to: '' },
+        date: [],
         description: '',
       },
       inputValue: null,
@@ -98,6 +106,7 @@ export default {
         grid-template-columns: repeat(2, 1fr);
         position: relative;
       }`,
+      isCustomInit: true,
     };
   },
   methods: {
@@ -110,6 +119,20 @@ export default {
     deleteExpirience(key) {
       this.inputValue = this.inputValue.filter((_, index) => index !== key);
     },
+    // componentCustomInit() {
+    //   console.log(this.inputValue[this.key].date);
+    //   this.date = this.inputValue[this.key].date;
+    // },
+    customInit(inputsValue) {
+      const res = inputsValue
+        .map((inputValue) => inputValue)
+        .map(({ date }) => date.map((d) => new Date(d)));
+      this.dates = res;
+    },
+  },
+  mounted() {
+    /* this.dates = this.inputValue.map(({ date }) =>
+    new Date(date.split('T').at(0)).toLocaleDateString()); */
   },
 };
 </script>

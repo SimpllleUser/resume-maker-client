@@ -58,6 +58,7 @@ export default {
     },
     initInputValue() {
       this.inputValue = this.inputValueFromStore || this.defaultInputValueInForm;
+      if (this.isCustomInit) this.customInit(this.inputValueFromStore);
     },
   },
   // mounted() {
