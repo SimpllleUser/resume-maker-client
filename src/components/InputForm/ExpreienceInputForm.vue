@@ -60,6 +60,7 @@
 <script>
 import constants from '@/constants';
 import inputMixin from '@/mixins/input';
+import datePicker from '@/mixins/date-picker';
 import DatePicker from 'vue2-datepicker';
 import TagEditable from '../TagEditable.vue';
 import 'vue2-datepicker/index.css';
@@ -67,7 +68,7 @@ import 'vue2-datepicker/index.css';
 export default {
   name: 'ExpreienceInputForm',
   components: { TagEditable, DatePicker },
-  mixins: [inputMixin],
+  mixins: [inputMixin, datePicker],
   data() {
     return {
       dates: [[new Date(), new Date()]],
@@ -93,15 +94,6 @@ export default {
       isCustomInit: true,
     };
   },
-  watch: {
-    dates: {
-      deep: true,
-      handler(dates) {
-        this.inputValue = this.inputValue
-          .map((inputValue, index) => ({ ...inputValue, date: dates[index] }));
-      },
-    },
-  },
   methods: {
     focusHandler() {
       this.$emit('focus-input');
@@ -113,9 +105,7 @@ export default {
       this.inputValue = this.inputValue.filter((_, index) => index !== key);
     },
     customInit(inputsValue) {
-      this.dates = inputsValue
-        .map((inputValue) => inputValue)
-        .map(({ date }) => date.map((d) => new Date(d)));
+      this.dates = this.getValidDateForInput(inputsValue);
     },
   },
 };
