@@ -1,9 +1,9 @@
 <template>
   <div class="expereiance-row" v-click-outside="onBlur">
     <div class="pb-2">
-      <b-button size="sm" variant="primary" @click="addExperience"
-        >add
-        <b-icon icon="plus-lg" />
+      <b-button size="sm" variant="dark" @click="addExperience"
+        >
+        <b-icon icon="plus" />
       </b-button>
     </div>
     <div
@@ -34,11 +34,11 @@
         <b-textarea v-model="educations[key].description" @change="updateInputValue" rows="4" />
         <b-button
           @click="deleteExpirience(key)"
-          variant="outline-danger"
+          variant="dark"
           size="sm"
           class="btn-delete"
         >
-          <b-icon icon="trash" variant="danger" />
+          <b-icon icon="trash"/>
         </b-button>
       </div>
     </div>
@@ -86,7 +86,7 @@ export default {
   position: relative;
   .btn-delete {
     position: absolute;
-    right: -40px;
+    right: 0px;
     top: 0px;
   }
 }

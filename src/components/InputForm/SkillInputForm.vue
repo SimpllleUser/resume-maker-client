@@ -1,28 +1,29 @@
 <template>
   <div class="conatct-input" v-click-outside="onBlur">
-    <div class="d-flex align-items-center flex-wrap">
+    <div class="d-flex justify-content-center align-items-center flex-wrap">
       <div
-        v-for="(skill, index) in skills[propertyName]"
+        v-for="(skill, index) in inputValue"
         :key="`skill-key-${id}-${index}`"
         class="mx-2 mb-2"
-      >
-        <div class="d-flex align-items-center">
-          <div class="contatc-input">
-            <b-form-input
-              v-model="skills[propertyName][index]"
-              @change="updateInputValue"
-              placeholde="some skill"
+      >        <div class="d-flex align-items-center">
+          <div class="contatc-input" style="min-width: 100px">
+            <tag-editable
+              v-model="inputValue[index]"
+              allow-white-space
+              tagType="div"
+              :placeholderValue="RESUME_PLACEHOLDER_TEXT.SKILL"
+              @focus-input="focusHandler"
             />
           </div>
-          <div class="pl-2">
+          <div class="pl-2" v-show="showNavigation">
             <b-icon icon="trash-fill" @click="deleteSkill(index)" />
           </div>
         </div>
       </div>
-      <div>
+      <div v-show="showNavigation">
         <div class="d-flex align-item-center">
-          <b-button size="sm" variant="dark-outline" @click="addSkill">
-            add <b-icon icon="plus-lg" />
+          <b-button size="sm" variant="outline-dark" @click="addSkill">
+            <b-icon icon="plus" />
           </b-button>
         </div>
       </div>
@@ -31,36 +32,34 @@
 </template>
 
 <script>
-import formMixin from '@/mixins/form';
+import constants from '@/constants';
+import inputMixin from '@/mixins/input';
+import TagEditable from '@/components/TagEditable.vue';
 
 export default {
   name: 'SkillInputForm',
-  mixins: [formMixin],
-  props: {
-    id: {
-      type: String,
-      require: true,
-      default: '',
-    },
-    value: {
-      type: Array,
-      require: true,
-      default: () => [''],
-    },
-  },
+  components: { TagEditable },
+  mixins: [inputMixin],
   data() {
     return {
+      test: '',
       skills: null,
       properties: null,
       propertyName: '',
+      inputValue: null,
+      inputType: constants.INPUT_KEYS.SKILL,
+      defaultInputValueInForm: [],
     };
   },
   methods: {
+    focusHandler() {
+      this.$emit('focus-input');
+    },
     addSkill() {
-      this.skills[this.propertyName] = [...this.skills[this.propertyName], ' '];
+      this.inputValue = [...this.inputValue || [''], ''] || [''];
     },
     deleteSkill(key) {
-      this.skills[this.propertyName] = this.skills[this.propertyName].filter(
+      this.inputValue = this.inputValue.filter(
         (_, index) => index !== key,
       );
       this.onFocus();
@@ -74,31 +73,8 @@ export default {
   },
   computed: {
     canUpdate() {
-      return Boolean(this.skills[`${this.propertyName}`]?.length);
+      return Boolean(this.inputValue?.length);
     },
-  },
-  watch: {
-    id: {
-      immediate: true,
-      handler() {
-        this.propertyName = this.id;
-        this.skills = { [this.propertyName]: [''] };
-        this.properties = [`skills.${this.propertyName}`];
-        this.updateInputValue();
-      },
-    },
-    value: {
-      immediate: true,
-      handler() {
-        this.skills[`${this.propertyName}`] = this.value;
-      },
-    },
-    skills() {
-      this.updateInputValue();
-    },
-  },
-  mounted() {
-    this.updateInputValue();
   },
 };
 </script>

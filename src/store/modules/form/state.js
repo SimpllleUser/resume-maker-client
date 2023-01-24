@@ -49,6 +49,7 @@ const currentFont = utils.initStateProperty('currentFont', fonts[0]);
 export default {
   formTitles: {},
   formData: {},
+  formDataTest: JSON.parse(localStorage.getItem('formDataTest')) || {},
   inputs: [],
   styles: {
     color: '',
@@ -58,4 +59,7 @@ export default {
   fonts,
   currentColor,
   currentFont,
+  requireFocus: false,
+  inputFocusExist: false,
+  focusContainer: {},
 };

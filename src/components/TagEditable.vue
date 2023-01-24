@@ -1,12 +1,12 @@
 <template>
   <div>
-    <component
+      <component
       :is="tagType"
       contenteditable
       v-text="content"
       @blur="setContentHandler"
-      @focus="resetPlaceHolder"
-      :style="contentStyle"
+      @focus="focusHandler"
+      :style="style"
     >
       {{ content }}
     </component>
@@ -28,19 +28,32 @@ export default {
       type: String,
       default: 'div',
     },
+    allowWhiteSpace: {
+      type: Boolean,
+      default: false,
+    },
+    disablePlaceholderStyle: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
+      isInit: false,
       content: '',
       isUpdatedContent: false,
+      placeholderIsActive: true,
     };
   },
   computed: {
-    placeholderIsactive() {
-      return !this.isUpdatedContent || !this.content.length;
-    },
     contentStyle() {
-      return this.placeholderIsactive ? 'color: gray;' : '';
+      return this.placeholderIsActive && !this.disablePlaceholderStyle ? 'color: gray;' : '';
+    },
+    whiteSpaceStyle() {
+      return this.allowWhiteSpace ? 'white-space: pre' : '';
+    },
+    style() {
+      return `${this.contentStyle} ${this.whiteSpaceStyle}`;
     },
   },
   watch: {
@@ -54,8 +67,9 @@ export default {
     },
   },
   methods: {
-    emitContent() {
-      this.$emit('input', this.content);
+    focusHandler() {
+      this.resetPlaceHolder();
+      this.$emit('focus-input');
     },
     resetPlaceHolder() {
       if (this.isUpdatedContent) return;
@@ -65,17 +79,24 @@ export default {
       this.content = value;
     },
     setContentHandler(e) {
+      if (!this.isInit) return;
       const value = e.target.innerText;
       this.setContent(value);
-      this.isUpdatedContent = value.length;
-      if (!this.isUpdatedContent) this.initPlaceholder();
-      this.emitContent();
+      this.isUpdatedContent = Boolean(value?.length);
+      if (!this.isUpdatedContent && this.placeholderIsActive) this.initPlaceholder();
+      this.$emit('input', value);
     },
     initPlaceholder() {
-      this.content = this.placeholderValue;
+      this.placeholderIsActive = !this.value?.length;
+      if (!this.placeholderIsActive) return;
+      this.setContent(this.placeholderValue);
     },
     initValue(value) {
-      this.content = value;
+      this.initPlaceholder();
+      if (this.isInit) return;
+      this.setContent(value);
+      this.isUpdatedContent = value.length;
+      this.isInit = true;
     },
   },
 };
