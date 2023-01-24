@@ -30,26 +30,10 @@
           />
         </div>
         <div class="company-date-work d-flex align-items-center">
-          {{ dates[key] }}
           <date-picker
           v-model="dates[key]"
           type="month"
           :range="true" />
-          <!-- <b-form-datepicker
-            v-model="inputValue[key].date.from"
-            :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.FROM"
-            style="border: none !important"
-            size="sm"
-          />
-          <b-form-datepicker
-            v-model="inputValue[key].date.to"
-            @input="() => (allow = false)"
-            @hidden="() => (allow = false)"
-            @shown="() => (allow = false)"
-            style="border: none !important"
-            :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.TO"
-            size="sm"
-          /> -->
         </div>
       </div>
       <div>
@@ -109,6 +93,15 @@ export default {
       isCustomInit: true,
     };
   },
+  watch: {
+    dates: {
+      deep: true,
+      handler(dates) {
+        this.inputValue = this.inputValue
+          .map((inputValue, index) => ({ ...inputValue, date: dates[index] }));
+      },
+    },
+  },
   methods: {
     focusHandler() {
       this.$emit('focus-input');
@@ -119,20 +112,11 @@ export default {
     deleteExpirience(key) {
       this.inputValue = this.inputValue.filter((_, index) => index !== key);
     },
-    // componentCustomInit() {
-    //   console.log(this.inputValue[this.key].date);
-    //   this.date = this.inputValue[this.key].date;
-    // },
     customInit(inputsValue) {
-      const res = inputsValue
+      this.dates = inputsValue
         .map((inputValue) => inputValue)
         .map(({ date }) => date.map((d) => new Date(d)));
-      this.dates = res;
     },
-  },
-  mounted() {
-    /* this.dates = this.inputValue.map(({ date }) =>
-    new Date(date.split('T').at(0)).toLocaleDateString()); */
   },
 };
 </script>
