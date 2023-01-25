@@ -1,6 +1,5 @@
 <template>
-  <d
-  iv class="expereiance-row">
+  <div class="expereiance-row">
     <span v-html="`<style>${styleFormPrint}</style>`" />
     <div class="pb-2" v-show="showNavigation">
       <b-button size="sm" variant="dark" @click="addExperience"
@@ -27,18 +26,26 @@
             v-model="inputValue[key].position"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.POSITION"
             @focus-input="focusHandler"
+            :open="open"
             style="text-align: center;"
           />
         </div>
         <div class="company-date-work d-flex align-items-center">
-          <date-picker
+          <calendar-panel
+        type="month"
+        :range="true"
+        :value="dates[key]"
+        @select="(date) => selectDate({date, key})"
+        />
+          <!-- <date-picker
           v-model="dates[key]"
           type="month"
           :range="true"
           @focus="focusHandler"
           :prefix-class="prefixClass"
           :placeholder="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DATE"
-          />
+          :popupStyle="{ display: 'block' }"
+          /> -->
         </div>
       </div>
       <div>
@@ -59,7 +66,7 @@
         </b-button>
       </div>
     </div>
-  </d>
+  </div>
 </template>
 
 <script>
@@ -72,10 +79,12 @@ import 'vue2-datepicker/index.css';
 
 export default {
   name: 'ExpreienceInputForm',
-  components: { TagEditable, DatePicker },
+  components: { TagEditable, CalendarPanel: DatePicker.CalendarRange },
   mixins: [inputMixin, datePicker],
   data() {
     return {
+      value: '',
+      open: true,
       dates: [[new Date(), new Date()]],
       expiriences: null,
       properties: null,
@@ -111,6 +120,9 @@ export default {
     },
     customInit(inputsValue) {
       this.dates = this.getValidDateForInput(inputsValue) || [];
+    },
+    selectDate({ date, key }) {
+      this.dates = Object.values({ ...this.dates, [key]: date });
     },
   },
 };

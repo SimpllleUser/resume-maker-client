@@ -12,6 +12,7 @@ export default {
   },
   methods: {
     dateHandle(dates) {
+      console.log(dates);
       this.inputValue = this.inputValue
         .map(this.getInputValueWithDate(dates));
     },

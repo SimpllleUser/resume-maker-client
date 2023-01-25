@@ -9,6 +9,15 @@
               font-scale="1.5rem"
               :id="`icon-selector-${index}`"
             />
+            <b-form-select
+            v-model="inputValue[index].icon"
+             :options="icons">
+               <b-icon
+              :icon="inputValue[index].icon"
+              font-scale="1.5rem"
+              :id="`icon-selector-${index}`"
+            />
+            </b-form-select>
             <b-tooltip :target="`icon-selector-${index}`" triggers="hover" variant="dark">
               <b-icon
                 v-for="icon in icons"
@@ -88,6 +97,7 @@ export default {
     },
     selectHandleIcon(icon, index) {
       this.inputValue[index].icon = icon;
+      this.focusHandler();
     },
   },
 };
