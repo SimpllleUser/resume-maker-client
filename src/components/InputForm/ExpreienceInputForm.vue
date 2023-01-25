@@ -2,8 +2,7 @@
   <div class="expereiance-row">
     <span v-html="`<style>${styleFormPrint}</style>`" />
     <div class="pb-2" v-show="showNavigation">
-      <b-button size="sm" variant="dark" @click="addExperience"
-        >
+      <b-button size="sm" variant="dark" @click="addExperience">
         <b-icon icon="plus" />
       </b-button>
     </div>
@@ -18,7 +17,7 @@
             v-model="inputValue[key].companyName"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.NAME"
             @focus-input="focusHandler"
-            style="text-align: center;"
+            style="text-align: center"
           />
         </div>
         <div class="company-position">
@@ -27,16 +26,26 @@
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.POSITION"
             @focus-input="focusHandler"
             :open="open"
-            style="text-align: center;"
+            style="text-align: center"
           />
         </div>
         <div class="company-date-work d-flex align-items-center">
-          <calendar-panel
-        type="month"
-        :range="true"
-        :value="dates[key]"
-        @select="(date) => selectDate({date, key})"
-        />
+          <div class="calendar-container position-relative">
+            <div class="date-label">
+              {{ dates[key].join(' - ') }}</div>
+            <div class="calendar-panel position-absolute bg-light">
+              <div class="d-flex justify-content-around">
+                <div class="border w-100 text-center">From</div>
+                <div class="border w-100 text-center">To</div>
+              </div>
+              <calendar-panel
+                type="month"
+                :range="true"
+                :value="dates[key]"
+                @select="(date) => selectDate({ date, key })"
+              />
+            </div>
+          </div>
           <!-- <date-picker
           v-model="dates[key]"
           type="month"
@@ -62,7 +71,7 @@
           size="sm"
           class="btn-delete"
         >
-          <b-icon icon="trash"/>
+          <b-icon icon="trash" />
         </b-button>
       </div>
     </div>
@@ -135,9 +144,16 @@ export default {
   position: relative;
 }
 .btn-delete {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-  }
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
 
+.calendar-panel {
+  display: none;
+}
+
+.calendar-container:hover .calendar-panel {
+  display: block;
+}
 </style>
