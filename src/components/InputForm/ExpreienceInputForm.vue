@@ -30,22 +30,7 @@
           />
         </div>
         <div class="company-date-work d-flex align-items-center">
-          <div class="calendar-container position-relative">
-            <div class="date-label">
-              {{ dates[key].join(' - ') }}</div>
-            <div class="calendar-panel position-absolute bg-light">
-              <div class="d-flex justify-content-around">
-                <div class="border w-100 text-center">From</div>
-                <div class="border w-100 text-center">To</div>
-              </div>
-              <calendar-panel
-                type="month"
-                :range="true"
-                :value="dates[key]"
-                @select="(date) => selectDate({ date, key })"
-              />
-            </div>
-          </div>
+          <date-picker />
           <!-- <date-picker
           v-model="dates[key]"
           type="month"
@@ -82,13 +67,15 @@
 import constants from '@/constants';
 import inputMixin from '@/mixins/input';
 import datePicker from '@/mixins/date-picker';
-import DatePicker from 'vue2-datepicker';
+import DatePicker from '@/components/DatePicker.vue';
 import TagEditable from '../TagEditable.vue';
-import 'vue2-datepicker/index.css';
 
 export default {
   name: 'ExpreienceInputForm',
-  components: { TagEditable, CalendarPanel: DatePicker.CalendarRange },
+  components: {
+    DatePicker,
+    TagEditable,
+  },
   mixins: [inputMixin, datePicker],
   data() {
     return {
@@ -147,13 +134,5 @@ export default {
   position: absolute;
   right: 0px;
   top: 0px;
-}
-
-.calendar-panel {
-  display: none;
-}
-
-.calendar-container:hover .calendar-panel {
-  display: block;
 }
 </style>
