@@ -12,7 +12,6 @@ export default {
   },
   methods: {
     dateHandle(dates) {
-      console.log(dates);
       this.inputValue = this.inputValue
         .map(this.getInputValueWithDate(dates));
     },
@@ -21,11 +20,13 @@ export default {
       date: dates[index],
     }),
     getFormattedDate(date) {
+      if (!date) return '';
       return new Date(date);
     },
     getValidDateForInput(inputsValue) {
       return inputsValue
-        .map(({ date }) => date.map(this.getFormattedDate));
+        ?.map(({ date }) => date
+          ?.map(this.getFormattedDate)) || [];
     },
   },
 };

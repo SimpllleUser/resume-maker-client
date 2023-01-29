@@ -26,20 +26,14 @@
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.POSITION"
             @focus-input="focusHandler"
             :open="open"
-            style="text-align: center"
           />
         </div>
         <div class="company-date-work d-flex align-items-center">
-          <date-picker />
-          <!-- <date-picker
-          v-model="dates[key]"
-          type="month"
-          :range="true"
-          @focus="focusHandler"
-          :prefix-class="prefixClass"
+          <date-picker
+          v-model="inputValue[key].date"
           :placeholder="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DATE"
-          :popupStyle="{ display: 'block' }"
-          /> -->
+          @foucs="focusHandler"
+          />
         </div>
       </div>
       <div>

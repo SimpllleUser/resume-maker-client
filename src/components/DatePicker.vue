@@ -1,11 +1,16 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center w-100"
+  <div
+  class="d-flex justify-content-center align-items-center w-100"
+  :style="foucsStyle"
   v-click-outside="blurHandle">
   <div class="calendar-container position-relative" style="z-index: 999">
     <div class="date-label">
       <div tabindex="0"
       @focus="setShowCalendar(true)"
-      >{{ dateLabel }}</div>
+      class="text-center"
+      :class="{'text-secondary': !existValue}"
+      >
+      {{ label }}</div>
     </div>
     <Transition>
     <div
@@ -32,17 +37,28 @@ import ClickOutside from 'vue-click-outside';
 
 import Vue2DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
+import constants from '@/constants';
 
 export default {
   name: 'DatePicker',
   components: {
     CalendarPanel: Vue2DatePicker.CalendarRange,
   },
+  props: {
+    value: {
+      type: Array,
+      default: () => [],
+    },
+    placeholder: {
+      type: String,
+      default: 'from - to',
+    },
+  },
   data() {
     return {
       range: true,
       type: 'month',
-      date: [new Date(), new Date()],
+      date: this.value,
       showCalendar: false,
       isFoucs: false,
     };
@@ -51,6 +67,22 @@ export default {
     dateLabel() {
       return this.date
         .map(this.getFormattedDate).join(' - ');
+    },
+    existValue() {
+      return this.date?.length && this.date?.every(Boolean);
+    },
+    label() {
+      return this.existValue
+        ? this.dateLabel
+        : this.placeholder;
+    },
+    foucsStyle() {
+      return `${this.showCalendar && `z-index: ${constants.EXTRA_Z_INDEX};`}`;
+    },
+  },
+  watch: {
+    showCalendar: {
+      handler: 'focusHandle',
     },
   },
   methods: {
@@ -71,10 +103,15 @@ export default {
     setDate(date) {
       this.date = date;
       setTimeout(this.hideCalendar, 400);
+      this.$emit('input', date);
     },
     blurHandle() {
       if (!this.showCalendar) return;
       this.hideCalendar();
+    },
+    focusHandle(isFoucs) {
+      if (!isFoucs) return;
+      this.$emit('foucs');
     },
   },
   directives: {

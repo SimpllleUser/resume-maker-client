@@ -17,31 +17,15 @@
               <tag-editable
               v-model="inputValue[key].educationName"
               :placeholder-value="RESUME_PLACEHOLDER_TEXT.EDUCATION.NAME"
-              @focus="focusHandler"
-              style="text-align: center;"
+              @focus-input="focusHandler"
               />
             </div>
             <div class="education-date-work d-flex align-items-center">
               <date-picker
-              v-model="dates[key]"
-              type="month"
-              :range="true"
-              @focus="focusHandler"
-              :prefix-class="prefixClass"
-              :placeholder="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DATE"
-              />
-              <!-- <b-form-datepicker
-              v-model="inputValue[key].date.from"
-              :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.FROM"
-              size="sm"
-              style="border: none !important;"
-              />
-              <b-form-datepicker
-              v-model="inputValue[key].date.to"
-              :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.TO"
-                size="sm"
-                style="border: none !important;"
-              /> -->
+          v-model="inputValue[key].date"
+          :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.DATE"
+          @foucs="focusHandler"
+          />
             </div>
           </div>
           <div>
@@ -71,9 +55,8 @@
 import constants from '@/constants';
 import input from '@/mixins/input';
 import datePicker from '@/mixins/date-picker';
-import DatePicker from 'vue2-datepicker';
+import DatePicker from '@/components/DatePicker.vue';
 import TagEditable from '../TagEditable.vue';
-import 'vue2-datepicker/index.css';
 
 export default {
   name: 'EducationInputForm',

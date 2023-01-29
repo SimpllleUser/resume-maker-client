@@ -8,6 +8,7 @@ const RESUME_PLACEHOLDER_TEXT = {
     DESCRIPTION: 'Degree and field of study',
     FORM: date,
     TO: date + 1,
+    DATE: 'from - to',
   },
   EXPERIANCE: {
     NAME: 'Company name ',
@@ -60,9 +61,12 @@ const INPUT_KEYS = {
   EDUCATION: 'education',
 };
 
+const EXTRA_Z_INDEX = 9999;
+
 export default {
   RESUME_PLACEHOLDER_TEXT,
   LOCAL_STORAGE_KEYS_RESUMES,
   DEFAULT_INPUT_VALUE,
   INPUT_KEYS,
+  EXTRA_Z_INDEX,
 };

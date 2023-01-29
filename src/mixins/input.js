@@ -61,9 +61,6 @@ export default {
       if (this.isCustomInit) this.customInit(this.inputValueFromStore);
     },
   },
-  // mounted() {
-  //   console.log(this.RESUME_PLACEHOLDER_TEXT);
-  // },
   directives: {
     ClickOutside,
   },
