@@ -1,22 +1,12 @@
 <template>
-  <div
-  class="d-flex justify-content-center align-items-center w-100"
-  :style="foucsStyle"
-  v-click-outside="blurHandle">
-  <div class="calendar-container position-relative" style="z-index: 999">
-    <div class="date-label">
-      <div tabindex="0"
-      @focus="setShowCalendar(true)"
-      class="text-center"
-      :class="{'text-secondary': !existValue}"
-      >
-      {{ label }}</div>
-    </div>
-    <Transition>
-    <div
-    v-show="showCalendar"
-     class="calendar-panel position-absolute bg-light" style="left: -183px;">
-      <div class="d-flex justify-content-around">
+  <v-popup
+  @focus="focusHandle">
+    <template #title>
+      <div :class="{ 'text-secondary': !existValue }">{{ label }}</div>
+    </template>
+    <template #body>
+      <div>
+        <div class="d-flex justify-content-around">
         <div class="border w-100 text-center">From</div>
         <div class="border w-100 text-center">To</div>
       </div>
@@ -26,10 +16,9 @@
         :value="date"
         @select="setDate"
       />
-    </div>
-  </Transition>
-  </div>
-  </div>
+      </div>
+    </template>
+  </v-popup>
 </template>
 
 <script>
@@ -38,11 +27,13 @@ import ClickOutside from 'vue-click-outside';
 import Vue2DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
 import constants from '@/constants';
+import VPopup from '@/components/VPopup.vue';
 
 export default {
   name: 'DatePicker',
   components: {
     CalendarPanel: Vue2DatePicker.CalendarRange,
+    VPopup,
   },
   props: {
     value: {
@@ -109,8 +100,7 @@ export default {
       if (!this.showCalendar) return;
       this.hideCalendar();
     },
-    focusHandle(isFoucs) {
-      if (!isFoucs) return;
+    focusHandle() {
       this.$emit('foucs');
     },
   },

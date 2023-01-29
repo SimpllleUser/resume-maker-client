@@ -15,6 +15,7 @@
         <b-button @click="print"> Print </b-button>
       </div>
     </div>
+    <v-popup />
     <div
     class="main-form"
      id="resume-form"
@@ -111,6 +112,7 @@ import types from '@/store/modules/form/types';
 import resumeTypes from '@/store/modules/resume/types';
 import TextPlaceholder from '@/components/TextPlaceholder.vue';
 import draggable from 'vuedraggable';
+import VPopup from '@/components/VPopup.vue';
 import MainInfoInputForm from './InputForm/MainInfoInputForm.vue';
 import ContactInput from './ContactInput.vue';
 import PhotoInput from './PhotoInput.vue';
@@ -128,6 +130,7 @@ export default {
     ContainerFocusItem,
     TitleContainer,
     TextPlaceholder,
+    VPopup,
   },
   mixins: [formMixin],
   props: {
