@@ -1,12 +1,5 @@
 <template>
   <div class="main-form-page p-2 border shadow">
-    <ul>
-      <li>Сделать кастомный календарь и popup</li>
-      <li>На нажатия popup елементов деактивируется фокус</li>
-      <li>Исправить отображения данных календаря с попощью tag-eitable</li>
-      <li>Сделать единый стиль для редактирования и отображения данных</li>
-      <li>Подключение стилей без инета</li>
-    </ul>
     <div class="d-flex justify-content-center">
       <div>
         <b-button @click="resetState()">Reset</b-button>
@@ -15,92 +8,104 @@
         <b-button @click="print"> Print </b-button>
       </div>
     </div>
-    <v-popup />
+    <b-card bg-variant="primary" text-variant="white" header="Todo" class="text-center">
+      <b-card-text>
+        <ul>
+          <li>Исправить состояние фокуса после удаления елемента (сброс фокуса)</li>
+          <li>
+            В некторых tag-editable отменить нажатие клавиши enter и задавть максимальную ширину или
+            макс количество символов
+          </li>
+          <li>Сделать единый стиль для редактирования и отображения данных</li>
+          <li>Подключение стилей без инета</li>
+        </ul>
+      </b-card-text>
+    </b-card>
     <div
-    class="main-form"
-     id="resume-form"
-      :class="` ${existFocusOnInput && 'exist-focus'} font-${currentFont.value}`">
-      <div style="margin: 0 auto; max-width: 990px;">
-      <span v-html="`<style>${styleFormPrint}margin: 0 auto; max-width: 990px;</style>`" />
-      <span v-html="includeFotns"></span>
-      <div>
-        <ContainerFocusItem name="main-info" :show-title="false">
-          <template #main="{ actions, focus }">
-            <div
-            class="row justify-content-center row-cols-2 position-relative"
-            >
-              <div :class="`col-${ showPhotoInput ? '8' : 12}`">
-                <div class="col">
-                  <main-info-input-form
-                  id="main-info"
-                  :show-navigation="focus"
-                  @focus-input="actions['main-info'].focus"
-                  />
-                </div>
-                <div>
-                  <ContactInput
-                  id="contact-item-is-uniq"
-                  :show-navigation="focus"
-                  @focus-input="actions['main-info'].focus"
-                  />
-                </div>
-              </div>
-              <div
-              :class="{ 'col-3': showPhotoInput }"
-              >
-                <div
-                :class="{ 'empty-photo position-absolute': !showPhotoInput }"
-                class="d-flex justify-content-center align-items-center">
-                  <PhotoInput
-                  id="photo-input-is-uniq"
-                  :show-navigation="focus" @can-show="showPhotoInputHandle" />
-                </div>
-              </div>
-            </div>
-          </template>
-        </ContainerFocusItem>
-      </div>
-      <draggable v-model="mainFormInputs" @end="setActiveContainer">
-        <transition-group>
-          <div
-            v-for="(input, inputKey) in mainFormInputs"
-            :key="`input-${inputKey}`"
-            style="position: relative; margin: 32px 0px"
-          >
-            <ContainerFocusItem
-            :name="input.id"
-            :id="input.id"
-            :title="input.name"
-            :show-title="true"
-            :activeIndex="activeIndex"
-            :index="inputKey"
-            >
-              <template #main="{ actions, focus }">
-                <div>
-                  <component
-                    :id="input.id"
-                    :value="getValue(input.id)"
-                    :show-navigation="focus"
-                    v-bind:is="input.component"
-                    @focus-input="actions[`${input.id}`].focus()"
+      class="main-form"
+      id="resume-form"
+      :class="` ${existFocusOnInput && 'exist-focus'} font-${currentFont.value}`"
+    >
+      <div style="margin: 0 auto; max-width: 990px">
+        <span v-html="`<style>${styleFormPrint}margin: 0 auto; max-width: 990px;</style>`" />
+        <span v-html="includeFotns"></span>
+        <div>
+          <ContainerFocusItem name="main-info" :show-title="false">
+            <template #main="{ actions, focus }">
+              <div class="row justify-content-center row-cols-2 position-relative">
+                <div :class="`col-${showPhotoInput ? '8' : 12}`">
+                  <div class="col">
+                    <main-info-input-form
+                      id="main-info"
+                      :show-navigation="focus"
+                      @focus-input="actions['main-info'].focus"
                     />
-                  <b-button
-                    v-show="focus"
-                    size="sm"
-                    @click="deleteInputForm(input)"
-                    variant="dark"
-                    style="position: absolute; top: -15px; right: -15px"
-                  >
-                    <b-icon icon="x" />
-                  </b-button>
+                  </div>
+                  <div>
+                    <ContactInput
+                      id="contact-item-is-uniq"
+                      :show-navigation="focus"
+                      @focus-input="actions['main-info'].focus"
+                    />
+                  </div>
                 </div>
-              </template>
-            </ContainerFocusItem>
-          </div>
-        </transition-group>
-      </draggable>
+                <div :class="{ 'col-3': showPhotoInput }">
+                  <div
+                    :class="{ 'empty-photo position-absolute': !showPhotoInput }"
+                    class="d-flex justify-content-center align-items-center"
+                  >
+                    <PhotoInput
+                      id="photo-input-is-uniq"
+                      :show-navigation="focus"
+                      @can-show="showPhotoInputHandle"
+                    />
+                  </div>
+                </div>
+              </div>
+            </template>
+          </ContainerFocusItem>
+        </div>
+        <draggable v-model="mainFormInputs" @end="setActiveContainer">
+          <transition-group>
+            <div
+              v-for="(input, inputKey) in mainFormInputs"
+              :key="`input-${inputKey}`"
+              style="position: relative; margin: 32px 0px"
+            >
+              <ContainerFocusItem
+                :name="input.id"
+                :id="input.id"
+                :title="input.name"
+                :show-title="true"
+                :activeIndex="activeIndex"
+                :index="inputKey"
+              >
+                <template #main="{ actions, focus }">
+                  <div>
+                    <component
+                      :id="input.id"
+                      :value="getValue(input.id)"
+                      :show-navigation="focus"
+                      v-bind:is="input.component"
+                      @focus-input="actions[`${input.id}`].focus()"
+                    />
+                    <b-button
+                      v-show="focus"
+                      size="sm"
+                      @click="deleteInputForm(input)"
+                      variant="dark"
+                      style="position: absolute; top: -15px; right: -15px"
+                    >
+                      <b-icon icon="x" />
+                    </b-button>
+                  </div>
+                </template>
+              </ContainerFocusItem>
+            </div>
+          </transition-group>
+        </draggable>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -164,12 +169,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('form', [
-      'inputs',
-      'formData',
-      'formDataTest',
-      'currentFont',
-    ]),
+    ...mapState('form', ['inputs', 'formData', 'formDataTest', 'currentFont']),
     ...mapGetters('form', [
       'getValue',
       'getContainerTitleValue',
@@ -178,14 +178,14 @@ export default {
       'existFocusOnInput',
       // 'currentResumeInputs',
     ]),
-    ...mapGetters('resume', [
-      'currentResume',
-      'currentResumeInputs',
-    ]),
+    ...mapGetters('resume', ['currentResume', 'currentResumeInputs']),
     bodyStyle() {
-      return !this.existFocusOnInput && ` body{
+      return (
+        !this.existFocusOnInput
+        && ` body{
       background-color: white;
-    }`;
+    }`
+      );
     },
     formData() {
       return this.currentResume(this.id);
@@ -235,7 +235,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@import '../assets/app.scss';
+@import "../assets/app.scss";
 .empty-photo {
   top: 0px;
   right: 100px;
