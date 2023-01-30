@@ -1,4 +1,5 @@
 import { mapGetters, mapMutations } from 'vuex';
+
 import ClickOutside from 'vue-click-outside';
 
 import types from '@/store/modules/form/types';
@@ -24,9 +25,7 @@ export default {
   watch: {
     id: {
       immediate: true,
-      handler() {
-        this.initInputValue();
-      },
+      handler: 'initInputValue',
     },
     inputProperty: {
       immediate: true,
@@ -42,7 +41,7 @@ export default {
   computed: {
     ...mapGetters('form', ['inputValueByKey']),
     inputKey() {
-      return `${this.inputType}.${this.id}`;
+      return `${this.inputType}.${this.id || this.keyId}`;
     },
     inputProperty() {
       return { key: this.inputKey, value: this.inputValue };

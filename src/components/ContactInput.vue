@@ -4,41 +4,41 @@
       <b-col cols="4" v-for="(contact, index) in inputValue" :key="index">
         <div class="d-flex align-items-center">
           <div class="contatc-icon">
-            <b-icon
-              :icon="inputValue[index].icon"
-              font-scale="1.5rem"
-              :id="`icon-selector-${index}`"
-            />
-            <b-form-select
-            v-model="inputValue[index].icon"
-             :options="icons">
-               <b-icon
-              :icon="inputValue[index].icon"
-              font-scale="1.5rem"
-              :id="`icon-selector-${index}`"
-            />
-            </b-form-select>
-            <b-tooltip :target="`icon-selector-${index}`" triggers="hover" variant="dark">
-              <b-icon
-                v-for="icon in icons"
-                :key="icon"
-                :icon="icon"
-                font-scale="2rem"
-                @click="selectHandleIcon(icon, index)"
-              />
-            </b-tooltip>
+            <v-popup @focus="focusHandler">
+              <template #title>
+                <b-icon
+                  :icon="inputValue[index].icon"
+                  font-scale="1.5rem"
+                />
+              </template>
+              <template #body>
+                <div class="d-flex bg-secondary">
+                  <b-icon
+                  v-for="icon in icons"
+                  :key="icon"
+                  :icon="icon"
+                  font-scale="1.5rem"
+                  @click="selectHandleIcon(icon, index)"
+                  />
+                </div>
+              </template>
+            </v-popup>
           </div>
-          <div class="contatc-input" style="margin-left: 10px;">
+          <div class="contatc-input" style="margin-left: 10px">
             <tag-editable
               tagType="div"
               v-model="inputValue[index].value"
               @focus-input="focusHandler"
-              :placeholderValue="RESUME_PLACEHOLDER_TEXT.CONTACT"
+              placeholderValue="constact"
               style="min-width: 150px"
             />
           </div>
           <div v-show="showNavigation">
-            <b-button size="sm" variant="outline-dark" @click="deleteConatct(index)">
+            <b-button
+              size="sm"
+              variant="outline-dark"
+              @click="deleteConatct(index)"
+            >
               <b-icon icon="trash-fill" />
             </b-button>
           </div>
@@ -58,10 +58,12 @@
 <script>
 import TagEditable from '@/components/TagEditable.vue';
 import inputMixin from '@/mixins/input';
+import VPopup from '@/components/VPopup.vue';
+import { cloneDeep } from 'lodash';
 
 export default {
-  name: 'ConatactInput',
-  components: { TagEditable },
+  name: 'ContactInput',
+  components: { VPopup, TagEditable },
   mixins: [inputMixin],
   data() {
     return {
@@ -72,7 +74,7 @@ export default {
       focus: false,
       inputType: 'contacts',
       defaultInputValueInForm: [],
-      inputValue: null,
+      inputValue: [],
     };
   },
   methods: {
@@ -81,8 +83,8 @@ export default {
     },
     addConatct() {
       this.inputValue = [
-        ...(this.inputValue || this.defaultInputValueInForm),
-        this.defaultInputItemValue,
+        ...this.inputValue,
+        cloneDeep(this.defaultInputItemValue),
       ];
     },
     deleteConatct(key) {

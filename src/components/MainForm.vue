@@ -113,11 +113,11 @@ import resumeTypes from '@/store/modules/resume/types';
 import TextPlaceholder from '@/components/TextPlaceholder.vue';
 import draggable from 'vuedraggable';
 import VPopup from '@/components/VPopup.vue';
-import MainInfoInputForm from './InputForm/MainInfoInputForm.vue';
-import ContactInput from './ContactInput.vue';
-import PhotoInput from './PhotoInput.vue';
-import ContainerFocusItem from './ContainerFocusItem.vue';
-import TagEditable from './TagEditable.vue';
+import ContactInput from '@/components/ContactInput.vue';
+import MainInfoInputForm from '@/components/InputForm/MainInfoInputForm.vue';
+import PhotoInput from '@/components/PhotoInput.vue';
+import ContainerFocusItem from '@/components/ContainerFocusItem.vue';
+import TagEditable from '@/components/TagEditable.vue';
 
 export default {
   name: 'MainForm',
