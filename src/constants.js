@@ -37,18 +37,12 @@ const DEFAULT_INPUT_VALUE = {
   EXPRERIANCE: {
     companyName: '',
     position: '',
-    date: {
-      from: '',
-      to: '',
-    },
+    date: [],
     description: '',
   },
   EDUCATION: {
     educationName: '',
-    date: {
-      from: '',
-      to: '',
-    },
+    date: [],
     description: '',
   },
   ABOUT: '',

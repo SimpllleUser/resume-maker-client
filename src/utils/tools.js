@@ -32,20 +32,14 @@ const getDefaultResume = () => ({
     {
       companyName: '',
       position: '',
-      date: {
-        from: '',
-        to: '',
-      },
+      date: [],
       description: '',
     },
   ],
   [`${constants.INPUT_KEYS.EDUCATION}.${uuidv4()}`]: [
     {
       educationName: '',
-      date: {
-        from: '',
-        to: '',
-      },
+      date: [],
       description: '',
     },
   ],

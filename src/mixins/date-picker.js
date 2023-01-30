@@ -23,9 +23,10 @@ export default {
       if (!date) return '';
       return new Date(date);
     },
-    getValidDateForInput(inputsValue) {
+    getValidDateForInput(inputsValue = []) {
+      if (!Array.isArray(inputsValue)) return [];
       return inputsValue
-        ?.map(({ date }) => date
+        ?.map((valueItem) => valueItem?.date
           ?.map(this.getFormattedDate)) || [];
     },
   },

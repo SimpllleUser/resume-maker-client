@@ -75,7 +75,7 @@ export default {
     return {
       value: '',
       open: true,
-      dates: [[new Date(), new Date()]],
+      dates: [],
       expiriences: null,
       properties: null,
       propertyName: '',
@@ -112,7 +112,7 @@ export default {
       this.dates = this.getValidDateForInput(inputsValue) || [];
     },
     selectDate({ date, key }) {
-      this.dates = Object.values({ ...this.dates, [key]: date });
+      this.dates = Object.values({ ...this.dates || [], [key]: date });
     },
   },
 };
