@@ -40,6 +40,7 @@
               placeholderValue="constact"
               style="min-width: 150px"
               :disabelEnter="true"
+              max-length="30"
             />
           </div>
           <div v-show="showNavigation">

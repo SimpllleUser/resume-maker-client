@@ -18,6 +18,7 @@
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.NAME"
             @focus-input="focusHandler"
             style="text-align: center"
+            :disabel-enter="false"
           />
         </div>
         <div class="company-position">
@@ -26,6 +27,7 @@
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.POSITION"
             @focus-input="focusHandler"
             :open="open"
+            :disabel-enter="false"
           />
         </div>
         <div class="company-date-work d-flex align-items-center">

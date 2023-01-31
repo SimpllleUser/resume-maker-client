@@ -26,6 +26,7 @@
                 tagType="h2"
                 :placeholderValue="title"
                 :disable-placeholder-style="true"
+                max-length="50"
                 style="min-width: 100px; font-weight: 700; text-align: center"
               />
             </div>

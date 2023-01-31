@@ -8,6 +8,8 @@
       @focus="focusHandler"
       :style="style"
       @keydown="keyPressHandle"
+      v-on:keydown="keyHandle"
+      ref="tag-editable"
     >
       {{ content }}
     </component>
@@ -41,6 +43,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    maxLength: {
+      type: [Number, String],
+      default: 2000,
+    },
   },
   data() {
     return {
@@ -70,10 +76,6 @@ export default {
       immediate: true,
       handler: 'initPlaceholder',
     },
-    // disabelEnter: {
-    //   immediate: true,
-    //   handler: 'initDisabelEnter',
-    // },
   },
   methods: {
     focusHandler() {
@@ -110,6 +112,11 @@ export default {
     keyPressHandle(event) {
       if (this.disabelEnter && event.keyCode === 13) event.preventDefault();
       return false;
+    },
+    keyHandle(event) {
+      const textLengthIsInvalid = this.$refs['tag-editable'].innerText?.length >= this.maxLength;
+      const isValidKeyCode = [8, 16, 17, 37, 38, 39, 40, 46].includes(event.keyCode);
+      if (!isValidKeyCode && textLengthIsInvalid) event.preventDefault();
     },
   },
 };

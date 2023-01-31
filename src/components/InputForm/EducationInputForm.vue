@@ -18,6 +18,7 @@
               v-model="inputValue[key].educationName"
               :placeholder-value="RESUME_PLACEHOLDER_TEXT.EDUCATION.NAME"
               @focus-input="focusHandler"
+              :disabel-enter="false"
               />
             </div>
             <div class="education-date-work d-flex align-items-center">

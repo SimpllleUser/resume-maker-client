@@ -14,6 +14,7 @@
               :placeholderValue="RESUME_PLACEHOLDER_TEXT.SKILL"
               @focus-input="focusHandler"
               :disabel-enter="false"
+              :max-length="20"
             />
           </div>
           <div class="pl-2" v-show="showNavigation">
