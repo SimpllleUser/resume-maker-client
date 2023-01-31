@@ -63,5 +63,7 @@ export default {
     `;
   },
   includeFotns: ({ fonts }) => fonts.reduce((fontTags, currentFont) => `${fontTags} <link href="${currentFont.link}" rel="stylesheet">`, ''),
-  existFocusOnInput: ({ focusContainer }) => Object.values(focusContainer).some(Boolean),
+  existFocusOnInput: ({ focusContainer }) => Object
+    .values(focusContainer)
+    .some(Boolean),
 };

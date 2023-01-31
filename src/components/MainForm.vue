@@ -92,7 +92,7 @@
                     <b-button
                       v-show="focus"
                       size="sm"
-                      @click="deleteInputForm(input)"
+                      @click="deleteInputFormHandle(input)"
                       variant="dark"
                       style="position: absolute; top: -15px; right: -15px"
                     >
@@ -216,6 +216,7 @@ export default {
       deleteInputForm: types.DELETE_INPUT_FROM_AND_DATA,
       resetState: types.RESET_STATE,
       toggleRequireFocus: types.TOGGLE_REQUIRE_FOCUS,
+      setContainerInputState: types.SET_CONTAINER_INPUT_BY_KEY,
     }),
     ...mapMutations('resume', {
       updateResume: resumeTypes.UPDATE_RESUME,
@@ -230,6 +231,10 @@ export default {
     setActiveContainer({ newIndex }) {
       this.toggleRequireFocus();
       this.activeIndex = newIndex;
+    },
+    deleteInputFormHandle(input) {
+      this.deleteInputForm(input);
+      this.setContainerInputState({ key: input.id, value: false });
     },
   },
 };
