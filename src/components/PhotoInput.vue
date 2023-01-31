@@ -29,12 +29,9 @@
           :height="190"
           style="max-width: 200px"
         />
-        <!-- <b-button
-          v-show="!updatedCropImg" variant="outline-primary" size="sm" @click="setImage">
-          <b-icon icon="check-lg"></b-icon>
-        </b-button> -->
       </div>
     </div>
+    <b-button @click="setImage">setImage</b-button>
     <div class="add-photo position-absolute" v-show="showNavigation">
       <b-button variant="primary" size="sm" @click="updatePhoto">
         <b-icon icon="arrow-clockwise" aria-hidden="true"></b-icon>
@@ -97,6 +94,10 @@ export default {
       immediate: true,
       handler: 'showPhotoInputHandler',
     },
+    showNavigation: {
+      immediate: true,
+      handler: 'showNavigationHandle',
+    },
   },
   methods: {
     setvalueTestImg(img) {
@@ -140,6 +141,9 @@ export default {
       } else {
         alert('Sorry, FileReader API not supported');
       }
+    },
+    showNavigationHandle(state) {
+      if (!state) this.setImage();
     },
   },
 };
