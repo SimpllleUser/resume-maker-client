@@ -35,6 +35,7 @@
             v-model="inputValue[key].description"
             @focus-input="focusHandler"
             :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.DESCRIPTION"
+            :disabel-enter="false"
              rows="4" />
             <b-button
             v-show="showNavigation"

@@ -7,6 +7,7 @@
         v-model="inputValue"
         @focus-input="focusHandler"
         :placeholderValue="RESUME_PLACEHOLDER_TEXT.ABOUT"
+        :disabel-enter="false"
       />
     </b-form-group>
   </div>

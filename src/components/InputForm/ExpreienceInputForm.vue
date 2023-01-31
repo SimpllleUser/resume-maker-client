@@ -42,6 +42,7 @@
           v-model="inputValue[key].description"
           @focus-input="focusHandler"
           :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DESCRIPTION"
+          :disabel-enter="false"
         ></tag-editable>
         <b-button
           v-show="showNavigation"

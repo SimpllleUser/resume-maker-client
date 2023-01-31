@@ -13,6 +13,7 @@
               tagType="div"
               :placeholderValue="RESUME_PLACEHOLDER_TEXT.SKILL"
               @focus-input="focusHandler"
+              :disabel-enter="false"
             />
           </div>
           <div class="pl-2" v-show="showNavigation">
