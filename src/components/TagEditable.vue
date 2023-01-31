@@ -7,6 +7,7 @@
       @blur="setContentHandler"
       @focus="focusHandler"
       :style="style"
+      @keydown="keyPressHandle"
     >
       {{ content }}
     </component>
@@ -33,6 +34,10 @@ export default {
       default: false,
     },
     disablePlaceholderStyle: {
+      type: Boolean,
+      default: false,
+    },
+    disabelEnter: {
       type: Boolean,
       default: false,
     },
@@ -65,6 +70,10 @@ export default {
       immediate: true,
       handler: 'initPlaceholder',
     },
+    // disabelEnter: {
+    //   immediate: true,
+    //   handler: 'initDisabelEnter',
+    // },
   },
   methods: {
     focusHandler() {
@@ -97,6 +106,10 @@ export default {
       this.setContent(value);
       this.isUpdatedContent = value.length;
       this.isInit = true;
+    },
+    keyPressHandle(event) {
+      if (this.disabelEnter && event.keyCode === 13) event.preventDefault();
+      return false;
     },
   },
 };

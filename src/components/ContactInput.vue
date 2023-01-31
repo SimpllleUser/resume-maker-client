@@ -39,6 +39,7 @@
               @focus-input="focusHandler"
               placeholderValue="constact"
               style="min-width: 150px"
+              :disabelEnter="true"
             />
           </div>
           <div v-show="showNavigation">
