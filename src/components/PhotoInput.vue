@@ -31,10 +31,12 @@
         />
       </div>
     </div>
-    <b-button @click="setImage">setImage</b-button>
-    <div class="add-photo position-absolute" v-show="showNavigation">
+    <div class="add-photo position-absolute pl-6" v-show="showNavigation">
+      <b-button size="sm" variant="accent" @click="setOriginal" v-if="original">
+        <b-icon icon="arrow-clockwise" />
+      </b-button>
       <b-button variant="primary" size="sm" @click="updatePhoto">
-        <b-icon icon="arrow-clockwise" aria-hidden="true"></b-icon>
+        <b-icon icon="upload" aria-hidden="true"></b-icon>
       </b-button>
       <b-button @click="resetPhoto" variant="primary" size="sm">
         <b-icon icon="trash" aria-hidden="true"></b-icon>
@@ -59,6 +61,7 @@ export default {
   mixins: [inputMixin],
   data() {
     return {
+      original: '',
       showPhotoInput: false,
       updateImg: false,
       updatedCropImg: true,
@@ -134,6 +137,7 @@ export default {
         const reader = new FileReader();
         reader.onload = (event) => {
           this.imgDataUrl = event.target.result;
+          this.original = this.imgDataUrl;
           this.$refs.cropper.replace(this.imgDataUrl);
           this.updatedCropImg = false;
         };
@@ -143,7 +147,17 @@ export default {
       }
     },
     showNavigationHandle(state) {
-      if (!state) this.setImage();
+      if (!state) {
+        this.setImage();
+        return;
+      }
+      this.updatedCropImg = false;
+      this.imgDataUrl = this.inputValue.img;
+      this.$refs.cropper.replace(this.imgDataUrl);
+    },
+    setOriginal() {
+      this.imgDataUrl = this.original;
+      this.$refs.cropper.replace(this.imgDataUrl);
     },
   },
 };
