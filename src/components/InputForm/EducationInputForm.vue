@@ -19,6 +19,8 @@
               :placeholder-value="RESUME_PLACEHOLDER_TEXT.EDUCATION.NAME"
               @focus-input="focusHandler"
               :disabel-enter="false"
+              style="text-align: center; margin: 0 auto;
+             min-width: 10rem; max-width: 20rem; white-space: auto"
               />
             </div>
             <div class="education-date-work d-flex align-items-center">

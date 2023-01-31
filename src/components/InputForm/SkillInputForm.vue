@@ -5,8 +5,9 @@
         v-for="(skill, index) in inputValue"
         :key="`skill-key-${id}-${index}`"
         class="mx-2 mb-2"
-      >        <div class="d-flex align-items-center">
-          <div class="contatc-input" style="min-width: 100px">
+      >
+      <div class="d-flex align-items-center">
+          <div class="contatc-input" style="min-width: 100px; max-width: 50% !important;">
             <tag-editable
               v-model="inputValue[index]"
               allow-white-space
@@ -14,7 +15,6 @@
               :placeholderValue="RESUME_PLACEHOLDER_TEXT.SKILL"
               @focus-input="focusHandler"
               :disabel-enter="false"
-              :max-length="20"
             />
           </div>
           <div class="pl-2" v-show="showNavigation">

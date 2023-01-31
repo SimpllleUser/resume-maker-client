@@ -11,13 +11,14 @@
       v-for="(expirience, key) in inputValue"
       :key="`experience-key-${id}-${key}`"
     >
-      <div>
+      <div style="margin: 0 auto">
         <div class="company-name">
           <tag-editable
             v-model="inputValue[key].companyName"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.NAME"
             @focus-input="focusHandler"
-            style="text-align: center"
+            style="text-align: center;
+             min-width: 10rem; max-width: 20rem; maring: 0 auto; white-space: auto"
             :disabel-enter="false"
           />
         </div>
@@ -28,6 +29,8 @@
             @focus-input="focusHandler"
             :open="open"
             :disabel-enter="false"
+            style="text-align: center;
+             min-width: 10rem; max-width: 20rem; maring: 0 auto; white-space: auto"
           />
         </div>
         <div class="company-date-work d-flex align-items-center">

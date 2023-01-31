@@ -32,7 +32,8 @@
               </template>
             </v-popup>
           </div>
-          <div class="contatc-input" style="margin-left: 10px">
+          <div class="contatc-input"
+           style="margin-left: 10px; max-width: 150px;">
             <tag-editable
               tagType="div"
               v-model="inputValue[index].value"
