@@ -11,7 +11,6 @@
     <b-card bg-variant="primary" text-variant="white" header="Todo" class="text-center">
       <b-card-text>
         <ul>
-          <li>Исправить состояние фокуса после удаления елемента (сброс фокуса)</li>
           <li>
             В некторых tag-editable отменить нажатие клавиши enter и задавть максимальную ширину или
             макс количество символов
