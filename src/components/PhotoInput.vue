@@ -1,48 +1,46 @@
 <template>
   <div class="photo-input position-relative">
-    <b-button
-    variant="outline-dark"
-    size="sm"
-     @click="togglePhoto"
-      v-show="showNavigation">
-    <div class="d-flex">
-        <b-icon :icon="`${  inputValue.show ? 'x-circle' : 'plus-circle'}`"></b-icon>
-    </div>
-    </b-button>
-    <div v-show="inputValue.show">
-    <div class="mb-2">
-      <label for="image-upload" v-show="false">
-        <input ref="FileInput" type="file" id="image-upload" @change="onFileSelect" />
-      </label>
-      <div :style="style">
-        <VueCropper
-          v-show="!updatedCropImg"
-          :style="style"
-          ref="cropper"
-          :src="imgDataUrl"
-          alt="Source Image"
-        />
-        <img
-          v-show="updatedCropImg"
-          :src="inputValue.img"
-          alt="photo"
-          :height="190"
-          style="max-width: 200px"
-        />
+    <div class="d-flex justify-content-between">
+      <div class="add-photo" v-show="showNavigation && inputValue.show">
+        <b-button size="sm" variant="accent" @click="setOriginal()">
+          <b-icon icon="arrow-clockwise" />
+        </b-button>
+        <b-button variant="primary" size="sm" @click="updatePhoto">
+          <b-icon icon="upload" aria-hidden="true"></b-icon>
+        </b-button>
+        <b-button @click="resetPhoto" variant="primary" size="sm">
+          <b-icon icon="trash" aria-hidden="true"></b-icon>
+        </b-button>
+      </div>
+      <div>
+        <b-button variant="outline-dark" size="sm" @click="togglePhoto" v-show="showNavigation">
+          <b-icon :icon="`${inputValue.show ? 'x-circle' : 'plus-circle'}`"></b-icon>
+        </b-button>
       </div>
     </div>
-    <div class="add-photo position-absolute pl-6" v-show="showNavigation">
-      <b-button size="sm" variant="accent" @click="setOriginal" v-if="original">
-        <b-icon icon="arrow-clockwise" />
-      </b-button>
-      <b-button variant="primary" size="sm" @click="updatePhoto">
-        <b-icon icon="upload" aria-hidden="true"></b-icon>
-      </b-button>
-      <b-button @click="resetPhoto" variant="primary" size="sm">
-        <b-icon icon="trash" aria-hidden="true"></b-icon>
-      </b-button>
+    <div v-show="inputValue.show">
+      <div class="mb-2">
+        <label for="image-upload" v-show="false">
+          <input ref="FileInput" type="file" id="image-upload" @change="onFileSelect" />
+        </label>
+        <div :style="style">
+          <VueCropper
+            v-show="!updatedCropImg"
+            :style="style"
+            ref="cropper"
+            :src="imgDataUrl"
+            alt="Source Image"
+          />
+          <img
+            v-show="updatedCropImg"
+            :src="inputValue.img"
+            alt="photo"
+            :height="190"
+            style="max-width: 200px"
+          />
+        </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -52,6 +50,8 @@ import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
 
 import defaultInputValueInForm from '@/assets/img/default.png';
+
+const ZOOM_VALUE = -0.2;
 
 export default {
   name: 'PhotoInput',
@@ -75,9 +75,10 @@ export default {
       },
       imgDataUrl: '',
       properties: ['imgDataUrl'],
-      mime_type: '',
+      mimeType: '',
       inputValue: { img: '', show: true },
       inputType: 'photo',
+      zoomValue: -0.5,
       defaultInputValueInForm,
     };
   },
@@ -127,12 +128,12 @@ export default {
       this.$emit('on-focus');
     },
     setImage() {
-      this.setvalueTestImg(this.$refs.cropper.getCroppedCanvas()?.toDataURL());
+      this.setvalueTestImg(this.$refs?.cropper?.getCroppedCanvas()?.toDataURL());
       this.updatedCropImg = true;
     },
     onFileSelect(e) {
       const file = e.target.files[0];
-      this.mime_type = file.type;
+      this.mimeType = file.type;
       if (typeof FileReader === 'function') {
         const reader = new FileReader();
         reader.onload = (event) => {
@@ -147,16 +148,22 @@ export default {
       }
     },
     showNavigationHandle(state) {
+      this.updatedCropImg = !state;
+      try {
+        this.$refs?.cropper?.relativeZoom(ZOOM_VALUE, 0);
+      } catch (e) {
+        console.log(e);
+      }
       if (!state) {
         this.setImage();
         return;
       }
-      this.updatedCropImg = false;
-      this.imgDataUrl = this.inputValue.img;
+      this.imgDataUrl = this.inputValue?.img;
       this.$refs.cropper.replace(this.imgDataUrl);
     },
     setOriginal() {
-      this.imgDataUrl = this.original;
+      this.imgDataUrl = this.inputValue.img;
+      this.updatedCropImg = false;
       this.$refs.cropper.replace(this.imgDataUrl);
     },
   },
