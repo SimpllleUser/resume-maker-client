@@ -3,7 +3,6 @@
     <div>
       <div>
         <div class="px-3 py-2">
-          {{ Object.keys(formDataTest).length }}
           <div
             v-for="input in inputsList"
            :key="input.name"

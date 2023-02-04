@@ -2,23 +2,9 @@
   <div class="main-form-page p-2 border shadow">
     <div class="d-flex justify-content-center">
       <div>
-        <b-button @click="resetState()">Reset</b-button>
-      </div>
-      <div>
-        <b-button @click="print"> Print </b-button>
+        <b-button variant="primary" @click="print"> <b-icon icon="printer-fill" /> </b-button>
       </div>
     </div>
-    <b-card bg-variant="primary" text-variant="white" header="Todo" class="text-center">
-      <b-card-text>
-        <ul>
-          <li>
-           Исправить работу с InputPhoto
-          </li>
-          <li>Сделать единый стиль для редактирования и отображения данных</li>
-          <li>Подключение стилей без инета</li>
-        </ul>
-      </b-card-text>
-    </b-card>
     <div
       class="main-form"
       id="resume-form"
