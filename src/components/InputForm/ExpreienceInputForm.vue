@@ -1,62 +1,59 @@
 <template>
   <div class="expereiance-row">
-    <span v-html="`<style>${styleFormPrint}</style>`" />
-    <div class="pb-2" v-show="showNavigation">
-      <b-button size="sm" variant="dark" @click="addExperience">
-        <b-icon icon="plus" />
+    <div class="pb-2">
+      <b-button size="sm" variant="primary" @click="addExperience"
+        >add
+        <b-icon icon="plus-lg" />
       </b-button>
     </div>
     <div
       class="experience-item company-template pb-2"
-      v-for="(expirience, key) in inputValue"
+      v-for="(expirience, key) in expiriences[propertyName]"
       :key="`experience-key-${id}-${key}`"
     >
-      <div style="margin: 0 auto">
+      <div>
         <div class="company-name">
-          <tag-editable
-            v-model="inputValue[key].companyName"
-            :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.NAME"
-            @focus-input="focusHandler"
-            style="text-align: center;
-             min-width: 10rem; max-width: 20rem; maring: 0 auto; white-space: auto"
-            :disabel-enter="false"
-          />
+          <b-form-input
+          v-model="expiriences[propertyName][key].companyName"
+           @change="updateInputValue" />
         </div>
         <div class="company-position">
-          <tag-editable
-            v-model="inputValue[key].position"
-            :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.POSITION"
-            @focus-input="focusHandler"
-            :open="open"
-            :disabel-enter="false"
-            style="text-align: center;
-             min-width: 10rem; max-width: 20rem; maring: 0 auto; white-space: auto"
-          />
+          <b-form-input
+          v-model="expiriences[propertyName][key].position"
+           @change="updateInputValue" />
         </div>
         <div class="company-date-work d-flex align-items-center">
-          <date-picker
-          v-model="inputValue[key].date"
-          :placeholder="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DATE"
-          @foucs="focusHandler"
+          <b-form-datepicker
+            v-model="expiriences[propertyName][key].date.from"
+            @context="updateInputValue"
+            placeholder="from"
+            size="sm"
+          />
+          <b-form-datepicker
+            v-model="expiriences[propertyName][key].date.to"
+            @context="updateInputValue"
+            @input="() => allow = false"
+            @hidden="() => allow = false"
+            @shown="() => allow = false"
+            placeholder="to"
+            size="sm"
           />
         </div>
       </div>
       <div>
-        <tag-editable
-          style="text-align: left; padding: 20px; white-space: pre"
-          v-model="inputValue[key].description"
-          @focus-input="focusHandler"
-          :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DESCRIPTION"
-          :disabel-enter="false"
-        ></tag-editable>
+        <b-textarea
+          v-model="expiriences[propertyName][key].description"
+          @change="updateInputValue"
+          placeholder="Description about your expereince"
+          rows="4"
+        ></b-textarea>
         <b-button
-          v-show="showNavigation"
           @click="deleteExpirience(key)"
-          variant="outline-dark"
+          variant="outline-danger"
           size="sm"
           class="btn-delete"
         >
-          <b-icon icon="trash" />
+          <b-icon icon="trash" variant="danger" />
         </b-button>
       </div>
     </div>
@@ -64,62 +61,72 @@
 </template>
 
 <script>
-import constants from '@/constants';
-import inputMixin from '@/mixins/input';
-import datePicker from '@/mixins/date-picker';
-import DatePicker from '@/components/DatePicker.vue';
-import TagEditable from '../TagEditable.vue';
+import cloneDepp from 'lodash/cloneDeep';
+import formMixin from '@/mixins/form';
+
+const defaultExpereence = {
+  companyName: '',
+  position: '',
+  date: { from: '', to: '' },
+  description: '',
+};
 
 export default {
   name: 'ExpreienceInputForm',
-  components: {
-    DatePicker,
-    TagEditable,
+  mixins: [formMixin],
+  props: {
+    id: {
+      type: String,
+      require: true,
+      default: '',
+    },
+    value: {
+      type: Array,
+      default: () => [cloneDepp(defaultExpereence)],
+    },
   },
-  mixins: [inputMixin, datePicker],
   data() {
     return {
-      value: '',
-      open: true,
-      dates: [],
       expiriences: null,
       properties: null,
       propertyName: '',
       allow: false,
-      defaultInputItemValue: {
-        companyName: '',
-        position: '',
-        date: [],
-        description: '',
-      },
-      inputValue: null,
-      inputType: constants.INPUT_KEYS.EXPERIENCE,
-      defaultInputValueInForm: [],
-      styleFormPrint: `
-      .company-template {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        position: relative;
-      }`,
-      isCustomInit: true,
     };
   },
   methods: {
-    focusHandler() {
-      this.$emit('focus-input');
-    },
     addExperience() {
-      this.inputValue = [...this.inputValue, this.defaultInputItemValue];
+      this.expiriences[this.propertyName] = [
+        ...this.expiriences[this.propertyName],
+        JSON.parse(JSON.stringify(defaultExpereence)),
+      ];
     },
     deleteExpirience(key) {
-      this.inputValue = this.inputValue.filter((_, index) => index !== key);
+      this.expiriences[this.propertyName] = this.expiriences[this.propertyName]
+        .filter((_, index) => index !== key);
     },
-    customInit(inputsValue) {
-      this.dates = this.getValidDateForInput(inputsValue) || [];
+  },
+  watch: {
+    id: {
+      immediate: true,
+      handler() {
+        this.propertyName = this.id;
+        this.expiriences = { [this.propertyName]: [JSON.parse(JSON.stringify(defaultExpereence))] };
+        this.properties = [`expiriences.${this.propertyName}`];
+        this.updateInputValue();
+      },
     },
-    selectDate({ date, key }) {
-      this.dates = Object.values({ ...this.dates || [], [key]: date });
+    value: {
+      immediate: true,
+      handler() {
+        this.expiriences[`${this.propertyName}`] = this.value;
+      },
     },
+    educations() {
+      this.updateInputValue();
+    },
+  },
+  mounted() {
+    this.updateInputValue();
   },
 };
 </script>
@@ -129,10 +136,10 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   position: relative;
-}
-.btn-delete {
-  position: absolute;
-  right: 0px;
-  top: 0px;
+  .btn-delete {
+    position: absolute;
+    right: -40px;
+    top: 0px;
+  }
 }
 </style>

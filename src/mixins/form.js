@@ -4,12 +4,6 @@ import ClickOutside from 'vue-click-outside';
 import _ from 'lodash';
 
 export default {
-  props: {
-    showNavigation: {
-      type: Boolean,
-      default: false,
-    },
-  },
   computed: {
     ...mapState('form', ['formData']),
   },
@@ -19,8 +13,7 @@ export default {
       this[namePropetyValue] = this.formData[namePropetyValue];
     },
     updateInputValue() {
-      // eslint-disable-next-line no-underscore-dangle
-      this.properties?.map((propertyName) => this.setFormValue({
+      this.properties.map((propertyName) => this.setFormValue({
         // eslint-disable-next-line no-underscore-dangle
         [propertyName]: _.get(this?._data, propertyName),
       }));
@@ -34,7 +27,7 @@ export default {
     },
   },
   mounted() {
-    this.properties?.map((propertyName) => this.initDataForm(propertyName));
+    this.properties.map((propertyName) => this.initDataForm(propertyName));
   },
   directives: {
     ClickOutside,

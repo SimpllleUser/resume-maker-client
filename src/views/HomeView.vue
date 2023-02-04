@@ -1,10 +1,10 @@
 <template>
     <div class="template">
       <div class="sidebar shadow">
-        <side-bar :id="id" />
+        <side-bar />
       </div>
       <div class="main-contant px-3 mx-3">
-        <main-form :id="id" />
+        <main-form />
       </div>
     </div>
 </template>
@@ -15,12 +15,6 @@ import SideBar from '@/components/SideBar.vue';
 
 export default {
   name: 'HomeView',
-  props: {
-    id: {
-      type: String,
-      require: true,
-    },
-  },
   components: {
     MainForm,
     SideBar,

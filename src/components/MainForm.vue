@@ -1,5 +1,10 @@
 <template>
-  <div class="main-form-page p-2 border shadow">
+  <div>
+    <ul>
+      <tag-editable tag-type="h1" v-model="txt" placeholderValue="Empty content" ></tag-editable>
+      <li><h1>Переделать все инпуты в editable content</h1></li>
+      <li>Добавить возможность множественных созданий резюме</li>
+    </ul>
     <div class="d-flex justify-content-center">
       <div>
         <b-button @click="resetState()">Reset</b-button>
@@ -8,101 +13,125 @@
         <b-button @click="print"> Print </b-button>
       </div>
     </div>
-    <b-card bg-variant="primary" text-variant="white" header="Todo" class="text-center">
-      <b-card-text>
-        <ul>
-          <li>
-           Исправить работу с InputPhoto
-          </li>
-          <li>Сделать единый стиль для редактирования и отображения данных</li>
-          <li>Подключение стилей без инета</li>
-        </ul>
-      </b-card-text>
-    </b-card>
-    <div
-      class="main-form"
-      id="resume-form"
-      :class="` ${existFocusOnInput && 'exist-focus'} font-${currentFont.value}`"
-    >
-      <div style="margin: 0 auto; max-width: 990px">
-        <span v-html="`<style>${styleFormPrint}margin: 0 auto; max-width: 990px;</style>`" />
-        <span v-html="includeFotns"></span>
-        <div>
-          <ContainerFocusItem name="main-info" :show-title="false">
-            <template #main="{ actions, focus }">
-              <div class="row justify-content-center row-cols-2 position-relative">
-                <div :class="`col-${showPhotoInput ? '8' : 12}`">
-                  <div class="col">
-                    <main-info-input-form
-                      id="main-info"
-                      :show-navigation="focus"
-                      @focus-input="actions['main-info'].focus"
+    <div class="main-form" id="resume-form" :class="`font-${currentFont.value}`">
+      <span v-html="`<style>${styleFormPrint}</style>`" />
+      <span v-html="includeFotns"></span>
+      <div>
+        <ContainerFocusItem name="main-info">
+          <template #text>
+            <div class="row row-cols-2">
+              <div :class="`col-${formData.imgDataUrl ? 9 : 12}`">
+                <div class="col">
+                  <div
+                    class="h1 text-center test"
+                    :class="`full-name-color-${currentColor.class} font-${currentFont.value}`"
+                  >
+                    <text-placeholder
+                      :class="`font-${currentFont.class}`"
+                      :value="formData.fullName"
+                      label="Your full name"
                     />
                   </div>
-                  <div>
-                    <ContactInput
-                      id="contact-item-is-uniq"
-                      :show-navigation="focus"
-                      @focus-input="actions['main-info'].focus"
+                  <div class="h4 text-center">
+                    <text-placeholder
+                      :class="`font-${currentFont.class}`"
+                      :value="formData.position"
+                      label="Your position"
                     />
                   </div>
                 </div>
-                <div :class="{ 'col-3': showPhotoInput }">
-                  <div
-                    :class="{ 'empty-photo position-absolute': !showPhotoInput }"
-                    class="d-flex justify-content-center align-items-center"
-                  >
-                    <PhotoInput
-                      id="photo-input-is-uniq"
-                      :show-navigation="focus"
-                      @can-show="showPhotoInputHandle"
-                    />
-                  </div>
+                <contact-static-item :value="formData.contacts" />
+              </div>
+              <div v-if="formData.imgDataUrl" class="col-3">
+                <div class="d-flex justify-content-center align-items-center">
+                  <img :src="formData.imgDataUrl" alt="photo" width="190px" height="190px" />
                 </div>
               </div>
-            </template>
-          </ContainerFocusItem>
-        </div>
-        <draggable v-model="mainFormInputs" @end="setActiveContainer">
-          <transition-group>
-            <div
-              v-for="(input, inputKey) in mainFormInputs"
-              :key="`input-${inputKey}`"
-              style="position: relative; margin: 32px 0px"
-            >
-              <ContainerFocusItem
-                :name="input.id"
-                :id="input.id"
-                :title="input.name"
-                :show-title="true"
-                :activeIndex="activeIndex"
-                :index="inputKey"
-              >
-                <template #main="{ actions, focus }">
-                  <div>
-                    <component
-                      :id="input.id"
-                      :value="getValue(input.id)"
-                      :show-navigation="focus"
-                      v-bind:is="input.component"
-                      @focus-input="actions[`${input.id}`].focus()"
-                    />
-                    <b-button
-                      v-show="focus"
-                      size="sm"
-                      @click="deleteInputFormHandle(input)"
-                      variant="dark"
-                      style="position: absolute; top: -15px; right: -15px"
-                    >
-                      <b-icon icon="x" />
-                    </b-button>
-                  </div>
-                </template>
-              </ContainerFocusItem>
             </div>
-          </transition-group>
-        </draggable>
+          </template>
+          <template #input="{ actions }">
+            <div
+              tabindex="-1"
+              v-click-outside="actions['main-info-on-blur']"
+              @focus="actions['main-info-on-focus']"
+            >
+              <div class="d-flex">
+                <div :class="{ 'w-100': !formData.imgDataUrl }">
+                  <b-form-input
+                    class="text-center"
+                    style="font-size: calc(1.375rem + 1.5vw); border-style: none"
+                    v-model="fullName"
+                    placeholder="Your full name"
+                    @change="updateInputValue"
+                  />
+                  <b-form-input
+                    v-model="position"
+                    class="text-center"
+                    style="font-size: calc(1.275rem + 0.3vw); border-style: none"
+                    placeholder="Your position"
+                    @change="updateInputValue"
+                  />
+                </div>
+                <div>
+                  <PhotoInput @on-focus="actions['main-info-on-focus']" />
+                </div>
+              </div>
+              <div>
+                <ContactInput
+                  @on-focus="actions['main-info-on-focus']"
+                  @on-blur="actions['main-info-on-blur']"
+                />
+              </div>
+            </div>
+          </template>
+        </ContainerFocusItem>
       </div>
+      <draggable v-model="mainFormInputs">
+        <transition-group>
+          <div
+            v-for="(input, inputKey) in mainFormInputs"
+            :key="`input-${inputKey}`"
+            style="position: relative; margin: 32px 0px"
+          >
+            <ContainerFocusItem name="about">
+              <template>
+                <title-container
+                  :id="input.id"
+                  :text="getContainerTitleValue(input.id)"
+                  :placeholder="input.name"
+                />
+              </template>
+              <template #text>
+                <div class="row">
+                  <component
+                    :id="input.id"
+                    :value="getValue(input.id)"
+                    v-bind:is="input.componentStatic"
+                  />
+                </div>
+              </template>
+              <template #input="{ actions }">
+                <div v-click-outside="actions['about-on-blur']">
+                  <component
+                    :id="input.id"
+                    :value="getValue(input.id)"
+                    v-bind:is="input.component"
+                  />
+                  <b-button
+                    size="sm"
+                    pill
+                    @click="deleteInputForm(input)"
+                    variant="danger"
+                    style="position: absolute; top: -15px; right: -15px"
+                  >
+                    <b-icon icon="trash" />
+                  </b-button>
+                </div>
+              </template>
+            </ContainerFocusItem>
+          </div>
+        </transition-group>
+      </draggable>
     </div>
   </div>
 </template>
@@ -110,38 +139,35 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex';
 import formMixin from '@/mixins/form';
+import ContactStaticItem from '@/components/StaticItem/ContactStaticItem.vue';
 import TitleContainer from '@/components/TitleContainer.vue';
 import types from '@/store/modules/form/types';
-import resumeTypes from '@/store/modules/resume/types';
 import TextPlaceholder from '@/components/TextPlaceholder.vue';
 import draggable from 'vuedraggable';
-import VPopup from '@/components/VPopup.vue';
-import ContactInput from '@/components/ContactInput.vue';
-import MainInfoInputForm from '@/components/InputForm/MainInfoInputForm.vue';
-import PhotoInput from '@/components/PhotoInput.vue';
-import ContainerFocusItem from '@/components/ContainerFocusItem.vue';
-import TagEditable from '@/components/TagEditable.vue';
+import ContactInput from './ContactInput.vue';
+import SkillInput from './SkillInput.vue';
+import ExpreienceInput from './ExpreienceInput.vue';
+import EducationInput from './EducationInput.vue';
+import PhotoInput from './PhotoInput.vue';
+import ContainerFocusItem from './ContainerFocusItem.vue';
+import TagEditable from './TagEditable.vue';
 
 export default {
   name: 'MainForm',
   components: {
-    TagEditable,
-    draggable,
-    MainInfoInputForm,
     ContactInput,
+    SkillInput,
+    ExpreienceInput,
+    EducationInput,
     PhotoInput,
     ContainerFocusItem,
     TitleContainer,
     TextPlaceholder,
-    VPopup,
+    ContactStaticItem,
+    TagEditable,
+    draggable,
   },
   mixins: [formMixin],
-  props: {
-    id: {
-      type: String,
-      require: true,
-    },
-  },
   data() {
     return {
       txt: '',
@@ -153,8 +179,6 @@ export default {
       about: '',
       properties: ['fullName', 'position', 'about'],
       mainFormInputs: null,
-      showPhotoInput: false,
-      activeIndex: NaN,
       //   includeFotns: `
       //   <link rel="preconnect" href="https://fonts.googleapis.com">
       //   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,91 +191,40 @@ export default {
     };
   },
   computed: {
-    ...mapState('form', ['inputs', 'formData', 'formDataTest', 'currentFont']),
-    ...mapGetters('form', [
-      'getValue',
-      'getContainerTitleValue',
-      'styleFormPrint',
-      'includeFotns',
-      'existFocusOnInput',
-      // 'currentResumeInputs',
-    ]),
-    ...mapGetters('resume', ['currentResume', 'currentResumeInputs']),
-    bodyStyle() {
-      return (
-        !this.existFocusOnInput
-        && ` body{
-      background-color: white;
-    }`
-      );
-    },
-    formData() {
-      return this.currentResume(this.id);
-    },
-    resumeInputs() {
-      return this.currentResumeInputs(this.id);
-    },
+    ...mapState('form', ['inputs', 'formData', 'currentColor', 'currentFont']),
+    ...mapGetters('form', ['getValue', 'getContainerTitleValue', 'styleFormPrint', 'includeFotns']),
   },
   watch: {
-    id: {
+    inputs: {
       immediate: true,
       handler() {
-        this.mainFormInputs = this.resumeInputs;
-        this.initState(this.currentResume(this.id));
+        this.mainFormInputs = this.inputs;
       },
     },
-    formDataTest() {
-      this.updateResume(this.formDataTest);
-    },
-    resumeInputs() {
-      this.mainFormInputs = this.resumeInputs;
+    mainFormInputs() {
+      this.updateInputs(this.mainFormInputs);
     },
   },
   methods: {
     ...mapMutations('form', {
-      initState: types.INIT_STATE,
       updateInputs: types.SET_INPUT,
       deleteInputForm: types.DELETE_INPUT_FROM_AND_DATA,
+      initState: types.INIT_STATE,
       resetState: types.RESET_STATE,
-      toggleRequireFocus: types.TOGGLE_REQUIRE_FOCUS,
-      setContainerInputState: types.SET_CONTAINER_INPUT_BY_KEY,
     }),
-    ...mapMutations('resume', {
-      updateResume: resumeTypes.UPDATE_RESUME,
-    }),
-    showPhotoInputHandle(canShow) {
-      this.showPhotoInput = canShow;
+    setValue(e) {
+      const value = e.target.innerText;
+      this.txt = value;
     },
     async print() {
-      await this.toggleRequireFocus();
       await this.$htmlToPaper('resume-form');
     },
-    setActiveContainer({ newIndex }) {
-      this.toggleRequireFocus();
-      this.activeIndex = newIndex;
-    },
-    deleteInputFormHandle(input) {
-      this.deleteInputForm(input);
-      this.setContainerInputState({ key: input.id, value: false });
-    },
+  },
+  mounted() {
+    this.initState();
   },
 };
 </script>
 <style lang="scss">
-@import "../assets/app.scss";
-.empty-photo {
-  top: 0px;
-  right: 100px;
-}
-.main-form {
-  padding: 10px;
-  background-color: white;
-}
-.main-form.exist-focus {
-  background-color: rgba(128, 128, 128, 0.332);
-  box-shadow: 0 0 3px rgb(0 0 0 / 10%);
-}
-.main-form-page {
-  background-color: rgba(128, 128, 128, 0.192);
-}
+@import '../assets/app.scss';
 </style>

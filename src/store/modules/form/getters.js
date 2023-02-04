@@ -1,21 +1,40 @@
-import inputList from '@/inputs-list';
-
-const getInputKeyFromData = (keyData) => keyData.split('.')[0];
-const getInputIdFromData = (keyData) => keyData.split('.')[1];
+import SkillInputForm from '@/components/InputForm/SkillInputForm.vue';
+import ExpreienceInputForm from '@/components/InputForm/ExpreienceInputForm.vue';
+import EducationInputForm from '@/components/InputForm/EducationInputForm.vue';
+import AboutInputForm from '@/components/InputForm/AboutInputForm.vue';
+import EducationStaticItem from '@/components/StaticItem/EducationStaticItem.vue';
+import ExpreienceStaticInput from '@/components/StaticItem/ExpreienceStaticInput.vue';
+import SkillStaticItem from '@/components/StaticItem/SkillStaticItem.vue';
+import AboutStaticItem from '@/components/StaticItem/AboutStaticItem.vue';
 
 export default {
-  currentResumeInputs: ({ formDataTest }) => {
-    const componentKeys = Object.keys(inputList);
-    return Object.keys(formDataTest)
-      .filter((key) => componentKeys.includes(key.split('.')[0]))
-      .map((formKey) => ({
-        id: getInputIdFromData(formKey),
-        ...inputList[getInputKeyFromData(formKey)],
-      }));
-  },
-  inputValueByKey: ({ formDataTest }) => (key) => formDataTest[key] || null,
   inputsList() {
-    return inputList;
+    return [
+      {
+        name: 'Skill',
+        type: 'skill',
+        component: SkillInputForm,
+        componentStatic: SkillStaticItem,
+      },
+      {
+        name: 'Experience',
+        type: 'experience',
+        component: ExpreienceInputForm,
+        componentStatic: ExpreienceStaticInput,
+      },
+      {
+        name: 'Education',
+        type: 'education',
+        component: EducationInputForm,
+        componentStatic: EducationStaticItem,
+      },
+      {
+        name: 'About',
+        type: 'about',
+        component: AboutInputForm,
+        componentStatic: AboutStaticItem,
+      },
+    ];
   },
   getValue: ({ formData }) => (keyInput) => {
     const createdInputKeys = Object
@@ -32,9 +51,6 @@ export default {
     const getCssStylesByColor = (color) => `
       .color-${color.class} {
           color: ${color.style} !important;
-      }
-      .bg_color-${color.class}:after {
-          background-color: ${color.style} !important;
       }
       .form-control.color-${color.class} {
           color: ${color.style} !important;
@@ -63,7 +79,4 @@ export default {
     `;
   },
   includeFotns: ({ fonts }) => fonts.reduce((fontTags, currentFont) => `${fontTags} <link href="${currentFont.link}" rel="stylesheet">`, ''),
-  existFocusOnInput: ({ focusContainer }) => Object
-    .values(focusContainer)
-    .some(Boolean),
 };

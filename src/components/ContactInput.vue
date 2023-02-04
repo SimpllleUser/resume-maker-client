@@ -1,60 +1,68 @@
 <template>
-  <div class="conatct-input d-flex justify-content-center">
+  <div class="conatct-input">
     <b-row>
-      <b-col cols="4" v-for="(contact, index) in inputValue" :key="index" class="d-flex">
+      <b-col cols="4" v-for="(contact, index) in contacts" :key="index">
         <div class="d-flex align-items-center">
           <div class="contatc-icon">
-            <v-popup
-              @focus="focusHandler"
-              body-class="border border-dark border rounded"
-              body-style="width: 6rem !important; padding: 5px !important;"
-            >
-              <template #title>
+            <b-dropdown id="dropdown-1" no-caret size="sm" :ref="getDropDownRefName(index)">
+              <template #button-content>
                 <b-icon
-                :class="currentColor.class"
-                  :icon="inputValue[index].icon"
+                  :icon="contacts[index].icon"
                   font-scale="1.5rem"
-                  :style="`color: ${currentColor.style}`"
+                  :id="`icon-selector-${index}`"
                 />
               </template>
-              <template #body>
-                <div class="d-flex bg-light d-flex justify-content-between flex-wrap">
-                  <div v-for="icon in icons" :key="icon" class="border" style="cursor: pointer">
-                    <b-button squared variant="outline-dark" size="sm">
-                      <b-icon
-                        :icon="icon"
-                        font-scale="1.5rem"
-                        @click="selectHandleIcon(icon, index)"
-                      />
-                    </b-button>
-                  </div>
-                </div>
-              </template>
-            </v-popup>
+              <b-dropdown-form>
+                <b-button
+                v-for="icon in icons"
+                 :key="icon"
+                  variant="outline-dark"
+                  @click="
+                  () => {
+                    contacts[index].icon = icon;
+                    hideDropDowm(`icon-selector-${index}`);
+                    updateInputValue();
+                  }
+                "
+                  >
+                  <b-icon
+                    :icon="icon"
+                    font-scale="1.5rem"
+                  />
+                </b-button>
+              </b-dropdown-form>
+            </b-dropdown>
+            <!-- <b-tooltip :target="`icon-selector-${index}`" triggers="hover" variant="primary">
+              <b-icon
+                v-for="icon in icons"
+                :key="icon"
+                :icon="icon"
+                font-scale="2rem"
+                @click="
+                  () => {
+                    contacts[index].icon = icon;
+                    updateInputValue();
+                  }
+                "
+              />
+            </b-tooltip> -->
           </div>
-          <div class="contatc-input"
-           style="margin-left: 10px; max-width: 150px;">
-            <tag-editable
-              tagType="div"
-              v-model="inputValue[index].value"
-              @focus-input="focusHandler"
-              placeholderValue="constact"
-              style="min-width: 150px"
-              :disabelEnter="true"
-              max-length="30"
+          <div class="contatc-input">
+            <b-form-input
+              v-model="contacts[index].value"
+              @change="updateInputValue"
+              placeholder="Your contact"
             />
           </div>
-          <div v-show="showNavigation">
-            <b-button size="sm" variant="outline-dark" @click="deleteConatct(index)">
-              <b-icon icon="trash-fill" />
-            </b-button>
+          <div>
+            <b-icon icon="trash-fill" @click="deleteConatct(index)" />
           </div>
         </div>
       </b-col>
-      <b-col v-show="showNavigation">
+      <b-col>
         <div class="d-flex align-item-center">
-          <b-button size="sm" variant="outline-dark" @click="addConatct">
-            <b-icon icon="plus" />
+          <b-button size="sm" variant="dark-outline" @click="addConatct">
+            add <b-icon icon="plus-lg" />
           </b-button>
         </div>
       </b-col>
@@ -63,41 +71,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import formMixin from '@/mixins/form';
 
-import TagEditable from '@/components/TagEditable.vue';
-import inputMixin from '@/mixins/input';
-import VPopup from '@/components/VPopup.vue';
-import { cloneDeep } from 'lodash';
+const defaultConatctItem = { icon: 'phone', value: '' };
 
 export default {
-  name: 'ContactInput',
-  components: { VPopup, TagEditable },
-  mixins: [inputMixin],
+  name: 'ConatactInput',
+  mixins: [formMixin],
   data() {
     return {
       icons: ['phone', 'mailbox', 'geo-alt-fill', 'github'],
-      defaultInputItemValue: { icon: 'phone', value: '' },
-      contacts: [this.defaultInputItemValue],
+      contacts: [JSON.parse(JSON.stringify(defaultConatctItem))],
       properties: ['contacts'],
       focus: false,
-      inputType: 'contacts',
-      defaultInputValueInForm: [],
-      inputValue: [],
     };
   },
-  computed: {
-    ...mapState('form', ['currentColor', 'currentFont']),
-  },
   methods: {
-    focusHandler() {
-      this.$emit('focus-input');
-    },
     addConatct() {
-      this.inputValue = [...this.inputValue, cloneDeep(this.defaultInputItemValue)];
+      this.contacts = [...(this.contacts || []), JSON.parse(JSON.stringify(defaultConatctItem))];
     },
     deleteConatct(key) {
-      this.inputValue = this.inputValue?.filter((_, index) => index !== key) || [];
+      this.contacts = this.contacts?.filter((_, index) => index !== key) || [];
       this.onFocus();
     },
     getDropDownRefName(index) {
@@ -106,9 +100,10 @@ export default {
     hideDropDowm(refName) {
       this.$refs[`${refName}`].at(0).hide();
     },
-    selectHandleIcon(icon, index) {
-      this.inputValue[index].icon = icon;
-      this.focusHandler();
+  },
+  watch: {
+    contacts() {
+      this.updateInputValue();
     },
   },
 };
