@@ -2,7 +2,7 @@
   <div>
     <div>
       <div>
-        <div class="px-3 py-2">
+        <div class="position-fixed px-3 py-2" style="max-width: 200px">
           <div
             v-for="input in inputsList"
            :key="input.name"
