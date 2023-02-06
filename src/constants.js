@@ -57,10 +57,15 @@ const INPUT_KEYS = {
 
 const EXTRA_Z_INDEX = 9999;
 
+const MAIN_INFO_KEY_RESUME = 'mainInfo.main-info';
+const PHOTO_KEY_RESUME = 'photo.photo-input-is-uniq';
+
 export default {
   RESUME_PLACEHOLDER_TEXT,
   LOCAL_STORAGE_KEYS_RESUMES,
   DEFAULT_INPUT_VALUE,
   INPUT_KEYS,
   EXTRA_Z_INDEX,
+  MAIN_INFO_KEY_RESUME,
+  PHOTO_KEY_RESUME,
 };

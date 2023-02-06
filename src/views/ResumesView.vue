@@ -1,36 +1,51 @@
 <template>
   <div>
-    <b-card text-variant="dark" title="Resumes" sub-title="Your resumes">
+    <b-card
+    text-variant="dark"
+     title="Resumes"
+      sub-title="Your resumes">
       <div>
         <div class="d-flex justify-content-start align-items-center flex-wrap">
-          <div v-for="resumeItem in resumeList" :key="resumeItem.key" class="m-3">
-            <div
-              class="list--item border border-dark d-flex align-items-center justify-content-center"
-            >
+          <div v-for="resumeItem in resumtListCards" :key="resumeItem.id" class="m-3">
+            <div class="list--item d-flex align-items-center justify-content-center">
               <div class="list--item__action">
-                <b-button @click="deleteResume(resumeItem.id)" variant="dark" class="delete">
+                <b-button @click="deleteResume(resumeItem.id)"
+                  variant="primary"
+                   class="delete">
                   <b-icon icon="x"></b-icon>
                 </b-button>
               </div>
-              <b-button variant="danger">
-                <router-link
-                :to="`resume/${resumeItem.id}`"
-                class="text-dark"
-                >{{ resumeItem.id }}</router-link>
-              </b-button>
+
+              <b-card
+               :title="getItem(resumeItem.fullName, 'Full name')"
+                 class="w-100 resume-card">
+                 <div>
+                  <b-img
+                    :src="resumeItem.img"
+                    blank-color="#88f"
+                    :blank="!resumeItem.img"
+                    style="height: 200px; width: 100%; object-fit: cover;"
+                    rounded
+                     alt="Profile photo"></b-img>
+                 </div>
+                <b-card-text class="w-100">
+                  <b-badge class="text-primary border border-primary" variant="primary">
+                    {{ getItem(resumeItem.position, 'Position') }}</b-badge>
+                </b-card-text>
+
+                <b-button variant="primary">
+                    <router-link :to="`resume/${resumeItem.id}`" class="text-light">
+                      Detail
+                    </router-link>
+                  </b-button>
+              </b-card>
             </div>
           </div>
           <div>
-            <div
-              class="list--item
-              border border-dark d-flex align-items-center justify-content-center m-3"
-            >
+            <div class="list--item
+              border border-dark d-flex align-items-center justify-content-center m-3">
               <b-button
-                @click="addResumeHandle"
-                size="lg"
-                variant="outline-dark"
-                style="border: none"
-              >
+              @click="addResumeHandle" size="lg" variant="outline-dark" style="border: none">
                 <b-icon icon="plus-lg"></b-icon>
               </b-button>
             </div>
@@ -56,9 +71,9 @@ export default {
   },
   computed: {
     ...mapState('resume', ['resumeList', 'createdResumeId']),
-    ...mapGetters('resume', ['createdResumeId']),
+    ...mapGetters('resume', ['createdResumeId', 'resumtListCards']),
   },
-  mounted() {},
+  mounted() { },
   methods: {
     ...mapMutations('resume', {
       addResume: types.ADD_RESUME,
@@ -68,20 +83,25 @@ export default {
       this.addResume();
       this.$router.push(`resume/${this.createdResumeId}`);
     },
+    getItem(item, placeholder = '') {
+      return item || placeholder;
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
 .list--item {
-  width: 200px;
-  height: 250px;
+  min-width: 200px;
+  height: 350px;
   position: relative;
+
   &:hover {
     .delete {
       opacity: 1;
       z-index: 3;
     }
   }
+
   .delete {
     z-index: -3;
     position: absolute;
@@ -89,5 +109,11 @@ export default {
     right: -20px;
     transition: all 0.3s;
   }
+
+  // .resume-card {
+  //   img {
+  //     object-fit: cover;
+  //   }
+  // }
 }
 </style>
