@@ -22,7 +22,7 @@
                  <div>
                   <b-img
                     :src="resumeItem.img"
-                    blank-color="#88f"
+                    blank-color="#ced4da"
                     :blank="!resumeItem.img"
                     style="height: 200px; width: 100%; object-fit: cover;"
                     rounded
