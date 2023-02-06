@@ -105,6 +105,7 @@ export default {
   },
   methods: {
     setvalueTestImg(img) {
+      if (!img) return;
       this.inputValue = { ...this.inputValue, img };
     },
     showPhotoInputHandler(state) {
