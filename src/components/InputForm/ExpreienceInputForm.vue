@@ -27,7 +27,6 @@
             v-model="inputValue[key].position"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.POSITION"
             @focus-input="focusHandler"
-            :open="open"
             :disabel-enter="false"
             style="text-align: center;
              min-width: 10rem; max-width: 20rem; maring: 0 auto; white-space: auto"

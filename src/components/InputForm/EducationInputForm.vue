@@ -33,13 +33,13 @@
           </div>
           <div>
             <tag-editable
-            style="text-align: left; padding: 20px; white-space: pre"
-            allow-white-space
-            v-model="inputValue[key].description"
+             v-model="inputValue[key].description"
+            :placeholder-value="RESUME_PLACEHOLDER_TEXT.EDUCATION.DESCRIPTION"
             @focus-input="focusHandler"
-            :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.DESCRIPTION"
             :disabel-enter="false"
-             rows="4" />
+            style="text-align: center;
+             min-width: 10rem; max-width: 20rem; maring: 0 auto; white-space: auto"
+             />
             <b-button
             v-show="showNavigation"
               @click="deleteExpirience(key)"

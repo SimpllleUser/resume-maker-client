@@ -29,7 +29,7 @@ const inputList = {
     component: ExpreienceInputForm,
     defaultValue: getValue({
       type: constants.INPUT_KEYS.EXPERIENCE,
-      quantity: 3,
+      quantity: 1,
       value: constants.DEFAULT_INPUT_VALUE.EXPRERIANCE,
     }),
   },
@@ -39,7 +39,7 @@ const inputList = {
     component: EducationInputForm,
     defaultValue: getValue({
       type: constants.INPUT_KEYS.EDUCATION,
-      quantity: 3,
+      quantity: 1,
       value: constants.DEFAULT_INPUT_VALUE.EDUCATION,
     }),
   },

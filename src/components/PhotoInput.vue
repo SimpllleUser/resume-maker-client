@@ -84,7 +84,7 @@ export default {
   },
   computed: {
     boxStyle() {
-      return this.showNavigation ? 'height: 200px; width: 200px;' : '';
+      return this.showNavigation ? 'height: 160px; width: 160px;' : '';
     },
     style() {
       return `${this.boxStyle}`;
@@ -120,6 +120,7 @@ export default {
       this.setImage();
       this.setvalueTestImg(this.defaultInputValueInForm);
       this.updatedCropImg = true;
+      this.$emit('can-show', true);
     },
     updatePhoto() {
       this.$refs.FileInput.click();
