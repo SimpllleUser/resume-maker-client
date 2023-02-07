@@ -1,17 +1,17 @@
 <template>
-  <div class="expereiance-row">
+  <b-row class="expereiance-row">
     <span v-html="`<style>${styleFormPrint}</style>`" />
     <div class="pb-2" v-show="showNavigation">
       <b-button size="sm" variant="dark" @click="addExperience">
         <b-icon icon="plus" />
       </b-button>
     </div>
-    <div
+    <b-row
       class="experience-item company-template pb-2"
       v-for="(expirience, key) in inputValue"
       :key="`experience-key-${id}-${key}`"
     >
-      <div style="margin: 0 auto">
+      <b-col cols="6" md="12" style="margin: 0 auto" class="border border-primary">
         <div class="company-name" :class="`font-${currentFont.class}`">
           <tag-editable
             v-model="inputValue[key].companyName"
@@ -41,8 +41,8 @@
           @foucs="focusHandler"
           />
         </div>
-      </div>
-      <div :class="`font-${currentFont.class}`">
+      </b-col>
+      <b-col cols="6" md="12" :class="`font-${currentFont.class}`">
         <tag-editable
           style="text-align: left; padding: 20px; white-space: pre"
           v-model="inputValue[key].description"
@@ -59,9 +59,9 @@
         >
           <b-icon icon="trash" />
         </b-button>
-      </div>
-    </div>
-  </div>
+      </b-col>
+    </b-row>
+  </b-row>
 </template>
 
 <script>

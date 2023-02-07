@@ -16,36 +16,45 @@
         <div>
           <ContainerFocusItem name="main-info" :show-title="false">
             <template #main="{ actions, focus }">
-              <div class="row justify-content-center row-cols-2 position-relative">
-                <div :class="`col-${showPhotoInput ? '8' : 12}`">
-                  <div class="col">
-                    <main-info-input-form
-                      id="main-info"
-                      :show-navigation="focus"
-                      @focus-input="actions['main-info'].focus"
-                    />
-                  </div>
-                  <div>
-                    <ContactInput
-                      id="contact-item-is-uniq"
-                      :show-navigation="focus"
-                      @focus-input="actions['main-info'].focus"
-                    />
-                  </div>
+              <!-- <div class="row justify-content-center row-cols-2 position-relative"> -->
+                <!-- <div :class="`col-${showPhotoInput ? '8' : 12}`">
+                  <div class="col"> -->
+                    <b-row>
+                      <b-col cols="12" xl="8" lg="8" md="12">
+                        <main-info-input-form
+                          id="main-info"
+                          :show-navigation="focus"
+                          @focus-input="actions['main-info'].focus"
+                        />
+                        <ContactInput
+                          id="contact-item-is-uniq"
+                          :show-navigation="focus"
+                          @focus-input="actions['main-info'].focus"
+                        />
+                      </b-col>
+                      <b-col  cols="12" xl="3" lg="3" md="12">
+                        <div
+                        class="d-flex align-items-center justify-content-center">
+                          <PhotoInput
+                          id="photo-input-is-uniq"
+                          :show-navigation="focus"
+                          @can-show="showPhotoInputHandle"
+                          />
+                        </div>
+                      </b-col>
+                    </b-row>
+                  <!-- </div>
+                  <div> -->
+                  <!-- </div>
                 </div>
                 <div :class="{ 'col-3': showPhotoInput }">
                   <div
                     :class="{ 'empty-photo position-absolute': !showPhotoInput }"
                     class="d-flex justify-content-center align-items-center"
-                  >
-                    <PhotoInput
-                      id="photo-input-is-uniq"
-                      :show-navigation="focus"
-                      @can-show="showPhotoInputHandle"
-                    />
-                  </div>
-                </div>
-              </div>
+                  > -->
+                  <!-- </div>
+                </div> -->
+              <!-- </div> -->
             </template>
           </ContainerFocusItem>
         </div>

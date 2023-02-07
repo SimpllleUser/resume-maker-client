@@ -1,7 +1,9 @@
 <template>
   <div class="conatct-input d-flex justify-content-center">
     <b-row>
-      <b-col cols="4" v-for="(contact, index) in inputValue" :key="index" class="d-flex">
+      <b-col
+      cols="12" sm="12" md="6" xl="4" lg="4"
+       v-for="(contact, index) in inputValue" :key="index" class="d-flex">
         <div class="d-flex align-items-center">
           <div class="contatc-icon">
             <v-popup
