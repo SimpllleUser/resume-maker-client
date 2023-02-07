@@ -35,7 +35,7 @@
 
                 <b-button variant="primary">
                     <router-link :to="`resume/${resumeItem.id}`" class="text-light">
-                      Detail
+                      Detail <b-icon icon="box-arrow-in-right" />
                     </router-link>
                   </b-button>
               </b-card>
