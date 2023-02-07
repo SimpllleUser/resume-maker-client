@@ -6,7 +6,9 @@
         :key="`skill-key-${id}-${index}`"
         class="mx-2 mb-2"
       >
-      <div class="d-flex align-items-center">
+      <div
+      :class="`font-${currentFont.class}`"
+      class="d-flex align-items-center">
           <div class="contatc-input" style="min-width: 100px; max-width: 50% !important;">
             <tag-editable
               v-model="inputValue[index]"
@@ -34,6 +36,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import constants from '@/constants';
 import inputMixin from '@/mixins/input';
 import TagEditable from '@/components/TagEditable.vue';
@@ -53,6 +56,12 @@ export default {
       defaultInputValueInForm: [],
     };
   },
+  computed: {
+    ...mapState('form', ['currentFont']),
+    canUpdate() {
+      return Boolean(this.inputValue?.length);
+    },
+  },
   methods: {
     focusHandler() {
       this.$emit('focus-input');
@@ -71,11 +80,6 @@ export default {
     },
     onBlur() {
       this.$emit('on-blur');
-    },
-  },
-  computed: {
-    canUpdate() {
-      return Boolean(this.inputValue?.length);
     },
   },
 };

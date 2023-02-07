@@ -1,7 +1,7 @@
 <template>
   <div
     class="h1 text-center"
-    :class="`full-name-color-${currentColor.class} font-${currentFont.value}`"
+    :class="`full-name-color-${currentColor.class} font-${currentFont.class}`"
   >
     <tag-editable
       v-model="inputValue.fullName"

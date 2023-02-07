@@ -33,6 +33,7 @@
             </v-popup>
           </div>
           <div class="contatc-input"
+          :class="`font-${currentFont.class}`"
            style="margin-left: 10px; max-width: 150px;">
             <tag-editable
               tagType="div"

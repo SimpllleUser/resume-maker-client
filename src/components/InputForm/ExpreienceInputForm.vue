@@ -12,7 +12,7 @@
       :key="`experience-key-${id}-${key}`"
     >
       <div style="margin: 0 auto">
-        <div class="company-name">
+        <div class="company-name" :class="`font-${currentFont.class}`">
           <tag-editable
             v-model="inputValue[key].companyName"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.NAME"
@@ -22,7 +22,7 @@
             :disabel-enter="false"
           />
         </div>
-        <div class="company-position">
+        <div class="company-position" :class="`font-${currentFont.class}`">
           <tag-editable
             v-model="inputValue[key].position"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.POSITION"
@@ -32,7 +32,9 @@
              min-width: 10rem; max-width: 20rem; maring: 0 auto; white-space: auto"
           />
         </div>
-        <div class="company-date-work d-flex align-items-center">
+        <div
+        class="company-date-work d-flex align-items-center"
+         :class="`font-${currentFont.class}`">
           <date-picker
           v-model="inputValue[key].date"
           :placeholder="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DATE"
@@ -40,7 +42,7 @@
           />
         </div>
       </div>
-      <div>
+      <div :class="`font-${currentFont.class}`">
         <tag-editable
           style="text-align: left; padding: 20px; white-space: pre"
           v-model="inputValue[key].description"
@@ -63,6 +65,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import constants from '@/constants';
 import inputMixin from '@/mixins/input';
 import datePicker from '@/mixins/date-picker';
@@ -102,6 +105,9 @@ export default {
       }`,
       isCustomInit: true,
     };
+  },
+  computed: {
+    ...mapState('form', ['currentFont']),
   },
   methods: {
     focusHandler() {

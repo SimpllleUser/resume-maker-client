@@ -13,7 +13,7 @@
           :key="key"
         >
           <div>
-            <div class="education-name">
+            <div class="education-name" :class="`font-${currentFont.class}`">
               <tag-editable
               v-model="inputValue[key].educationName"
               :placeholder-value="RESUME_PLACEHOLDER_TEXT.EDUCATION.NAME"
@@ -23,7 +23,10 @@
              min-width: 10rem; max-width: 20rem; white-space: auto"
               />
             </div>
-            <div class="education-date-work d-flex align-items-center">
+            <div
+            class="education-date-work d-flex align-items-center"
+            :class="`font-${currentFont.class}`"
+            >
               <date-picker
           v-model="inputValue[key].date"
           :placeholder="RESUME_PLACEHOLDER_TEXT.EDUCATION.DATE"
@@ -31,7 +34,7 @@
           />
             </div>
           </div>
-          <div>
+          <div :class="`font-${currentFont.class}`">
             <tag-editable
              v-model="inputValue[key].description"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EDUCATION.DESCRIPTION"
@@ -56,6 +59,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import constants from '@/constants';
 import input from '@/mixins/input';
 import datePicker from '@/mixins/date-picker';
@@ -88,6 +92,9 @@ export default {
       }`,
       isCustomInit: true,
     };
+  },
+  computed: {
+    ...mapState('form', ['currentFont']),
   },
   methods: {
     focusHandler() {

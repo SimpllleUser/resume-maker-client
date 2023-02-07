@@ -1,6 +1,8 @@
 <template>
   <div v-click-outside="onBlur" class="ml-auto mr-auto">
-    <b-form-group style="width: 100%; display: block; margin: 0 auto">
+    <b-form-group
+    :class="`font-${currentFont.class}`"
+    style="width: 100%; display: block; margin: 0 auto">
       <tag-editable
       style="text-align: left; padding: 20px;"
         allow-white-space
@@ -14,6 +16,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import constants from '@/constants';
 import inputMixin from '@/mixins/input';
 import TagEditable from '../TagEditable.vue';
@@ -31,6 +34,9 @@ export default {
       defaultInputValueInForm: '',
       inputValue: null,
     };
+  },
+  computed: {
+    ...mapState('form', ['currentFont']),
   },
   methods: {
     focusHandler() {

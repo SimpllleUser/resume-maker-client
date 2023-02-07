@@ -15,7 +15,7 @@
           style="position: relative"
           :class="`
       full-name-color-${currentColor.class}
-      font-${currentFont.value}`"
+      font-${currentFont.class}`"
         >
           <div class="middle-line" :class="`bg_color-${currentColor.class}`"></div>
           <div class="title-wrapper-container">
