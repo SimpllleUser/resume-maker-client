@@ -45,7 +45,7 @@
           />
         </div>
       </div>
-      <div  class="col-xl-6 col-lg-6 col-md-6 col-sm-12" style="margin: 0 auto">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12" style="margin: 0 auto">
         <tag-editable
           style="text-align: left; padding: 20px; white-space: normal"
           v-model="inputValue[key].description"

@@ -1,6 +1,6 @@
 <template>
     <div class="expereiance-row">
-      <span v-html="`<style>${styleFormPrint}</style>`" />
+      <!-- <span v-html="`<style>${styleFormPrint}</style>`" /> -->
         <div class="pb-2" v-show="showNavigation">
           <b-button size="sm" variant="dark" @click="addExperience"
             >
@@ -8,11 +8,11 @@
           </b-button>
         </div>
         <div
-          class="experience-item education-template pb-2"
+          class="row container pb-2"
           v-for="(education, key) in inputValue"
           :key="key"
         >
-          <div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
             <div class="education-name" :class="`font-${currentFont.class}`">
               <tag-editable
               v-model="inputValue[key].educationName"
@@ -34,14 +34,17 @@
           />
             </div>
           </div>
-          <div :class="`font-${currentFont.class}`">
+          <div
+          class="col-xl-6 col-lg-6 col-md-6 col-sm-12
+          d-flex align-items-center justify-content-center"
+           :class="`font-${currentFont.class}`">
             <tag-editable
              v-model="inputValue[key].description"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EDUCATION.DESCRIPTION"
             @focus-input="focusHandler"
             :disabel-enter="false"
-            style="text-align: center;
-             min-width: 10rem; max-width: 20rem; maring: 0 auto; white-space: auto"
+            style="text-align: left;
+             min-width: 10rem; max-width: 20rem; maring: 0 auto; white-space: pre"
              />
             <b-button
             v-show="showNavigation"
@@ -84,12 +87,12 @@ export default {
       inputValue: null,
       inputType: constants.INPUT_KEYS.EDUCATION,
       defaultInputValueInForm: [],
-      styleFormPrint: `
-      .education-template {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        position: relative;
-      }`,
+      // styleFormPrint: `
+      // .education-template {
+      //   display: grid;
+      //   grid-template-columns: repeat(2, 1fr);
+      //   position: relative;
+      // }`,
       isCustomInit: true,
     };
   },
