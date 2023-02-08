@@ -1,5 +1,6 @@
 <template>
   <v-popup
+  titleClass="text-center"
   @focus="focusHandle">
     <template #title>
       <div :class="{ 'text-secondary': !existValue }">{{ label }}</div>

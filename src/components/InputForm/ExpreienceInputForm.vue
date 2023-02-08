@@ -1,18 +1,20 @@
 <template>
-  <b-row class="expereiance-row">
-    <span v-html="`<style>${styleFormPrint}</style>`" />
+  <div class="expereiance-row">
+    <!-- <span v-html="`<style>${styleFormPrint}</style>`" /> -->
     <div class="pb-2" v-show="showNavigation">
       <b-button size="sm" variant="dark" @click="addExperience">
         <b-icon icon="plus" />
       </b-button>
     </div>
-    <b-row
-      class="experience-item company-template pb-2"
+    <div class="container">
+      <div class="row experience-item company-template pb-2"
       v-for="(expirience, key) in inputValue"
       :key="`experience-key-${id}-${key}`"
     >
-      <b-col cols="6" md="12" style="margin: 0 auto" class="border border-primary">
-        <div class="company-name" :class="`font-${currentFont.class}`">
+      <div
+      class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="d-flex align-items-center justify-content-center"
+         :class="`font-${currentFont.class}`">
           <tag-editable
             v-model="inputValue[key].companyName"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.NAME"
@@ -22,7 +24,8 @@
             :disabel-enter="false"
           />
         </div>
-        <div class="company-position" :class="`font-${currentFont.class}`">
+        <div class="d-flex align-items-center justify-content-center"
+        :class="`font-${currentFont.class}`">
           <tag-editable
             v-model="inputValue[key].position"
             :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.POSITION"
@@ -33,18 +36,18 @@
           />
         </div>
         <div
-        class="company-date-work d-flex align-items-center"
-         :class="`font-${currentFont.class}`">
+        class="d-flex align-items-center justify-content-center"
+         :class="`font-${currentFont.class}`" style="margin: 0 auto">
           <date-picker
           v-model="inputValue[key].date"
           :placeholder="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DATE"
           @foucs="focusHandler"
           />
         </div>
-      </b-col>
-      <b-col cols="6" md="12" :class="`font-${currentFont.class}`">
+      </div>
+      <div  class="col-xl-6 col-lg-6 col-md-6 col-sm-12" style="margin: 0 auto">
         <tag-editable
-          style="text-align: left; padding: 20px; white-space: pre"
+          style="text-align: left; padding: 20px; white-space: normal"
           v-model="inputValue[key].description"
           @focus-input="focusHandler"
           :placeholder-value="RESUME_PLACEHOLDER_TEXT.EXPERIANCE.DESCRIPTION"
@@ -59,9 +62,10 @@
         >
           <b-icon icon="trash" />
         </b-button>
-      </b-col>
-    </b-row>
-  </b-row>
+      </div>
+    </div>
+  </div>
+    </div>
 </template>
 
 <script>
@@ -97,12 +101,12 @@ export default {
       inputValue: null,
       inputType: constants.INPUT_KEYS.EXPERIENCE,
       defaultInputValueInForm: [],
-      styleFormPrint: `
-      .company-template {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        position: relative;
-      }`,
+      // styleFormPrint: `
+      // .company-template {
+      //   display: grid;
+      //   grid-template-columns: repeat(2, 1fr);
+      //   position: relative;
+      // }`,
       isCustomInit: true,
     };
   },
@@ -130,11 +134,11 @@ export default {
 </script>
 
 <style lang="scss">
-.company-template {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  position: relative;
-}
+// .company-template {
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+//   position: relative;
+// }
 .btn-delete {
   position: absolute;
   right: 0px;

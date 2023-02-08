@@ -1,8 +1,7 @@
 <template>
   <div class="conatct-input d-flex justify-content-center">
     <b-row>
-      <b-col
-      cols="12" sm="12" md="6" xl="4" lg="4"
+      <b-col cols="12" sm="12" md="6" xl="4" lg="4"
        v-for="(contact, index) in inputValue" :key="index" class="d-flex">
         <div class="d-flex align-items-center justify-content-center w-100">
           <div class="contatc-icon">
