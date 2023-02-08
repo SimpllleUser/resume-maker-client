@@ -19,8 +19,9 @@
               <!-- <div class="row justify-content-center row-cols-2 position-relative"> -->
                 <!-- <div :class="`col-${showPhotoInput ? '8' : 12}`">
                   <div class="col"> -->
-                    <b-row>
-                      <b-col cols="12" xl="8" lg="8" md="12">
+                    <div class="container">
+                    <div class="row align-items-center">
+                      <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
                         <main-info-input-form
                           id="main-info"
                           :show-navigation="focus"
@@ -31,8 +32,8 @@
                           :show-navigation="focus"
                           @focus-input="actions['main-info'].focus"
                         />
-                      </b-col>
-                      <b-col  cols="12" xl="3" lg="3" md="12">
+                      </div>
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                         <div
                         class="d-flex align-items-center justify-content-center">
                           <PhotoInput
@@ -41,8 +42,9 @@
                           @can-show="showPhotoInputHandle"
                           />
                         </div>
-                      </b-col>
-                    </b-row>
+                      </div>
+                    </div>
+                  </div>
                   <!-- </div>
                   <div> -->
                   <!-- </div>

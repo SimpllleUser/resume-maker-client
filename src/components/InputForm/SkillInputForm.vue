@@ -8,7 +8,7 @@
       >
       <div
       :class="`font-${currentFont.class}`"
-      class="d-flex align-items-center">
+      class="d-flex justify-content-center align-items-center">
           <div class="contatc-input" style="min-width: 100px; max-width: 50% !important;">
             <tag-editable
               v-model="inputValue[index]"
