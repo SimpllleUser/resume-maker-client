@@ -3,7 +3,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ref } from 'vue';
 
-const date = ref(new Date());
+const date = ref({ "month": 11, "year": 2023 });
 </script>
 
 <template>
