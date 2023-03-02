@@ -9,7 +9,7 @@ import ResumePhoto from './Resume/ResumePhoto.vue';
         <resume-main-info />
         <resume-calendar />
         <resume-photo />
-        <h1>Main form</h1>
+        <h1 class="text-primary bg-dark-700">Main form</h1>
     </div>
 </template>
 

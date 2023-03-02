@@ -2,7 +2,7 @@
 import { Ref, ref } from 'vue';
 import myUpload from 'vue-image-crop-upload';
 
-const show = ref(true);
+const show = ref(false);
 const params = ref({
 				token: '123456798',
 				name: 'avatar'
@@ -17,9 +17,8 @@ const cropSuccess = (imgValue: string | undefined, field: any) => {
 </script>
 
 <template>
-<a class="btn" @click="toggleShow">set avatar</a>
+<a class="btn-primary-2" @click="toggleShow">set avatar</a>
 	<my-upload field="img"
-        @crop-success="cropSuccess"
         v-model="show"
 		:width="300"
 		:height="300"
