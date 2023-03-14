@@ -1,24 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   content: [],
-  theme: {
-    extend: {
-      colors: {
-        'primary': '#104c91',
-        'primary-dark': '#0b3565',
-        'primary-light': '#3f6fa7',
-        'secondary': '#efc9af',
-        'secondary-dark': '#a78c7a',
-        'secondary-light': '#f2d3bf',
-        'accent': '#1f8ac0',
-        'accent-dark': '#156086',
-        'accent-light': '#4ba1cc',
-        'light': '#fcfcfc',
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "color-scheme": "light",
+          primary: "#4b6bfb",
+          secondary: "#7b92b2",
+          accent: "#67cba0",
+          neutral: "#181a2a",
+          "neutral-content": "#edf2f7",
+          "base-100": "#ffffff",
+          "base-content": "#181a2a",
+          "--rounded-box": "0.25rem",
+          "--rounded-btn": ".125rem",
+          "--rounded-badge": ".125rem",
+          "--animation-btn": "0",
+          "--animation-input": "0",
+          "--btn-focus-scale": "1",
+        },
       },
-    },
+    ],
   },
-  plugins: [
-    
-  ],
-}
+  plugins: [require("daisyui")],
+};
