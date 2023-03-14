@@ -1,34 +1,50 @@
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
+import { useToggle, useVModel } from '@vueuse/core';
+import { computed, onMounted, Ref, ref, useSlots } from 'vue';
 import myUpload from 'vue-image-crop-upload';
 
-const show = ref(false);
+interface Props {
+	label: string;
+	modelValue: string
+}
+
+const slots = useSlots()
+
+const props = withDefaults(defineProps<Props>(), {
+  label: 'update',
+});
+
+const emit = defineEmits(['update:modelValue']);
+const imgDataUrl = useVModel(props, 'modelValue', emit)
+
 const params = ref({
-				token: '123456798',
-				name: 'avatar'
-			});
-const imgDataUrl: Ref<string | undefined> = ref('');
+	token: '123456798',
+	name: 'avatar'
+});
+// const imgDataUrl: Ref<string | undefined> = ref('');
 
+const [showPhotoUpdateModal, togglePhotoUpdate] = useToggle();
 
-const toggleShow = () => { show.value = !show.value };
 const cropSuccess = (imgValue: string | undefined, field: any) => {
-				imgDataUrl.value = imgValue;
-			};
+	imgDataUrl.value = imgValue || '';
+};
+
+const existImageSlot = computed(() => slots.img);
+const existButtonUpdateImgSlot = computed(() => slots['button-update-image']);
+
+
 </script>
 
 <template>
-<a class="btn-primary-2" @click="toggleShow">set avatar</a>
-	<my-upload field="img"
-        v-model="show"
-		:width="300"
-		:height="300"
-		url="/upload"
-		:params="params"
-        langType="eng"
+	<my-upload field="img" v-model="showPhotoUpdateModal" :params="params" langType="eng" @crop-success="cropSuccess"
 		img-format="png"></my-upload>
-	<img :src="imgDataUrl">
+	<img v-show="!existImageSlot" :src="imgDataUrl">
+	<button 
+	v-show="!existButtonUpdateImgSlot"
+	 class="btn btn-primary btn-sm"
+	@click="togglePhotoUpdate()">{{ props.label }}</button>
+	<slot name="img" :img="imgDataUrl"></slot>
+	<slot name="button-update-image" :update="togglePhotoUpdate"></slot>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
