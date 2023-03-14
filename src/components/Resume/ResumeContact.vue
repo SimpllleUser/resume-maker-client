@@ -19,7 +19,7 @@ const icons = [
 
 const contacts: Ref<Contact[]> = ref([
     { icon: 'phone', value: 'phone' },
-    {  icon: 'envelope', value: 'email' },
+    { icon: 'envelope', value: 'email' },
     { icon: 'github', value: 'link' },
     { icon: '', value: 'empty icon' },
 ]);
@@ -34,20 +34,19 @@ const removeContact = (contactIndex: number) => {
 
 <template>
     <div class="flex flex-wrap justify-around">
-        <div 
-        v-for="(contact, index) in contacts" 
-        :key="index" 
-        class="flex justify-around w-64 mb-2">
-            <icon-selector v-model="contact.icon" :icons="icons"  />
+        <div v-for="(contact, index) in contacts" :key="index" class="flex justify-around w-64 mb-2">
+            <icon-selector v-model="contact.icon" :icons="icons" />
             <input-tag v-model="contact.value" class="min-w-full" />
             <button class="btn btn-active btn-primary btn-xs" @click="removeContact(index)">
                 <unicon name="multiply" class="text-xs" fill="white"></unicon>
             </button>
         </div>
+        <div class="flex justify-around w-64 mb-2">
+            <button class="btn btn-primary btn-xs" @click="addContact">
+                <unicon name="plus" class="text-xs" fill="white"></unicon>
+            </button>
+        </div>
     </div>
-    <button class="btn btn-primary btn-xs" @click="addContact">
-        <unicon name="plus" class="text-xs" fill="white"></unicon>
-    </button>
 </template>
 
 <style scoped></style>
