@@ -10,9 +10,9 @@ interface Skill {
 }
 
 const skills: Ref<Skill[]> = ref([
-    { icon: '', value: 'JavaScript' },
-    { icon: '', value: 'TypeScript' },
-    { icon: '', value: 'TypeScript' },
+    { icon: 'phone', value: 'JavaScript' },
+    { icon: 'github', value: 'TypeScript' },
+    { icon: 'print', value: 'TypeScript' },
 ]);
 
 const addSkill = () => {
@@ -29,6 +29,8 @@ const removeSkill = (skillIndex: number) => {
         v-for="(skill, index) in skills" 
         :key="index" 
         class="flex justify-around w-64 border-2 border-primary mb-2">
+        {{ skill.icon }}
+        <unicon :name="skill.icon" class="btn-primary text-xs" fill="white" />
             <input-tag v-model="skill.value" />
             <button class="btn-primary px-2 py-1" @click="removeSkill(index)">
                 <unicon name="multiply" class="text-xs" fill="white"></unicon>
