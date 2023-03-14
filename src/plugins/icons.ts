@@ -15,6 +15,7 @@ Unicon.add([
     icons.uniTimes,
     icons.uniRedo,
     icons.uniAngleDown,
+    icons.uniImageTimes,
 ]);
 
 export default Unicon;

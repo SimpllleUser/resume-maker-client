@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import InputTag from '../Input/InputTag.vue';
-import ResumeSkills from './ResumeSkills.vue';
+import ResumeContact from './ResumeContact.vue';
 
 const fullName = ref('User full name');
 const position = ref('User position');
@@ -13,8 +13,11 @@ const position = ref('User position');
         <input-tag v-model="position" class="text-xl"/>
     </div>
     <div>
-        <resume-skills/>
+        <resume-contact/>
     </div>
+    <!-- <div>
+        <resume-skills/>
+    </div> -->
 </template>
 
 <style lang="scss" scoped>

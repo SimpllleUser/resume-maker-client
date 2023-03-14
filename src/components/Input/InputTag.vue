@@ -25,6 +25,7 @@ const model = useVModel(props, "modelValue", emit);
       tag="div"
       :contenteditable="true"
       v-model="model"
+      style="min-width: 2rem;"
       :class="`${props.class}`"
     />
   </div>
