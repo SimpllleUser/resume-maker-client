@@ -5,18 +5,17 @@ import { ref, Ref } from 'vue';
 import InputTag from '../Input/InputTag.vue';
 
 interface Skill {
-    icon: string;
     value: string;
 }
 
 const skills: Ref<Skill[]> = ref([
-    { icon: 'phone', value: 'JavaScript' },
-    { icon: 'github', value: 'TypeScript' },
-    { icon: 'print', value: 'TypeScript' },
+    { value: 'HTML' },
+    {  value: 'CSS' },
+    { value: 'JS' },
 ]);
 
 const addSkill = () => {
-    skills.value.push({ icon: '', value: 'TypeScript' });
+    skills.value.push({ value: 'TypeScript' });
 };
 const removeSkill = (skillIndex: number) => {
     skills.value = skills.value.filter((_, index) => skillIndex !== index);
@@ -24,26 +23,18 @@ const removeSkill = (skillIndex: number) => {
 </script>
 
 <template>
-    <button class="btn">Button</button>
-<button class="btn btn-primary">Button</button>
-<button class="btn btn-secondary">Button</button>
-<button class="btn btn-accent">Button</button>
-<button class="btn btn-ghost">Button</button>
-<button class="btn btn-link">Button</button>
     <div class="flex flex-wrap justify-around">
         <div 
         v-for="(skill, index) in skills" 
         :key="index" 
-        class="flex justify-around w-64 border-2 border-primary mb-2">
-        {{ skill.icon }}
-        <unicon :name="skill.icon" class="btn-primary text-xs" fill="white" />
+        class="flex justify-around w-64 mb-2">
             <input-tag v-model="skill.value" />
-            <button class="btn-primary px-2 py-1" @click="removeSkill(index)">
+            <button class="btn btn-active btn-primary btn-xs" @click="removeSkill(index)">
                 <unicon name="multiply" class="text-xs" fill="white"></unicon>
             </button>
         </div>
     </div>
-    <button class="btn-primary px-2 py-1" @click="addSkill">
+    <button class="btn btn-primary btn-xs" @click="addSkill">
         <unicon name="plus" class="text-xs" fill="white"></unicon>
     </button>
 </template>
