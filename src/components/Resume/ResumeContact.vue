@@ -1,9 +1,11 @@
 
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
+import { ref, Ref, watch } from 'vue';
 
 import InputTag from '../Input/InputTag.vue';
 import IconSelector from '../UI/IconSelector.vue';
+
+import { useFocusWithin } from '@vueuse/core'
 
 interface Contact {
     icon: string;
@@ -30,10 +32,21 @@ const addContact = () => {
 const removeContact = (contactIndex: number) => {
     contacts.value = contacts.value.filter((_, index) => index !== contactIndex);
 };
+
+const setFocus = () => {console.log('FOCUS'); }
+
+
+const target = ref();
+const { focused } = useFocusWithin(target)
+
+watch(focused, focused => {
+  if (focused) console.log('Target contains the focused element')
+  else console.log('Target does NOT contain the focused element')
+})
 </script>
 
 <template>
-    <div class="flex flex-wrap justify-around">
+    <div class="flex flex-wrap justify-around border-red-600" ref="target" @focus="setFocus" tabindex="-1">
         <div v-for="(contact, index) in contacts" :key="index" class="flex justify-around w-64 mb-2">
             <icon-selector v-model="contact.icon" :icons="icons" />
             <input-tag v-model="contact.value" class="min-w-full" />
