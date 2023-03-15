@@ -17,7 +17,7 @@ watch(focused, focused => {
 <template>
     <div ref="target"  tabindex="-1">
         <slot name="header"></slot>
-        <slot></slot>
+        <slot :focus="focused"></slot>
         <slot name="footer"></slot>
     </div>
 </template>

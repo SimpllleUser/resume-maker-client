@@ -1,58 +1,55 @@
-
 <script setup lang="ts">
-import { ref, Ref, watch } from 'vue';
+import { ref, Ref, watch } from "vue";
 
-import InputTag from '../Input/InputTag.vue';
-import IconSelector from '../UI/IconSelector.vue';
-import FocusContainer from '../FocusContainer.vue';
+import InputTag from "../Input/InputTag.vue";
+import IconSelector from "../UI/IconSelector.vue";
 
 interface Contact {
-    icon: string;
-    value: string;
+  icon: string;
+  value: string;
 }
 
-const icons = [
-    'phone',
-    'envelope',
-    'map-marker',
-    'github',
-];
+const icons = ["phone", "envelope", "map-marker", "github"];
 
 const contacts: Ref<Contact[]> = ref([
-    { icon: 'phone', value: 'phone' },
-    { icon: 'envelope', value: 'email' },
-    { icon: 'github', value: 'link' },
-    { icon: '', value: 'empty icon' },
+  { icon: "phone", value: "phone" },
+  { icon: "envelope", value: "email" },
+  { icon: "github", value: "link" },
+  { icon: "", value: "empty icon" },
 ]);
 
 const addContact = () => {
-    contacts.value.push({ icon: 'phone', value: '' });
+  contacts.value.push({ icon: "phone", value: "" });
 };
 const removeContact = (contactIndex: number) => {
-    contacts.value = contacts.value.filter((_, index) => index !== contactIndex);
+  contacts.value = contacts.value.filter((_, index) => index !== contactIndex);
 };
-
 </script>
 
 <template>
-    <focus-container>
-    <div class="grid grid-cols-4 hover:border-red-600">
-        <div v-for="(contact, index) in contacts" :key="index" class="flex items-center justify-around mb-2">
-            <div class="print:ml-4">
-                <icon-selector v-model="contact.icon" :icons="icons" />
-            </div>
-            <input-tag v-model="contact.value" class="min-w-full" />
-            <button class="btn btn-active btn-primary btn-xs print:hidden" @click="removeContact(index)">
-                <unicon name="multiply" class="text-xs" fill="white"></unicon>
-            </button>
-        </div>
-        <div class="print:hidden">
-            <button class="btn btn-primary btn-xs" @click="addContact">
-                <unicon name="plus" class="text-xs" fill="white"></unicon>
-            </button>
-        </div>
+  <div class="flex items-center justify-center flex-wrap">
+    <div
+      v-for="(contact, index) in contacts"
+      :key="index"
+      class="flex items-center justify-between mb-2 w-1/3"
+    >
+      <div class="print:ml-2">
+        <icon-selector v-model="contact.icon" :icons="icons" />
+      </div>
+      <input-tag v-model="contact.value" class="min-w-full print:text-center" />
+      <button
+        class="btn btn-active btn-primary btn-xs print:opacity-0"
+        @click="removeContact(index)"
+      >
+        <unicon name="multiply" class="text-xs" fill="white"></unicon>
+      </button>
     </div>
-</focus-container>
+    <div class="flex items-center mb-2 print:hidden">
+      <button class="btn btn-primary btn-xs" @click="addContact">
+        <unicon name="plus" fill="white"></unicon>
+      </button>
+    </div>
+  </div>
 </template>
 
 <style scoped></style>
