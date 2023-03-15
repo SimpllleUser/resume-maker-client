@@ -4,8 +4,7 @@ import { ref, Ref, watch } from 'vue';
 
 import InputTag from '../Input/InputTag.vue';
 import IconSelector from '../UI/IconSelector.vue';
-
-import { useFocusWithin } from '@vueuse/core'
+import FocusContainer from '../FocusContainer.vue';
 
 interface Contact {
     icon: string;
@@ -33,33 +32,27 @@ const removeContact = (contactIndex: number) => {
     contacts.value = contacts.value.filter((_, index) => index !== contactIndex);
 };
 
-const setFocus = () => {console.log('FOCUS'); }
-
-
-const target = ref();
-const { focused } = useFocusWithin(target)
-
-watch(focused, focused => {
-  if (focused) console.log('Target contains the focused element')
-  else console.log('Target does NOT contain the focused element')
-})
 </script>
 
 <template>
-    <div class="flex flex-wrap justify-around border-red-600" ref="target" @focus="setFocus" tabindex="-1">
-        <div v-for="(contact, index) in contacts" :key="index" class="flex justify-around w-64 mb-2">
-            <icon-selector v-model="contact.icon" :icons="icons" />
+    <focus-container>
+    <div class="grid grid-cols-4 hover:border-red-600">
+        <div v-for="(contact, index) in contacts" :key="index" class="flex items-center justify-around mb-2">
+            <div class="print:ml-4">
+                <icon-selector v-model="contact.icon" :icons="icons" />
+            </div>
             <input-tag v-model="contact.value" class="min-w-full" />
-            <button class="btn btn-active btn-primary btn-xs" @click="removeContact(index)">
+            <button class="btn btn-active btn-primary btn-xs print:hidden" @click="removeContact(index)">
                 <unicon name="multiply" class="text-xs" fill="white"></unicon>
             </button>
         </div>
-        <div class="flex justify-around w-64 mb-2">
+        <div class="print:hidden">
             <button class="btn btn-primary btn-xs" @click="addContact">
                 <unicon name="plus" class="text-xs" fill="white"></unicon>
             </button>
         </div>
     </div>
+</focus-container>
 </template>
 
 <style scoped></style>
