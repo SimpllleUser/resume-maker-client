@@ -13,3 +13,7 @@
   before:z-[-1]
   before:top-1/2 before:left-1/2 before:transform before:-translate-x-1/2 before:-translate-y-1/2;
 }
+
+.container-title-input {
+    @apply text-center text-2xl font-semibold bg-white;
+}

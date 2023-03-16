@@ -16,7 +16,7 @@ const skillTitle = ref('Skill')
             <template #header>
                 <div class="flex justify-center items-center py-6 container-title-line">
                 <div class="bg-white px-6">
-                    <input-tag v-model="skillTitle" style="min-width: 10rem;" class="text-center text-2xl font-semibold bg-white" />
+                    <input-tag v-model="skillTitle" class="container-title-input" />
                 </div>
                 </div>
             </template>
