@@ -30,9 +30,11 @@ const cropSuccess = (imgValue: string | undefined, field: any) => {
 };
 
 const existImageSlot = computed(() => slots.img);
-const existButtonUpdateImgSlot = computed(() => slots['button-update-image']);
-
-
+const existButtonUpdateImgSlot = computed(() => slots['button-actions']);
+const setPhotoData = (data) => {
+	imgDataUrl.value = data;
+};
+const removePhoto = () => setPhotoData('');
 </script>
 
 <template>
@@ -44,7 +46,10 @@ const existButtonUpdateImgSlot = computed(() => slots['button-update-image']);
 	 class="btn btn-primary btn-sm"
 	@click="togglePhotoUpdate()">{{ props.label }}</button>
 	<slot name="img" :img="imgDataUrl"></slot>
-	<slot name="button-update-image" :update="togglePhotoUpdate"></slot>
+	<slot name="button-actions"
+	 :update="togglePhotoUpdate"
+	 :remove="removePhoto"
+	 ></slot>
 </template>
 
 <style scoped></style>

@@ -10,15 +10,14 @@ const position = ref('User position');
 const img = ref('');
 
 const getTemplateClasses = (focus: boolean) => {
-    const existImageOrFocus = img.value?.length || focus;
+    const existImageOrFocus = img.value?.length;
     return {
         contacts: {
             'w-4/5': existImageOrFocus,
             'w-full': !existImageOrFocus
         },
         photo: {
-            'w-1/5': existImageOrFocus,
-            'hidden': !existImageOrFocus
+            'w-1/5 pl-2 flex items-center justify-center': existImageOrFocus,
         }
     }
 }
@@ -27,7 +26,7 @@ const getTemplateClasses = (focus: boolean) => {
 
 <template>
     <focus-container #default="{ focus }">
-    <div class="flex items-center">
+    <div class="flex items-center relative">
         <div :class="getTemplateClasses(focus).contacts">
                 <div class="text-center" tabindex="0">
                     <input-tag v-model="fullName" class="text-2xl font-bold" />
@@ -42,11 +41,23 @@ const getTemplateClasses = (focus: boolean) => {
                             <img :src="img" alt="user-photo" />
                         </div>
                     </template>
-                    <template #button-update-image="{ update }">
+                    <template #button-actions="{ update, remove }">
                         <div class="flex justify-center" :class="{
                             'hidden': !focus,
                         }">
-                            <button class="btn btn-primary btn-sm" @click="update()">update</button>
+                            <button 
+                            class="btn btn-accent btn-sm absolute transform top-0 right-0"
+                            :class="{ 'right-12': img }"
+                            @click="update()">
+                                <unicon v-show="!img" name="camera-plus" fill="white"></unicon>
+                                <unicon v-show="img" name="camera-change" fill="white"></unicon>
+                            </button>
+                            <button 
+                            v-show="img"
+                            class="btn btn-accent btn-sm absolute transform top-0 right-0"
+                            @click="remove()">
+                                <unicon name="camera-slash" fill="white"></unicon>
+                            </button>
                         </div>
                     </template>
                 </resume-photo>
