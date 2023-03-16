@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container-title-line {
+  @apply relative 
+  before:absolute
+  before:content-['.']
+  before:w-full
+  before:text-white
+  before:h-1
+  before:bg-black
+  before:z-[-1]
+  before:top-1/2 before:left-1/2 before:transform before:-translate-x-1/2 before:-translate-y-1/2;
+}
