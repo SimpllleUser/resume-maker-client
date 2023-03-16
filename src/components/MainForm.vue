@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ResumeMainInfo from './Resume/ResumeMainInfo.vue';
+import ResumeSkills from './Resume/ResumeSkills.vue';
 // import ResumeCalendar from './Resume/ResumeCalendar.vue';
 // import ResumePhoto from './Resume/ResumePhoto.vue';
 
@@ -7,6 +8,7 @@ import ResumeMainInfo from './Resume/ResumeMainInfo.vue';
 <template>
     <div class="max-w-[990px] mx-auto border border-solid border-gray-300">
         <resume-main-info />
+        <resume-skills />
         <!-- <resume-calendar /> -->
     </div>
 </template>

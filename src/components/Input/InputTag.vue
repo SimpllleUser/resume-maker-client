@@ -8,6 +8,7 @@ import { useVModel } from "@vueuse/core";
 
 const props = defineProps<{
   class?: string;
+  style?: string;
   modelValue: string;
 }>();
 
@@ -26,6 +27,7 @@ const model = useVModel(props, "modelValue", emit);
       :contenteditable="true"
       v-model="model"
       style="min-width: 2rem;"
+      :style="style"
       :class="`${props.class}`"
     />
   </div>
