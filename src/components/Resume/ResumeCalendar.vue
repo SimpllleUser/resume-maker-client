@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import YearMonthInput from '../Input/YearMonthInput.vue';
+import YearMonthInputRange from '../Input/YearMonthInputRange.vue';
 
-const dateYear = ref({ year: '', month:'' });
+const dateRange = ref({
+    from: { year: '', month:'' },
+    to: { year: '', month:'' },
+});
 </script>
 
 <template>
-    <div class="flex">
-        <year-month-input v-model="dateYear" present startFromEnd />
+    <div>
+        <year-month-input-range v-model="dateRange" />
     </div>
 </template>
 
