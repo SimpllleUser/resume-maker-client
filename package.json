@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.191",
     "@vuepic/vue-datepicker": "^4.0.1",
     "@vueuse/components": "^9.13.0",
     "@vueuse/core": "^9.13.0",
@@ -16,6 +17,7 @@
     "daisyui": "^2.51.3",
     "focus-trap": "^7.4.0",
     "html2pdf.js": "^0.10.1",
+    "lodash": "^4.17.21",
     "vue": "^3.2.45",
     "vue-contenteditable": "^4.1.0",
     "vue-html-to-paper": "^1.4.4",

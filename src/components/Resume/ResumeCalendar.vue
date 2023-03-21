@@ -1,18 +1,13 @@
 <script setup lang="ts">
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
-import { ref } from 'vue';
-
-const date = ref({ "month": 11, "year": 2023 });
+import YearMonthInput from '../Input/YearMonthInput.vue';
 </script>
 
 <template>
-    <div>
-        {{ date }}
-        <vue-date-picker v-model="date" month-picker/>
+    <div class="flex">
+        ADD v-model and choose year | moth or year & moth
+        <year-month-input startFromEnd/>
+        <!-- <year-month-input present/> -->
     </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
