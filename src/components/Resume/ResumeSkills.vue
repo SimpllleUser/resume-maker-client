@@ -30,14 +30,14 @@ const removeSkill = (skillIndex: number) => {
         class="flex items-center justify-between mb-2" style="width: calc(100% - 40px)">
             <input-tag v-model="skill.value" style="max-width: 290px; min-width: 190px;" 
              class="min-w-full text-center" />
-            <div class="print:hidden">
+            <div class="action print:hidden">
                 <button class="btn btn-active btn-primary btn-xs" @click="removeSkill(index)">
                 <unicon name="multiply" class="text-xs" fill="white"></unicon>
             </button>
             </div>
         </div>
     </div>
-    <button class="btn btn-primary btn-xs print:hidden" @click="addSkill">
+    <button class="action btn btn-primary btn-xs print:hidden" @click="addSkill">
         <unicon name="plus" class="text-xs" fill="white"></unicon>
     </button>
 </template>
