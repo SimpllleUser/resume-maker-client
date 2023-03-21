@@ -3,6 +3,7 @@ import { Ref, ref } from 'vue';
 import InputTag from '../Input/InputTag.vue';
 import YearMonthInputRange from '../Input/YearMonthInputRange.vue';
 import { YearMonthRange } from '../../common/types';
+import BTemplate from '../UI/BTemplate.vue';
 
 
 const testText = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -28,15 +29,15 @@ const date: Ref<YearMonthRange> = ref({
 </script>
 
 <template>
-    <div class="flex justify-around items-start">
-        <div class="mx-auto w-80 text-center">
+    <b-template>
+        <template #details>
             <input-tag v-model="place" />
             <year-month-input-range v-model="date" />
-        </div>
-        <div>
+        </template>
+        <template #description>
             <input-tag v-model="description" />
-        </div>
-    </div>
+        </template>
+    </b-template>
 </template>
 
 <style scoped></style>

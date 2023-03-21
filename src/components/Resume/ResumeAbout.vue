@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
 import InputTag from '../Input/InputTag.vue';
+import BTemplate from '../UI/BTemplate.vue';
 
 const testText = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -15,14 +16,14 @@ const description: Ref<string> = ref('Description')
 </script>
 
 <template>
-    <div class="flex justify-around items-start">
-        <div>
+    <b-template>
+        <template #details>
             <input-tag v-model="description" />
-        </div>
-        <div>
+        </template>
+        <template #description>
             <input-tag v-model="about" />
-        </div>
-    </div>
+        </template>
+    </b-template>
 </template>
 
 <style scoped></style>
