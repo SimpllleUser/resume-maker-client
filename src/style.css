@@ -17,3 +17,10 @@
 .container-title-input {
     @apply text-center text-2xl font-semibold bg-white;
 }
+
+.b-template-details-w {
+ width: 24rem;
+}
+.b-template-description-w {
+ width: calc(100% - 24rem);
+}

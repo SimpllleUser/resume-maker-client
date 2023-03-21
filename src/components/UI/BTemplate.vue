@@ -1,9 +1,9 @@
 <template>
     <div class="flex justify-around items-start">
-        <div class="mx-auto w-80 text-center">
+        <div class="mx-auto b-template-details-w text-center">
             <slot name="details" />
         </div>
-        <div>
+        <div class="pr-2 b-template-description-w">
             <slot name="description" />
         </div>
     </div>
