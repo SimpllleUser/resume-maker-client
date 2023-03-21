@@ -1,12 +1,13 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import YearMonthInput from '../Input/YearMonthInput.vue';
+
+const dateYear = ref({ year: '', month:'' });
 </script>
 
 <template>
     <div class="flex">
-        ADD v-model and choose year | moth or year & moth
-        <year-month-input startFromEnd/>
-        <!-- <year-month-input present/> -->
+        <year-month-input v-model="dateYear" present startFromEnd />
     </div>
 </template>
 
