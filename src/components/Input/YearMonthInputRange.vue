@@ -4,22 +4,12 @@ import { useVModel } from "@vueuse/core";
 import { vOnClickOutside } from '@vueuse/components';
 
 import YearMonthInput from "./YearMonthInput.vue";
-
-interface ModelValue {
-    from: {
-        year?: string;
-        month?: string;
-    }
-    to: {
-        year?: string;
-        month?: string;
-    }
-}
+import { YearMonthRange } from "../../common/types";
 
 type YearOrMonth = 'year' | 'month';
 
 interface Props {
-    modelValue: ModelValue;
+    modelValue: YearMonthRange;
     present?: boolean;
     startFromEnd?: boolean;
     disable?: YearOrMonth | '';
@@ -31,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
     disable: '',
 });
 const emit = defineEmits<{
-    (event: 'update:modelValue', payload: ModelValue): void
+    (event: 'update:modelValue', payload: YearMonthRange): void
 }>()
 const data = useVModel(props, 'modelValue', emit)
 
@@ -67,7 +57,8 @@ const handleOutsideClick = () => {
                 <year-month-input v-model="data.to" :disable="disable" present />
             </div>
         </div>
-        <input :value="dateRange" @focus="showDateInput = true" readonly />
+        <input :value="dateRange" class="text-center" @focus="showDateInput = true" readonly />
+        <div class="text-center hidden print:block">{{ dateRange }}</div>
     </div>
 </template>
 

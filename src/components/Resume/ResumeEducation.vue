@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
 import InputTag from '../Input/InputTag.vue';
-import ResumeCalendar from '../Resume/ResumeCalendar.vue';
+import YearMonthInputRange from '../Input/YearMonthInputRange.vue';
+import { YearMonthRange } from '../../common/types';
+
 
 const testText = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -13,15 +15,23 @@ const testText = `Lorem Ipsum is simply dummy text of the printing and typesetti
          PageMaker including versions of Lorem Ipsum`;
 const description: Ref<string> = ref(testText);
 const place: Ref<string> = ref('University / School');
-const date: Ref<string> = ref('30.09.1998 - 2016');
+const date: Ref<YearMonthRange> = ref({
+    from: {
+        month: '',
+        year: '',
+    },
+    to: {
+        month: '',
+        year: '',
+    },
+});
 </script>
 
 <template>
     <div class="flex justify-around items-start">
-        <div>
+        <div class="mx-auto w-80 text-center">
             <input-tag v-model="place" />
-            <!-- <input-tag v-model="date" /> -->
-            <resume-calendar v-model="date" />
+            <year-month-input-range v-model="date" />
         </div>
         <div>
             <input-tag v-model="description" />
