@@ -32,7 +32,7 @@ const date: Ref<YearMonthRange> = ref({
     <b-template>
         <template #details>
             <input-tag v-model="place" />
-            <year-month-input-range v-model="date" />
+            <year-month-input-range v-model="date" disable="month" />
         </template>
         <template #description>
             <input-tag v-model="description" />

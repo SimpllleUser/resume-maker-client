@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useVModel } from '@vueuse/core';
 import { isEqual } from 'lodash';
 
@@ -37,9 +37,16 @@ const ACTUAL_DATE_YEAR = new Date().getFullYear();
 const getMonthShortNameByIndex = (index: number) => new Date(2000, index)
     .toLocaleString('en-us', { month: 'short' });
 
+const canShowYear = computed(() => props.disable.toString() !== 'year');
+const canShowMonth = computed(() => props.disable.toString() !== 'month');
+
 const presentDate = {
-    year: ACTUAL_DATE_YEAR.toString(),
-    month: getMonthShortNameByIndex(ACTUAL_DATE.getMonth())
+    year: canShowYear.value
+        ? ACTUAL_DATE_YEAR.toString()
+        : '',
+    month: canShowMonth.value
+        ? getMonthShortNameByIndex(ACTUAL_DATE.getMonth())
+        : ''
 };
 
 const isPresent = ref(false);
@@ -52,18 +59,19 @@ watch(isPresent, () => {
 watch(data, () => {
     if (isEqual(data.value, presentDate)) return;
     isPresent.value = false;
-}, {deep: true})
+}, { deep: true })
+
 
 </script>
 
 <template>
     <div class="">
-        <year-input v-model="data.year" :start-from-end="props.startFromEnd" />
+        <year-input v-model="data.year" v-show="canShowYear" :start-from-end="props.startFromEnd" />
         <label class="label cursor-pointer" v-show="props.present">
             <span class="label-text">Present</span>
             <input type="checkbox" v-model="isPresent" class="checkbox checkbox-primary" />
         </label>
-        <month-input v-model="data.month" />
+        <month-input v-model="data.month" v-show="canShowMonth" />
     </div>
 </template>
 
