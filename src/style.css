@@ -28,3 +28,8 @@
 .action-hide .action{
   @apply hidden;
 }
+
+.duplicator-action-position {
+  bottom: -1.5rem;
+  left: 0;
+}
