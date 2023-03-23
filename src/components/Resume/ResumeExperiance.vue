@@ -34,31 +34,16 @@ const mockDate: YearMonthRange = {
   },
 };
 
-const mockExperiance: ExperianceElement = {
+const defaultExperiance: ExperianceElement = {
   position: "Front end Team Lead",
   place: 'google',
   date: mockDate,
   description: testText,
 };
 
-const experiances: Ref<Array<ExperianceElement>> = ref(
-  [
-    {
-      position: "Front end Team Lead",
-      place: 'google',
-      date: mockDate,
-      description: testText,
-    },
-    {
-      position: "Front end Team Lead 2222",
-      place: 'google 222',
-      date: mockDate,
-      description: '!!!!' + testText,
-    },
-  ]
-);
+const experiances: Ref<Array<ExperianceElement>> = ref([ { ...defaultExperiance } ]);
 const handleAdd = () => {
-  experiances.value.push(mockExperiance);
+  experiances.value.push(defaultExperiance);
 };
 
 const handleRemove = (index: number) => {
