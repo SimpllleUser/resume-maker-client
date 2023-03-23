@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
 
-import InputTag from '../Input/InputTag.vue';
+import InputTag from '@/components/Input/InputTag.vue';
 
 interface Skill {
     value: string;

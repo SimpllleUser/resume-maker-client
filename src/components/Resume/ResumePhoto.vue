@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { computed, ref, useSlots } from 'vue';
+
 import { useToggle, useVModel } from '@vueuse/core';
-import { computed, onMounted, Ref, ref, useSlots } from 'vue';
+
 import myUpload from 'vue-image-crop-upload';
 
 interface Props {
@@ -21,7 +23,6 @@ const params = ref({
 	token: '123456798',
 	name: 'avatar'
 });
-// const imgDataUrl: Ref<string | undefined> = ref('');
 
 const [showPhotoUpdateModal, togglePhotoUpdate] = useToggle();
 

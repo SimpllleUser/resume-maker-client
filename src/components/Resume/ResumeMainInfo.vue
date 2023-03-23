@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import InputTag from "../Input/InputTag.vue";
-import ResumeContact from "./ResumeContact.vue";
-import ResumePhoto from "./ResumePhoto.vue";
-import FocusContainer from "../FocusContainer.vue";
+import { ref } from "vue";
+
+import InputTag from "@/components/Input/InputTag.vue";
+import FocusContainer from "@/components/FocusContainer.vue";
+
+import ResumeContact from "@/components/Resume/ResumeContact.vue";
+import ResumePhoto from "@/components/Resume/ResumePhoto.vue";
 
 const fullName = ref("User full name");
 const position = ref("User position");

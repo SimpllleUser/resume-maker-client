@@ -1,14 +1,15 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+
 import { useToggle, useVModel } from '@vueuse/core';
 import { vOnClickOutside } from '@vueuse/components';
-import { onMounted, Ref, ref } from 'vue';
 
 const props = defineProps<{ modelValue: string, icons: string[]}>();
 const emit = defineEmits(['update:modelValue']);
 const currentIcon = useVModel(props, 'modelValue', emit)
 
 const [showDropDown, toggleDropDown] = useToggle();
-// const currentIcon: Ref<string> = ref('image-times');
+
 const handleOutsideClick = (): void => {
     if (!showDropDown.value) return;
     toggleDropDown();

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import YearMonthInputRange from '../Input/YearMonthInputRange.vue';
+import YearMonthInputRange from '@/components/Input/YearMonthInputRange.vue';
 
 const dateRange = ref({
     from: { year: '', month:'' },

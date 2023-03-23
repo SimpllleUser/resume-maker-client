@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import ResumeMainInfo from "./Resume/ResumeMainInfo.vue";
-import ResumeSkills from "./Resume/ResumeSkills.vue";
-import FocusContainer from "./FocusContainer.vue";
-import InputTag from "./Input/InputTag.vue";
-import ResumeAbout from "./Resume/ResumeAbout.vue";
-import ResumeEducation from "./Resume/ResumeEducation.vue";
-import ResumeExperiance from "./Resume/ResumeExperiance.vue";
 import { ref } from "vue";
-// import ResumeCalendar from './Resume/ResumeCalendar.vue';
-// import ResumePhoto from './Resume/ResumePhoto.vue';
+
+import FocusContainer from "@/components/FocusContainer.vue";
+import InputTag from "@/components/Input/InputTag.vue";
+
+import ResumeMainInfo from "@/components/Resume/ResumeMainInfo.vue";
+import ResumeSkills from "@/components/Resume/ResumeSkills.vue";
+import ResumeAbout from "@/components/Resume/ResumeAbout.vue";
+import ResumeEducation from "@/components/Resume/ResumeEducation.vue";
+import ResumeExperiance from "@/components/Resume/ResumeExperiance.vue";
+
 const skillTitle = ref("Skill");
 const aboutTitle = ref("About");
 const educationTitle = ref("Education");
@@ -55,10 +56,7 @@ const experianceTitle = ref("Experiance");
       <template #header>
         <div class="flex justify-center items-center py-6 container-title-line">
           <div class="bg-white px-6">
-            <input-tag
-              v-model="experianceTitle"
-              class="container-title-input"
-            />
+            <input-tag v-model="experianceTitle" class="container-title-input" />
           </div>
         </div>
       </template>

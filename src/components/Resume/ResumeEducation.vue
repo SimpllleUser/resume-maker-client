@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
-import InputTag from '../Input/InputTag.vue';
-import YearMonthInputRange from '../Input/YearMonthInputRange.vue';
-import BDuplicator from "../UI/BDuplicator.vue";
-import FocusContainer from "../FocusContainer.vue";
-import BTemplate from '../UI/BTemplate.vue';
-import { YearMonthRange } from '../../common/types';
+import { ref, Ref } from "vue";
+
+import InputTag from "@/components/Input/InputTag.vue";
+import YearMonthInputRange from "@/components/Input/YearMonthInputRange.vue";
+
+import BTemplate from "@/components/UI/BTemplate.vue";
+import BDuplicator from "@/components/UI/BDuplicator.vue";
+
+import FocusContainer from "@/components/FocusContainer.vue";
+
+import { YearMonthRange } from "@/common/types";
 
 interface EducationElement {
     description: string;

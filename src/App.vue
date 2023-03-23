@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MainForm from './components/MainForm.vue';
+import MainForm from '@/components/MainForm.vue';
 
   function getStyle() {
     return document.querySelectorAll('style')[0].innerHTML;

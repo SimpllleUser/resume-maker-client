@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, Ref, watch } from "vue";
+import { ref, Ref } from "vue";
 
-import InputTag from "../Input/InputTag.vue";
-import IconSelector from "../UI/IconSelector.vue";
+import InputTag from "@/components/Input/InputTag.vue";
+import IconSelector from "@/components/UI/IconSelector.vue";
 
 interface Contact {
   icon: string;

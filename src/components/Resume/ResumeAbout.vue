@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
-import InputTag from '../Input/InputTag.vue';
-import BTemplate from '../UI/BTemplate.vue';
+
+import InputTag from '@/components/Input/InputTag.vue';
+import BTemplate from '@/components/UI/BTemplate.vue';
 
 const testText = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
