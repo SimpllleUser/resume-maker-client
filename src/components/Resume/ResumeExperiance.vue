@@ -7,6 +7,13 @@ import BTemplate from "../UI/BTemplate.vue";
 import BDuplicator from "../UI/BDuplicator.vue";
 import FocusContainer from "../FocusContainer.vue";
 
+interface ExperianceElement {
+  date: YearMonthRange;
+  place: string;
+  position: string;
+  description: string;
+}
+
 const testText = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
       when an unknown printer took a galley of type and scrambled it to make 
@@ -16,7 +23,7 @@ const testText = `Lorem Ipsum is simply dummy text of the printing and typesetti
         Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
          PageMaker including versions of Lorem Ipsum`;
 
-const mockDate = {
+const mockDate: YearMonthRange = {
   from: {
     month: "",
     year: "",
@@ -26,61 +33,43 @@ const mockDate = {
     year: "",
   },
 };
-const description: Ref<string> = ref(testText);
-const place: Ref<string> = ref("Google");
-const position: Ref<string> = ref("Front end Team Lead");
-const date: Ref<YearMonthRange> = ref({
-  from: {
-    month: "",
-    year: "",
-  },
-  to: {
-    month: "",
-    year: "",
-  },
-});
 
-const mockExperiance = {
-    position: "Front end Team Lead",
-    place: 'google',
-    date: mockDate,
-    description: testText,
-  };
+const mockExperiance: ExperianceElement = {
+  position: "Front end Team Lead",
+  place: 'google',
+  date: mockDate,
+  description: testText,
+};
 
-const experiances = ref(
-    [
-  {
-    position: "Front end Team Lead",
-    place: 'google',
-    date: mockDate,
-    description: testText,
-  },
-  {
-    position: "Front end Team Lead 2222",
-    place: 'google 222',
-    date: mockDate,
-    description: '!!!!' + testText,
-  },
-]
+const experiances: Ref<Array<ExperianceElement>> = ref(
+  [
+    {
+      position: "Front end Team Lead",
+      place: 'google',
+      date: mockDate,
+      description: testText,
+    },
+    {
+      position: "Front end Team Lead 2222",
+      place: 'google 222',
+      date: mockDate,
+      description: '!!!!' + testText,
+    },
+  ]
 );
 const handleAdd = () => {
-    experiances.value.push(mockExperiance);
+  experiances.value.push(mockExperiance);
 };
 
 const handleRemove = (index: number) => {
-    experiances.value.splice(index, 1);
+  experiances.value.splice(index, 1);
 };
 </script>
 
 <template>
   <focus-container #default="{ focus }">
-    <b-duplicator 
-    :properties="experiances"
-     :allow-editable="focus"
-     @add="handleAdd"
-     @remove="handleRemove"
-     #default="{ index }"
-     >
+    <b-duplicator :properties="experiances" :allow-editable="focus" @add="handleAdd" @remove="handleRemove"
+      #default="{ index }">
       <div class="my-2">
         <b-template>
           <template #details>

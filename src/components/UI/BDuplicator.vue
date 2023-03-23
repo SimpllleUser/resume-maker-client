@@ -3,8 +3,10 @@ import { computed } from "vue";
 <script setup lang="ts">
 import { computed, Ref, ref } from "vue";
 
+type Properties = Array<unknown>;
+
 interface Props {
-  properties: Array<unknown>;
+  properties: Properties;
   allowEditable?: boolean;
 }
 
@@ -17,7 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
   allowEditable: false,
 });
 
-const editabelProperty: Ref<Array<unknown>> = ref(props.properties);
+const editabelProperty: Ref<Properties> = ref(props.properties);
 
 const handleAdd = (): void => {
   emit("add");
