@@ -6,11 +6,16 @@ import { useFocusWithin } from '@vueuse/core'
 const target = ref();
 const { focused } = useFocusWithin(target)
 
-const emit = defineEmits(['focus', 'blur']);
+interface Emits {
+  (event: 'focus', payload: boolean): void;
+  (event: 'blur', payload: boolean): void;
+}
+
+const emit = defineEmits<Emits>();
 
 watch(focused, focused => {
-    const emitName = focused ? 'focus' : 'blur';
-    return emit(emitName, focused);
+    if (focused) emit('focus', focused);
+    emit('blur', focused);
 })
 
 </script>
