@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { Ref, ref } from "vue";
 
 import FocusContainer from "@/components/FocusContainer.vue";
 import InputTag from "@/components/Input/InputTag.vue";
@@ -10,10 +10,10 @@ import ResumeAbout from "@/components/Resume/ResumeAbout.vue";
 import ResumeEducation from "@/components/Resume/ResumeEducation.vue";
 import ResumeExperiance from "@/components/Resume/ResumeExperiance.vue";
 
-const skillTitle = ref("Skill");
-const aboutTitle = ref("About");
-const educationTitle = ref("Education");
-const experianceTitle = ref("Experiance");
+const skillTitle: Ref<string> = ref("Skill");
+const aboutTitle: Ref<string> = ref("About");
+const educationTitle: Ref<string> = ref("Education");
+const experianceTitle: Ref<string> = ref("Experiance");
 </script>
 <template>
   <div class="max-w-[990px] mx-auto border border-solid border-gray-300">
