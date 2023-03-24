@@ -1,38 +1,9 @@
 <script setup lang="ts">
 import MainForm from "@/components/MainForm.vue";
 
-function getStyle(): string {
-  return document.querySelectorAll("style")[0].innerHTML;
-}
+import usePrint from '@/composables/print-dom.ts'
 
-function getElementHtml(selector: string) {
-  const element = document.querySelector(selector);
-  if (!element) {
-    throw new Error(`Element with selector "${selector}" not found`);
-  }
-  return element.outerHTML;
-}
-
-function printElement(selector: string) {
-  const elementHtml = getElementHtml(selector);
-  const printWindow = window.open("", "_blank");
-  printWindow?.document.write(`
-     <html><head><title>${123123}</title>
-       <style>${getStyle()}</style>
-       </head>
-       <body>
-         ${elementHtml}
-       </body>
-       </html>
-     `);
-  printWindow?.document.close();
-  printWindow?.focus();
-  printWindow?.print();
-
-  setTimeout(() => {
-    printWindow?.close();
-  }, 50);
-}
+const { printElement } = usePrint();
 </script>
 
 <template>
