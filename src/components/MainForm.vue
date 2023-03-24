@@ -56,7 +56,10 @@ const experianceTitle: Ref<string> = ref("Experiance");
       <template #header>
         <div class="flex justify-center items-center py-6 container-title-line">
           <div class="bg-white px-6">
-            <input-tag v-model="experianceTitle" class="container-title-input" />
+            <input-tag
+              v-model="experianceTitle"
+              class="container-title-input"
+            />
           </div>
         </div>
       </template>
