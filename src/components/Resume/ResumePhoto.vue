@@ -1,56 +1,76 @@
 <script setup lang="ts">
-import { computed, ref, useSlots } from 'vue';
+import { computed, ComputedRef, Ref, ref, useSlots } from "vue";
 
-import { useToggle, useVModel } from '@vueuse/core';
+import { useToggle, useVModel } from "@vueuse/core";
 
-import myUpload from 'vue-image-crop-upload';
+import myUpload from "vue-image-crop-upload";
 
 interface Props {
-	label: string;
-	modelValue: string
+  label?: string;
+  modelValue: string;
 }
 
-const slots = useSlots()
+interface Emits {
+  (event: "update:modelValue", payload: string): void;
+}
+
+interface PhotoUploadParams {
+  token: string;
+  name: string;
+}
+
+const slots = useSlots();
 
 const props = withDefaults(defineProps<Props>(), {
-  label: 'update',
+  label: "update",
 });
 
-const emit = defineEmits(['update:modelValue']);
-const imgDataUrl = useVModel(props, 'modelValue', emit)
+const emit = defineEmits<Emits>();
+const imgDataUrl = useVModel(props, "modelValue", emit);
 
-const params = ref({
-	token: '123456798',
-	name: 'avatar'
+const params: Ref<PhotoUploadParams> = ref({
+  token: "123456798",
+  name: "avatar",
 });
 
 const [showPhotoUpdateModal, togglePhotoUpdate] = useToggle();
 
-const cropSuccess = (imgValue: string | undefined, field: any) => {
-	imgDataUrl.value = imgValue || '';
+const cropSuccess = (imgValue: string | undefined): void => {
+  imgDataUrl.value = imgValue || "";
 };
 
-const existImageSlot = computed(() => slots.img);
-const existButtonUpdateImgSlot = computed(() => slots['button-actions']);
-const setPhotoData = (data) => {
-	imgDataUrl.value = data;
+const existImageSlot: ComputedRef<boolean> = computed(() => Boolean(slots.img));
+const existButtonUpdateImgSlot: ComputedRef<boolean> = computed(() =>
+  Boolean(slots["button-actions"])
+);
+const setPhotoData = (data: string): void => {
+  imgDataUrl.value = data;
 };
-const removePhoto = () => setPhotoData('');
 </script>
 
 <template>
-	<my-upload field="img" v-model="showPhotoUpdateModal" :params="params" langType="eng" @crop-success="cropSuccess"
-		img-format="png"></my-upload>
-	<img v-show="!existImageSlot" :src="imgDataUrl">
-	<button 
-	v-show="!existButtonUpdateImgSlot"
-	 class="btn btn-primary btn-sm"
-	@click="togglePhotoUpdate()">{{ props.label }}</button>
-	<slot name="img" :img="imgDataUrl"></slot>
-	<slot name="button-actions"
-	 :update="togglePhotoUpdate"
-	 :remove="removePhoto"
-	 ></slot>
+  <my-upload
+    field="img"
+    v-model="showPhotoUpdateModal"
+    :params="params"
+    langType="eng"
+    @crop-success="cropSuccess"
+    img-format="png"
+  ></my-upload>
+  <img v-show="!existImageSlot" :src="imgDataUrl" />
+  <button
+    v-show="!existButtonUpdateImgSlot"
+    class="btn btn-primary btn-sm"
+    @click="togglePhotoUpdate()"
+  >
+    {{ props.label }}
+  </button>
+  <slot name="img" :img="imgDataUrl"></slot>
+  <slot
+    name="button-actions"
+    :update="togglePhotoUpdate"
+    :remove="setPhotoData('')"
+  ></slot>
 </template>
 
 <style scoped></style>
