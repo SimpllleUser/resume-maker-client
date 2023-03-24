@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ComputedRef, Ref, ref } from "vue";
+
 import { useVModel } from "@vueuse/core";
 import { vOnClickOutside } from "@vueuse/components";
 
-import YearMonthInput from "./YearMonthInput.vue";
-import { YearMonthRange } from "../../common/types";
+import YearMonthInput from "@/components/Input/YearMonthInput.vue";
+
+import { YearMonthRange } from "@/common/types";
 
 type YearOrMonth = "year" | "month";
 
@@ -15,34 +17,39 @@ interface Props {
   disable?: YearOrMonth | "";
 }
 
+interface Emits {
+  (event: "update:modelValue", payload: YearMonthRange): void;
+}
+
 const props = withDefaults(defineProps<Props>(), {
   present: false,
   startFromEnd: false,
   disable: "",
 });
-const emit = defineEmits<{
-  (event: "update:modelValue", payload: YearMonthRange): void;
-}>();
+
+const emit = defineEmits<Emits>();
 const data = useVModel(props, "modelValue", emit);
+  
 
-const separate = computed(() => (!props.disable ? "/" : ""));
+const separate: ComputedRef<string> = computed(() => (!props.disable ? "/" : ""));
 
-const getDateFromInput = ({ year = "", month = "" }) =>
+const getDateFromInput = ({ year = "", month = "" }): string =>
   `${month} ${separate.value} ${year} `;
 
-const dateRange = computed(
+const dateRange: ComputedRef<string> = computed(
   () =>
     `${getDateFromInput(data.value.from)} - ${getDateFromInput(data.value.to)}`
 );
 
-const showDateInput = ref(false);
-const handleOutsideClick = () => {
-  showDateInput.value = false;
+const showDateInput: Ref<boolean> = ref(false);
+
+const handleOutsideClick = (state: boolean): void => {
+  showDateInput.value = state;
 };
 </script>
         
 <template>
-  <div class="relative" v-on-click-outside="handleOutsideClick">
+  <div class="relative" v-on-click-outside="() => handleOutsideClick(false)">
     <div
       class="flex justify-center w-96 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-primary bg-white z-10"
       v-show="showDateInput"
@@ -68,7 +75,7 @@ const handleOutsideClick = () => {
     <input
       :value="dateRange"
       class="text-center input input-bordered input-sm input-secondary print:hidden"
-      @focus="showDateInput = true"
+      @focus="handleOutsideClick(true)"
       readonly
     />
     <div class="text-center hidden print:block">{{ dateRange }}</div>
