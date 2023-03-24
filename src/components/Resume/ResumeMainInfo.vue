@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ComputedRef, Ref, ref } from "vue";
 
 import InputTag from "@/components/Input/InputTag.vue";
 import FocusContainer from "@/components/FocusContainer.vue";
@@ -7,12 +7,17 @@ import FocusContainer from "@/components/FocusContainer.vue";
 import ResumeContact from "@/components/Resume/ResumeContact.vue";
 import ResumePhoto from "@/components/Resume/ResumePhoto.vue";
 
-const fullName = ref("User full name");
-const position = ref("User position");
-const img = ref("");
+interface TemplateClasses {
+  contacts: { [key: string]: boolean };
+  photo: { [key: string]: boolean };
+}
 
-const getTemplateClasses = (focus: boolean) => {
-  const existImageOrFocus = img.value?.length;
+const fullName: Ref<string> = ref("User full name");
+const position: Ref<string> = ref("User position");
+const img: Ref<string> = ref("");
+
+const getTemplateClasses = (): TemplateClasses => {
+  const existImageOrFocus: boolean = Boolean(img.value?.length);
   return {
     contacts: {
       "w-4/5": existImageOrFocus,
@@ -28,7 +33,7 @@ const getTemplateClasses = (focus: boolean) => {
 <template>
   <focus-container #default="{ focus }">
     <div class="flex items-center relative">
-      <div :class="getTemplateClasses(focus).contacts">
+      <div :class="getTemplateClasses().contacts">
         <div class="text-center" tabindex="0">
           <input-tag v-model="fullName" class="text-2xl font-bold" />
           <input-tag v-model="position" class="text-xl" />
@@ -37,7 +42,7 @@ const getTemplateClasses = (focus: boolean) => {
           <resume-contact />
         </div>
       </div>
-      <div :class="getTemplateClasses(focus).photo">
+      <div :class="getTemplateClasses().photo">
         <resume-photo v-model="img" label="update-photo">
           <template #img="{ img }">
             <div
@@ -75,9 +80,6 @@ const getTemplateClasses = (focus: boolean) => {
       </div>
     </div>
   </focus-container>
-  <!-- <div>
-                <resume-skills/>
-            </div> -->
 </template>
 
 <style lang="scss" scoped></style>
