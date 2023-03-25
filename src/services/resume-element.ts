@@ -1,14 +1,7 @@
 import { findIndex } from "lodash";
 import { CurrenntResumeElement, ResumeElement } from "@/store/resume-elements";
 import getUniqId from "@/services/uuid-generator";
-
- interface IResumeElementService {
-    resumeElements: Array<CurrenntResumeElement>
-    add(element: ResumeElement): void
-    remove(id: string): void
-    getAll(): Array<CurrenntResumeElement>
- }
- 
+import { IResumeElementService } from "@/types/data-managment.types copy";
 
 export default class ResumeElementService implements IResumeElementService {
     resumeElements: Array<CurrenntResumeElement> = [];

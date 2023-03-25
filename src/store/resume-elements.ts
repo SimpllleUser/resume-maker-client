@@ -2,14 +2,11 @@ import { Ref, ref } from "vue";
 import { defineStore } from "pinia";
 import { findIndex } from "lodash";
 
-import ResumeElementService from "../services/resume-element";
-
-export interface ResumeElement {
-  name: string;
-  component: string;
-}
-
-export type CurrenntResumeElement = ResumeElement & { id: string; title: string; }
+import ResumeElementService from "@/services/resume-element";
+import {
+  CurrenntResumeElement,
+  ResumeElement,
+} from "@/types/data-managment.types copy";
 
 const prefixName = "resume";
 
