@@ -1,5 +1,6 @@
-import { defineStore } from "pinia";
 import { Ref, ref } from "vue";
+import { defineStore } from "pinia";
+import { findIndex } from "lodash";
 
 import getUniqId from "@/services/uuid-generator";
 
@@ -40,9 +41,12 @@ export const useResumeElements = defineStore("resume-elements", () => {
       title: element.name,
     }
     currentElements.value.push(createdElement);
-    console.log(currentElements);
   };
-  const removeResumeElement = () => {};
+  const removeResumeElement = (id: string) => {
+    const currentIndexElement: number = findIndex(currentElements.value, { id });
+    if (currentIndexElement < 0) return;
+    currentElements?.value?.splice(currentIndexElement, 1);
+  };
 
   return {
     resumeElements,

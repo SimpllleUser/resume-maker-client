@@ -9,7 +9,8 @@ import ResumeAbout from "@/components/Resume/ResumeAbout.vue";
 import ResumeEducation from "@/components/Resume/ResumeEducation.vue";
 import ResumeExperiance from "@/components/Resume/ResumeExperiance.vue";
 import Sidebar from "@/components/Layout/Sidebar.vue";
-import ElementFactory from "@/components/ElementFactory.vue";
+import ElementFactory from "@/components/Element/ElementFactory.vue";
+import ElementActions from "@/components/Element/ElementActions.vue";
 
 import { useResumeElements } from "@/store/resume-elements";
 
@@ -21,7 +22,7 @@ const educationTitle: Ref<string> = ref("Education");
 const experianceTitle: Ref<string> = ref("Experiance");
 </script>
 <template>
-  <div class="flex">
+  <div class="flex pb-12">
     <div class="pl-9">
       <sidebar />
     </div>
@@ -87,28 +88,41 @@ const experianceTitle: Ref<string> = ref("Experiance");
           <resume-experiance />
         </focus-container>
 
-        <focus-container
+        <div
           v-for="resumeElement in resumeElementStore.currentElements"
           :key="resumeElement.id"
+          class="my-6"
         >
-          <template #header>
-            <div
-              class="flex justify-center items-center py-6 container-title-line"
-            >
-              <div class="bg-white px-6">
-                <input-tag
-                  v-model="resumeElement.title"
-                  class="container-title-input"
-                />
+          <focus-container>
+            <template #header>
+              <div
+                class="flex justify-center items-center py-6 container-title-line"
+              >
+                <div class="bg-white px-6">
+                  <input-tag
+                    v-model="resumeElement.title"
+                    class="container-title-input"
+                  />
+                </div>
               </div>
-            </div>
-          </template>
-          <template #default="{ focus }">
-            <div :class="{ 'action-hide': !focus }">
-              <element-factory :resume-element="resumeElement" />
-            </div>
-          </template>
-        </focus-container>
+            </template>
+            <template #default="{ focus }">
+              <div class="relative" :class="{ 'action-hide': !focus }">
+                <div
+                  v-show="focus"
+                  class="element-actions absolute left-1/2 transform -translate-x-1/2"
+                >
+                  <element-actions
+                    @remove="
+                      resumeElementStore.removeResumeElement(resumeElement.id)
+                    "
+                  />
+                </div>
+                <element-factory :resume-element="resumeElement" />
+              </div>
+            </template>
+          </focus-container>
+        </div>
       </div>
     </div>
   </div>
