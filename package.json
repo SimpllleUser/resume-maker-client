@@ -18,6 +18,8 @@
     "focus-trap": "^7.4.0",
     "html2pdf.js": "^0.10.1",
     "lodash": "^4.17.21",
+    "pinia": "^2.0.33",
+    "uuid": "^9.0.0",
     "vue": "^3.2.45",
     "vue-contenteditable": "^4.1.0",
     "vue-html-to-paper": "^1.4.4",
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.15.6",
+    "@types/uuid": "^9.0.1",
     "@vitejs/plugin-vue": "^4.0.0",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
