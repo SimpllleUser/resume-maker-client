@@ -2,7 +2,7 @@ import { Ref, ref } from "vue";
 import { defineStore } from "pinia";
 import { findIndex } from "lodash";
 
-import getUniqId from "@/services/uuid-generator";
+import ResumeElementService from "../services/resume-element";
 
 export interface ResumeElement {
   name: string;
@@ -11,41 +11,36 @@ export interface ResumeElement {
 
 export type CurrenntResumeElement = ResumeElement & { id: string; title: string; }
 
-const preficName = "resume";
+const prefixName = "resume";
 
 export const useResumeElements = defineStore("resume-elements", () => {
   const resumeElements: Ref<Array<ResumeElement>> = ref([
     {
       name: "Skills",
-      component: `${preficName}-skills`,
+      component: `${prefixName}-skills`,
     },
     {
       name: "Education",
-      component: `${preficName}-education`,
+      component: `${prefixName}-education`,
     },
     {
       name: "Experiance",
-      component: `${preficName}-experiance`,
+      component: `${prefixName}-experiance`,
     },
     {
       name: "About",
-      component: `${preficName}-about`,
+      component: `${prefixName}-about`,
     },
   ]);
   const currentElements: Ref<Array<CurrenntResumeElement>> = ref([]);
 
+  const resumeElementSerice = new ResumeElementService(currentElements.value);
+
   const addResumeElement = (element: ResumeElement): void => {
-    const createdElement = {
-      ...element,
-      id: getUniqId(),
-      title: element.name,
-    }
-    currentElements.value.push(createdElement);
+    resumeElementSerice.add(element);
   };
   const removeResumeElement = (id: string) => {
-    const currentIndexElement: number = findIndex(currentElements.value, { id });
-    if (currentIndexElement < 0) return;
-    currentElements?.value?.splice(currentIndexElement, 1);
+    resumeElementSerice.remove(id);
   };
 
   return {
