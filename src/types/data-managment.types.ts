@@ -16,6 +16,7 @@ export interface IResumeElementService {
     getAll(): Array<CurrenntResumeElement>
 }
 
+
 interface ResumeContent {
     id: string;
     title: string;
@@ -29,7 +30,7 @@ interface Experiance {
 }
 
 interface Education {
-    position: string;
+    place: string;
     date: YearMonthRange;
     description: string;
 }
@@ -53,4 +54,17 @@ export type ResumeContentExperience = ResumeContent & {
 
 export type ResumeContentEducation = ResumeContent & {
     educations: Array<Education>
+}
+
+export type ResumeContentItem =
+    | ResumeContentSkills
+    // | ResumeContentContact
+    | ResumeContentAbout
+    | ResumeContentExperience
+    | ResumeContentEducation;
+
+export interface IResumeContentService {
+    resumeContent: { [key: string]: ResumeContentItem }
+    add(content: ResumeContentItem): void
+    remove(id: string): void
 }

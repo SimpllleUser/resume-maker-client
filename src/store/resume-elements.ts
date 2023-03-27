@@ -8,36 +8,22 @@ import {
   ResumeElement,
 } from "@/types/data-managment.types copy";
 
-const prefixName = "resume";
+import * as constants from '@/constants.ts';
 
 export const useResumeElements = defineStore("resume-elements", () => {
-  const resumeElements: Ref<Array<ResumeElement>> = ref([
-    {
-      name: "Skills",
-      component: `${prefixName}-skills`,
-    },
-    {
-      name: "Education",
-      component: `${prefixName}-education`,
-    },
-    {
-      name: "Experiance",
-      component: `${prefixName}-experiance`,
-    },
-    {
-      name: "About",
-      component: `${prefixName}-about`,
-    },
-  ]);
+  const resumeElements: Ref<Array<ResumeElement>> = ref(constants.RESUME_ELEMENTS);
   const currentElements: Ref<Array<CurrenntResumeElement>> = ref([]);
 
   const resumeElementSerice = new ResumeElementService(currentElements.value);
 
   const addResumeElement = (element: ResumeElement): void => {
-    resumeElementSerice.add(element);
+    currentElements.value = [ ...currentElements.value, { ...element, id: Date.now() }];
+    // resumeElementSerice.add(element);
   };
   const removeResumeElement = (id: string) => {
-    resumeElementSerice.remove(id);
+    currentElements.value = currentElements.value
+    .filter((element) => element.id !== id);
+    // resumeElementSerice.remove(id);
   };
 
   return {
