@@ -23,8 +23,10 @@ const experianceTitle: Ref<string> = ref("Experiance");
 </script>
 <template>
   <div class="flex pb-12">
-    <div class="pl-9">
-      <sidebar />
+    <div  class="mx-auto fixed top-0 left-24 print:hidden">
+      <div>
+        <sidebar />
+      </div>
     </div>
     <div class="mx-auto">
       <div class="max-w-[990px] mx-auto border border-solid border-gray-300">
