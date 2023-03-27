@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import {Ref, ref} from "vue";
 
 import FocusContainer from "@/components/FocusContainer.vue";
 import InputTag from "@/components/Input/InputTag.vue";
@@ -12,7 +12,7 @@ import Sidebar from "@/components/Layout/Sidebar.vue";
 import ElementFactory from "@/components/Element/ElementFactory.vue";
 import ElementActions from "@/components/Element/ElementActions.vue";
 
-import { useResumeElements } from "@/store/resume-elements";
+import {useResumeElements} from "@/store/resume-elements";
 
 const resumeElementStore = useResumeElements();
 
@@ -23,87 +23,87 @@ const experianceTitle: Ref<string> = ref("Experiance");
 </script>
 <template>
   <div class="flex pb-12">
-    <div  class="mx-auto fixed top-0 left-24 print:hidden">
+    <div class="mx-auto fixed top-0 left-24 print:hidden">
       <div>
-        <sidebar />
+        <sidebar/>
       </div>
     </div>
     <div class="mx-auto">
       <div class="max-w-[990px] mx-auto border border-solid border-gray-300">
-        <resume-main-info />
+        <resume-main-info/>
         <focus-container>
           <template #header>
             <div
-              class="flex justify-center items-center py-6 container-title-line"
+                class="flex justify-center items-center py-6 container-title-line"
             >
               <div class="bg-white px-6">
-                <input-tag v-model="skillTitle" class="container-title-input" />
+                <input-tag v-model="skillTitle" class="container-title-input"/>
               </div>
             </div>
           </template>
           <template #default="{ focus }">
             <div :class="{ 'action-hide': !focus }">
-              <resume-skills />
+              <resume-skills/>
             </div>
           </template>
         </focus-container>
         <focus-container>
           <template #header>
             <div
-              class="flex justify-center items-center py-6 container-title-line"
+                class="flex justify-center items-center py-6 container-title-line"
             >
               <div class="bg-white px-6">
-                <input-tag v-model="aboutTitle" class="container-title-input" />
+                <input-tag v-model="aboutTitle" class="container-title-input"/>
               </div>
             </div>
           </template>
-          <resume-about />
+          <resume-about/>
         </focus-container>
         <focus-container>
           <template #header>
             <div
-              class="flex justify-center items-center py-6 container-title-line"
+                class="flex justify-center items-center py-6 container-title-line"
             >
               <div class="bg-white px-6">
                 <input-tag
-                  v-model="educationTitle"
-                  class="container-title-input"
+                    v-model="educationTitle"
+                    class="container-title-input"
                 />
               </div>
             </div>
           </template>
-          <resume-education />
+          <resume-education/>
         </focus-container>
         <focus-container>
           <template #header>
             <div
-              class="flex justify-center items-center py-6 container-title-line"
+                class="flex justify-center items-center py-6 container-title-line"
             >
               <div class="bg-white px-6">
                 <input-tag
-                  v-model="experianceTitle"
-                  class="container-title-input"
+                    v-model="experianceTitle"
+                    class="container-title-input"
                 />
               </div>
             </div>
           </template>
-          <resume-experiance />
+          <resume-experiance/>
         </focus-container>
 
         <div
-          v-for="resumeElement in resumeElementStore.currentElements"
-          :key="resumeElement.id"
-          class="my-6"
+            v-for="resumeElement in resumeElementStore.currentElements"
+            :key="resumeElement.id"
+            class="my-6"
         >
           <focus-container>
             <template #header>
               <div
-                class="flex justify-center items-center py-6 container-title-line"
+                  class="flex justify-center items-center py-6 container-title-line"
               >
                 <div class="bg-white px-6">
                   <input-tag
-                    v-model="resumeElement.title"
-                    class="container-title-input"
+                      v-model="resumeElement.title"
+                      class="container-title-input"
                   />
                 </div>
               </div>
@@ -111,16 +111,16 @@ const experianceTitle: Ref<string> = ref("Experiance");
             <template #default="{ focus }">
               <div class="relative" :class="{ 'action-hide': !focus }">
                 <div
-                  v-show="focus"
-                  class="element-actions absolute left-1/2 transform -translate-x-1/2"
+                    v-show="focus"
+                    class="element-actions absolute left-1/2 transform -translate-x-1/2"
                 >
                   <element-actions
-                    @remove="
+                      @remove="
                       resumeElementStore.removeResumeElement(resumeElement.id)
                     "
                   />
                 </div>
-                <element-factory :resume-element="resumeElement" />
+                <element-factory :resume-element="resumeElement"/>
               </div>
             </template>
           </focus-container>

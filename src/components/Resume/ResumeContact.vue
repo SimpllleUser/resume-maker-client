@@ -4,14 +4,14 @@ import { ref, Ref } from "vue";
 import InputTag from "@/components/Input/InputTag.vue";
 import IconSelector from "@/components/UI/IconSelector.vue";
 
-interface Contact {
+export interface Contact {
   icon: string;
   value: string;
 }
 
 const icons = ["phone", "envelope", "map-marker", "github"];
 
-const contacts: Ref<Contact[]> = ref([
+const contacts: Ref<Array<Contact>> = ref([
   { icon: "phone", value: "phone" },
   { icon: "envelope", value: "email" },
   { icon: "github", value: "link" },

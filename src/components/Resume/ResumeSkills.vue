@@ -4,18 +4,12 @@ import { ref, Ref } from 'vue';
 
 import InputTag from '@/components/Input/InputTag.vue';
 
-interface Skill {
-    value: string;
-}
+type Skill = string; 
 
-const skills: Ref<Skill[]> = ref([
-    { value: 'HTML' },
-    {  value: 'CSS' },
-    { value: 'JS' },
-]);
+const skills: Ref<Skill[]> = ref(['HTML', 'CSS','JS']);
 
 const addSkill = () => {
-    skills.value.push({ value: 'TypeScript' });
+    skills.value.push('Some skill');
 };
 const removeSkill = (skillIndex: number) => {
     skills.value = skills.value.filter((_, index) => skillIndex !== index);
@@ -28,7 +22,7 @@ const removeSkill = (skillIndex: number) => {
         v-for="(skill, index) in skills" 
         :key="index" 
         class="flex items-center justify-between mb-2" style="width: calc(100% - 40px)">
-            <input-tag v-model="skill.value" style="max-width: 290px; min-width: 190px;" 
+            <input-tag v-model="skills[index]" style="max-width: 290px; min-width: 190px;" 
              class="min-w-full text-center" />
             <div class="action print:hidden">
                 <button class="btn btn-active btn-primary btn-xs" @click="removeSkill(index)">
