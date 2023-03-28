@@ -22,7 +22,7 @@ interface ResumeContent {
     title: string;
 }
 
-interface Experiance {
+export interface Experiance {
     place: string;
     position: string;
     date: YearMonthRange;

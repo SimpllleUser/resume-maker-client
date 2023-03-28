@@ -10,6 +10,7 @@ import BDuplicator from "@/components/UI/BDuplicator.vue";
 import FocusContainer from "@/components/FocusContainer.vue";
 
 import { YearMonthRange } from "@/common/types";
+import { useVModel } from "@vueuse/core";
 
 interface ExperianceElement {
   date: YearMonthRange;
@@ -17,6 +18,21 @@ interface ExperianceElement {
   position: string;
   description: string;
 }
+
+interface Props {
+    modelValue: Array<ExperianceElement>;
+}
+
+interface Emits {
+    (event: "update:modelValue", payload: Props): void;
+    (event: "add"): void;
+    (event: "remove", payload: number): void;
+}
+
+const props = withDefaults(defineProps<Props>(), {});
+
+const emit = defineEmits<Emits>();
+const data = useVModel(props, "modelValue", emit);
 
 const testText = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -46,28 +62,29 @@ const defaultExperiance: ExperianceElement = {
 };
 
 const experiances: Ref<Array<ExperianceElement>> = ref([ { ...defaultExperiance } ]);
+
 const handleAdd = () => {
-  experiances.value.push(defaultExperiance);
+  emit('add');
 };
 
 const handleRemove = (index: number) => {
-  experiances.value.splice(index, 1);
+  emit('remove', index);
 };
 </script>
 
 <template>
   <focus-container #default="{ focus }">
-    <b-duplicator :properties="experiances" :allow-editable="focus" @add="handleAdd" @remove="handleRemove"
+    <b-duplicator :properties="data" :allow-editable="focus" @add="handleAdd" @remove="handleRemove"
       #default="{ index }">
       <div class="my-2">
         <b-template>
           <template #details>
-            <input-tag v-model="experiances[index].place" />
-            <input-tag v-model="experiances[index].position" />
-            <year-month-input-range v-model="experiances[index].date" />
+            <input-tag v-model="data[index].place" />
+            <input-tag v-model="data[index].position" />
+            <year-month-input-range v-model="data[index].date" />
           </template>
           <template #description>
-            <input-tag v-model="experiances[index].description" />
+            <input-tag v-model="data[index].description" />
           </template>
         </b-template>
       </div>

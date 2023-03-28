@@ -13,6 +13,7 @@ import ElementActions from "@/components/Element/ElementActions.vue";
 
 import { useResumeElements } from "../store/resume-elements";
 import { useResumeContent } from "../store/resume-content";
+import { Experiance } from "@/types/data-managment.types";
 
 const resumeElementStore = useResumeElements();
 const resumeContentStore = useResumeContent();
@@ -53,6 +54,14 @@ const defaultSkills: Ref<Array<string>> = ref(['HTML', 'CSS', 'JS']);
 const defaultEducation: Ref<Array<EducationElement>> = ref([
   {
     date: dateRange,
+    place: 'Oxford',
+    description: 'Some description about education',
+  }
+]);
+const defaultExperiance: Ref<Array<Experiance>> = ref([
+  {
+    date: dateRange,
+    position: 'Front-end',
     place: 'Oxford',
     description: 'Some description about education',
   }
@@ -115,7 +124,7 @@ const handleRemoveItem = (index: number, elementId: string) => {
               </div>
             </div>
           </template>
-          <resume-experiance />
+          <resume-experiance v-model="defaultExperiance" />
         </focus-container>
 
         <div v-for="resumeElement in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
