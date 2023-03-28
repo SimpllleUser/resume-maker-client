@@ -46,6 +46,8 @@ interface Props {
 
 interface Emits {
     (event: "update:modelValue", payload: Props): void;
+    (event: "add"): void;
+    (event: "remove", payload: number): void;
 }
 
 const props = withDefaults(defineProps<Props>(), {});
@@ -57,11 +59,11 @@ const data = useVModel(props, "modelValue", emit);
 const educations: Ref<Array<EducationElement>> = ref([{ ...defaultEducation }]);
 
 const handleAdd = () => {
-    // educations.value.push(defaultEducation);
+    emit('add');
 };
 
 const handleRemove = (index: number) => {
-    // educations.value.splice(index, 1);
+    emit('remove', index);
 };
 </script>
 
@@ -73,7 +75,7 @@ const handleRemove = (index: number) => {
                 <b-template>
                     <template #details>
                         <input-tag v-model="data[index].place" />
-                        <year-month-input-range v-model="educations[index].date" disable="month" />
+                        <year-month-input-range v-model="data[index].date" disable="month" />
                     </template>
                     <template #description>
                         <input-tag v-model="data[index].description" />
