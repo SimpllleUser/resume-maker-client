@@ -9,7 +9,6 @@ import ResumeAbout from "@/components/Resume/ResumeAbout.vue";
 import ResumeEducation, { EducationElement } from "@/components/Resume/ResumeEducation.vue";
 import ResumeExperiance from "@/components/Resume/ResumeExperiance.vue";
 import Sidebar from "@/components/Layout/Sidebar.vue";
-import ElementFactory from "@/components/Element/ElementFactory.vue";
 import ElementActions from "@/components/Element/ElementActions.vue";
 
 import { useResumeElements } from "../store/resume-elements";
@@ -58,6 +57,10 @@ const defaultEducation: Ref<Array<EducationElement>> = ref([
     description: 'Some description about education',
   }
 ]);
+
+const handleRemoveItem = (index: number, elementId: string) => {
+  resumeContentStore.removeContentItem({ index, id: elementId });
+};
 
 </script>
 <template>
@@ -130,7 +133,12 @@ const defaultEducation: Ref<Array<EducationElement>> = ref([
                 <div v-show="focus" class="element-actions absolute left-1/2 transform -translate-x-1/2">
                   <element-actions @remove="handleRemoveElement(resumeElement.id)" />
                 </div>
-                <component v-model="resumeContentStore.resumeContent[resumeElement.id].data" :is="resumeElement.component" />
+                <component 
+                v-model="resumeContentStore.resumeContent[resumeElement.id].data"
+                 :is="resumeElement.component"
+                 @add="resumeContentStore.addContentItem(resumeElement)"
+                 @remove="handleRemoveItem($event, resumeElement.id)"
+                 />
               </div>
             </template>
           </focus-container>

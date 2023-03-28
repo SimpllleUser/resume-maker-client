@@ -14,6 +14,8 @@ interface Props {
 
 interface Emits {
     (event: "update:modelValue", payload: Props): void;
+    (event: "add"): void;
+    (event: "remove", payload: number): void;
 }
 
 const props = withDefaults(defineProps<Props>(), {});
@@ -24,11 +26,10 @@ const data = useVModel(props, "modelValue", emit);
 // const skills: Ref<Skill[]> = ref(['HTML', 'CSS', 'JS']);
 
 const addSkill = () => {
-    // console.log(Array.from(data.value).push);
-    // data.value = [...data?.value || [], 'Some skill'];
+    emit('add');
 };
 const removeSkill = (skillIndex: number) => {
-    // props.data = props.data.filter((_, index: number) => skillIndex !== index);
+    emit('remove', skillIndex);
 };
 </script>
 

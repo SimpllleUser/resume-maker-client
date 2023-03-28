@@ -40,7 +40,7 @@ export type ResumeContentSkills = ResumeContent & {
 }
 
 export type ResumeContentContact = ResumeContent & {
-    data: Contact[];
+    data: Array<Contact>;
 }
 
 export type ResumeContentAbout = ResumeContent & {
@@ -74,3 +74,22 @@ export interface IResumeContentService {
 }
 
 export interface ResumeContentsElement { [key: string]: ResumeContentItem }
+
+export interface ElementBase {
+    id: string;
+    name: string;
+}
+export interface RemovableContentItem {
+    id: string;
+    index: number;
+}
+
+export type ContentsWithPlurarData = 
+| ResumeContentEducation 
+| ResumeContentExperience 
+| ResumeContentSkills 
+
+export type ContentDataPlurar = 
+| Array<Education> 
+| Array<Experiance> 
+| Array<string> 
