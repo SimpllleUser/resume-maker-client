@@ -36,24 +36,26 @@ interface Education {
 }
 
 export type ResumeContentSkills = ResumeContent & {
-    skills: Array<string>;
+    data: Array<string>;
 }
 
 export type ResumeContentContact = ResumeContent & {
-    contacts: Contact[];
+    data: Contact[];
 }
 
 export type ResumeContentAbout = ResumeContent & {
-    description: string;
-    about: string;
+    data: {
+        description: string;
+        about: string;
+    }
 }
 
 export type ResumeContentExperience = ResumeContent & {
-    experiances: Array<Experiance>
+    data: Array<Experiance>
 }
 
 export type ResumeContentEducation = ResumeContent & {
-    educations: Array<Education>
+    data: Array<Education>
 }
 
 export type ResumeContentItem =

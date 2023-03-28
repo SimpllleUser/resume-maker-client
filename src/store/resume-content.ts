@@ -11,7 +11,7 @@ export const useResumeContent = defineStore("resume-content", () => {
     ['somedID']: {
       id: 'test-1',
       title: 'Experiance',
-      experiances: [
+      data: [
         {
           date: {
             from: {
@@ -34,10 +34,9 @@ export const useResumeContent = defineStore("resume-content", () => {
 
 
   const create = ({ id, name }: { id: string; name: string; }) => {
-    console.log(name, COMPONENT_KEYS);
     if (!COMPONENT_KEYS.includes(name)) return;
     const contentTemplate = RESUME_CONTENTS_BY_ELEMENT[name] || {};
-    resumeContent.value = { ...resumeContent.value, [id]: contentTemplate };
+    resumeContent.value = { ...resumeContent.value, [id]: JSON.parse(JSON.stringify(contentTemplate)) };
   };
 
   return {

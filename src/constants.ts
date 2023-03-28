@@ -37,7 +37,7 @@ const RESUME_ENTITIES: [
             },
             content: {
                 title: 'Skills',
-                skills: ['Write example skill'],
+                data: ['Write example skill'],
             },
         },
         {
@@ -47,7 +47,7 @@ const RESUME_ENTITIES: [
             },
             content: {
                 title: 'Education',
-                educations: [
+                data: [
                     {
                         place: 'Where are you studied',
                         date: mockDate,
@@ -63,7 +63,7 @@ const RESUME_ENTITIES: [
             },
             content: {
                 title: 'Experiance',
-                experiances: [
+                data: [
                     {
                         place: 'Where are you worked',
                         position: 'Wath did was your postion',
@@ -80,8 +80,10 @@ const RESUME_ENTITIES: [
             },
             content: {
                 title: 'About',
-                about: 'Some thing about you',
-                description: '',
+                data: {
+                    about: 'Some thing about you',
+                    description: '',
+                }
             },
         },
     ];

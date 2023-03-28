@@ -131,7 +131,7 @@ const defaultEducation: Ref<Array<EducationElement>> = ref([
                     resumeElementStore.removeResumeElement(resumeElement.id)
                   " />
                 </div>
-                <component v-model="resumeContentStore.resumeContent[resumeElement.id]" :is="resumeElement.component" />
+                <component v-model="resumeContentStore.resumeContent[resumeElement.id].data" :is="resumeElement.component" />
               </div>
             </template>
           </focus-container>
