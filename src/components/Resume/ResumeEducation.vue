@@ -10,8 +10,9 @@ import BDuplicator from "@/components/UI/BDuplicator.vue";
 import FocusContainer from "@/components/FocusContainer.vue";
 
 import { YearMonthRange } from "@/common/types";
+import { useVModel } from "@vueuse/core";
 
-interface EducationElement {
+export interface EducationElement {
     description: string;
     place: string;
     date: YearMonthRange;
@@ -39,30 +40,43 @@ const defaultEducation: EducationElement = {
     date: mockDate,
 }
 
+interface Props {
+    modelValue: Array<EducationElement>;
+}
 
-const educations: Ref<Array<EducationElement>> = ref([ { ...defaultEducation } ]);
+interface Emits {
+    (event: "update:modelValue", payload: Props): void;
+}
+
+const props = withDefaults(defineProps<Props>(), {});
+
+const emit = defineEmits<Emits>();
+const data = useVModel(props, "modelValue", emit);
+
+
+const educations: Ref<Array<EducationElement>> = ref([{ ...defaultEducation }]);
 
 const handleAdd = () => {
-    educations.value.push(defaultEducation);
+    // educations.value.push(defaultEducation);
 };
 
 const handleRemove = (index: number) => {
-    educations.value.splice(index, 1);
+    // educations.value.splice(index, 1);
 };
 </script>
 
 <template>
     <focus-container #default="{ focus }">
-        <b-duplicator :properties="educations" :allow-editable="focus" @add="handleAdd" @remove="handleRemove"
+        <b-duplicator :properties="data" :allow-editable="focus" @add="handleAdd" @remove="handleRemove"
             #default="{ index }">
             <div class="my-6">
                 <b-template>
                     <template #details>
-                        <input-tag v-model="educations[index].place" />
+                        <input-tag v-model="data[index].place" />
                         <year-month-input-range v-model="educations[index].date" disable="month" />
                     </template>
                     <template #description>
-                        <input-tag v-model="educations[index].description" />
+                        <input-tag v-model="data[index].description" />
                     </template>
                 </b-template>
             </div>

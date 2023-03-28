@@ -6,7 +6,7 @@ import InputTag from "@/components/Input/InputTag.vue";
 import ResumeMainInfo from "@/components/Resume/ResumeMainInfo.vue";
 import ResumeSkills from "@/components/Resume/ResumeSkills.vue";
 import ResumeAbout from "@/components/Resume/ResumeAbout.vue";
-import ResumeEducation from "@/components/Resume/ResumeEducation.vue";
+import ResumeEducation, { EducationElement } from "@/components/Resume/ResumeEducation.vue";
 import ResumeExperiance from "@/components/Resume/ResumeExperiance.vue";
 import Sidebar from "@/components/Layout/Sidebar.vue";
 import ElementFactory from "@/components/Element/ElementFactory.vue";
@@ -14,7 +14,6 @@ import ElementActions from "@/components/Element/ElementActions.vue";
 
 import { useResumeElements } from "../store/resume-elements";
 import { useResumeContent } from "../store/resume-content";
-import { differenceBy, differenceWith, find, isEqual } from "lodash";
 
 const resumeElementStore = useResumeElements();
 const resumeContentStore = useResumeContent();
@@ -24,12 +23,40 @@ const aboutTitle: Ref<string> = ref("About");
 const educationTitle: Ref<string> = ref("Education");
 const experianceTitle: Ref<string> = ref("Experiance");
 
+const dateRange = {
+  from: {
+        month: "",
+        year: "",
+    },
+    to: {
+        month: "",
+        year: "",
+    },
+};
 
 watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
   if (currentElements.length <= prev.length) return;
   const createdElement = currentElements.at(-1);
-  // resumeContentStore.
-}, { deep: true })
+  resumeContentStore.create(createdElement);
+}, { deep: true });
+
+const getContentByElement = (elementId: string) => {
+  return resumeContentStore.resumeContent[elementId] || {};
+}
+
+const defaultAbout = ref({
+  about: 'About default',
+  description: 'Description default',
+})
+
+const defaultSkills: Ref<Array<string>> = ref(['HTML', 'CSS', 'JS']);
+const defaultEducation: Ref<Array<EducationElement>> = ref([
+  {
+    date: dateRange,
+    place: 'Oxford',
+    description: 'Some description about education',
+  }
+]);
 
 </script>
 <template>
@@ -52,7 +79,7 @@ watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
           </template>
           <template #default="{ focus }">
             <div :class="{ 'action-hide': !focus }">
-              <resume-skills />
+              <resume-skills v-model="defaultSkills" />
             </div>
           </template>
         </focus-container>
@@ -64,7 +91,7 @@ watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
               </div>
             </div>
           </template>
-          <resume-about />
+          <resume-about v-model="defaultAbout" />
         </focus-container>
         <focus-container>
           <template #header>
@@ -74,7 +101,7 @@ watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
               </div>
             </div>
           </template>
-          <resume-education />
+          <resume-education v-model="defaultEducation" />
         </focus-container>
         <focus-container>
           <template #header>
@@ -92,7 +119,8 @@ watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
             <template #header>
               <div class="flex justify-center items-center py-6 container-title-line">
                 <div class="bg-white px-6">
-                  <input-tag v-model="resumeElement.title" class="container-title-input" />
+                  <input-tag v-model="resumeContentStore.resumeContent[resumeElement.id].title"
+                    class="container-title-input" />
                 </div>
               </div>
             </template>
@@ -103,7 +131,7 @@ watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
                     resumeElementStore.removeResumeElement(resumeElement.id)
                   " />
                 </div>
-                <element-factory :resume-element="resumeElement" />
+                <component v-model="resumeContentStore.resumeContent[resumeElement.id]" :is="resumeElement.component" />
               </div>
             </template>
           </focus-container>

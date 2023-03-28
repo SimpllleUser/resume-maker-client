@@ -1,6 +1,13 @@
-import { property } from "lodash";
+import { keyBy, mapValues, property } from "lodash";
 import { YearMonthRange } from "./common/types";
-import { ResumeContentAbout, ResumeContentEducation, ResumeContentExperience, ResumeContentItem, ResumeContentSkills, ResumeElement } from "./types/data-managment.types";
+import {
+    ResumeContentAbout,
+    ResumeContentEducation,
+    ResumeContentExperience,
+    ResumeContentsElement,
+    ResumeContentSkills,
+    ResumeElement
+} from "./types/data-managment.types";
 
 
 const PREFIX_NAME = "resume";
@@ -16,11 +23,12 @@ const mockDate: YearMonthRange = {
     },
 };
 
+
 const RESUME_ENTITIES: [
-    {element: ResumeElement, content: Omit<ResumeContentSkills, 'id'>},
-    {element: ResumeElement, content: Omit<ResumeContentEducation, 'id'>},
-    {element: ResumeElement, content: Omit<ResumeContentExperience, 'id'>},
-    {element: ResumeElement, content: Omit<ResumeContentAbout, 'id'>},
+    { element: ResumeElement, content: ResumeContentSkills },
+    { element: ResumeElement, content: ResumeContentEducation },
+    { element: ResumeElement, content: ResumeContentExperience },
+    { element: ResumeElement, content: ResumeContentAbout },
 ] = [
         {
             element: {
@@ -79,6 +87,5 @@ const RESUME_ENTITIES: [
     ];
 
 export const RESUME_ELEMENTS: Array<ResumeElement> = RESUME_ENTITIES.map((property('element')));
-export const RESUME_CONTENTS_BY_ELEMENT = RESUME_ENTITIES.reduce((contents, entity) => ({
-    ...contents, [entity.element.name]: entity.content
-}), {});
+export const RESUME_CONTENTS_BY_ELEMENT: ResumeContentsElement = mapValues(keyBy(RESUME_ENTITIES, 'element.name'), 'content');
+export const COMPONENT_KEYS = Object.keys(RESUME_CONTENTS_BY_ELEMENT);

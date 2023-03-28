@@ -18,7 +18,7 @@ export interface IResumeElementService {
 
 
 interface ResumeContent {
-    id: string;
+    // id: string;
     title: string;
 }
 
@@ -63,8 +63,12 @@ export type ResumeContentItem =
     | ResumeContentExperience
     | ResumeContentEducation;
 
+
+
 export interface IResumeContentService {
     resumeContent: { [key: string]: ResumeContentItem }
     add(content: ResumeContentItem): void
     remove(id: string): void
 }
+
+export interface ResumeContentsElement { [key: string]: ResumeContentItem }

@@ -1,7 +1,7 @@
 import { Ref, ref } from "vue";
 import { defineStore } from "pinia";
 import { ResumeContentItem } from "../types/data-managment.types";
-import { RESUME_CONTENTS_BY_ELEMENT } from "../constants";
+import { COMPONENT_KEYS, RESUME_CONTENTS_BY_ELEMENT } from "../constants";
 
 interface ResumeContent {
   [key: string]: ResumeContentItem
@@ -31,15 +31,17 @@ export const useResumeContent = defineStore("resume-content", () => {
     }
   });
 
-  
 
-const create = ({ id: string, name: string }) => {
-  
-  const currentTemplate = RESUME_CONTENTS_BY_ELEMENT[name] || {};
-  const contentTemplate = 
-}
+
+  const create = ({ id, name }: { id: string; name: string; }) => {
+    console.log(name, COMPONENT_KEYS);
+    if (!COMPONENT_KEYS.includes(name)) return;
+    const contentTemplate = RESUME_CONTENTS_BY_ELEMENT[name] || {};
+    resumeContent.value = { ...resumeContent.value, [id]: contentTemplate };
+  };
 
   return {
     resumeContent,
+    create,
   };
 });
