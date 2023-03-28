@@ -40,8 +40,9 @@ watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
   resumeContentStore.create(createdElement);
 }, { deep: true });
 
-const getContentByElement = (elementId: string) => {
-  return resumeContentStore.resumeContent[elementId] || {};
+const handleRemoveElement = (id: string) => {
+  resumeElementStore.removeResumeElement(id);
+  resumeContentStore.remove(id);
 }
 
 const defaultAbout = ref({
@@ -127,9 +128,7 @@ const defaultEducation: Ref<Array<EducationElement>> = ref([
             <template #default="{ focus }">
               <div class="relative" :class="{ 'action-hide': !focus }">
                 <div v-show="focus" class="element-actions absolute left-1/2 transform -translate-x-1/2">
-                  <element-actions @remove="
-                    resumeElementStore.removeResumeElement(resumeElement.id)
-                  " />
+                  <element-actions @remove="handleRemoveElement(resumeElement.id)" />
                 </div>
                 <component v-model="resumeContentStore.resumeContent[resumeElement.id].data" :is="resumeElement.component" />
               </div>

@@ -2,6 +2,7 @@ import { Ref, ref } from "vue";
 import { defineStore } from "pinia";
 import { ResumeContentItem } from "../types/data-managment.types";
 import { COMPONENT_KEYS, RESUME_CONTENTS_BY_ELEMENT } from "../constants";
+import { omit } from "lodash";
 
 interface ResumeContent {
   [key: string]: ResumeContentItem
@@ -39,8 +40,13 @@ export const useResumeContent = defineStore("resume-content", () => {
     resumeContent.value = { ...resumeContent.value, [id]: JSON.parse(JSON.stringify(contentTemplate)) };
   };
 
+  const remove = (id: string) => {
+    resumeContent.value = omit(resumeContent.value, [id]);
+  };
+
   return {
     resumeContent,
     create,
+    remove,
   };
 });
