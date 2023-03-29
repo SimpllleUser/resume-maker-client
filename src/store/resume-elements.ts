@@ -1,4 +1,4 @@
-import { Ref, ref } from "vue";
+import { Ref, ref, watch } from "vue";
 import { defineStore } from "pinia";
 
 import {
@@ -9,11 +9,15 @@ import {
 import * as constants from '@/constants';
 
 import getUniqId from "@/services/uuid-generator";
+import { useStorage } from "@vueuse/core";
 
 export const useResumeElements = defineStore("resume-elements", () => {
-  const resumeElements: Ref<Array<ResumeElement>> = ref(constants.RESUME_ELEMENTS);
-  const currentElements: Ref<Array<CurrenntResumeElement>> = ref([]);
 
+  
+  const resumeElements: Ref<Array<ResumeElement>> = ref(constants.RESUME_ELEMENTS);
+  // const currentElements: Ref<Array<CurrenntResumeElement>> = ref([]);
+  
+  const currentElements: Ref<Array<CurrenntResumeElement>> = useStorage('resume-element', [])
 
   const addResumeElement = (element: ResumeElement): void => {
     currentElements.value = [ ...currentElements.value, { ...element, id: getUniqId()}];
@@ -26,6 +30,7 @@ export const useResumeElements = defineStore("resume-elements", () => {
   const addResumeElements = (elements: Array<CurrenntResumeElement>) => {
     currentElements.value = [ ...currentElements.value, ...elements ];
   };
+
 
   return {
     resumeElements,

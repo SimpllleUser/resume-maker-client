@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, watch } from "vue";
+import { computed, onMounted, watch } from "vue";
 
 import ResumeMainInfo from "@/components/Resume/ResumeMainInfo.vue";
 import FocusContainer from "@/components/FocusContainer.vue";
@@ -10,6 +10,7 @@ import ElementActions from "@/components/Element/ElementActions.vue";
 import { useResumeElements } from "../store/resume-elements";
 import { useResumeContent } from "../store/resume-content";
 import { getDeaultContentData } from "@/services/generate-default-data";
+import { omit } from "lodash";
 
 const resumeElementStore = useResumeElements();
 const resumeContentStore = useResumeContent();
@@ -30,11 +31,11 @@ const handleRemoveItem = (index: number, elementId: string) => {
   resumeContentStore.removeContent({ index, id: elementId });
 };
 
-onMounted(() => {
-  const { elements, contents } = getDeaultContentData();
-  resumeElementStore.addResumeElements(elements);
-  resumeContentStore.addContents(contents);
-})
+// onMounted(() => {
+//   const { elements, contents } = getDeaultContentData();
+//   resumeElementStore.addResumeElements(elements);
+//   resumeContentStore.addContents(contents);
+// })
 
 </script>
 <template>
@@ -45,14 +46,13 @@ onMounted(() => {
       </div>
     </div>
     <div class="mx-auto">
-      <div class="max-w-[990px] mx-auto border border-solid border-gray-300">
+      <div class="max-w-[990px] mx-auto border border-solid border-gray-300 p-4">
         <resume-main-info v-model="resumeContentStore.resumeContent['main']" />
         <div v-for="resumeElement in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
           <focus-container>
             <template #header>
               <div class="flex justify-center items-center py-6 container-title-line">
                 <div class="bg-white px-6">
-                  {{ resumeContentStore.resumeContent[resumeElement.id] }}
                   <input-tag v-model="resumeContentStore.resumeContent[resumeElement.id].title"
                     class="container-title-input" />
                 </div>

@@ -9,9 +9,14 @@ import {
   ResumeContentState
 } from "@/types/data-managment.types";
 import { COMPONENT_KEYS, MAIN_INFO, RESUME_CONTENTS_BY_ELEMENT } from "@/constants";
+import { useStorage } from "@vueuse/core";
 
 export const useResumeContent = defineStore("resume-content", () => {
-  const resumeContent: Ref<ResumeContentState> = ref({
+  // const resumeContent: Ref<ResumeContentState> = ref({
+  //   main: MAIN_INFO,
+  // });
+
+  const resumeContent: Ref<ResumeContentState> = useStorage('resume-content', {
     main: MAIN_INFO,
   });
 
@@ -28,10 +33,10 @@ export const useResumeContent = defineStore("resume-content", () => {
   };
 
   const remove = (id: string) => {
-    const updatedContent: ResumeContentState =  omit(resumeContent.value, [id]);
+    const updatedContent: ResumeContentState = omit(resumeContent.value, [id]);
     resumeContent.value = updatedContent;
   };
-  
+
   const addContent = ({ id, name }: ElementBase) => {
     const contentTemplate = getContentByElement(name)?.data;
     const currentContent = resumeContent.value[id] as ContentsWithPlurarData;
@@ -48,7 +53,7 @@ export const useResumeContent = defineStore("resume-content", () => {
     resumeContent.value = { ...resumeContent.value, ...contents };
   };
 
-  
+
   return {
     resumeContent,
     create,
