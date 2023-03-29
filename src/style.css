@@ -19,10 +19,10 @@
 }
 
 .b-template-details-w {
- width: 24rem;
+ width: 12rem;
 }
 .b-template-description-w {
- width: calc(100% - 24rem);
+ width: calc(100% - 10rem);
 }
 
 .action-hide .action{

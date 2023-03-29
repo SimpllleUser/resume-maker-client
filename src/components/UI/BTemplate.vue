@@ -3,7 +3,7 @@
         <div class="mx-auto b-template-details-w text-center">
             <slot name="details" />
         </div>
-        <div class="pr-2 b-template-description-w">
+        <div class="pl-4 b-template-description-w">
             <slot name="description" />
         </div>
     </div>
