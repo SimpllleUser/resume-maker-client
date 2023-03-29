@@ -4,9 +4,11 @@ import { defineStore } from "pinia";
 import {
   CurrenntResumeElement,
   ResumeElement,
-} from "@/types/data-managment.types copy";
+} from"@/types/data-managment.types";
 
-import * as constants from '@/constants.ts';
+import * as constants from '@/constants';
+
+import getUniqId from "@/services/uuid-generator";
 
 export const useResumeElements = defineStore("resume-elements", () => {
   const resumeElements: Ref<Array<ResumeElement>> = ref(constants.RESUME_ELEMENTS);
@@ -14,14 +16,14 @@ export const useResumeElements = defineStore("resume-elements", () => {
 
 
   const addResumeElement = (element: ResumeElement): void => {
-    currentElements.value = [ ...currentElements.value, { ...element, id: Date.now() }];
+    currentElements.value = [ ...currentElements.value, { ...element, id: getUniqId()}];
   };
   const removeResumeElement = (id: string) => {
     currentElements.value = currentElements.value
     .filter((element) => element.id !== id);
   };
 
-  const addResumeElements = (elements: Array<ResumeElement>) => {
+  const addResumeElements = (elements: Array<CurrenntResumeElement>) => {
     currentElements.value = [ ...currentElements.value, ...elements ];
   };
 

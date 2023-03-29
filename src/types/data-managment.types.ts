@@ -1,12 +1,12 @@
 import { YearMonthRange } from "@/common/types";
 
-export interface MainResumeVModel {
+export interface MainContent {
     fullName: string;
     position: string;
     img: string;
-    contacts: Array<Contact>;
-  }
-  
+    contacts: Array<Contact>,
+}
+export type MainResumeVModel = MainContent;
 
 export interface ResumeElement {
     name: string;
@@ -15,16 +15,9 @@ export interface ResumeElement {
 export interface Contact {
     icon: string;
     value: string;
-  }
-
-interface MainContent {
-    fullName: string;
-    position: string;
-    img: string;
-    contacts: Array<Contact>,
 }
 
-export type CurrenntResumeElement = ResumeElement & { id: string; title: string; }
+export type CurrenntResumeElement = ResumeElement & { id: string; }
 
 
 export interface IResumeElementService {
@@ -78,17 +71,17 @@ export type ResumeContentEducation = ResumeContent & {
 }
 
 export type ResumeContentItem =
-| ResumeContentSkills
-// | ResumeContentContact
-| ResumeContentAbout
-| ResumeContentExperience
-| ResumeContentEducation
-| MainContent;
+    | ResumeContentSkills
+    // | ResumeContentContact
+    | ResumeContentAbout
+    | ResumeContentExperience
+    | ResumeContentEducation
+    | MainContent;
 
 
-export interface ResumeContentState {
+export type ResumeContentState = {
     [key: string]: ResumeContentItem
-  }
+}
 export interface IResumeContentService {
     resumeContent: { [key: string]: ResumeContentItem }
     add(content: ResumeContentItem): void
@@ -106,12 +99,13 @@ export interface RemovableContentItem {
     index: number;
 }
 
-export type ContentsWithPlurarData = 
-| ResumeContentEducation 
-| ResumeContentExperience 
-| ResumeContentSkills 
+export type ContentsWithPlurarData =
+    | ResumeContentEducation
+    | ResumeContentExperience
+    | ResumeContentSkills
 
-export type ContentDataPlurar = 
-| Array<Education> 
-| Array<Experiance> 
-| Array<string> 
+export type ContentDataWithPlurar =
+| ResumeContentSkills
+| ResumeContentAbout
+| ResumeContentExperience
+| ResumeContentEducation;
