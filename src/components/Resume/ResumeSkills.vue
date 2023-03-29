@@ -1,9 +1,9 @@
 
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
+
+import { useVModel } from '@vueuse/core';
 
 import InputTag from '@/components/Input/InputTag.vue';
-import { useVModel } from '@vueuse/core';
 
 type Skill = string;
 
@@ -22,8 +22,6 @@ const props = withDefaults(defineProps<Props>(), {});
 
 const emit = defineEmits<Emits>();
 const data = useVModel(props, "modelValue", emit);
-
-// const skills: Ref<Skill[]> = ref(['HTML', 'CSS', 'JS']);
 
 const addSkill = () => {
     emit('add');

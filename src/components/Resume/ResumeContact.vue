@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref, Ref } from "vue";
 
-import InputTag from "@/components/Input/InputTag.vue";
-import IconSelector from "@/components/UI/IconSelector.vue";
 import { Contact } from "@/types/data-managment.types";
 import { useVModel } from "@vueuse/core";
+
+import InputTag from "@/components/Input/InputTag.vue";
+import IconSelector from "@/components/UI/IconSelector.vue";
 
 
 interface Props {

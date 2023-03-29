@@ -6,7 +6,6 @@ import {
   ContentsWithPlurarData,
   ElementBase,
   RemovableContentItem,
-  ResumeContentItem,
   ResumeContentState
 } from "@/types/data-managment.types";
 import { COMPONENT_KEYS, RESUME_CONTENTS_BY_ELEMENT } from "@/constants";

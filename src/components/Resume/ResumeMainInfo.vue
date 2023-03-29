@@ -6,15 +6,8 @@ import FocusContainer from "@/components/FocusContainer.vue";
 import ResumeContact from "@/components/Resume/ResumeContact.vue";
 import ResumePhoto from "@/components/Resume/ResumePhoto.vue";
 
-import { Contact } from "@/types/data-managment.types";
+import { MainResumeVModel } from "@/types/data-managment.types";
 import { useVModel } from "@vueuse/core";
-
-interface MainResumeVModel {
-  fullName: string;
-  position: string;
-  img: string;
-  contacts: Array<Contact>;
-}
 
 interface Props {
   modelValue: MainResumeVModel;

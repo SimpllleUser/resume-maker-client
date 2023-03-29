@@ -1,47 +1,16 @@
 <script setup lang="ts">
-import { ref, Ref } from "vue";
-
+import { useVModel } from "@vueuse/core";
 import InputTag from "@/components/Input/InputTag.vue";
 import YearMonthInputRange from "@/components/Input/YearMonthInputRange.vue";
-
 import BTemplate from "@/components/UI/BTemplate.vue";
 import BDuplicator from "@/components/UI/BDuplicator.vue";
-
 import FocusContainer from "@/components/FocusContainer.vue";
 
-import { YearMonthRange } from "@/common/types";
-import { useVModel } from "@vueuse/core";
+import { Education } from "@/types/data-managment.types";
 
-export interface EducationElement {
-    description: string;
-    place: string;
-    date: YearMonthRange;
-}
-
-const mockDate: YearMonthRange = {
-    from: {
-        month: "",
-        year: "",
-    },
-    to: {
-        month: "",
-        year: "",
-    },
-};
-
-const testText = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to make 
-      a type specimen book. It has survived not only five centuries.`;
-
-const defaultEducation: EducationElement = {
-    place: 'Oxford',
-    description: testText,
-    date: mockDate,
-}
 
 interface Props {
-    modelValue: Array<EducationElement>;
+    modelValue: Array<Education>;
 }
 
 interface Emits {
@@ -54,9 +23,6 @@ const props = withDefaults(defineProps<Props>(), {});
 
 const emit = defineEmits<Emits>();
 const data = useVModel(props, "modelValue", emit);
-
-
-const educations: Ref<Array<EducationElement>> = ref([{ ...defaultEducation }]);
 
 const handleAdd = () => {
     emit('add');

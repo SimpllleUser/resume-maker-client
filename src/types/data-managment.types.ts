@@ -1,5 +1,13 @@
 import { YearMonthRange } from "@/common/types";
 
+export interface MainResumeVModel {
+    fullName: string;
+    position: string;
+    img: string;
+    contacts: Array<Contact>;
+  }
+  
+
 export interface ResumeElement {
     name: string;
     component: string;
@@ -39,7 +47,7 @@ export interface Experiance {
     description: string;
 }
 
-interface Education {
+export interface Education {
     place: string;
     date: YearMonthRange;
     description: string;

@@ -1,6 +1,5 @@
 import { Ref, ref } from "vue";
 import { defineStore } from "pinia";
-import { findIndex } from "lodash";
 
 import {
   CurrenntResumeElement,

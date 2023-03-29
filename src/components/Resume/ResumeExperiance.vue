@@ -1,26 +1,16 @@
 <script setup lang="ts">
-import { ref, Ref } from "vue";
+import { useVModel } from "@vueuse/core";
 
 import InputTag from "@/components/Input/InputTag.vue";
 import YearMonthInputRange from "@/components/Input/YearMonthInputRange.vue";
-
 import BTemplate from "@/components/UI/BTemplate.vue";
 import BDuplicator from "@/components/UI/BDuplicator.vue";
-
 import FocusContainer from "@/components/FocusContainer.vue";
 
-import { YearMonthRange } from "@/common/types";
-import { useVModel } from "@vueuse/core";
-
-interface ExperianceElement {
-  date: YearMonthRange;
-  place: string;
-  position: string;
-  description: string;
-}
+import { Experiance } from "@/types/data-managment.types";
 
 interface Props {
-    modelValue: Array<ExperianceElement>;
+    modelValue: Array<Experiance>;
 }
 
 interface Emits {
@@ -33,35 +23,6 @@ const props = withDefaults(defineProps<Props>(), {});
 
 const emit = defineEmits<Emits>();
 const data = useVModel(props, "modelValue", emit);
-
-const testText = `Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-      when an unknown printer took a galley of type and scrambled it to make 
-      a type specimen book. It has survived not only five centuries,
-       but also the leap into electronic typesetting, remaining essentially unchanged.
-        It was popularised in the 1960s with the release of Letraset sheets containing 
-        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-         PageMaker including versions of Lorem Ipsum`;
-
-const mockDate: YearMonthRange = {
-  from: {
-    month: "",
-    year: "",
-  },
-  to: {
-    month: "",
-    year: "",
-  },
-};
-
-const defaultExperiance: ExperianceElement = {
-  position: "Front end Team Lead",
-  place: 'google',
-  date: mockDate,
-  description: testText,
-};
-
-const experiances: Ref<Array<ExperianceElement>> = ref([ { ...defaultExperiance } ]);
 
 const handleAdd = () => {
   emit('add');
