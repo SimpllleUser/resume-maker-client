@@ -1,6 +1,7 @@
 import { keyBy, mapValues, property } from "lodash";
 import { YearMonthRange } from "./common/types";
 import {
+    MainContent,
     ResumeContentAbout,
     ResumeContentEducation,
     ResumeContentExperience,
@@ -91,7 +92,7 @@ export const RESUME_ENTITIES: [
 export const RESUME_ELEMENTS: Array<ResumeElement> = RESUME_ENTITIES.map((property('element')));
 export const RESUME_CONTENTS_BY_ELEMENT: ResumeContentsElement = mapValues(keyBy(RESUME_ENTITIES, 'element.name'), 'content');
 export const COMPONENT_KEYS = Object.keys(RESUME_CONTENTS_BY_ELEMENT);
-export const MAIN_INFO = {
+export const MAIN_INFO: MainContent = {
     img: '',
     fullName: 'Your full name',
     position: 'Your position',

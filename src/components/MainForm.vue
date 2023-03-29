@@ -52,6 +52,7 @@ onMounted(() => {
             <template #header>
               <div class="flex justify-center items-center py-6 container-title-line">
                 <div class="bg-white px-6">
+                  {{ resumeContentStore.resumeContent[resumeElement.id] }}
                   <input-tag v-model="resumeContentStore.resumeContent[resumeElement.id].title"
                     class="container-title-input" />
                 </div>

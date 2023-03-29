@@ -76,11 +76,9 @@ export type ResumeContentItem =
     | ResumeContentAbout
     | ResumeContentExperience
     | ResumeContentEducation
-    | MainContent;
-
 
 export type ResumeContentState = {
-    [key: string]: ResumeContentItem
+    [key: string]: { title: string; } &  ResumeContentItem
 }
 export interface IResumeContentService {
     resumeContent: { [key: string]: ResumeContentItem }
@@ -104,6 +102,7 @@ export type ContentsWithPlurarData =
     | ResumeContentExperience
     | ResumeContentSkills
 
+    
 export type ContentDataWithPlurar =
 | ResumeContentSkills
 | ResumeContentAbout

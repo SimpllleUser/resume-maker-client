@@ -17,6 +17,7 @@ export const useResumeContent = defineStore("resume-content", () => {
 
   const getContentByElement = (elementName: string): ContentDataWithPlurar | null => {
     if (!COMPONENT_KEYS.includes(elementName)) return null;
+    console.log(RESUME_CONTENTS_BY_ELEMENT[elementName]);
     return RESUME_CONTENTS_BY_ELEMENT[elementName] as ContentDataWithPlurar;
   }
 
