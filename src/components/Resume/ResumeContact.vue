@@ -3,33 +3,46 @@ import { ref, Ref } from "vue";
 
 import InputTag from "@/components/Input/InputTag.vue";
 import IconSelector from "@/components/UI/IconSelector.vue";
+import { Contact } from "@/types/data-managment.types";
+import { useVModel } from "@vueuse/core";
 
-export interface Contact {
-  icon: string;
-  value: string;
+
+interface Props {
+    modelValue: Array<Contact>;
 }
+
+interface Emits {
+    (event: "update:modelValue", payload: Props): void;
+    (event: "add", payload: Array<Contact>): void;
+    (event: "remove", payload: Array<Contact>): void;
+}
+
+const props = withDefaults(defineProps<Props>(), {});
+
+const emit = defineEmits<Emits>();
+const data = useVModel(props, "modelValue", emit);
 
 const icons = ["phone", "envelope", "map-marker", "github"];
 
 const contacts: Ref<Array<Contact>> = ref([
-  { icon: "phone", value: "phone" },
-  { icon: "envelope", value: "email" },
-  { icon: "github", value: "link" },
-  { icon: "", value: "empty icon" },
+
 ]);
 
-const addContact = () => {
-  contacts.value.push({ icon: "phone", value: "" });
+const handleAdd = () => {
+  data.value = [ ...data.value, { icon: "phone", value: "" } ]
+  emit('add', data.value);
 };
-const removeContact = (contactIndex: number) => {
-  contacts.value = contacts.value.filter((_, index) => index !== contactIndex);
+
+const handleRemove = (contactIndex: number) => {
+  data.value = data.value.filter((_, index) => index !== contactIndex)
+  emit('remove', data.value);
 };
 </script>
 
 <template>
   <div class="flex items-center justify-center flex-wrap">
     <div
-      v-for="(contact, index) in contacts"
+      v-for="(contact, index) in data"
       :key="index"
       class="flex items-center justify-around mb-2 w-1/3"
     >
@@ -39,13 +52,13 @@ const removeContact = (contactIndex: number) => {
       <input-tag v-model="contact.value" class="min-w-full print:text-center" />
       <button
         class="action btn btn-active btn-primary btn-xs print:opacity-0"
-        @click="removeContact(index)"
+        @click="handleRemove(index)"
       >
         <unicon name="multiply" class="text-xs" fill="white"></unicon>
       </button>
     </div>
     <div class="flex items-center mb-2 action print:hidden">
-      <button class="btn btn-primary btn-xs" @click="addContact">
+      <button class="btn btn-primary btn-xs" @click="handleAdd">
         <unicon name="plus" fill="white"></unicon>
       </button>
     </div>

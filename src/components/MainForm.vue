@@ -25,13 +25,13 @@ const experianceTitle: Ref<string> = ref("Experiance");
 
 const dateRange = {
   from: {
-        month: "",
-        year: "",
-    },
-    to: {
-        month: "",
-        year: "",
-    },
+    month: "",
+    year: "",
+  },
+  to: {
+    month: "",
+    year: "",
+  },
 };
 
 watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
@@ -71,6 +71,15 @@ const handleRemoveItem = (index: number, elementId: string) => {
   resumeContentStore.removeContentItem({ index, id: elementId });
 };
 
+// const defaultMain = ref({
+//   fullName: 'Vitalii.Pecherytsya',
+//   position: 'Front-end developer',
+//   img: '',
+//   contacts: [
+//     { icon: "phone", value: "3809516515108" }
+//   ],
+// });
+
 </script>
 <template>
   <div class="flex pb-12">
@@ -81,7 +90,7 @@ const handleRemoveItem = (index: number, elementId: string) => {
     </div>
     <div class="mx-auto">
       <div class="max-w-[990px] mx-auto border border-solid border-gray-300">
-        <resume-main-info />
+        <resume-main-info v-model="resumeContentStore.resumeContent['main']" />
         <focus-container>
           <template #header>
             <div class="flex justify-center items-center py-6 container-title-line">
@@ -142,12 +151,9 @@ const handleRemoveItem = (index: number, elementId: string) => {
                 <div v-show="focus" class="element-actions absolute left-1/2 transform -translate-x-1/2">
                   <element-actions @remove="handleRemoveElement(resumeElement.id)" />
                 </div>
-                <component 
-                v-model="resumeContentStore.resumeContent[resumeElement.id].data"
-                 :is="resumeElement.component"
-                 @add="resumeContentStore.addContentItem(resumeElement)"
-                 @remove="handleRemoveItem($event, resumeElement.id)"
-                 />
+                <component v-model="resumeContentStore.resumeContent[resumeElement.id].data" :is="resumeElement.component"
+                  @add="resumeContentStore.addContentItem(resumeElement)"
+                  @remove="handleRemoveItem($event, resumeElement.id)" />
               </div>
             </template>
           </focus-container>

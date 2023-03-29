@@ -3,7 +3,6 @@ import { defineStore } from "pinia";
 import {
   ContentDataPlurar,
   ContentsWithPlurarData,
-  CreaeteContentElement,
   ElementBase,
   RemovableContentItem,
   ResumeContentItem
@@ -16,6 +15,16 @@ interface ResumeContent {
 }
 export const useResumeContent = defineStore("resume-content", () => {
   const resumeContent: Ref<ResumeContent> = ref({
+    ['main']: {
+      fullName: 'Your full name',
+      position: 'Your position',
+      contacts: [
+        { icon: "phone", value: "phone" },
+        { icon: "envelope", value: "email" },
+        { icon: "github", value: "link" },
+        { icon: "", value: "empty icon" },
+      ]
+    },
     ['somedID']: {
       id: 'test-1',
       title: 'Experiance',

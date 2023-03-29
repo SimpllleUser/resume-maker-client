@@ -1,9 +1,19 @@
 import { YearMonthRange } from "@/common/types";
-import { Contact } from "@/components/Resume/ResumeContact.vue";
 
 export interface ResumeElement {
     name: string;
     component: string;
+}
+export interface Contact {
+    icon: string;
+    value: string;
+  }
+
+interface MainContent {
+    fullName: string;
+    position: string;
+    img: string;
+    contacts: Array<Contact>,
 }
 
 export type CurrenntResumeElement = ResumeElement & { id: string; title: string; }
@@ -63,7 +73,8 @@ export type ResumeContentItem =
     // | ResumeContentContact
     | ResumeContentAbout
     | ResumeContentExperience
-    | ResumeContentEducation;
+    | ResumeContentEducation
+    | MainContent;
 
 
 
