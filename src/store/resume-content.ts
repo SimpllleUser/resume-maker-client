@@ -1,20 +1,19 @@
 import { Ref, ref } from "vue";
+import { omit } from "lodash";
 import { defineStore } from "pinia";
 import {
   ContentDataPlurar,
   ContentsWithPlurarData,
   ElementBase,
   RemovableContentItem,
-  ResumeContentItem
+  ResumeContentItem,
+  ResumeContentState
 } from "@/types/data-managment.types";
 import { COMPONENT_KEYS, RESUME_CONTENTS_BY_ELEMENT } from "@/constants";
-import { omit } from "lodash";
 
-interface ResumeContent {
-  [key: string]: ResumeContentItem
-}
+
 export const useResumeContent = defineStore("resume-content", () => {
-  const resumeContent: Ref<ResumeContent> = ref({
+  const resumeContent: Ref<ResumeContentState> = ref({
     ['main']: {
       fullName: 'Your full name',
       position: 'Your position',
@@ -25,27 +24,6 @@ export const useResumeContent = defineStore("resume-content", () => {
         { icon: "", value: "empty icon" },
       ]
     },
-    ['somedID']: {
-      id: 'test-1',
-      title: 'Experiance',
-      data: [
-        {
-          date: {
-            from: {
-              year: '2023',
-              month: 'Jun',
-            },
-            to: {
-              year: '2023',
-              month: 'Jun',
-            },
-          },
-          place: 'Google',
-          position: 'Front end',
-          description: 'Test description',
-        }
-      ]
-    }
   });
 
   const getContentByElement = (elementName: string) => {
@@ -63,21 +41,28 @@ export const useResumeContent = defineStore("resume-content", () => {
     resumeContent.value = omit(resumeContent.value, [id]);
   };
   
-  const addContentItem = ({ id, name }: ElementBase) => {
+  const addConten = ({ id, name }: ElementBase) => {
     const contentTemplate = getContentByElement(name)?.data as ContentDataPlurar;
     const currentContent = resumeContent.value[id] as ContentsWithPlurarData
     currentContent.data.push((JSON.parse(JSON.stringify(contentTemplate.at(0)))))
   };
 
-  const removeContentItem = ({ id, index }: RemovableContentItem) => {
+  const removeContent = ({ id, index }: RemovableContentItem) => {
     const currentContent = resumeContent.value[id] as ContentsWithPlurarData
     currentContent.data.splice(index, 1);
   };
+
+  const addContents = (contents: ResumeContentState) => {
+    resumeContent.value = { ...resumeContent.value, ...contents };
+  };
+
+  
   return {
     resumeContent,
     create,
     remove,
-    addContentItem,
-    removeContentItem,
+    addConten,
+    removeContent,
+    addContents,
   };
 });

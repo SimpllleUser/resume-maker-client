@@ -24,7 +24,7 @@ const mockDate: YearMonthRange = {
 };
 
 
-const RESUME_ENTITIES: [
+export const RESUME_ENTITIES: [
     { element: ResumeElement, content: ResumeContentSkills },
     { element: ResumeElement, content: ResumeContentEducation },
     { element: ResumeElement, content: ResumeContentExperience },

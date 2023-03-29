@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, Ref, ref, watch } from "vue";
+import { computed, onMounted, Ref, ref, watch } from "vue";
 
 import FocusContainer from "@/components/FocusContainer.vue";
 import InputTag from "@/components/Input/InputTag.vue";
@@ -14,6 +14,7 @@ import ElementActions from "@/components/Element/ElementActions.vue";
 import { useResumeElements } from "../store/resume-elements";
 import { useResumeContent } from "../store/resume-content";
 import { Experiance } from "@/types/data-managment.types";
+import { getDeaultContentData } from "@/services/generate-default-data";
 
 const resumeElementStore = useResumeElements();
 const resumeContentStore = useResumeContent();
@@ -68,17 +69,14 @@ const defaultExperiance: Ref<Array<Experiance>> = ref([
 ]);
 
 const handleRemoveItem = (index: number, elementId: string) => {
-  resumeContentStore.removeContentItem({ index, id: elementId });
+  resumeContentStore.removeContent({ index, id: elementId });
 };
 
-// const defaultMain = ref({
-//   fullName: 'Vitalii.Pecherytsya',
-//   position: 'Front-end developer',
-//   img: '',
-//   contacts: [
-//     { icon: "phone", value: "3809516515108" }
-//   ],
-// });
+onMounted(() => {
+  const { elements, contents } = getDeaultContentData();
+  resumeElementStore.addResumeElements(elements);
+  resumeContentStore.addContents(contents);
+})
 
 </script>
 <template>
@@ -91,7 +89,7 @@ const handleRemoveItem = (index: number, elementId: string) => {
     <div class="mx-auto">
       <div class="max-w-[990px] mx-auto border border-solid border-gray-300">
         <resume-main-info v-model="resumeContentStore.resumeContent['main']" />
-        <focus-container>
+        <!-- <focus-container>
           <template #header>
             <div class="flex justify-center items-center py-6 container-title-line">
               <div class="bg-white px-6">
@@ -134,7 +132,7 @@ const handleRemoveItem = (index: number, elementId: string) => {
             </div>
           </template>
           <resume-experiance v-model="defaultExperiance" />
-        </focus-container>
+        </focus-container> -->
 
         <div v-for="resumeElement in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
           <focus-container>
@@ -152,7 +150,7 @@ const handleRemoveItem = (index: number, elementId: string) => {
                   <element-actions @remove="handleRemoveElement(resumeElement.id)" />
                 </div>
                 <component v-model="resumeContentStore.resumeContent[resumeElement.id].data" :is="resumeElement.component"
-                  @add="resumeContentStore.addContentItem(resumeElement)"
+                  @add="resumeContentStore.addContent(resumeElement)"
                   @remove="handleRemoveItem($event, resumeElement.id)" />
               </div>
             </template>

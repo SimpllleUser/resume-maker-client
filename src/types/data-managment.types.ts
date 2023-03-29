@@ -60,6 +60,7 @@ export type ResumeContentAbout = ResumeContent & {
     }
 }
 
+
 export type ResumeContentExperience = ResumeContent & {
     data: Array<Experiance>
 }
@@ -69,15 +70,17 @@ export type ResumeContentEducation = ResumeContent & {
 }
 
 export type ResumeContentItem =
-    | ResumeContentSkills
-    // | ResumeContentContact
-    | ResumeContentAbout
-    | ResumeContentExperience
-    | ResumeContentEducation
-    | MainContent;
+| ResumeContentSkills
+// | ResumeContentContact
+| ResumeContentAbout
+| ResumeContentExperience
+| ResumeContentEducation
+| MainContent;
 
 
-
+export interface ResumeContentState {
+    [key: string]: ResumeContentItem
+  }
 export interface IResumeContentService {
     resumeContent: { [key: string]: ResumeContentItem }
     add(content: ResumeContentItem): void
