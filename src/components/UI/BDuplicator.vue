@@ -1,7 +1,7 @@
 import { computed } from "vue";
 
 <script setup lang="ts">
-import { computed, Ref, ref } from "vue";
+import { watch, computed, Ref, ref } from "vue";
 
 type Properties = Array<unknown>;
 
@@ -26,10 +26,12 @@ const handleAdd = (): void => {
 };
 
 const canRemove = computed(() => editabelProperty.value?.length > 1);
+const properties = computed(() => editabelProperty);
 
 const handleRemove = (index: number): void => {
   emit("remove", index);
 };
+
 </script>
 
 <template>
@@ -38,7 +40,7 @@ const handleRemove = (index: number): void => {
       <button class="btn btn-primary btn-xs" @click="handleAdd()">Add</button>
     </div>
     <div
-      v-for="(_, index) in editabelProperty"
+      v-for="(_, index) in props.properties"
       :key="`property-key-${index}`"
       class="relative"
     >
