@@ -7,10 +7,8 @@ import InputTag from "@/components/Input/InputTag.vue";
 import Sidebar from "@/components/Layout/Sidebar.vue";
 import ElementActions from "@/components/Element/ElementActions.vue";
 
-import { useResumeElements } from "../store/resume-elements";
-import { useResumeContent } from "../store/resume-content";
-import { getDeaultContentData } from "@/services/generate-default-data";
-import { omit } from "lodash";
+import { useResumeElements } from "@/store/resume-elements";
+import { useResumeContent } from "@/store/resume-content";
 
 const resumeElementStore = useResumeElements();
 const resumeContentStore = useResumeContent();

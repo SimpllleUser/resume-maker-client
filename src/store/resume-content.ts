@@ -1,6 +1,8 @@
-import { Ref, ref } from "vue";
+import { Ref } from "vue";
 import { omit } from "lodash";
 import { defineStore } from "pinia";
+import { useStorage } from "@vueuse/core";
+
 import {
   ContentDataWithPlurar,
   ContentsWithPlurarData,
@@ -9,8 +11,8 @@ import {
   RemovableContentItem,
   ResumeContentState
 } from "@/types/data-managment.types";
+
 import { COMPONENT_KEYS, MAIN_INFO, RESUME_CONTENTS_BY_ELEMENT } from "@/constants";
-import { useStorage } from "@vueuse/core";
 
 const getCopyObject = (obj: any) => JSON.parse(JSON.stringify(obj)); 
 
