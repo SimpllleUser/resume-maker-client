@@ -22,6 +22,7 @@ interface Props {
 
 interface Emits {
   (event: "update:modelValue", payload: ModelValue): void;
+  (event: "present-change", payload: boolean): void;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -56,18 +57,17 @@ const presentDate: ModelValue = {
 const isPresent = ref(false);
 
 const handlePresentDate = () => {
+  emit('present-change', isPresent.value);
   if (!isPresent.value) return;
   data.value = { ...presentDate };
 };
 
-watch(isPresent, handlePresentDate);
+watch(isPresent, handlePresentDate, { immediate: true, deep: true });
 
 const handleDate = (): void => {
-  if (isEqual(data.value, presentDate)) return;
-  isPresent.value = false;
+  isPresent.value = isEqual({ ...data.value }, presentDate);
 };
-
-watch(data, handlePresentDate, { deep: true });
+watch(data, handleDate, { immediate: true, deep: true });
 </script>
 
 <template>

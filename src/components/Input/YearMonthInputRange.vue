@@ -29,7 +29,8 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>();
 const data = useVModel(props, "modelValue", emit);
-  
+
+const isPresent: Ref<boolean> = ref(false);
 
 const separate: ComputedRef<string> = computed(() => (!props.disable ? "/" : ""));
 
@@ -38,7 +39,7 @@ const getDateFromInput = ({ year = "", month = "" }): string =>
 
 const dateRange: ComputedRef<string> = computed(
   () =>
-    `${getDateFromInput(data.value.from)} - ${getDateFromInput(data.value.to)}`
+    `${getDateFromInput(data.value.from)} -  ${isPresent.value ? 'Present' : getDateFromInput(data.value.to)}`
 );
 
 const showDateInput: Ref<boolean> = ref(false);
@@ -46,6 +47,9 @@ const showDateInput: Ref<boolean> = ref(false);
 const handleOutsideClick = (state: boolean): void => {
   showDateInput.value = state;
 };
+
+const setPresent = (state: boolean) => { isPresent.value = state; };
+
 </script>
         
 <template>
@@ -69,6 +73,7 @@ const handleOutsideClick = (state: boolean): void => {
           :disable="disable"
           start-from-end
           present
+          @present-change="setPresent"
         />
       </div>
     </div>
