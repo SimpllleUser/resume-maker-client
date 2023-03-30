@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 import {
   ContentDataWithPlurar,
   ContentsWithPlurarData,
+  DynamicContents,
   ElementBase,
   RemovableContentItem,
   ResumeContentState
@@ -11,13 +12,13 @@ import {
 import { COMPONENT_KEYS, MAIN_INFO, RESUME_CONTENTS_BY_ELEMENT } from "@/constants";
 import { useStorage } from "@vueuse/core";
 
-export const useResumeContent = defineStore("resume-content", () => {
-  // const resumeContent: Ref<ResumeContentState> = ref({
-  //   main: MAIN_INFO,
-  // });
+const getCopyObject = (obj: any) => JSON.parse(JSON.stringify(obj)); 
 
-  const resumeContent: Ref<ResumeContentState> = useStorage('resume-content', {
+export const useResumeContent = defineStore("resume-content", () => {
+  
+  const resumeContentState: Ref<ResumeContentState> = useStorage('resume-content-state', {
     main: MAIN_INFO,
+    dynamic: {},
   });
 
   const getContentByElement = (elementName: string): ContentDataWithPlurar | null => {
@@ -28,33 +29,33 @@ export const useResumeContent = defineStore("resume-content", () => {
   const create = ({ id, name }: ElementBase) => {
     const contentTemplate = getContentByElement(name);
     if (!contentTemplate) return;
-    resumeContent.value = { ...resumeContent.value, [id]: JSON.parse(JSON.stringify(contentTemplate)) };
+    resumeContentState.value.dynamic = { ...resumeContentState.value.dynamic, [id]: JSON.parse(JSON.stringify(contentTemplate)) };
   };
 
   const remove = (id: string) => {
-    const updatedContent: ResumeContentState = omit(resumeContent.value, [id]);
-    resumeContent.value = updatedContent;
+    const updatedContent: DynamicContents = omit(resumeContentState.value.dynamic, [id]);
+    resumeContentState.value =  { ...resumeContentState.value, ...updatedContent };
   };
 
   const addContent = ({ id, name }: ElementBase) => {
     const contentTemplate = getContentByElement(name)?.data;
-    const currentContent = resumeContent.value[id] as ContentsWithPlurarData;
+    const currentContent = resumeContentState.value.dynamic[id] as ContentsWithPlurarData;
     if (!Array.isArray(contentTemplate) || !contentTemplate[0]) return;
-    currentContent.data.push((JSON.parse(JSON.stringify(contentTemplate[0]))))
+    currentContent.data.push(getCopyObject(contentTemplate[0]));
   };
 
   const removeContent = ({ id, index }: RemovableContentItem) => {
-    const currentContent = resumeContent.value[id] as ContentsWithPlurarData
+    const currentContent = resumeContentState.value.dynamic[id] as ContentsWithPlurarData
     currentContent.data.splice(index, 1);
   };
 
   const addContents = (contents: ResumeContentState) => {
-    resumeContent.value = { ...resumeContent.value, ...contents };
+    resumeContentState.value = { ...resumeContentState.value.dynamic, ...contents };
   };
 
 
   return {
-    resumeContent,
+    resumeContentState,
     create,
     remove,
     addContent,

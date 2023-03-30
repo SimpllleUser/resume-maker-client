@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, watch } from "vue";
+import { watch } from "vue";
 
 import ResumeMainInfo from "@/components/Resume/ResumeMainInfo.vue";
 import FocusContainer from "@/components/FocusContainer.vue";
@@ -18,6 +18,7 @@ const resumeContentStore = useResumeContent();
 watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
   if (currentElements.length <= prev.length) return;
   const createdElement = currentElements.at(-1);
+  if (!createdElement) return;
   resumeContentStore.create(createdElement);
 }, { deep: true });
 
@@ -47,13 +48,13 @@ const handleRemoveItem = (index: number, elementId: string) => {
     </div>
     <div class="mx-auto">
       <div class="max-w-[990px] mx-auto border border-solid border-gray-300 p-4">
-        <resume-main-info v-model="resumeContentStore.resumeContent['main']" />
+        <resume-main-info v-model="resumeContentStore.resumeContentState.main" />
         <div v-for="resumeElement in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
           <focus-container>
             <template #header>
               <div class="flex justify-center items-center py-6 container-title-line">
                 <div class="bg-white px-6">
-                  <input-tag v-model="resumeContentStore.resumeContent[resumeElement.id].title"
+                  <input-tag v-model="resumeContentStore.resumeContentState.dynamic[resumeElement.id].title"
                     class="container-title-input" />
                 </div>
               </div>
@@ -63,8 +64,8 @@ const handleRemoveItem = (index: number, elementId: string) => {
                 <div v-show="focus" class="element-actions absolute left-1/2 transform -translate-x-1/2">
                   <element-actions @remove="handleRemoveElement(resumeElement.id)" />
                 </div>
-                <component v-model="resumeContentStore.resumeContent[resumeElement.id].data" :is="resumeElement.component"
-                  @add="resumeContentStore.addContent(resumeElement)"
+                <component v-model="resumeContentStore.resumeContentState.dynamic[resumeElement.id].data"
+                  :is="resumeElement.component" @add="resumeContentStore.addContent(resumeElement)"
                   @remove="handleRemoveItem($event, resumeElement.id)" />
               </div>
             </template>

@@ -6,7 +6,10 @@ export interface MainContent {
     img: string;
     contacts: Array<Contact>,
 }
-export type MainResumeVModel = MainContent;
+
+export interface MainContentState {
+    main: MainContent;
+}
 
 export interface ResumeElement {
     name: string;
@@ -72,14 +75,20 @@ export type ResumeContentEducation = ResumeContent & {
 
 export type ResumeContentItem =
     | ResumeContentSkills
-    // | ResumeContentContact
     | ResumeContentAbout
     | ResumeContentExperience
     | ResumeContentEducation
 
+
+export interface DynamicContents  { [key: string]: { title: string; } & ResumeContentItem};
+
 export type ResumeContentState = {
-    [key: string]: { title: string; } &  ResumeContentItem
-}
+    ['main']: MainContent;
+    dynamic: DynamicContents;
+}; 
+
+export type MainResumeVModel = MainContent;
+
 export interface IResumeContentService {
     resumeContent: { [key: string]: ResumeContentItem }
     add(content: ResumeContentItem): void
