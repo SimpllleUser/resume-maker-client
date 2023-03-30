@@ -36,6 +36,10 @@ const handleRemoveItem = (index: number, elementId: string) => {
 //   resumeContentStore.addContents(contents);
 // })
 
+const canShowUpButton = (index: number): boolean => index !== 0;
+
+const canShowDownButton = (index: number): boolean => index !== (resumeElementStore.currentElements.length - 1);
+
 </script>
 <template>
   <div class="flex pb-12">
@@ -47,7 +51,7 @@ const handleRemoveItem = (index: number, elementId: string) => {
     <div class="mx-auto">
       <div class="max-w-[990px] mx-auto border border-solid border-gray-300 p-4">
         <resume-main-info v-model="resumeContentStore.resumeContentState.main" />
-        <div v-for="resumeElement in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
+        <div v-for="(resumeElement, index) in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
           <focus-container>
             <template #header>
               <div class="flex justify-center items-center py-6 container-title-line">
@@ -59,6 +63,16 @@ const handleRemoveItem = (index: number, elementId: string) => {
             </template>
             <template #default="{ focus }">
               <div class="relative" :class="{ 'action-hide': !focus }">
+                <div class="w-1 absolute right-0" v-show="focus">
+                  <button v-show="canShowUpButton(index)" @click="resumeElementStore.swapOrder(Number(index), index - 1)"
+                    class="btn btn-primary rotate-180 btn-sm mb-1">
+                    <unicon name="angle-double-down" fill="white"></unicon>
+                  </button>
+                  <button v-show="canShowDownButton(index)"
+                    @click="resumeElementStore.swapOrder(Number(index), index + 1)" class="btn btn-primary btn-sm">
+                    <unicon name="angle-double-down" fill="white"></unicon>
+                  </button>
+                </div>
                 <div v-show="focus" class="element-actions absolute left-1/2 transform -translate-x-1/2">
                   <element-actions @remove="handleRemoveElement(resumeElement.id)" />
                 </div>

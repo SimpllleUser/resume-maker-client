@@ -13,7 +13,7 @@ import ResumeExperiance from "@/components/Resume/ResumeExperiance.vue";
 
 
 const app  = createApp(App);
-app.use(UnIcon, {
+app.use(UnIcon as any, {
     height: 18,
     width: 18,
 })

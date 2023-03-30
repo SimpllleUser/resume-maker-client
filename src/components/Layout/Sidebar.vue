@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, Ref } from "vue";
-import { useResumeElements } from '@/store/resume-elements.ts';
-import { ResumeElement } from "../../types/data-managment.types";
+import { useResumeElements } from '@/store/resume-elements';
+import { ResumeElement } from "@/types/data-managment.types";
 
 interface Emits {
   (event: 'add', payload: string): void;

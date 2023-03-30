@@ -19,6 +19,7 @@ Unicon.add([
     icons.uniCameraPlus,
     icons.uniCameraSlash,
     icons.uniCameraChange,
+    icons.uniAngleDoubleDown,
 ]);
 
 export default Unicon;

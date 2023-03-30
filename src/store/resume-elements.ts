@@ -10,6 +10,7 @@ import * as constants from '@/constants';
 
 import getUniqId from "@/services/uuid-generator";
 import { useStorage } from "@vueuse/core";
+import swapOrderByKeys from "@/helpers";
 
 export const useResumeElements = defineStore("resume-elements", () => {
 
@@ -29,12 +30,20 @@ export const useResumeElements = defineStore("resume-elements", () => {
     currentElements.value = [...currentElements.value, ...elements];
   };
 
+  const swapOrder = (firstIndex: number, secondIndex: number) => {
+    currentElements.value = swapOrderByKeys(
+      currentElements.value,
+      firstIndex,
+      secondIndex,
+    ) as Array<CurrenntResumeElement>;
+  }
 
   return {
     resumeElements,
     currentElements,
     addResumeElement,
     removeResumeElement,
-    addResumeElements
+    addResumeElements,
+    swapOrder
   };
 });
