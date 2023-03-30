@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {});
 const emit = defineEmits<Emits>();
 const data = useVModel(props, "modelValue", emit);
 
-const icons = ["phone", "envelope", "map-marker", "github"];
+const icons: Array<string> = ["phone", "envelope", "map-marker", "github"];
 
 const contacts: Ref<Array<Contact>> = ref([
 
@@ -45,7 +45,7 @@ const handleRemove = (contactIndex: number) => {
     <div
       v-for="(contact, index) in data"
       :key="index"
-      class="flex items-center justify-around mb-2 w-1/3"
+      class="flex items-center mb-2 w-1/3"
     >
       <div class="print:ml-2">
         <icon-selector v-model="contact.icon" :icons="icons" />

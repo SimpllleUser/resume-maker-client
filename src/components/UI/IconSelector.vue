@@ -4,7 +4,7 @@ import { onMounted } from "vue";
 import { useToggle, useVModel } from "@vueuse/core";
 import { vOnClickOutside } from "@vueuse/components";
 
-const props = defineProps<{ modelValue: string; icons: [] }>();
+const props = defineProps<{ modelValue: string; icons: Array<string> }>();
 
 interface Emits {
   (event: "update:modelValue", payload: string): void;
