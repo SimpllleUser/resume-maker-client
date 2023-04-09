@@ -33,12 +33,12 @@ const removeSkill = (skillIndex: number) => {
 
 <template>
     <div class="grid grid-cols-3">
-        <div v-for="(skill, index) in data" :key="index" class="flex items-center mb-2 relative w-100">
-            <div class="flex justify-center w-100">
-                <input-tag v-model="data[index]" style="max-width: 290px; min-width: 190px;" class="min-w-full text-center" />
+        <div v-for="(skill, index) in data" :key="index" class="flex items-center mb-2 relative w-100 mx-4">
+            <div class="flex justify-center" style="width: 100%;">
+                <input-tag v-model="data[index]" style="width: 190px;" class="min-w-full text-center" />
             </div>
             <div class="action print:hidden">
-                <div class="absolute right-0">
+                <div class="absolute" style="right: -35px">
                     <button class="btn btn-active btn-primary btn-xs" @click="removeSkill(index)">
                         <unicon name="multiply" class="text-xs" fill="white"></unicon>
                     </button>

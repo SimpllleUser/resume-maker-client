@@ -50,8 +50,8 @@ const handleRemove = (contactIndex: number) => {
       <div class="print:ml-2">
         <icon-selector v-model="contact.icon" :icons="icons" />
       </div>
-      <input-tag v-model="contact.value" class="min-w-full print:text-center" />
-      <div class="absolute right-0">
+      <input-tag v-model="contact.value" style="width: 160px;" class="min-w-full print:text-center" />
+      <div class="absolute" style="right: -10px">
         <button
         class="action btn btn-active btn-primary btn-xs print:opacity-0"
         @click="handleRemove(index)"

@@ -63,7 +63,7 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
             </template>
             <template #default="{ focus }">
               <div class="relative p-3" :class="{ 'action-hide': !focus, 'shadow-2xl': focus }">
-                <div class="w-1 absolute right-0" v-show="focus">
+                <div class="w-1 absolute right-0" v-show="focus" style="right: -25px;">
                   <button v-show="canShowUpButton(index)" @click="resumeElementStore.swapOrder(Number(index), index - 1)"
                     class="btn btn-primary rotate-180 btn-sm mb-1">
                     <unicon name="angle-double-down" fill="white"></unicon>
