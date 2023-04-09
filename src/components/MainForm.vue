@@ -42,8 +42,8 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
 
 </script>
 <template>
-  <div class="flex pb-12">
-    <div class="mx-auto fixed top-0 left-24 print:hidden">
+  <div class="flex max-w-[1240px] mx-auto pb-12">
+    <div class="mx-auto print:hidden">
       <div>
         <sidebar />
       </div>
