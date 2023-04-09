@@ -45,18 +45,20 @@ const handleRemove = (contactIndex: number) => {
     <div
       v-for="(contact, index) in data"
       :key="index"
-      class="flex items-center mb-2 w-1/3"
+      class="flex items-center mb-2 w-1/3 relative"
     >
       <div class="print:ml-2">
         <icon-selector v-model="contact.icon" :icons="icons" />
       </div>
       <input-tag v-model="contact.value" class="min-w-full print:text-center" />
-      <button
+      <div class="absolute right-0">
+        <button
         class="action btn btn-active btn-primary btn-xs print:opacity-0"
         @click="handleRemove(index)"
       >
         <unicon name="multiply" class="text-xs" fill="white"></unicon>
       </button>
+      </div>
     </div>
     <div class="flex items-center mb-2 action print:hidden">
       <button class="btn btn-primary btn-xs" @click="handleAdd">

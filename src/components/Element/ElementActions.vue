@@ -11,7 +11,7 @@ const handleRemove = () => {
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex p-1 bg-white">
     <button class="btn btn-sm btn-primary btn-wide" @click="handleRemove">
       Remove
     </button>

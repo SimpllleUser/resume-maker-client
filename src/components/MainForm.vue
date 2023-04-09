@@ -54,7 +54,7 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
         <div v-for="(resumeElement, index) in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
           <focus-container>
             <template #header>
-              <div class="flex justify-center items-center py-6 container-title-line">
+              <div class="flex justify-center items-center py-8 my-2 container-title-line">
                 <div class="bg-white px-6">
                   <input-tag v-model="resumeContentStore.resumeContentState.dynamic[resumeElement.id].title"
                     class="container-title-input" />
@@ -62,7 +62,7 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
               </div>
             </template>
             <template #default="{ focus }">
-              <div class="relative" :class="{ 'action-hide': !focus }">
+              <div class="relative p-3" :class="{ 'action-hide': !focus, 'shadow-2xl': focus }">
                 <div class="w-1 absolute right-0" v-show="focus">
                   <button v-show="canShowUpButton(index)" @click="resumeElementStore.swapOrder(Number(index), index - 1)"
                     class="btn btn-primary rotate-180 btn-sm mb-1">
