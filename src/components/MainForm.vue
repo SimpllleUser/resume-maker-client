@@ -48,7 +48,7 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
         <sidebar />
       </div>
     </div>
-    <div class="mx-auto">
+    <div class="mx-auto h-[90vh] overflow-auto scrollbar scrollbar-thumb-primary scrollbar-track-white">
       <div class="max-w-[990px] mx-auto border border-solid border-gray-300 p-4">
         <resume-main-info v-model="resumeContentStore.resumeContentState.main" />
         <div v-for="(resumeElement, index) in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
