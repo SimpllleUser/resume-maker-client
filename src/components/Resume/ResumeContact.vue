@@ -41,7 +41,7 @@ const handleRemove = (contactIndex: number) => {
 </script>
 
 <template>
-  <div class="flex items-center justify-center flex-wrap">
+  <div class="flex items-center justify-center flex-wrap relative">
     <div
       v-for="(contact, index) in data"
       :key="index"
@@ -60,7 +60,7 @@ const handleRemove = (contactIndex: number) => {
       </button>
       </div>
     </div>
-    <div class="flex items-center mb-2 action print:hidden">
+    <div class="absolute bottom-0 left-0 print:hidden">
       <button class="btn btn-primary btn-xs" @click="handleAdd">
         <unicon name="plus" fill="white"></unicon>
       </button>

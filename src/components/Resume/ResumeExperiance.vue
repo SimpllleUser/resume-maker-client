@@ -37,7 +37,7 @@ const handleRemove = (index: number) => {
   <focus-container #default="{ focus }">
     <b-duplicator :properties="data" :allow-editable="focus" @add="handleAdd" @remove="handleRemove"
       #default="{ index }">
-      <div class="my-2">
+      <div class="my-2 py-2">
         <b-template>
           <template #details>
             <input-tag v-model="data[index].place" />
