@@ -42,20 +42,20 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
 
 </script>
 <template>
-  <div class="flex max-w-[1240px] mx-auto pb-12">
-    <div class="mx-auto print:hidden">
+  <div class="flex max-w-[1240px] mx-auto pb-12 bg-slate-100">
+    <div class="mx-auto bg-white print:hidden">
       <div>
         <sidebar />
       </div>
     </div>
-    <div class="mx-auto h-[90vh] overflow-auto scrollbar scrollbar-thumb-primary scrollbar-track-white">
+    <div class="mx-auto h-[90vh] overflow-y-auto overflow-x-hidden scrollbar scrollbar-thumb-primary scrollbar-track-white bg-white print:h-auto">
       <div class="max-w-[990px] mx-auto border border-solid border-gray-300 p-4">
         <resume-main-info v-model="resumeContentStore.resumeContentState.main" />
         <div v-for="(resumeElement, index) in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
           <focus-container>
             <template #header>
               <div class="flex justify-center items-center py-8 my-2 container-title-line">
-                <div class="bg-white px-6">
+                <div class="bg-white px-6 z-10">
                   <input-tag v-model="resumeContentStore.resumeContentState.dynamic[resumeElement.id].title"
                     class="container-title-input" />
                 </div>

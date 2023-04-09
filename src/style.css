@@ -14,7 +14,7 @@
   before:text-white
   before:h-1
   before:bg-black
-  before:z-[-1]
+  before:z-0
   before:top-1/2 before:left-1/2 before:transform before:-translate-x-1/2 before:-translate-y-1/2;
 }
 
