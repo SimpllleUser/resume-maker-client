@@ -32,8 +32,7 @@ const model = useVModel(props, "modelValue", emit);
       :contenteditable="true"
       v-model="model"
       style="min-width: 2rem;"
-      class="text-"
-      :class="`font-${resumeElementsStore.font.value} ${props.class}`"
+      :class="`${resumeElementsStore.font.value} ${props.class}`"
     />
   </div>
 </template>

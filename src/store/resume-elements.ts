@@ -43,19 +43,19 @@ export const useResumeElements = defineStore("resume-elements", () => {
   const fonts: Array<Option> = [
     {
       label: 'Pop',
-      value: 'pop',
+      value: 'font-pop',
     },
     {
       label: 'Lato',
-      value: 'lato',
+      value: 'font-lato',
     },
     {
       label: 'Montserrat',
-      value: 'montserrat',
+      value: 'font-montserrat',
     },
     {
       label: 'Lora',
-      value: 'lora',
+      value: 'font-lora',
     }
   ];
   const font = useStorage('font', fonts.at(0));
