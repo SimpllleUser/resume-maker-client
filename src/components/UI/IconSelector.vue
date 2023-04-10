@@ -3,8 +3,11 @@ import { onMounted } from "vue";
 
 import { useToggle, useVModel } from "@vueuse/core";
 import { vOnClickOutside } from "@vueuse/components";
+import { useResumeElements } from "@/store/resume-elements";
 
 const props = defineProps<{ modelValue: string; icons: Array<string> }>();
+
+const resumeElementsStore = useResumeElements();
 
 interface Emits {
   (event: "update:modelValue", payload: string): void;
@@ -37,7 +40,7 @@ onMounted(initIconByFirstElement);
 <template>
   <div class="dropdown dropdown-end" v-on-click-outside="handleOutsideClick">
     <button class="btn-sm" @click="toggleDropDown()">
-      <unicon :name="currentIcon"></unicon>
+      <unicon :name="currentIcon" :fill="resumeElementsStore.color.code"></unicon>
     </button>
     <div
       v-show="showDropDown"
@@ -49,7 +52,7 @@ onMounted(initIconByFirstElement);
         class="p-1 cursor-pointer"
         @click="handleSelectIcon(icon)"
       >
-        <unicon :name="icon"></unicon>
+        <unicon :name="icon" :fill="resumeElementsStore.color.code"></unicon>
       </div>
     </div>
   </div>

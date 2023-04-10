@@ -12,3 +12,10 @@ export interface Option {
     label: string;
     value: string;
 }
+
+export interface ColorOption {
+    label: string;
+    text: string;
+    bg: string;
+    code: string;
+}

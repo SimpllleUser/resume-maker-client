@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
+import { computed, ComputedRef, Ref, ref } from "vue";
 
 import InputTag from "@/components/Input/InputTag.vue";
 import FocusContainer from "@/components/FocusContainer.vue";
@@ -8,6 +8,7 @@ import ResumePhoto from "@/components/Resume/ResumePhoto.vue";
 
 import { MainResumeVModel } from "@/types/data-managment.types";
 import { useVModel } from "@vueuse/core";
+import { useResumeElements } from "@/store/resume-elements";
 
 interface Props {
   modelValue: MainResumeVModel;
@@ -23,6 +24,8 @@ interface TemplateClasses {
   contacts: { [key: string]: boolean };
   photo: { [key: string]: boolean };
 }
+
+const resumeElementsStore = useResumeElements();
 
 const img: Ref<string> = ref("");
 
@@ -44,6 +47,8 @@ const getTemplateClasses = (): TemplateClasses => {
   };
 };
 
+const inputStyle: ComputedRef<string> = computed(() => `color: ${resumeElementsStore.color}`)
+
 </script>
 
 <template>
@@ -51,8 +56,8 @@ const getTemplateClasses = (): TemplateClasses => {
     <div class="flex items-center relative">
       <div :class="getTemplateClasses().contacts">
         <div class="text-center" tabindex="0">
-          <input-tag v-model="data.fullName" class="text-2xl font-bold" />
-          <input-tag v-model="data.position" class="text-xl" />
+          <input-tag v-model="data.fullName" :class="resumeElementsStore.color.text" class="text-2xl font-bold" />
+          <input-tag v-model="data.position" :class="resumeElementsStore.color.text" class="text-xl" />
         </div>
         <div :class="{ 'action-hide': !focus }">
           <resume-contact v-model="data.contacts" />

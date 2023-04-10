@@ -1,6 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  safelist: [
+    'text-teal-500',
+    'text-indiog-500',
+    'text-green-500',
+    'text-red-500',
+    'bg-teal-500',
+    'bg-indiog-500',
+    'bg-green-500',
+    'bg-red-500',
+  ],
   content: [],
   theme: {
     extend: {

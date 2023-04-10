@@ -5,6 +5,7 @@
 ::-webkit-scrollbar {
   width: 5px !important;
 }
+
 body {
   @apply bg-slate-100;
 }
@@ -21,6 +22,30 @@ body {
   before:top-1/2 before:left-1/2 before:transform before:-translate-x-1/2 before:-translate-y-1/2;
 }
 
+.variant-slate.container-title-line {
+  @apply relative 
+  before:bg-slate-700 
+}
+.variant-green.container-title-line {
+  @apply relative 
+  before:bg-green-700 
+}
+.variant-sky.container-title-line {
+  @apply relative 
+  before:bg-sky-900 
+}
+.variant-stone.container-title-line {
+  @apply relative 
+  before:bg-stone-700 
+}
+.variant-indigo.container-title-line {
+  @apply relative 
+  before:bg-indigo-700 
+}
+.variant-sky-500.container-title-line {
+  @apply relative 
+  before:bg-sky-500 
+}
 .container-title-input {
     @apply text-center text-2xl font-semibold bg-white;
 }

@@ -1,7 +1,7 @@
 import { Ref, ref } from "vue";
 import { defineStore } from "pinia";
 
-import { Option } from "@/common/types";
+import { ColorOption, Option } from "@/common/types";
 
 import {
   CurrenntResumeElement,
@@ -42,28 +42,70 @@ export const useResumeElements = defineStore("resume-elements", () => {
 
   const fonts: Array<Option> = [
     {
-        label: 'Pop',
-        value: 'pop',
+      label: 'Pop',
+      value: 'pop',
     },
     {
-        label: 'Lato',
-        value: 'lato',
+      label: 'Lato',
+      value: 'lato',
     },
     {
-        label: 'Montserrat',
-        value: 'montserrat',
+      label: 'Montserrat',
+      value: 'montserrat',
     },
     {
-        label: 'Lora',
-        value: 'lora',
+      label: 'Lora',
+      value: 'lora',
     }
-];
+  ];
+  const font = useStorage('font', fonts.at(0));
+  const setFont = (value: Option) => {
+    font.value = value;
+  }
 
-const font = useStorage('font', fonts.at(0));
-
-const setFont = (value: Option) => {
-  font.value = value;
-}
+  // const colors = [ '#2a2d31', '#6c7f93', '#799acc', '#005842' ];
+  const colors: Array<ColorOption> = [
+    {
+      label: 'slate',
+      bg: 'bg-slate-700',
+      text: 'text-slate-700',
+      code: '#334155',
+    },
+    {
+      label: 'green',
+      bg: 'bg-green-700',
+      text: 'text-green-700',
+      code: '#14532d',
+    },
+    {
+      label: 'sky',
+      bg: 'bg-sky-900',
+      text: 'text-sky-900',
+      code: '#0c4a6e',
+    },
+    {
+      label: 'stone',
+      bg: 'bg-stone-700',
+      text: 'text-stone-700',
+      code: '#44403c',
+    },
+    {
+      label: 'indigo',
+      bg: 'bg-indigo-700',
+      text: 'text-indigo-700',
+      code: '#3730a3',
+    },
+    {
+      label: 'sky-500',
+      bg: 'bg-sky-500',
+      text: 'text-sky-500',
+      code: '#0ea5e9',
+    },
+  ];
+  const color: Ref<ColorOption> = useStorage('color', colors.at(0));
+  const setColor = (value: ColorOption) => {
+    color.value = value;
+  }
 
   return {
     resumeElements,
@@ -75,5 +117,8 @@ const setFont = (value: Option) => {
     font,
     fonts,
     setFont,
+    color,
+    colors,
+    setColor,
   };
 });

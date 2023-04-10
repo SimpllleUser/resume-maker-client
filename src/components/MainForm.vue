@@ -54,10 +54,11 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
         <div v-for="(resumeElement, index) in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
           <focus-container>
             <template #header>
-              <div class="flex justify-center items-center py-8 my-2 container-title-line">
+              <div class="flex justify-center items-center py-8 my-2 container-title-line" :class="`variant-${resumeElementStore.color.label}`">
                 <div class="bg-white px-6 z-10">
+                  <!-- variant-${resumeElementStore.color.label} -->
                   <input-tag v-model="resumeContentStore.resumeContentState.dynamic[resumeElement.id].title"
-                    class="container-title-input" />
+                    class="container-title-input" :class="resumeElementStore.color.text" />
                 </div>
               </div>
             </template>
