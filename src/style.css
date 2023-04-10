@@ -5,6 +5,9 @@
 ::-webkit-scrollbar {
   width: 5px !important;
 }
+body {
+  @apply bg-slate-100;
+}
 
 .container-title-line {
   @apply relative 
