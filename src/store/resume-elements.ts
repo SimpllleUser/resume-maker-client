@@ -1,6 +1,8 @@
 import { Ref, ref } from "vue";
 import { defineStore } from "pinia";
 
+import { Option } from "@/common/types";
+
 import {
   CurrenntResumeElement,
   ResumeElement,
@@ -38,12 +40,40 @@ export const useResumeElements = defineStore("resume-elements", () => {
     ) as Array<CurrenntResumeElement>;
   }
 
+  const fonts: Array<Option> = [
+    {
+        label: 'Pop',
+        value: 'pop',
+    },
+    {
+        label: 'Lato',
+        value: 'lato',
+    },
+    {
+        label: 'Montserrat',
+        value: 'montserrat',
+    },
+    {
+        label: 'Lora',
+        value: 'lora',
+    }
+];
+
+const font = useStorage('font', fonts.at(0));
+
+const setFont = (value: Option) => {
+  font.value = value;
+}
+
   return {
     resumeElements,
     currentElements,
     addResumeElement,
     removeResumeElement,
     addResumeElements,
-    swapOrder
+    swapOrder,
+    font,
+    fonts,
+    setFont,
   };
 });

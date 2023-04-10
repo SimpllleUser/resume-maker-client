@@ -7,3 +7,8 @@ export interface YearMonthRange {
     from: YearMonth
     to: YearMonth
 }
+
+export interface Option {
+    label: string;
+    value: string;
+}

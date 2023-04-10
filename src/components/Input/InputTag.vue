@@ -2,6 +2,8 @@
 import contenteditable from "vue-contenteditable";
 import { useVModel } from "@vueuse/core";
 
+import { useResumeElements } from "@/store/resume-elements";
+
 interface Props {
   class?: string;
   style?: string;
@@ -11,6 +13,9 @@ interface Props {
 interface Emits {
   (event: "update:modelValue", payload: string): void;
 }
+
+const resumeElementsStore = useResumeElements();
+
 
 const props = defineProps<Props>();
 
@@ -28,7 +33,7 @@ const model = useVModel(props, "modelValue", emit);
       v-model="model"
       style="min-width: 2rem;"
       :style="style"
-      :class="`${props.class}`"
+      :class="`font-${resumeElementsStore.font.value} ${props.class}`"
     />
   </div>
 </template>

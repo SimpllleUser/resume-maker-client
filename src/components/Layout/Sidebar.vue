@@ -3,6 +3,8 @@ import { computed, ref, Ref } from "vue";
 import { useResumeElements } from '@/store/resume-elements';
 import { ResumeElement } from "@/types/data-managment.types";
 
+import FontSelector from "@/components/FontSelector.vue";
+
 interface Emits {
   (event: 'add', payload: string): void;
 }
@@ -30,6 +32,9 @@ const handleAddResume = (element: ResumeElement) => {
         >
           {{ element.name }}
         </button>
+      </li>
+      <li>
+        <font-selector/>
       </li>
     </ul>
   </div>
