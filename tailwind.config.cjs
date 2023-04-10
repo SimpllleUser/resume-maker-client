@@ -2,6 +2,16 @@
 module.exports = {
   purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   content: [],
+  theme: {
+    extend: {
+      fontFamily: {
+        'pop': ['Poppins', 'sans-serif'],
+        'lato': ['Lato', 'sans-serif'],
+        'montserrat': ['Montserrat', 'sans-serif'],
+        'lora': ['Lora', 'sans-serif'],
+      }
+    }
+  },
   daisyui: {
     themes: [
       {
