@@ -17,7 +17,7 @@ const getItemClass = (color: string) => color === resumeElementsStore.color.labe
 </script>
 
 <template>
-    <div>Colors</div>
+    <div class="text-center"><small>Colors</small></div>
       <div
         v-for="colorItem in resumeElementsStore.colors"
         :key="colorItem"
@@ -25,7 +25,6 @@ const getItemClass = (color: string) => color === resumeElementsStore.color.labe
         :class="`${colorItem.bg} ${getItemClass(colorItem.label)}`"
         @click="handleSelectIcon(colorItem)"
       >
-      {{ colorItem.label }}
       </div>
 </template>
 

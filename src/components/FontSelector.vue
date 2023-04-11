@@ -14,6 +14,7 @@ watch(font, resumeElementsStore.setFont, { deep: true })
 
 <template>
     <div>
+        <div class="text-center"><small>Fonts</small></div>
         <select className="select select-bordered w-full max-w-xs" v-model="font">
             <option v-for="font in resumeElementsStore.fonts" :key="font.value" :value="font">{{ font.label }}</option>
         </select>
