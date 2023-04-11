@@ -53,7 +53,7 @@ const inputStyle: ComputedRef<string> = computed(() => `color: ${resumeElementsS
 
 <template>
   <focus-container #default="{ focus }">
-    <div class="flex items-center relative">
+    <div class="flex items-center relative" :class="{'shadow-2xl': focus}">
       <div :class="getTemplateClasses().contacts">
         <div class="text-center" tabindex="0">
           <input-tag v-model="data.fullName" :class="resumeElementsStore.color.text" class="text-2xl font-bold" />
