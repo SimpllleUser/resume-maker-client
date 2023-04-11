@@ -62,7 +62,7 @@ const setPresent = (state: boolean) => { isPresent.value = state; };
         <div class="text-center text-gray-400">
           <b>From</b>
         </div>
-        <year-month-input v-model="data.from" :disable="disable" />
+        <year-month-input v-model="data.from" start-from-end :disable="disable" />
       </div>
       <div class="p-1">
         <div class="text-center text-gray-400">
