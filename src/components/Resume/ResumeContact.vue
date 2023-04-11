@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, Ref } from "vue";
-
 import { Contact } from "@/types/data-managment.types";
 import { useVModel } from "@vueuse/core";
+
+import { PRIMARY } from '@/constants';
 
 import InputTag from "@/components/Input/InputTag.vue";
 import IconSelector from "@/components/UI/IconSelector.vue";
@@ -25,10 +25,6 @@ const data = useVModel(props, "modelValue", emit);
 
 const icons: Array<string> = ["phone", "envelope", "map-marker", "github"];
 
-const contacts: Ref<Array<Contact>> = ref([
-
-]);
-
 const handleAdd = () => {
   data.value = [ ...data.value, { icon: "phone", value: "" } ]
   emit('add', data.value);
@@ -50,19 +46,20 @@ const handleRemove = (contactIndex: number) => {
       <div class="print:ml-2">
         <icon-selector v-model="contact.icon" :icons="icons" />
       </div>
-      <input-tag v-model="contact.value" style="width: 160px;" class="min-w-full print:text-center" />
+      <input-tag 
+      v-model="contact.value" style="width: 160px;" class="min-w-full print:text-center" />
       <div class="absolute" style="right: -10px">
         <button
-        class="action btn btn-active btn-primary btn-xs print:opacity-0"
+        class="action btn btn-outline btn-square btn-warning btn-xs print:opacity-0"
         @click="handleRemove(index)"
       >
-        <unicon name="multiply" class="text-xs" fill="white"></unicon>
+        <unicon name="multiply" class="text-xs" fill="black" hover-fill="white"></unicon>
       </button>
       </div>
     </div>
     <div class="absolute bottom-0 left-0 print:hidden">
-      <button class="btn btn-primary btn-xs" @click="handleAdd">
-        <unicon name="plus" fill="white"></unicon>
+      <button class="btn btn-square btn-outline btn-primary btn-xs" @click="handleAdd">
+        <unicon name="plus" :fill="PRIMARY" hover-fill="white"></unicon>
       </button>
     </div>
   </div>

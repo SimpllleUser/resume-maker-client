@@ -5,6 +5,8 @@ import { useVModel } from '@vueuse/core';
 
 import InputTag from '@/components/Input/InputTag.vue';
 
+import { PRIMARY } from '@/constants';
+
 type Skill = string;
 
 
@@ -39,15 +41,15 @@ const removeSkill = (skillIndex: number) => {
             </div>
             <div class="action print:hidden">
                 <div class="absolute" style="right: -35px">
-                    <button class="btn btn-active btn-primary btn-xs" @click="removeSkill(index)">
-                        <unicon name="multiply" class="text-xs" fill="white"></unicon>
+                    <button class="action btn btn-outline btn-square btn-warning btn-xs" @click="removeSkill(index)">
+                        <unicon name="multiply" class="text-xs" fill="black" hover-fill="white"></unicon>
                     </button>
                 </div>
             </div>
         </div>
     </div>
-    <button class="action btn btn-primary btn-xs print:hidden" @click="addSkill">
-        <unicon name="plus" class="text-xs" fill="white"></unicon>
+    <button class="btn btn-square btn-outline btn-primary btn-xs print:hidden" @click="addSkill">
+        <unicon name="plus" :fill="PRIMARY" hover-fill="white"></unicon>
     </button>
 </template>
 

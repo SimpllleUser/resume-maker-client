@@ -26,7 +26,7 @@ const handleAddResume = (element: ResumeElement) => {
 <template>
   <div class="flex justify-around bg-white z-50">
     <ul class="w-100">
-      <li><div class="text-center"><small>Elements</small></div></li>
+      <li><div class="text-center"> <small>Elements</small></div></li>
       <li v-for="element in elements" :key="element.name" class="w-100">
         <button
           class="btn btn-outline btn-success btn-wide"

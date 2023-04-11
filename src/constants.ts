@@ -103,3 +103,8 @@ export const MAIN_INFO: MainContent = {
       { icon: "", value: "empty icon" },
     ]
   };
+
+export const PRIMARY = "#4B6BFB";
+export const SECONDARY = "#7B92B2";
+export const ACCENT = "#67CBA0";
+export const NEUTRAL = "#181A2A";

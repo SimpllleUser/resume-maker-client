@@ -12,8 +12,8 @@ const handleRemove = () => {
 
 <template>
   <div class="flex p-1 bg-white">
-    <button class="btn btn-sm btn-primary btn-wide" @click="handleRemove">
-      Remove
+    <button class="btn btn-sm btn-outline btn-warning btn-wide" @click="handleRemove">
+      <span class="text-black">Remove</span>
     </button>
   </div>
 </template>
