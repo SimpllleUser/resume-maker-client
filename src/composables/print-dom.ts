@@ -15,7 +15,11 @@ export default function usePrint() {
     const elementHtml = getElementHtml(selector);
     const printWindow = window.open("", "_blank");
     printWindow?.document.write(`
-           <html><head><title>${123123}</title>
+           <html>
+           <head>
+           <link href="https://fonts.googleapis.com/css2?family=Lato&family=Lora&family=Montserrat&family=PT+Sans+Narrow:wght@400;700&family=Poppins&display=swap" rel="stylesheet">
+           <title>${123123}
+           </title>
              <style>${getStyle()}</style>
              </head>
              <body>

@@ -27,6 +27,10 @@ const props = withDefaults(defineProps<Props>(), {
   disable: "",
 });
 
+import { useResumeElements } from "@/store/resume-elements";
+
+const resumeElementsStore = useResumeElements();
+
 const emit = defineEmits<Emits>();
 const data = useVModel(props, "modelValue", emit);
 
@@ -53,7 +57,7 @@ const setPresent = (state: boolean) => { isPresent.value = state; };
 </script>
         
 <template>
-  <div class="relative" v-on-click-outside="() => handleOutsideClick(false)">
+  <div class="relative" :class="resumeElementsStore.font.value" v-on-click-outside="() => handleOutsideClick(false)">
     <div
       class="date-picker--popup"
       v-show="showDateInput"
