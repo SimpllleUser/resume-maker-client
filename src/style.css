@@ -69,3 +69,7 @@ body {
 .element-actions {
   bottom: -2.5rem;
 }
+
+.date-picker--popup {
+  @apply flex justify-center w-96 absolute top-1/2 left-[80%] transform -translate-x-1/2 -translate-y-1/2 border-2 border-primary bg-white z-10 ml-4;
+}
