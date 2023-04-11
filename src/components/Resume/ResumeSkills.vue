@@ -48,7 +48,7 @@ const removeSkill = (skillIndex: number) => {
             </div>
         </div>
     </div>
-    <button class="btn btn-square btn-outline btn-primary btn-xs print:hidden" @click="addSkill">
+    <button class="action btn btn-square btn-outline btn-primary btn-xs print:hidden" @click="addSkill">
         <unicon name="plus" :fill="PRIMARY" hover-fill="white"></unicon>
     </button>
 </template>

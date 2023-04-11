@@ -48,7 +48,7 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
         <sidebar />
       </div>
     </div>
-    <div class="mx-auto h-[90vh] relative overflow-y-auto scrollbar scrollbar-thumb-primary scrollbar-track-white bg-white print:h-auto">
+    <div class="mx-auto h-[90vh] overflow-y-auto scrollbar scrollbar-thumb-primary scrollbar-track-white bg-white print:h-auto">
       <div class="max-w-[990px] mx-auto border border-solid border-gray-300 p-4">
         <resume-main-info v-model="resumeContentStore.resumeContentState.main" />
         <div v-for="(resumeElement, index) in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
@@ -63,8 +63,8 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
               </div>
             </template>
             <template #default="{ focus }">
-              <div class="p-3" :class="{ 'action-hide': !focus, 'shadow-2xl': focus }">
-                <div class="w-1 absolute" v-show="focus" style="right: -25px;">
+              <div class="relative p-2 bg-white" :class="{ 'action-hide': !focus, 'shadow-2xl': focus }">
+                <div class="absolute top-[-5.6rem] right-0 z-30 bg-white w-11" v-show="focus">
                   <button v-show="canShowUpButton(index)" @click="resumeElementStore.swapOrder(Number(index), index - 1)"
                     class="btn btn-primary rotate-180 btn-sm mb-1">
                     <unicon name="angle-double-down" fill="white"></unicon>
