@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { watch } from "vue";
+import { computed, ComputedRef, watch } from "vue";
+import { useRoute } from "vue-router";
 
 import ResumeMainInfo from "@/components/Resume/ResumeMainInfo.vue";
 import FocusContainer from "@/components/FocusContainer.vue";
@@ -9,9 +10,28 @@ import ElementActions from "@/components/Element/ElementActions.vue";
 
 import { useResumeElements } from "@/store/resume-elements";
 import { useResumeContent } from "@/store/resume-content";
+import { useResumeList } from "@/store/resume-list";
+import { ResumeItem } from "@/types/data-managment.types";
+
 
 const resumeElementStore = useResumeElements();
 const resumeContentStore = useResumeContent();
+const resumeListStore = useResumeList();
+
+const $route = useRoute();
+
+const currentReumeId = computed(() => $route?.params?.id); 
+
+watch(currentReumeId, () => {
+  if (!currentReumeId) return;
+  console.log(currentReumeId?.value);
+  const data = resumeListStore.getResume(currentReumeId?.value);
+  if (!data) return;
+  resumeElementStore.setColor(data.color);
+  resumeElementStore.setFont(data.font);
+  resumeElementStore.setResumeElements(data?.elements);
+  resumeContentStore.setContents(data?.content);
+}, { immediate: true });
 
 watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
   if (currentElements.length <= prev.length) return;
@@ -19,6 +39,17 @@ watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
   if (!createdElement) return;
   resumeContentStore.create(createdElement);
 }, { deep: true });
+
+const resumeData: ComputedRef<Omit<ResumeItem, 'id'>> = computed(() =>  ({
+  color: resumeElementStore.color,
+  font: resumeElementStore.font,
+  elements: resumeElementStore.currentElements,
+  content: resumeContentStore.resumeContentState,
+}));
+
+watch(resumeData, () => {
+  resumeListStore.setResume({ ...resumeData.value, id: currentReumeId.value,  })
+});
 
 const handleRemoveElement = (id: string) => {
   resumeElementStore.removeResumeElement(id);
@@ -29,12 +60,6 @@ const handleRemoveElement = (id: string) => {
 const handleRemoveItem = (index: number, elementId: string) => {
   resumeContentStore.removeContent({ index, id: elementId });
 };
-
-// onMounted(() => {
-//   const { elements, contents } = getDeaultContentData();
-//   resumeElementStore.addResumeElements(elements);
-//   resumeContentStore.addContents(contents);
-// })
 
 const canShowUpButton = (index: number): boolean => index !== 0;
 
@@ -56,7 +81,6 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
             <template #header>
               <div class="flex justify-center items-center py-8 my-2 container-title-line" :class="`variant-${resumeElementStore.color.label}`">
                 <div class="bg-white px-6 z-10">
-                  <!-- variant-${resumeElementStore.color.label} -->
                   <input-tag v-model="resumeContentStore.resumeContentState.dynamic[resumeElement.id].title"
                     class="container-title-input" :class="resumeElementStore.color.text" />
                 </div>

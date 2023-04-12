@@ -14,10 +14,10 @@ import {
 
 import { COMPONENT_KEYS, MAIN_INFO, RESUME_CONTENTS_BY_ELEMENT } from "@/constants";
 
-const getCopyObject = (obj: any) => JSON.parse(JSON.stringify(obj)); 
+const getCopyObject = (obj: any) => JSON.parse(JSON.stringify(obj));
 
 export const useResumeContent = defineStore("resume-content", () => {
-  
+
   const resumeContentState: Ref<ResumeContentState> = useStorage('resume-content-state', {
     main: MAIN_INFO,
     dynamic: {},
@@ -31,12 +31,18 @@ export const useResumeContent = defineStore("resume-content", () => {
   const create = ({ id, name }: ElementBase) => {
     const contentTemplate = getContentByElement(name);
     if (!contentTemplate) return;
-    resumeContentState.value.dynamic = { ...resumeContentState.value.dynamic, [id]: JSON.parse(JSON.stringify(contentTemplate)) };
+    resumeContentState.value.dynamic = {
+      ...resumeContentState.value.dynamic,
+      [id]: JSON.parse(JSON.stringify(contentTemplate)),
+    };
   };
 
   const remove = (id: string) => {
     const updatedContent: DynamicContents = omit(resumeContentState.value.dynamic, [id]);
-    resumeContentState.value =  { ...resumeContentState.value, ...updatedContent };
+    resumeContentState.value = {
+      ...resumeContentState.value,
+      ...updatedContent,
+    };
   };
 
   const addContent = ({ id, name }: ElementBase) => {
@@ -55,6 +61,10 @@ export const useResumeContent = defineStore("resume-content", () => {
     resumeContentState.value = { ...resumeContentState.value.dynamic, ...contents };
   };
 
+  const setContents = (contents: ResumeContentState) => {
+    resumeContentState.value = contents;
+  };
+
 
   return {
     resumeContentState,
@@ -63,5 +73,6 @@ export const useResumeContent = defineStore("resume-content", () => {
     addContent,
     removeContent,
     addContents,
+    setContents,
   };
 });

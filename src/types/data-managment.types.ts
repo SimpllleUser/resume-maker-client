@@ -1,4 +1,4 @@
-import { YearMonthRange } from "@/common/types";
+import { ColorOption, Option, YearMonthRange } from "@/common/types";
 
 export interface MainContent {
     fullName: string;
@@ -80,12 +80,12 @@ export type ResumeContentItem =
     | ResumeContentEducation
 
 
-export interface DynamicContents  { [key: string]: { title: string; } & ResumeContentItem};
+export interface DynamicContents { [key: string]: { title: string; } & ResumeContentItem };
 
 export type ResumeContentState = {
     ['main']: MainContent;
     dynamic: DynamicContents;
-}; 
+};
 
 export type MainResumeVModel = MainContent;
 
@@ -111,9 +111,22 @@ export type ContentsWithPlurarData =
     | ResumeContentExperience
     | ResumeContentSkills
 
-    
+
 export type ContentDataWithPlurar =
-| ResumeContentSkills
-| ResumeContentAbout
-| ResumeContentExperience
-| ResumeContentEducation;
+    | ResumeContentSkills
+    | ResumeContentAbout
+    | ResumeContentExperience
+    | ResumeContentEducation;
+
+export interface ResumeStyle { color: ColorOption, font: Option };
+
+export interface ResumeStyleElement {
+    color: ColorOption;
+    font: Option;
+}
+
+export type ResumeItem =
+    & ResumeStyleElement
+    & { elements: Array<CurrenntResumeElement>; }
+    & { content: ResumeContentState }
+    & { id: string };

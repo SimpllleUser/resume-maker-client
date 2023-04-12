@@ -1,5 +1,7 @@
 import { keyBy, mapValues, property } from "lodash";
-import { YearMonthRange } from "./common/types";
+import { YearMonthRange, ColorOption, Option } from "@/common/types";
+
+
 import {
     MainContent,
     ResumeContentAbout,
@@ -97,14 +99,72 @@ export const MAIN_INFO: MainContent = {
     fullName: 'Your full name',
     position: 'Your position',
     contacts: [
-      { icon: "phone", value: "phone" },
-      { icon: "envelope", value: "email" },
-      { icon: "github", value: "link" },
-      { icon: "", value: "empty icon" },
+        { icon: "phone", value: "phone" },
+        { icon: "envelope", value: "email" },
+        { icon: "github", value: "link" },
+        { icon: "", value: "empty icon" },
     ]
-  };
+};
 
 export const PRIMARY = "#4B6BFB";
 export const SECONDARY = "#7B92B2";
 export const ACCENT = "#67CBA0";
 export const NEUTRAL = "#181A2A";
+
+export const FONTS: Array<Option> = [
+    {
+        label: 'Pop',
+        value: 'font-pop',
+    },
+    {
+        label: 'Lato',
+        value: 'font-lato',
+    },
+    {
+        label: 'Montserrat',
+        value: 'font-montserrat',
+    },
+    {
+        label: 'Lora',
+        value: 'font-lora',
+    }
+];
+
+export const COLORS: Array<ColorOption> = [
+    {
+        label: 'slate',
+        bg: 'bg-slate-700',
+        text: 'text-slate-700',
+        code: '#334155',
+    },
+    {
+        label: 'green',
+        bg: 'bg-green-700',
+        text: 'text-green-700',
+        code: '#14532d',
+    },
+    {
+        label: 'sky',
+        bg: 'bg-sky-900',
+        text: 'text-sky-900',
+        code: '#0c4a6e',
+    },
+    {
+        label: 'stone',
+        bg: 'bg-stone-700',
+        text: 'text-stone-700',
+        code: '#44403c',
+    },
+    {
+        label: 'indigo',
+        bg: 'bg-indigo-700',
+        text: 'text-indigo-700',
+        code: '#3730a3',
+    },
+    {
+        label: 'sky-500',
+        bg: 'bg-sky-500',
+        text: 'text-sky-500',
+        code: '#0ea5e9',
+    },
+];
