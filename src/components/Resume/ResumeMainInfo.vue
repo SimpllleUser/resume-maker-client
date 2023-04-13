@@ -27,7 +27,7 @@ interface TemplateClasses {
 
 const resumeElementsStore = useResumeElements();
 
-const img: Ref<string> = ref("");
+const img: Ref<string> = ref('');
 
   const props = withDefaults(defineProps<Props>(), {});
 
@@ -60,7 +60,7 @@ const inputStyle: ComputedRef<string> = computed(() => `color: ${resumeElementsS
           <input-tag v-model="data.position" :class="resumeElementsStore.color.text" class="text-xl" />
         </div>
         <div :class="{ 'action-hide': !focus }">
-          <resume-contact v-model="data.contacts" />
+          <resume-contact :full-size="!data.img" v-model="data.contacts" />
         </div>
       </div>
       <div :class="getTemplateClasses().photo">

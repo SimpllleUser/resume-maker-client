@@ -81,3 +81,7 @@ body {
 .resume-card:hover > .resume-item--actions {
   @apply block opacity-100
 }
+
+.btn-remove-item {
+  @appl
+}

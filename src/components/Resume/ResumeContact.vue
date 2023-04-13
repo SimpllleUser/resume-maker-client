@@ -6,10 +6,12 @@ import { PRIMARY } from '@/constants';
 
 import InputTag from "@/components/Input/InputTag.vue";
 import IconSelector from "@/components/UI/IconSelector.vue";
+import { computed, ComputedRef } from "vue";
 
 
 interface Props {
     modelValue: Array<Contact>;
+    fullSize: boolean;
 }
 
 interface Emits {
@@ -34,21 +36,25 @@ const handleRemove = (contactIndex: number) => {
   data.value = data.value.filter((_, index) => index !== contactIndex)
   emit('remove', data.value);
 };
+
+const styleWidthInput: string = 'min-width: 160px; max-width: 100%';
+
 </script>
 
 <template>
-  <div class="flex items-center justify-center flex-wrap relative">
+  <div class="flex items-center justify-center flex-wrap relative px-2">
     <div
       v-for="(contact, index) in data"
       :key="index"
-      class="flex items-center mb-2 w-1/3 relative"
+      class="flex items-center mb-2 relative"
+      :class="{ 'w-1/3': props.fullSize, 'w-1/2': !props.fullSize }"
     >
       <div class="print:ml-2">
         <icon-selector v-model="contact.icon" :icons="icons" />
       </div>
       <input-tag 
-      v-model="contact.value" style="width: 160px;" class="min-w-full print:text-center" />
-      <div class="absolute" style="right: -10px">
+      v-model="contact.value" :style="styleWidthInput" class="min-w-full print:text-center" />
+      <div class="absolute right-[0rem]">
         <button
         class="action btn btn-square btn-warning btn-xs print:opacity-0"
         @click="handleRemove(index)"
@@ -57,7 +63,7 @@ const handleRemove = (contactIndex: number) => {
       </button>
       </div>
     </div>
-    <div class="absolute bottom-0 left-0 print:hidden">
+    <div class="absolute bottom-[-1rem] left-0 print:hidden">
       <button class="btn btn-square btn-outline btn-primary btn-xs" @click="handleAdd">
         <unicon name="plus" :fill="PRIMARY" hover-fill="white"></unicon>
       </button>

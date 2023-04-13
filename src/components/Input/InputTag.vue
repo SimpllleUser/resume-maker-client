@@ -6,8 +6,8 @@ import { useResumeElements } from "@/store/resume-elements";
 
 interface Props {
   class?: string;
-  style?: string;
-  modelValue: string;
+  customStyle?: string;
+  modelValue: string | '';
 }
 
 interface Emits {
@@ -32,6 +32,7 @@ const model = useVModel(props, "modelValue", emit);
       :contenteditable="true"
       v-model="model"
       style="min-width: 2rem;"
+      :style="props.customStyle"
       :class="`${resumeElementsStore.font.value} ${props.class}`"
     />
   </div>
