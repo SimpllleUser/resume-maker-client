@@ -83,9 +83,9 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
       </div>
     </div>
     <div
-      class="mx-auto h-[90vh] overflow-y-auto scrollbar scrollbar-thumb-primary scrollbar-track-white bg-white print:h-auto">
+      class="mx-auto h-[90vh] overflow-x-hidden overflow-y-auto scrollbar scrollbar-thumb-primary scrollbar-track-white bg-white print:h-auto">
 
-      <div class=" resume-detail max-w-[990px] bg-white mx-auto border border-solid border-gray-300 p-4">
+      <div class=" resume-detail overflow-x-hidden w-[990px] bg-white mx-auto border border-solid border-gray-300 p-4">
         <resume-main-info v-model="resumeContentStore.resumeContentState.main" />
         <div v-for="(resumeElement, index) in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
           <focus-container>

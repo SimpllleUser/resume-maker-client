@@ -37,7 +37,7 @@ const handleRemove = (contactIndex: number) => {
   emit('remove', data.value);
 };
 
-const styleWidthInput: string = 'min-width: 160px; max-width: 100%';
+const styleWidthInput: string = 'min-width: 50px; max-width: 90%';
 
 </script>
 
@@ -47,14 +47,14 @@ const styleWidthInput: string = 'min-width: 160px; max-width: 100%';
       v-for="(contact, index) in data"
       :key="index"
       class="flex items-center mb-2 relative"
-      :class="{ 'w-1/3': props.fullSize, 'w-1/2': !props.fullSize }"
+      :class="{ 'w-1/2': !props.fullSize, 'justify-center flex-wrap': props.fullSize }"
     >
       <div class="print:ml-2">
         <icon-selector v-model="contact.icon" :icons="icons" />
       </div>
       <input-tag 
       v-model="contact.value" :style="styleWidthInput" class="min-w-full print:text-center" />
-      <div class="absolute right-[0rem]">
+      <div class="absolute right-0">
         <button
         class="action btn btn-square btn-warning btn-xs print:opacity-0"
         @click="handleRemove(index)"
