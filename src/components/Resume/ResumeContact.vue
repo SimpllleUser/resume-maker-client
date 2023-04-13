@@ -50,7 +50,7 @@ const handleRemove = (contactIndex: number) => {
       v-model="contact.value" style="width: 160px;" class="min-w-full print:text-center" />
       <div class="absolute" style="right: -10px">
         <button
-        class="action btn btn-outline btn-square btn-warning btn-xs print:opacity-0"
+        class="action btn btn-square btn-warning btn-xs print:opacity-0"
         @click="handleRemove(index)"
       >
         <unicon name="multiply" class="text-xs" fill="black" hover-fill="white"></unicon>

@@ -45,7 +45,7 @@ const handleRemove = (index: number): void => {
       class="relative"
     >
       <div class="absolute right-0" v-show="allowEditable && canRemove">
-        <button class="btn btn-outline btn-warning btn-xs" @click="handleRemove(index)">
+        <button class="btn btn-warning btn-xs" @click="handleRemove(index)">
           <span class="text-black">Remove</span>
         </button>
       </div>

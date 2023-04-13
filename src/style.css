@@ -73,3 +73,11 @@ body {
 .date-picker--popup {
   @apply flex justify-center w-96 absolute top-1/2 left-[80%] transform -translate-x-1/2 -translate-y-1/2 border-2 border-primary bg-white z-10 ml-4;
 }
+
+.resume-item--actions {
+  @apply opacity-0 absolute right-0 z-10 transition-opacity
+}
+
+.resume-card:hover > .resume-item--actions {
+  @apply block opacity-100
+}

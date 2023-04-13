@@ -2,7 +2,7 @@ import { Ref, ref } from "vue";
 import { defineStore } from "pinia";
 import { ResumeItem } from "@/types/data-managment.types";
 import { useStorage } from "@vueuse/core";
-import { assign, find, findIndex } from "lodash";
+import { assign, differenceBy, find, findIndex } from "lodash";
 
 export const useResumeList = defineStore("resume-list", () => {
     const resumes: Ref<Array<ResumeItem>> = useStorage('resumes', []) || [];
@@ -21,10 +21,16 @@ export const useResumeList = defineStore("resume-list", () => {
         resumes.value = assign([], { ...resumes.value,  [currentItemIndex]: resumeItem});
     }
 
+    const removeResume = (resumeItem: ResumeItem): void => {
+        if (!resumeItem.id) return;
+        resumes.value = differenceBy(resumes.value, [resumeItem]);
+    }
+
     return {
         resumes,
         addResume,
         getResume,
         setResume,
+        removeResume,
     };
 });

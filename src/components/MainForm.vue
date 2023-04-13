@@ -2,6 +2,8 @@
 import { computed, ComputedRef, watch } from "vue";
 import { useRoute } from "vue-router";
 
+import usePrint from '@/composables/print-dom.ts'
+
 import ResumeMainInfo from "@/components/Resume/ResumeMainInfo.vue";
 import FocusContainer from "@/components/FocusContainer.vue";
 import InputTag from "@/components/Input/InputTag.vue";
@@ -20,7 +22,9 @@ const resumeListStore = useResumeList();
 
 const $route = useRoute();
 
-const currentReumeId = computed(() => $route?.params?.id); 
+const currentReumeId = computed(() => $route?.params?.id);
+
+const { printElement } = usePrint();
 
 watch(currentReumeId, () => {
   if (!currentReumeId) return;
@@ -40,7 +44,7 @@ watch(() => resumeElementStore.currentElements, (currentElements, prev) => {
   resumeContentStore.create(createdElement);
 }, { deep: true });
 
-const resumeData: ComputedRef<Omit<ResumeItem, 'id'>> = computed(() =>  ({
+const resumeData: ComputedRef<Omit<ResumeItem, 'id'>> = computed(() => ({
   color: resumeElementStore.color,
   font: resumeElementStore.font,
   elements: resumeElementStore.currentElements,
@@ -48,7 +52,7 @@ const resumeData: ComputedRef<Omit<ResumeItem, 'id'>> = computed(() =>  ({
 }));
 
 watch(resumeData, () => {
-  resumeListStore.setResume({ ...resumeData.value, id: currentReumeId.value,  })
+  resumeListStore.setResume({ ...resumeData.value, id: currentReumeId.value, })
 });
 
 const handleRemoveElement = (id: string) => {
@@ -67,19 +71,27 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
 
 </script>
 <template>
-  <div class="flex max-w-[1240px] mx-auto pb-12 bg-slate-100">
-    <div class="mx-auto bg-white print:hidden">
+  <div class="flex justify-center max-w-[1240px] mx-auto pb-12 bg-slate-100">
+    <div class="bg-white print:hidden">
       <div>
         <sidebar />
+        <div class="mt-8 shadow-sm">
+          <button class="btn btn-sm btn-wide btn-primary" @click="printElement('.resume-detail')">
+            Print <unicon name="print" fill="white"></unicon>
+          </button>
+        </div>
       </div>
     </div>
-    <div class="mx-auto h-[90vh] overflow-y-auto scrollbar scrollbar-thumb-primary scrollbar-track-white bg-white print:h-auto">
-      <div class="max-w-[990px] mx-auto border border-solid border-gray-300 p-4">
+    <div
+      class="mx-auto h-[90vh] overflow-y-auto scrollbar scrollbar-thumb-primary scrollbar-track-white bg-white print:h-auto">
+
+      <div class=" resume-detail max-w-[990px] bg-white mx-auto border border-solid border-gray-300 p-4">
         <resume-main-info v-model="resumeContentStore.resumeContentState.main" />
         <div v-for="(resumeElement, index) in resumeElementStore.currentElements" :key="resumeElement.id" class="my-6">
           <focus-container>
             <template #header>
-              <div class="flex justify-center items-center py-8 my-2 container-title-line" :class="`variant-${resumeElementStore.color.label}`">
+              <div class="flex justify-center items-center py-4 my-2 container-title-line"
+                :class="`variant-${resumeElementStore.color.label}`">
                 <div class="bg-white px-6 z-10">
                   <input-tag v-model="resumeContentStore.resumeContentState.dynamic[resumeElement.id].title"
                     class="container-title-input" :class="resumeElementStore.color.text" />
@@ -87,8 +99,8 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
               </div>
             </template>
             <template #default="{ focus }">
-              <div class="relative p-2 bg-white" :class="{ 'action-hide': !focus, 'shadow-2xl': focus }">
-                <div class="absolute top-[-5.6rem] right-0 z-30 bg-white w-11" v-show="focus">
+              <div class="relative bg-white" :class="{ 'action-hide': !focus, 'shadow-2xl': focus }">
+                <div class="absolute top-[-4.6rem] right-0 z-30 bg-white w-11" v-show="focus">
                   <button v-show="canShowUpButton(index)" @click="resumeElementStore.swapOrder(Number(index), index - 1)"
                     class="btn btn-primary rotate-180 btn-sm mb-1">
                     <unicon name="angle-double-down" fill="white"></unicon>

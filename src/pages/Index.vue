@@ -22,7 +22,12 @@ const createResume = () => {
             <h1 class="text-5xl font-bold">Resume maker</h1>
         </div>
         <div class="resumes flex flex-wrap justify-center bg-base-100 mb-4">
-            <div class="resume-card mr-4 mb-4" v-for="resume in resumeListStore.resumes" :key="resume.id">
+            <div class="resume-card mr-4 mb-4 group relative" v-for="resume in resumeListStore.resumes" :key="resume.id">
+                <div class="flex justify-end resume-item--actions">
+                    <button class="action btn btn-square btn-warning btn-xs resume-item--actions__btn" @click="resumeListStore.removeResume(resume)">
+                        <unicon name="multiply" class="text-xs" fill="black" hover-fill="white"></unicon>
+                    </button>
+                </div>
                 <div class="card card-compact w-80 shadow-xl">
                     <div class="card-body">
                         <div class="flex justify-center h-48">

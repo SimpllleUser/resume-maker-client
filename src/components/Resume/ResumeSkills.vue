@@ -41,7 +41,7 @@ const removeSkill = (skillIndex: number) => {
             </div>
             <div class="action print:hidden">
                 <div class="absolute" style="right: -35px">
-                    <button class="action btn btn-outline btn-square btn-warning btn-xs" @click="removeSkill(index)">
+                    <button class="action btn btn-square btn-warning btn-xs" @click="removeSkill(index)">
                         <unicon name="multiply" class="text-xs" fill="black" hover-fill="white"></unicon>
                     </button>
                 </div>
