@@ -1,7 +1,6 @@
 import { findIndex } from "lodash";
-import { CurrenntResumeElement, ResumeElement } from "@/store/resume-elements";
 import getUniqId from "@/services/uuid-generator";
-import { IResumeElementService } from "@/types/data-managment.types copy";
+import { IResumeElementService, CurrenntResumeElement, ResumeElement } from "@/types/data-managment.types";
 
 export default class ResumeElementService implements IResumeElementService {
     resumeElements: Array<CurrenntResumeElement> = [];

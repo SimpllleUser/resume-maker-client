@@ -3,8 +3,6 @@ import { computed, ComputedRef, Ref, ref, useSlots, watch } from "vue";
 
 import { useToggle, useVModel } from "@vueuse/core";
 
-import myUpload from "vue-image-crop-upload";
-
 interface Props {
   label?: string;
   modelValue: string;

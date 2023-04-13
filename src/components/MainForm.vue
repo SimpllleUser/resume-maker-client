@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ComputedRef, watch } from "vue";
+import { computed, ComputedRef, Ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
-import usePrint from '@/composables/print-dom.ts'
+import usePrint from '@/composables/print-dom'
 
 import ResumeMainInfo from "@/components/Resume/ResumeMainInfo.vue";
 import FocusContainer from "@/components/FocusContainer.vue";
@@ -22,13 +22,12 @@ const resumeListStore = useResumeList();
 
 const $route = useRoute();
 
-const currentReumeId = computed(() => $route?.params?.id);
+const currentReumeId: Ref<string> = computed(() => $route?.params?.id.toString());
 
 const { printElement } = usePrint();
 
 watch(currentReumeId, () => {
   if (!currentReumeId) return;
-  console.log(currentReumeId?.value);
   const data = resumeListStore.getResume(currentReumeId?.value);
   if (!data) return;
   resumeElementStore.setColor(data.color);

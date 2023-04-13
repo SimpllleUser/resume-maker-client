@@ -4,6 +4,8 @@ import { computed, ComputedRef, Ref, ref } from "vue";
 import { useVModel } from "@vueuse/core";
 import { vOnClickOutside } from "@vueuse/components";
 
+import { useResumeElements } from "@/store/resume-elements";
+
 import YearMonthInput from "@/components/Input/YearMonthInput.vue";
 
 import { YearMonthRange } from "@/common/types";
@@ -27,7 +29,6 @@ const props = withDefaults(defineProps<Props>(), {
   disable: "",
 });
 
-import { useResumeElements } from "@/store/resume-elements";
 
 const resumeElementsStore = useResumeElements();
 
@@ -57,7 +58,8 @@ const setPresent = (state: boolean) => { isPresent.value = state; };
 </script>
         
 <template>
-  <div class="relative" :class="resumeElementsStore.font.value" v-on-click-outside="() => handleOutsideClick(false)">
+  <div class="relative" :class="resumeElementsStore.font.value" 
+  v-on-click-outside="() => handleOutsideClick(false)">
     <div
       class="date-picker--popup"
       v-show="showDateInput"

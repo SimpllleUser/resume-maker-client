@@ -8,20 +8,20 @@ export interface ResumeGeneratedData {
     elements: Array<CurrenntResumeElement>;
 }
 
-export const getDeaultContentData = (): ResumeGeneratedData & { id: string } => {
-    const elements: Array<CurrenntResumeElement> = [];
-    const contents: ResumeContentState = {};
-    RESUME_ELEMENTS.forEach((element) => {
-        const id: string = getUniqId();
-        contents[id] = RESUME_CONTENTS_BY_ELEMENT[element.name];
-        elements.push({
-            ...element, id,
-            title: ""
-        });
+// export const getDeaultContentData = (): ResumeGeneratedData & { id: string } => {
+//     const elements: Array<CurrenntResumeElement> = [];
+//     const contents: ResumeContentState = {};
+//     RESUME_ELEMENTS.forEach((element) => {
+//         const id: string = getUniqId();
+//         contents[id] = RESUME_CONTENTS_BY_ELEMENT[element.name];
+//         elements.push({
+//             ...element, id,
+//             title: ""
+//         });
 
-    })
-    return { id: getUniqId(), contents, elements };
-};
+//     })
+//     return { id: getUniqId(), contents, elements };
+// };
 
 export const getDataForNewResume = (): ResumeItem => {
     const elements: Array<CurrenntResumeElement> = [];
@@ -34,7 +34,6 @@ export const getDataForNewResume = (): ResumeItem => {
         content.dynamic[id] = RESUME_CONTENTS_BY_ELEMENT[element.name];
         elements.push({
             ...element, id,
-            title: ""
         });
     });
 

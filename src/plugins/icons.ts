@@ -1,7 +1,8 @@
 /// https://antonreshetov.github.io/vue-unicons/
-
-import Unicon from 'vue-unicons'
+// @ts-ignore
 import * as icons from 'vue-unicons/dist/icons';
+import Unicon from 'vue-unicons';
+
 
 Unicon.add([
     icons.uniMultiply,

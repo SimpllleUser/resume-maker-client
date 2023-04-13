@@ -1,7 +1,7 @@
 
 
 <script setup lang="ts">
-import { CurrenntResumeElement } from "@/store/resume-elements";
+import { CurrenntResumeElement } from "@/types/data-managment.types";
 
 type Props = {
     resumeElement: CurrenntResumeElement

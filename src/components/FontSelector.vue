@@ -3,10 +3,11 @@ import { Ref, watch, ref } from "vue";
 
 import { useResumeElements } from "@/store/resume-elements";
 import { Option } from "@/common/types";
+import { FONTS } from "@/constants";
 
 const resumeElementsStore = useResumeElements();
 
-const font: Ref<Option> = ref(resumeElementsStore?.font);
+const font: Ref<Option> = ref(FONTS[0]);
 
 watch(font, resumeElementsStore.setFont, { deep: true })
 

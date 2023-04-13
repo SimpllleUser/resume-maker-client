@@ -44,11 +44,11 @@ export const useResumeElements = defineStore("resume-elements", () => {
       secondIndex,
     ) as Array<CurrenntResumeElement>;
   }
-  const font = useStorage('font', FONTS.at(0));
+  const font: Ref<Option> = useStorage('font', FONTS[0]);
   const setFont = (value: Option) => {
     font.value = value;
   }
-  const color = useStorage('color', COLORS.at(0));
+  const color: Ref<ColorOption> = useStorage('color', COLORS[0]);
   const setColor = (value: ColorOption) => {
     color.value = value;
   }
