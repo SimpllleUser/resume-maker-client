@@ -4,7 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/',
+  base: '/resume-maker-client/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
