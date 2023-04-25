@@ -5,7 +5,7 @@ import routes from './routes';
 
 const router = createRouter({
     // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-    history: createWebHistory(),
+    history: createWebHistory('/resume-maker-client/'),
     routes, // short for `routes: routes`
   });
   

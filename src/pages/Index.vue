@@ -6,6 +6,7 @@ import ResumeItemCard from '@/components/Resume/ResumeItemCard.vue';
 import { getDataForNewResume } from '@/services/generate-default-data';
 import { useResumeList } from '@/store/resume-list';
 import { ResumeItem } from '@/types/data-managment.types';
+import { onMounted } from 'vue';
 
 const $router = useRouter();
 
@@ -20,6 +21,10 @@ const createResume = () => {
 const goToDetail = (id: string) => {
     $router.push({ path: `/detail/${id}` });
 }
+
+onMounted(() => {
+    console.log($router);
+})
 
 </script>
 
