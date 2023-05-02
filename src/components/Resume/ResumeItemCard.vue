@@ -22,6 +22,7 @@ const resume = computed(() => ({
 </script>
         
 <template>
+    
             <div class="resume-card mr-4 mb-4 group relative">
                 <div class="flex justify-end resume-item--actions">
                     <button class="action btn btn-square btn-warning btn-xs resume-item--actions__btn" @click="emits('remove', props.resume)">
@@ -32,13 +33,14 @@ const resume = computed(() => ({
                     <div class="card-body">
                         <div class="flex justify-center h-48">
                             <img v-show="resume.img" :src="resume.img"
+                                id="user-photo"
                                 class="shadow-xl object-contain " />
                             <div v-show="!resume.img" 
                             class="opacity-75 bg-accent h-48 w-full">
                             </div>
                         </div>
-                        <h2 class="card-title justify-center">{{ resume.fullName }}</h2>
-                        <p class="text-center">{{ resume.position }}</p>
+                        <h2 class="card-title justify-center" id="full-name">{{ resume.fullName }}</h2>
+                        <p class="text-center" id="position">{{ resume.position }}</p>
                         <div class="card-actions justify-center">
                             <button @click="emits('redirect-to-detail', resume.id)"
                                 class="btn btn-accent btn-wide btn-sm text-white rounded">

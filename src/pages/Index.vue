@@ -22,10 +22,6 @@ const goToDetail = (id: string) => {
     $router.push({ path: `/detail/${id}` });
 }
 
-onMounted(() => {
-    console.log($router);
-})
-
 </script>
 
 <template>
