@@ -61,7 +61,7 @@ const isCurrentedDate = (date: string): boolean =>
   date === data.value?.toString();
 </script>
 
-<template>1123
+<template>
   <div class="grid grid-cols-4">
     <div class="flex align-items-center">
       <div class="p-1">
