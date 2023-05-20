@@ -3,6 +3,7 @@ import { createPinia } from "pinia";
 import "./style.css";
 import App from "./App.vue";
 import UnIcon from "./plugins/icons";
+import VueFeather from 'vue-feather';
 
 const pinia = createPinia();
 
@@ -19,6 +20,9 @@ app.use(UnIcon as any, {
     width: 18,
 })
 .use(pinia).use(router);
+
+app.component(VueFeather.name, VueFeather);
+
 app.component('resume-skills', ResumeSkills);
 app.component('resume-about', ResumeAbout);
 app.component('resume-education', ResumeEducation);

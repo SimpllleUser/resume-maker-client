@@ -17,17 +17,20 @@
     "@vueuse/core": "^9.13.0",
     "@vueuse/integrations": "^9.13.0",
     "daisyui": "^2.51.3",
+    "feather-icons": "^4.29.0",
     "focus-trap": "^7.4.0",
     "html2pdf.js": "^0.10.1",
     "lodash": "^4.17.21",
     "pinia": "^2.0.33",
     "uuid": "^9.0.0",
-    "vue": "^3.2.45",
+    "vue": "^3.3.4",
+    "vue-awesome": "^4.5.0",
     "vue-contenteditable": "^4.1.0",
+    "vue-feather": "^2.0.0",
     "vue-html-to-paper": "^1.4.4",
     "vue-image-crop-upload": "^3.0.3",
     "vue-router": "^4.1.6",
-    "vue-unicons": "^3.3.1"
+    "vue-unicons": "^2.1.0"
   },
   "devDependencies": {
     "@types/node": "^18.15.6",

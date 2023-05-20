@@ -61,17 +61,16 @@ const isCurrentedDate = (date: string): boolean =>
   date === data.value?.toString();
 </script>
 
-<template>
+<template>1123
   <div class="grid grid-cols-4">
     <div class="flex align-items-center">
       <div class="p-1">
         <div 
           class="h-4 w-4"
           @click="setPage(-1)">
-            <unicon name="angle-left" 
-              v-show="activePage > 1"
-              class="text-xs" fill="black">
-            </unicon>
+          <vue-feather 
+          v-show="activePage > 1" 
+          type="chevron-left"></vue-feather>
         </div>
       </div>
       <div class="p-1">
@@ -79,10 +78,7 @@ const isCurrentedDate = (date: string): boolean =>
           class="h-4 w-4"
           @click="setPage(1)"
         >
-          <unicon 
-          name="angle-right"
-          class="text-xs"
-          fill="black"></unicon>
+        <vue-feather type="chevron-right"></vue-feather>
         </div>
       </div>
     </div>
