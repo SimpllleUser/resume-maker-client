@@ -63,19 +63,26 @@ const isCurrentedDate = (date: string): boolean =>
 
 <template>
   <div class="grid grid-cols-4">
-    <div class="flex">
+    <div class="flex align-items-center">
       <div class="p-1">
-        <div class="rotate-90" @click="setPage(-1)" v-show="activePage > 1">
-          <unicon name="angle-down" class="text-xs" fill="black"></unicon>
+        <div 
+          class="h-4 w-4"
+          @click="setPage(-1)">
+            <unicon name="angle-left" 
+              v-show="activePage > 1"
+              class="text-xs" fill="black">
+            </unicon>
         </div>
       </div>
       <div class="p-1">
         <div
-          style="transform: rotate(-90deg)"
+          class="h-4 w-4"
           @click="setPage(1)"
-          v-show="!existMaxYear"
         >
-          <unicon name="angle-down" class="text-xs" fill="black"></unicon>
+          <unicon 
+          name="angle-right"
+          class="text-xs"
+          fill="black"></unicon>
         </div>
       </div>
     </div>

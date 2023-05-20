@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   safelist: [
     'text-teal-500',
     'text-indiog-500',
@@ -11,7 +10,7 @@ module.exports = {
     'bg-green-500',
     'bg-red-500',
   ],
-  content: [],
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
