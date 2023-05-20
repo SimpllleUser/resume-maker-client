@@ -65,36 +65,23 @@ const isCurrentedDate = (date: string): boolean =>
   <div class="grid grid-cols-4">
     <div class="flex align-items-center">
       <div class="p-1">
-        <div 
-          class="h-4 w-4"
-          @click="setPage(-1)">
-          <vue-feather 
-          v-show="activePage > 1" 
-          type="chevron-left"></vue-feather>
+        <div class="h-4 w-4 cursor-pointer" @click="setPage(-1)">
+          <vue-feather v-show="activePage > 1" type="chevron-left"></vue-feather>
         </div>
       </div>
       <div class="p-1">
-        <div
-          class="h-4 w-4"
-          @click="setPage(1)"
-        >
-        <vue-feather type="chevron-right"></vue-feather>
+        <div class="h-4 w-4 cursor-pointer" v-if="!existMaxYear" @click="setPage(1)">
+          <vue-feather type="chevron-right"></vue-feather>
         </div>
       </div>
     </div>
-    <div
-      v-for="year in actualYearsRange"
-      :key="year"
-      @click="setActiveYearFrom(year)"
-      class="p-1 cursor-pointer text-center"
-      :class="{
+    <div v-for="year in actualYearsRange" :key="year" @click="setActiveYearFrom(year)"
+      class="p-1 cursor-pointer text-center" :class="{
         'bg-primary text-white': isCurrentedDate(year.toString()),
-      }"
-    >
+      }">
       {{ year }}
     </div>
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
