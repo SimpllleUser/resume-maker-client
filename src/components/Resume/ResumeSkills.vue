@@ -41,15 +41,15 @@ const removeSkill = (skillIndex: number) => {
             </div>
             <div class="action print:hidden">
                 <div class="absolute" style="right: -35px">
-                    <button class="action btn btn-square btn-warning btn-xs" @click="removeSkill(index)">
-                        <unicon name="multiply" class="text-xs" fill="black" hover-fill="white"></unicon>
+                    <button class="action btn btn-square btn-warning btn-xs" @click="removeSkill(index)">                        
+                        <vue-feather type="x"></vue-feather>
                     </button>
                 </div>
             </div>
         </div>
     </div>
     <button class="action btn btn-square btn-outline btn-primary btn-xs print:hidden" @click="addSkill">
-        <unicon name="plus" :fill="PRIMARY" hover-fill="white"></unicon>
+        <vue-feather type="plus"></vue-feather>
     </button>
 </template>
 

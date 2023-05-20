@@ -26,7 +26,7 @@ const resume = computed(() => ({
             <div class="resume-card mr-4 mb-4 group relative">
                 <div class="flex justify-end resume-item--actions">
                     <button class="action btn btn-square btn-warning btn-xs resume-item--actions__btn" @click="emits('remove', props.resume)">
-                        <unicon name="multiply" class="text-xs" fill="black" hover-fill="white"></unicon>
+                        <vue-feather type="x"></vue-feather>
                     </button>
                 </div>
                 <div class="card card-compact w-80 shadow-xl">

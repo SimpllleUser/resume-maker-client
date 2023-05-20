@@ -76,7 +76,7 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
         <sidebar />
         <div class="mt-8 shadow-sm">
           <button class="btn btn-sm btn-wide btn-primary" @click="printElement('.resume-detail')">
-            Print <unicon name="print" fill="white"></unicon>
+            <vue-feather type="printer"></vue-feather>
           </button>
         </div>
       </div>
@@ -102,11 +102,11 @@ const canShowDownButton = (index: number): boolean => index !== (resumeElementSt
                 <div class="absolute top-[-4.6rem] right-0 z-30 bg-white w-11" v-show="focus">
                   <button v-show="canShowUpButton(index)" @click="resumeElementStore.swapOrder(Number(index), index - 1)"
                     class="btn btn-primary rotate-180 btn-sm mb-1">
-                    <unicon name="angle-double-down" fill="white"></unicon>
+                    <vue-feather type="chevrons-up"></vue-feather>
                   </button>
                   <button v-show="canShowDownButton(index)"
-                    @click="resumeElementStore.swapOrder(Number(index), index + 1)" class="btn btn-primary btn-sm">
-                    <unicon name="angle-double-down" fill="white"></unicon>
+                  @click="resumeElementStore.swapOrder(Number(index), index + 1)" class="btn btn-primary btn-sm">
+                  <vue-feather type="chevrons-down"></vue-feather>
                   </button>
                 </div>
                 <div v-show="focus" class="element-actions absolute left-1/2 transform -translate-x-1/2">

@@ -76,11 +76,12 @@ const inputStyle: ComputedRef<string> = computed(() => `color: ${resumeElementsS
             }">
               <button class="btn btn-accent btn-sm absolute transform top-0 right-0" :class="{ 'right-12': data.img }"
                 @click="update()">
-                <unicon v-show="!data.img" name="camera-plus" fill="white"></unicon>
-                <unicon v-show="data.img" name="camera-change" fill="white"></unicon>
+                <vue-feather v-show="!data.img" type="plus-circle"></vue-feather>
+                <vue-feather v-show="data.img" type="refresh-cw"></vue-feather>
               </button>
-              <button v-show="data.img" class="btn btn-accent btn-sm absolute transform top-0 right-0" @click="remove()">
-                <unicon name="camera-slash" fill="white"></unicon>
+              <button v-show="data.img" 
+              class="btn btn-accent btn-sm absolute transform top-0 right-0" @click="remove()">
+                <vue-feather type="slash"></vue-feather>
               </button>
             </div>
           </template>

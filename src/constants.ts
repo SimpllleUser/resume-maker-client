@@ -100,9 +100,9 @@ export const MAIN_INFO: MainContent = {
     position: 'Your position',
     contacts: [
         { icon: "phone", value: "phone" },
-        { icon: "envelope", value: "email" },
-        { icon: "github", value: "link" },
-        { icon: "", value: "empty icon" },
+        { icon: "mail", value: "mail" },
+        { icon: "github", value: "github" },
+        { icon: "map-pin", value: "map" },
     ]
 };
 

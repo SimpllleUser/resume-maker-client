@@ -25,10 +25,10 @@ const props = withDefaults(defineProps<Props>(), {});
 const emit = defineEmits<Emits>();
 const data = useVModel(props, "modelValue", emit);
 
-const icons: Array<string> = ["phone", "envelope", "map-marker", "github"];
+const icons: Array<string> = ["phone", "mail", "map-pin", "github"];
 
 const handleAdd = () => {
-  data.value = [ ...data.value, { icon: "phone", value: "" } ]
+  data.value = [ ...data.value, { icon: "phone", value: "phone" } ]
   emit('add', data.value);
 };
 
@@ -59,13 +59,13 @@ const styleWidthInput: string = 'min-width: 50px; max-width: 90%';
         class="action btn btn-square btn-warning btn-xs print:opacity-0"
         @click="handleRemove(index)"
       >
-        <unicon name="multiply" class="text-xs" fill="black" hover-fill="white"></unicon>
+        <vue-feather type="x"></vue-feather>
       </button>
-      </div>
     </div>
-    <div class="absolute bottom-[-1rem] left-0 print:hidden">
-      <button class="btn btn-square btn-outline btn-primary btn-xs" @click="handleAdd">
-        <unicon name="plus" :fill="PRIMARY" hover-fill="white"></unicon>
+  </div>
+  <div class="absolute bottom-[-1rem] left-0 print:hidden">
+    <button class="btn btn-square btn-outline btn-primary btn-xs" @click="handleAdd">
+      <vue-feather type="plus"></vue-feather>
       </button>
     </div>
   </div>

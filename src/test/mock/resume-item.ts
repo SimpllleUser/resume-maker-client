@@ -49,8 +49,8 @@ export const resumeItem: ResumeItem = {
                     value: 'phone'
                 },
                 {
-                    icon: 'envelope',
-                    value: 'email'
+                    icon: 'mail',
+                    value: 'mail'
                 },
                 {
                     icon: 'github',

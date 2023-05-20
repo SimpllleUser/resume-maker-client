@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import myUpload from 'vue-image-crop-upload';
 import { computed, ComputedRef, Ref, ref, useSlots, watch } from "vue";
 
 import { useToggle, useVModel } from "@vueuse/core";

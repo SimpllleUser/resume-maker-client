@@ -40,7 +40,7 @@ onMounted(initIconByFirstElement);
 <template>
   <div class="dropdown dropdown-end" v-on-click-outside="handleOutsideClick">
     <button class="btn-sm" @click="toggleDropDown()">
-      <unicon :name="currentIcon" :fill="resumeElementsStore.color.code"></unicon>
+      <vue-feather :type="currentIcon"></vue-feather>
     </button>
     <div
       v-show="showDropDown"
@@ -52,7 +52,7 @@ onMounted(initIconByFirstElement);
         class="p-1 cursor-pointer"
         @click="handleSelectIcon(icon)"
       >
-        <unicon :name="icon" :fill="resumeElementsStore.color.code"></unicon>
+      <vue-feather :type="icon"></vue-feather>
       </div>
     </div>
   </div>
