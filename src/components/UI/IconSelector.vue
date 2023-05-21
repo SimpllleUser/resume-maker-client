@@ -25,6 +25,7 @@ const handleOutsideClick = (): void => {
 };
 
 const handleSelectIcon = (icon: string): void => {
+  console.log(1);
   currentIcon.value = icon;
   toggleDropDown();
 };
@@ -38,13 +39,13 @@ onMounted(initIconByFirstElement);
 </script>
 
 <template>
-  <div class="dropdown dropdown-end" v-on-click-outside="handleOutsideClick">
+  <div v-on-click-outside="handleOutsideClick" class="relative">
     <button class="btn-sm" @click="toggleDropDown()">
       <vue-feather :type="currentIcon"></vue-feather>
     </button>
     <div
       v-show="showDropDown"
-      class="flex flex-wrap justify-center align-center dropdown-content shadow bg-base-100 rounded-box"
+      class="absolute flex flex-wrap justify-center align-center dropdown-content shadow bg-base-100 rounded-box z-50"
     >
       <div
         v-for="icon in icons"
